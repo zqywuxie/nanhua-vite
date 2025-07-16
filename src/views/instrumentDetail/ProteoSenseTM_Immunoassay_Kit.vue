@@ -7,7 +7,7 @@
     <!-- 顶部主模块：左图右文按钮 -->
     <div class="main-info-row">
       <div class="main-img-col">
-        <img :src="imgMain" class="main-img" alt="ProteoSense™ Immunoassay Kit" />
+        <img :src="imgMain" class="main-img previewable" alt="ProteoSense™ Immunoassay Kit" @click="openPreview(imgMain)" />
       </div>
       <div class="main-info-col">
         <h1 class="main-title highlight-title">ProteoSense™ Immunoassay Kit</h1>
@@ -41,7 +41,7 @@
         </ul>
       </div>
       <div class="section-img-row">
-        <img :src="imgTech" class="section-img" alt="BIOSEER Technology Route" />
+        <img :src="imgTech" class="section-img previewable" alt="BIOSEER Technology Route" @click="openPreview(imgTech)" />
       </div>
       <div class="section-highlight-block">
         <span>The ProteoSense™ Immunoassay Kit utilizes a pair of target-specific matched antibodies, each conjugated to a unique DNA oligonucleotide. When both antibodies bind simultaneously to the target analyte, the two DNA strands are brought into proximity, triggering the BIOSEER reaction and forming an amplifiable template strand. This platform leverages the inherent high sensitivity of PCR technology (qPCR/dPCR) and the specificity of antibody-antigen binding.</span>
@@ -51,14 +51,14 @@
     <section class="section-block">
       <h2 class="section-title">Product Specifications</h2>
       <div class="section-img-row">
-        <img :src="imgSpecs" class="section-img" alt="Product Specifications" />
+        <img :src="imgSpecs" class="section-img previewable" alt="Product Specifications" @click="openPreview(imgSpecs)" />
       </div>
     </section>
 
     <section class="section-block">
       <h2 class="section-title">Product Catalog</h2>
       <div class="section-img-row">
-        <img :src="imgCatalog" class="section-img" alt="Product Catalog" />
+        <img :src="imgCatalog" class="section-img previewable" alt="Product Catalog" @click="openPreview(imgCatalog)" />
       </div>
       <div class="section-highlight-block">
         <span>Additional detection targets are currently under optimization. Stay tuned!</span>
@@ -70,14 +70,25 @@
       <a class="prev" href="javascript:;">Prev：None</a>
       <a class="next" href="/instrumentDetail/ProteoSenseTM_Antibody_Oligo_Conjugation_Kit">Next：ProteoSense™ Antibody-Oligo Conjugation Kit</a>
     </div>
+    <div v-if="previewImg" class="img-preview-mask" @click="closePreview">
+      <img :src="previewImg" class="img-preview-large" @click.stop />
+    </div>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import imgMain from '@/assets/instrumentsDetail/ProteoSenseTM_Immunoassay_Kit/10001.png';
 import imgTech from '@/assets/instrumentsDetail/ProteoSenseTM_Immunoassay_Kit/10002.png';
 import imgSpecs from '@/assets/instrumentsDetail/ProteoSenseTM_Immunoassay_Kit/10003.png';
 import imgCatalog from '@/assets/instrumentsDetail/ProteoSenseTM_Immunoassay_Kit/10004.png';
+const previewImg = ref(null);
+function openPreview(img) {
+  previewImg.value = img;
+}
+function closePreview() {
+  previewImg.value = null;
+}
 </script>
 
 <style scoped>
@@ -97,9 +108,16 @@ import imgCatalog from '@/assets/instrumentsDetail/ProteoSenseTM_Immunoassay_Kit
   flex: 0 0 420px;
 }
 .main-img {
-  width: 100%;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  width: 70%;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.main-img:hover {
+  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  transform: scale(1.04);
 }
 .main-info-col {
   flex: 1;
@@ -177,10 +195,16 @@ import imgCatalog from '@/assets/instrumentsDetail/ProteoSenseTM_Immunoassay_Kit
   margin-bottom: 18px;
 }
 .section-img {
-  width: 80%;
-  max-width: 800px;
+  width: 70%;
+  max-width: 500px;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(25,118,210,0.08);
+  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.section-img:hover {
+  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  transform: scale(1.04);
 }
 .breadcrumb-nav {
   font-size: 1.05rem;
@@ -209,5 +233,21 @@ import imgCatalog from '@/assets/instrumentsDetail/ProteoSenseTM_Immunoassay_Kit
 }
 .prev-next-row a:hover {
   text-decoration: underline;
+}
+.img-preview-mask {
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-preview-large {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(25,118,210,0.18);
+  background: #fff;
 }
 </style> 

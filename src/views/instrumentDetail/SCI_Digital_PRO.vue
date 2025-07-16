@@ -3,7 +3,7 @@
     <!-- 顶部主模块：左图右文按钮 -->
     <div class="main-info-row">
       <div class="main-img-col">
-        <img :src="imgMain" class="main-img" alt="SCI_Digital_PRO" />
+        <img :src="imgMain" class="main-img previewable" alt="SCI_Digital_PRO" @click="openPreview(imgMain)" />
       </div>
       <div class="main-info-col">
         <h1 class="main-title highlight-title">SCI Digital PRO</h1>
@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="intro-img-center">
-        <img :src="imgAngle" alt="SCI Digital Pro-45度角" />
+        <img :src="imgAngle" alt="SCI Digital Pro-45度角" class="previewable" @click="openPreview(imgAngle)" />
       </div>
       <div class="intro-features-cards">
         <div class="feature-card">
@@ -134,11 +134,11 @@
     <section class="section-block">
       <h2 class="section-title section-title-strong">Product Specification</h2>
       <div class="spec-imgs">
-        <img :src="imgSpec1" alt="Product Specification" class="spec-img" />
+        <img :src="imgSpec1" alt="Product Specification" class="spec-img previewable" @click="openPreview(imgSpec1)" />
       </div>
       <h2 class="section-title section-title-strong">Technical Specification</h2>
       <div class="spec-imgs">
-        <img :src="imgSpec2" alt="Technical Specification" class="spec-img" />
+        <img :src="imgSpec2" alt="Technical Specification" class="spec-img previewable" @click="openPreview(imgSpec2)" />
       </div>
     </section>
 
@@ -152,129 +152,106 @@
         </a>
       </div>
     </section>
+    <div v-if="previewImg" class="img-preview-mask" @click="closePreview">
+      <img :src="previewImg" class="img-preview-large" @click.stop />
+    </div>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import imgMain from '@/assets/instrumentsDetail/SCI_Digital_PRO/10001.jpg'
 import imgAngle from '@/assets/instrumentsDetail/SCI_Digital_PRO/10005.jpg'
 import imgSpec1 from '@/assets/instrumentsDetail/SCI_Digital_PRO/10003.png'
 import imgSpec2 from '@/assets/instrumentsDetail/SCI_Digital_PRO/10002.png'
 import pdfIcon from '@/assets/instrumentsDetail/SCI_Digital_PRO/10004.svg'
-import video1 from '@/assets/instrumentsDetail/SCI_Digital_PRO/SCI_Digital_PRO-Shanghai Turtle Technology Co. Ltd. - R D Manufacturing Sales and Services of Digital PCR and isothermal amplification devices and reagents - Turtle Technology.mp4'
+import video1 from '@/assets/instrumentsDetail/SCI_Digital_PRO/SCI_Digital_PRO.mp4'
 import video2 from '@/assets/instrumentsDetail/SCI_Digital_PRO/1739427403203657.mp4'
 import video3 from '@/assets/instrumentsDetail/SCI_Digital_PRO/1739426911154519.mp4'
 const pdfUrl = 'https://turtle-tech.com.cn/static/upload/file/20250513/1747119449187556.pdf'
+const previewImg = ref(null)
+function openPreview(img) {
+  previewImg.value = img
+}
+function closePreview() {
+  previewImg.value = null
+}
 </script>
 
 <style scoped>
 .detail-page {
-  background: #f7f7f7;
-  min-height: 100vh;
-  padding-bottom: 64px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 24px 60px 24px;
+  background: #fff;
 }
 .main-info-row {
   display: flex;
-  flex-wrap: wrap;
+  gap: 48px;
   align-items: center;
-  justify-content: center;
-  gap: 64px;
-  margin: 0 0 64px 0;
-  width: 100%;
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-bottom: 48px;
 }
 .main-img-col {
-  flex: 1 1 520px;
-  display: flex;
-  justify-content: flex-end;
-  min-width: 380px;
+  flex: 0 0 420px;
 }
 .main-img {
   width: 100%;
-  max-width: 540px;
-  border-radius: 22px;
-  box-shadow: 0 4px 24px rgba(43,123,191,0.10);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
 }
 .main-info-col {
-  flex: 1 1 520px;
-  min-width: 380px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 32px;
+  flex: 1;
 }
 .main-title {
-  font-size: 56px;
-  font-weight: 900;
-  color: #2b7bbf;
-  margin-bottom: 12px;
-  letter-spacing: 1px;
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 18px;
+  color: #1a237e;
 }
 .highlight-title {
-  border-left: 8px solid #2b7bbf;
+  border-left: 8px solid #1976d2;
   padding-left: 18px;
-  background: linear-gradient(90deg, #e6f7ff 0%, #fff 100%);
+  background: linear-gradient(90deg, #e3f2fd 60%, transparent 100%);
 }
 .main-desc {
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 12px;
-  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 24px;
 }
 .main-btns {
   display: flex;
-  gap: 32px;
+  gap: 18px;
 }
 .main-btn {
   display: inline-block;
-  padding: 18px 48px;
-  font-size: 24px;
-  font-weight: 800;
-  border-radius: 12px;
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 8px;
+  background: #1976d2;
+  color: #fff;
   text-decoration: none;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-  box-shadow: 0 4px 24px rgba(43,123,191,0.10);
-  letter-spacing: 1px;
+  box-shadow: 0 2px 8px rgba(25,118,210,0.08);
+  transition: background 0.2s;
 }
 .main-btn.contact {
-  background: #2b7bbf;
-  color: #fff;
-}
-.main-btn.contact:hover {
-  background: #1a5a8a;
-  box-shadow: 0 8px 32px rgba(43,123,191,0.18);
+  background: #43a047;
 }
 .main-btn.online {
-  background: #fff;
-  color: #2b7bbf;
-  border: 3px solid #2b7bbf;
+  background: #1976d2;
 }
-.main-btn.online:hover {
-  background: #e6f7ff;
-  box-shadow: 0 8px 32px rgba(43,123,191,0.18);
+.main-btn:hover {
+  background: #1565c0;
 }
 .section-block {
-  background: #fff;
-  border-radius: 24px;
-  margin: 48px auto 0 auto;
-  padding: 48px 48px 40px 48px;
-  max-width: 1280px;
-  box-shadow: 0 4px 24px rgba(43,123,191,0.10);
+  margin-bottom: 56px;
 }
 .section-title {
-  font-size: 36px;
-  font-weight: 900;
-  color: #2b7bbf;
-  margin-bottom: 32px;
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  letter-spacing: 1px;
-  border-bottom: 3px solid #e6f7ff;
-  padding-bottom: 8px;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #1976d2;
+  border-left: 6px solid #1976d2;
+  padding-left: 16px;
 }
 .section-title-strong {
   background: linear-gradient(90deg, #e6f7ff 0%, #fff 100%);
@@ -327,26 +304,24 @@ const pdfUrl = 'https://turtle-tech.com.cn/static/upload/file/20250513/174711944
 }
 .intro-features-cards {
   display: flex;
-  flex-wrap: wrap;
   gap: 32px;
+  margin-bottom: 18px;
   justify-content: center;
-  margin-bottom: 32px;
 }
 .feature-card {
-  background: linear-gradient(90deg, #f7faff 0%, #fff 100%);
-  border-radius: 16px;
-  box-shadow: 0 2px 12px rgba(43,123,191,0.07);
-  padding: 32px 32px 24px 32px;
-  min-width: 320px;
-  max-width: 400px;
-  flex: 1 1 320px;
+  background: #f5faff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(25,118,210,0.04);
+  padding: 16px 18px;
+  font-size: 1.05rem;
+  min-width: 220px;
+  flex: 1;
 }
 .feature-title {
-  font-size: 26px;
-  font-weight: 800;
-  margin: 18px 0 12px 0;
-  color: #2b7bbf;
-  letter-spacing: 1px;
+  font-size: 1.08rem;
+  color: #1976d2;
+  font-weight: 700;
+  margin-bottom: 12px;
 }
 .feature-title.orange {
   color: #E36C09;
@@ -354,18 +329,18 @@ const pdfUrl = 'https://turtle-tech.com.cn/static/upload/file/20250513/174711944
 .feature-card ul {
   margin: 0 0 12px 24px;
   color: #333;
-  font-size: 18px;
+  font-size: 1rem;
   font-weight: 500;
 }
 .intro-video-center {
   text-align: center;
-  margin: 32px 0;
+  margin-bottom: 18px;
 }
 .product-video {
-  max-width: 900px;
-  width: 100%;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  width: 80%;
+  max-width: 700px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(25,118,210,0.08);
 }
 .intro-data-analysis {
   margin-top: 32px;
@@ -383,44 +358,39 @@ const pdfUrl = 'https://turtle-tech.com.cn/static/upload/file/20250513/174711944
   margin-bottom: 32px;
   font-weight: 500;
 }
-.spec-imgs {
-  display: flex;
-  gap: 48px;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 32px;
-}
-.spec-img {
-  max-width: 540px;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-}
-.download-section {
+.section-img-row, .intro-img-center, .spec-imgs {
   display: flex;
   justify-content: center;
-  margin: 48px 0 0 0;
+  margin-bottom: 18px;
 }
-.download-btn {
+.section-img, .spec-img {
+  width: 90%;
+  max-width: 900px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(25,118,210,0.08);
+}
+.download-section, .pdf-download-row {
   display: flex;
   align-items: center;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(43,123,191,0.10);
-  padding: 24px 48px;
-  font-size: 22px;
-  color: #2b7bbf;
-  font-weight: 800;
-  text-decoration: none;
-  transition: background 0.2s, box-shadow 0.2s;
+  gap: 18px;
+  margin-top: 12px;
+  justify-content: center;
 }
-.download-btn:hover {
-  background: #e6f7ff;
-  box-shadow: 0 8px 32px rgba(43,123,191,0.18);
+.download-btn {
+  font-size: 1.18rem;
+  color: #1976d2;
+  font-weight: 600;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+  display: inline;
 }
 .pdf-icon {
-  width: 40px;
-  height: 40px;
-  margin-right: 24px;
+  width: 38px;
+  height: 38px;
+  margin-right: 0;
 }
 .link {
   color: #2b7bbf;
@@ -428,6 +398,11 @@ const pdfUrl = 'https://turtle-tech.com.cn/static/upload/file/20250513/174711944
   cursor: pointer;
 }
 .advantages-card {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 28px 24px 18px 24px;
   max-width: 700px;
 }
@@ -435,6 +410,7 @@ const pdfUrl = 'https://turtle-tech.com.cn/static/upload/file/20250513/174711944
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 18px 32px;
+  justify-items: center;
 }
 .adv-item {
   display: flex;
@@ -442,11 +418,11 @@ const pdfUrl = 'https://turtle-tech.com.cn/static/upload/file/20250513/174711944
   gap: 12px;
 }
 .adv-dot {
-  width: 16px;
-  height: 16px;
-  margin-top: 6px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #2b7bbf 60%, #e6f7ff 100%);
+  background: #1976d2;
+  margin-top: 7px;
   flex-shrink: 0;
 }
 .adv-content {
@@ -455,31 +431,57 @@ const pdfUrl = 'https://turtle-tech.com.cn/static/upload/file/20250513/174711944
   gap: 2px;
 }
 .adv-main {
-  font-size: 18px;
+  font-size: 1.08rem;
+  color: #1976d2;
   font-weight: 700;
-  color: #2b7bbf;
   line-height: 1.1;
 }
 .adv-desc {
-  font-size: 15px;
-  color: #555;
+  font-size: 0.98rem;
+  color: #333;
   line-height: 1.3;
   font-weight: 400;
 }
+.main-img, .intro-img-center img, .spec-img {
+  width: 70%;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(25,118,210,0.08);
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.main-img:hover, .intro-img-center img:hover, .spec-img:hover {
+  box-shadow: 0 8px 32px rgba(25,118,210,0.18);
+  transform: scale(1.03);
+}
+.img-preview-mask {
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-preview-large {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(25,118,210,0.25);
+  background: #fff;
+}
 @media (max-width: 900px) {
-  .main-info-row, .section-block {
-    max-width: 98vw;
-    padding: 24px 8px;
+  .main-info-row {
+    flex-direction: column;
+    gap: 24px;
   }
-  .intro-main-title-block {
-    padding: 12px 8px;
+  .main-img-col {
+    width: 100%;
+    flex: none;
   }
-  .feature-card {
-    min-width: 220px;
-    padding: 18px 8px 12px 8px;
-  }
-  .spec-imgs {
-    gap: 12px;
+  .intro-features-cards {
+    flex-direction: column;
+    gap: 18px;
   }
   .advantages-list {
     grid-template-columns: 1fr;

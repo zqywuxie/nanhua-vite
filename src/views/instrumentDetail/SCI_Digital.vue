@@ -3,7 +3,7 @@
     <!-- 顶部主模块：左图右文按钮 -->
     <div class="main-info-row">
       <div class="main-img-col">
-        <img :src="imgMain" class="main-img" alt="SCI Digital" />
+        <img :src="imgMain" class="main-img previewable" alt="SCI Digital" @click="openPreview(imgMain)" />
       </div>
       <div class="main-info-col">
         <h1 class="main-title highlight-title">SCI Digital</h1>
@@ -97,7 +97,7 @@
     <section class="section-block">
       <h2 class="section-title">Ten Reasons to Choose SCI Digital</h2>
       <div class="section-img-row">
-        <img :src="imgTenReasons" class="section-img" alt="Ten Reasons to Choose SCI Digital" />
+        <img :src="imgTenReasons" class="section-img previewable" alt="Ten Reasons to Choose SCI Digital" @click="openPreview(imgTenReasons)" />
       </div>
     </section>
 
@@ -109,16 +109,27 @@
         <a :href="pdfUrl" target="_blank" class="pdf-link">SCI Digital Brochure</a>
       </div>
     </section>
+    <div v-if="previewImg" class="img-preview-mask" @click="closePreview">
+      <img :src="previewImg" class="img-preview-large" @click.stop />
+    </div>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import imgMain from '@/assets/instrumentsDetail/SCI_Digital/10001.jpeg';
 import imgTenReasons from '@/assets/instrumentsDetail/SCI_Digital/10002.png';
 import pdfIcon from '@/assets/instrumentsDetail/SCI_Digital/10003.svg';
 import video1 from '@/assets/instrumentsDetail/SCI_Digital/1739505198630265.mp4';
 import video2 from '@/assets/instrumentsDetail/SCI_Digital/1739504847129505.mp4';
 const pdfUrl = '/pdf/SCI_Digital_Brochure.pdf';
+const previewImg = ref(null)
+function openPreview(img) {
+  previewImg.value = img
+}
+function closePreview() {
+  previewImg.value = null
+}
 </script>
 
 <style scoped>
@@ -136,6 +147,34 @@ const pdfUrl = '/pdf/SCI_Digital_Brochure.pdf';
 }
 .main-img-col {
   flex: 0 0 420px;
+}
+.main-img, .section-img {
+  width: 70%;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(25,118,210,0.08);
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.main-img:hover, .section-img:hover {
+  box-shadow: 0 8px 32px rgba(25,118,210,0.18);
+  transform: scale(1.03);
+}
+.img-preview-mask {
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-preview-large {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(25,118,210,0.25);
+  background: #fff;
 }
 .main-img {
   width: 100%;
@@ -260,12 +299,6 @@ const pdfUrl = '/pdf/SCI_Digital_Brochure.pdf';
   display: flex;
   justify-content: center;
   margin-bottom: 18px;
-}
-.section-img {
-  width: 90%;
-  max-width: 900px;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(25,118,210,0.08);
 }
 .pdf-download-row {
   display: flex;

@@ -114,7 +114,7 @@
 </template>
 
 <script setup>
-import imgMain from '@/assets/instrumentsDetail/SCI_Cycler/10001.jpg';
+import imgMain from '@/assets/instrumentsDetail/SCI_Cycler/1740555330129063.jpg';
 import imgFeature from '@/assets/instrumentsDetail/SCI_Cycler/1721706546689701.png';
 import imgUI from '@/assets/instrumentsDetail/SCI_Cycler/1721706576152708.png';
 import imgRenaturation from '@/assets/instrumentsDetail/SCI_Cycler/1721706628184143.png';
@@ -124,7 +124,8 @@ import imgGradient from '@/assets/instrumentsDetail/SCI_Cycler/1721707084190117.
 import imgLid from '@/assets/instrumentsDetail/SCI_Cycler/1721707098297111.png';
 import imgProgram from '@/assets/instrumentsDetail/SCI_Cycler/1721707760142197.png';
 import imgOther from '@/assets/instrumentsDetail/SCI_Cycler/1721707130104720.png';
-import pdfIcon from '@/assets/instrumentsDetail/SCI_Cycler/10010.svg';
+import pdfIcon from '@/assets/instrumentsDetail/SCI_Cycler/pdf.svg';
+
 const pdfUrl1 = '/pdf/SCI_Cycler_Brochure-EN.pdf';
 const pdfUrl2 = '/pdf/SCI_Cycler_Pamphlet.pdf';
 </script>

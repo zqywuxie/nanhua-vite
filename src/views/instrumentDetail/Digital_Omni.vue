@@ -3,7 +3,7 @@
     <!-- 顶部主模块：左图右文按钮 -->
     <div class="main-info-row">
       <div class="main-img-col">
-        <img :src="imgMain" class="main-img" alt="Digital Omni" />
+        <img :src="imgMain" class="main-img previewable" alt="Digital Omni" @click="openPreview(imgMain)" />
       </div>
       <div class="main-info-col">
         <h1 class="main-title highlight-title">Digital Omni</h1>
@@ -28,7 +28,7 @@
         <span>Digital Omni™: Ushering in a New Era of "Omni-Modality" Digital Molecular Detection</span>
       </div>
       <div class="section-img-row">
-        <img :src="imgBanner" class="section-img" alt="Digital Omni Banner" />
+        <img :src="imgBanner" class="section-img previewable" alt="Digital Omni Banner" @click="openPreview(imgBanner)" />
       </div>
       <div class="section-highlight-block">
         <span>Digital Omni is the first fully integrated platform that combines digital PCR, digital isothermal amplification, and digital immunoassays into a single system. It offers ultra-multiplex nucleic acid quantification with 15–30 targets per run and achieves femtogram-level sensitivity in protein detection. With its exceptional openness, compatibility, and automation, Digital Omni provides a unified, highly efficient, and low-barrier solution for applications in research, diagnostics, food safety, and public health.</span>
@@ -102,24 +102,35 @@
     <section class="section-block">
       <h2 class="section-title">Product Specification</h2>
       <div class="section-img-row">
-        <img :src="imgSpec" class="section-img" alt="Product Specification" />
+        <img :src="imgSpec" class="section-img previewable" alt="Product Specification" @click="openPreview(imgSpec)" />
       </div>
     </section>
     <section class="section-block">
       <h2 class="section-title">Technical Specification</h2>
       <div class="section-img-row">
-        <img :src="imgTechSpec" class="section-img" alt="Technical Specification" />
+        <img :src="imgTechSpec" class="section-img previewable" alt="Technical Specification" @click="openPreview(imgTechSpec)" />
       </div>
     </section>
+    <div v-if="previewImg" class="img-preview-mask" @click="closePreview">
+      <img :src="previewImg" class="img-preview-large" @click.stop />
+    </div>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import imgMain from '@/assets/instrumentsDetail/Digital_Omni/10001.png';
 import imgBanner from '@/assets/instrumentsDetail/Digital_Omni/10002.png';
-import imgSpec from '@/assets/instrumentsDetail/Digital_Omni/10002.png';
-import imgTechSpec from '@/assets/instrumentsDetail/Digital_Omni/10002.png';
+import imgSpec from '@/assets/instrumentsDetail/Digital_Omni/10004.png';
+import imgTechSpec from '@/assets/instrumentsDetail/Digital_Omni/10003.png';
 import videoDroplet from '@/assets/instrumentsDetail/Digital_Omni/1739427494934415.mp4';
+const previewImg = ref(null)
+function openPreview(img) {
+  previewImg.value = img
+}
+function closePreview() {
+  previewImg.value = null
+}
 </script>
 
 <style scoped>
@@ -276,6 +287,34 @@ import videoDroplet from '@/assets/instrumentsDetail/Digital_Omni/17394274949344
   max-width: 900px;
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(25,118,210,0.08);
+}
+.main-img, .section-img {
+  width: 70%;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(25,118,210,0.08);
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.main-img:hover, .section-img:hover {
+  box-shadow: 0 8px 32px rgba(25,118,210,0.18);
+  transform: scale(1.03);
+}
+.img-preview-mask {
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-preview-large {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(25,118,210,0.25);
+  background: #fff;
 }
 @media (max-width: 900px) {
   .main-info-row {

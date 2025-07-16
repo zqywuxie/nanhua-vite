@@ -3,7 +3,7 @@
     <!-- 顶部主模块：左图右文按钮 -->
     <div class="main-info-row">
       <div class="main-img-col">
-        <img :src="imgMain" class="main-img" alt="ISO_Digital" />
+        <img :src="imgMain" class="main-img previewable" alt="ISO_Digital" @click="openPreview(imgMain)" />
       </div>
       <div class="main-info-col">
         <h1 class="main-title highlight-title">ISO Digital</h1>
@@ -65,7 +65,7 @@
         </div>
       </div>
       <div class="section-img-row">
-        <img :src="imgAdvantage" class="section-img" alt="Competitive Advantages" />
+        <img :src="imgAdvantage" class="section-img previewable" alt="Competitive Advantages" @click="openPreview(imgAdvantage)" />
       </div>
     </section>
 
@@ -100,18 +100,30 @@
     <section class="section-block">
       <h2 class="section-title">Droplet generation Illustration</h2>
       <div class="section-img-row">
-        <img :src="imgDroplet" class="section-img" alt="Droplet generation Illustration" />
+        <img :src="imgDroplet" class="section-img previewable" alt="Droplet generation Illustration" @click="openPreview(imgDroplet)" />
       </div>
     </section>
+    <div v-if="previewImg" class="img-preview-mask" @click="closePreview">
+      <img :src="previewImg" class="img-preview-large" @click.stop />
+    </div>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import imgMain from '@/assets/instrumentsDetail/ISO_Digital/10001.jpg';
 import imgAdvantage from '@/assets/instrumentsDetail/ISO_Digital/10002.png';
 import imgDroplet from '@/assets/instrumentsDetail/ISO_Digital/10002.png';
 import videoMain from '@/assets/instrumentsDetail/ISO_Digital/1750923996473917.mp4';
 import videoDroplet from '@/assets/instrumentsDetail/ISO_Digital/1750924085130117.mp4';
+
+const previewImg = ref(null);
+function openPreview(img) {
+  previewImg.value = img;
+}
+function closePreview() {
+  previewImg.value = null;
+}
 </script>
 
 <style scoped>
@@ -131,9 +143,16 @@ import videoDroplet from '@/assets/instrumentsDetail/ISO_Digital/175092408513011
   flex: 0 0 420px;
 }
 .main-img {
-  width: 100%;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  width: 70%;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.main-img:hover {
+  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  transform: scale(1.04);
 }
 .main-info-col {
   flex: 1;
@@ -255,10 +274,32 @@ import videoDroplet from '@/assets/instrumentsDetail/ISO_Digital/175092408513011
   margin-bottom: 18px;
 }
 .section-img {
-  width: 90%;
-  max-width: 900px;
+  width: 70%;
+  max-width: 500px;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(25,118,210,0.08);
+  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.section-img:hover {
+  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  transform: scale(1.04);
+}
+.img-preview-mask {
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-preview-large {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(25,118,210,0.18);
+  background: #fff;
 }
 @media (max-width: 900px) {
   .main-info-row {

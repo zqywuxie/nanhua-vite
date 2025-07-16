@@ -7,7 +7,7 @@
     <!-- 顶部主模块：左图右文按钮 -->
     <div class="main-info-row">
       <div class="main-img-col">
-        <img :src="imgMain" class="main-img" alt="12-plex Respiratory Pathogen Detection Kit" />
+        <img :src="imgMain" class="main-img previewable" alt="12-plex Respiratory Pathogen Detection Kit" @click="openPreview(imgMain)" />
       </div>
       <div class="main-info-col">
         <h1 class="main-title highlight-title">12-plex Respiratory Pathogen Detection Kit</h1>
@@ -35,7 +35,7 @@
         <span>Based on <b>Exponential Ultra-Multiplex Digital PCR Technology</b>, achieving precise quantitative detection! Covers 12 respiratory pathogens, capable of differentiating influenza A/B and SARS-CoV-2.</span>
       </div>
       <div class="section-img-row">
-        <img :src="imgTech" class="section-img" alt="Exponential Ultra-Multiplex Digital PCR Technology" />
+        <img :src="imgTech" class="section-img previewable" alt="Exponential Ultra-Multiplex Digital PCR Technology" @click="openPreview(imgTech)" />
       </div>
       <div class="section-highlight-block">
         <b>Key Features:</b>
@@ -60,19 +60,19 @@
         <b>Test Targets:</b>
       </div>
       <div class="section-img-row">
-        <img :src="imgTargets" class="section-img" alt="Test Targets" />
+        <img :src="imgTargets" class="section-img previewable" alt="Test Targets" @click="openPreview(imgTargets)" />
       </div>
       <div class="section-highlight-block">
         <b>Product Components:</b>
       </div>
       <div class="section-img-row">
-        <img :src="imgComponents" class="section-img" alt="Product Components" />
+        <img :src="imgComponents" class="section-img previewable" alt="Product Components" @click="openPreview(imgComponents)" />
       </div>
       <div class="section-highlight-block">
         <b>Sample Report:</b>
       </div>
       <div class="section-img-row">
-        <img :src="imgReport" class="section-img" alt="Sample Report" />
+        <img :src="imgReport" class="section-img previewable" alt="Sample Report" @click="openPreview(imgReport)" />
       </div>
     </section>
     <!-- Prev/Next 区块 -->
@@ -80,15 +80,26 @@
       <a class="prev" href="/instrumentDetail/28_plex_Respiratory_Pathogen_Detection_Kit">Prev：28-plex Respiratory Pathogen Detection Kit</a>
       <a class="next" href="/instrumentDetail/Tumor_Detection_Kits">Next：Tumor Detection Kits</a>
     </div>
+    <div v-if="previewImg" class="img-preview-mask" @click="closePreview">
+      <img :src="previewImg" class="img-preview-large" @click.stop />
+    </div>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import imgMain from '@/assets/instrumentsDetail/12-plex_Respiratory_Pathogen_Detection_Kit/10001.jpeg';
 import imgTech from '@/assets/instrumentsDetail/12-plex_Respiratory_Pathogen_Detection_Kit/10002.png';
 import imgTargets from '@/assets/instrumentsDetail/12-plex_Respiratory_Pathogen_Detection_Kit/10003.png';
 import imgComponents from '@/assets/instrumentsDetail/12-plex_Respiratory_Pathogen_Detection_Kit/10004.png';
 import imgReport from '@/assets/instrumentsDetail/12-plex_Respiratory_Pathogen_Detection_Kit/10005.png';
+const previewImg = ref(null);
+function openPreview(img) {
+  previewImg.value = img;
+}
+function closePreview() {
+  previewImg.value = null;
+}
 </script>
 
 <style scoped>
@@ -108,9 +119,16 @@ import imgReport from '@/assets/instrumentsDetail/12-plex_Respiratory_Pathogen_D
   flex: 0 0 420px;
 }
 .main-img {
-  width: 100%;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  width: 70%;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.main-img:hover {
+  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  transform: scale(1.04);
 }
 .main-info-col {
   flex: 1;
@@ -188,10 +206,16 @@ import imgReport from '@/assets/instrumentsDetail/12-plex_Respiratory_Pathogen_D
   margin-bottom: 18px;
 }
 .section-img {
-  width: 80%;
-  max-width: 800px;
+  width: 70%;
+  max-width: 500px;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(25,118,210,0.08);
+  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.section-img:hover {
+  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  transform: scale(1.04);
 }
 .breadcrumb-nav {
   font-size: 1.05rem;
@@ -220,5 +244,21 @@ import imgReport from '@/assets/instrumentsDetail/12-plex_Respiratory_Pathogen_D
 }
 .prev-next-row a:hover {
   text-decoration: underline;
+}
+.img-preview-mask {
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-preview-large {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(25,118,210,0.18);
+  background: #fff;
 }
 </style> 

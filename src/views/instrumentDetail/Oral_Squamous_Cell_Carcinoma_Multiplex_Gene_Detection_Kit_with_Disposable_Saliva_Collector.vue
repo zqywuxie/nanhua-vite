@@ -7,7 +7,7 @@
     <!-- Main Info Row: Left Image, Right Info -->
     <div class="main-info-row">
       <div class="main-img-col">
-        <img :src="imgMain" class="main-img" alt="Oral Squamous Cell Carcinoma Multiplex Gene Detection Kit" />
+        <img :src="imgMain" class="main-img previewable" alt="Oral Squamous Cell Carcinoma Multiplex Gene Detection Kit" @click="openPreview(imgMain)" />
         <img :src="imgVideoIcon" class="main-img-icon" alt="Video Icon" />
       </div>
       <div class="main-info-col">
@@ -18,7 +18,7 @@
             <li><b>Use with specially designed disposable saliva collector</b></li>
           </ul>
           <div class="saliva-img-row">
-            <img :src="imgSalivaCollector" class="saliva-img" alt="Disposable Saliva Collector" />
+            <img :src="imgSalivaCollector" class="saliva-img previewable" alt="Disposable Saliva Collector" @click="openPreview(imgSalivaCollector)" />
           </div>
         </div>
         <div class="main-btns">
@@ -48,18 +48,29 @@
         The clinical performance of this gene detection kit was verified by three clinical centers, including the Ninth People's Hospital Affiliated to the School of Medicine of Shanghai Jiao Tong University, the Beijing Stological Hospital Affiliated to Capital Medical University, and the Nanjing University Affiliated Stomatological Hospital, with a large sample of oral cancer tissue and control tissue, showed that the area under the curve (AUC) of the kit for the detection of oral cancer tissue in the subjects reached above 0.96, and sensitivity and specificity of the diagnosis of oral cancer and precancerous lesions of the mucosa at different clinical stages were both over 90%, indicating that it is reliable early auxiliary diagnostic product for oral cancer.
       </div>
       <div class="section-img-row">
-        <img :src="imgPerformance" class="section-img" alt="Clinical Performance" />
+        <img :src="imgPerformance" class="section-img previewable" alt="Clinical Performance" @click="openPreview(imgPerformance)" />
       </div>
     </section>
     <!-- Prev/Next Section (none for this product) -->
+    <div v-if="previewImg" class="img-preview-mask" @click="closePreview">
+      <img :src="previewImg" class="img-preview-large" @click.stop />
+    </div>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import imgMain from '@/assets/instrumentsDetail/Oral_Squamous_Cell_Carcinoma_Multiplex_Gene_Detection_Kit_with_Disposable_Saliva_Collector/10001.jpg';
 import imgVideoIcon from '@/assets/instrumentsDetail/Oral_Squamous_Cell_Carcinoma_Multiplex_Gene_Detection_Kit_with_Disposable_Saliva_Collector/10002.png';
 import imgSalivaCollector from '@/assets/instrumentsDetail/Oral_Squamous_Cell_Carcinoma_Multiplex_Gene_Detection_Kit_with_Disposable_Saliva_Collector/10002.png';
 import imgPerformance from '@/assets/instrumentsDetail/Oral_Squamous_Cell_Carcinoma_Multiplex_Gene_Detection_Kit_with_Disposable_Saliva_Collector/10002.png';
+const previewImg = ref(null);
+function openPreview(img) {
+  previewImg.value = img;
+}
+function closePreview() {
+  previewImg.value = null;
+}
 </script>
 
 <style scoped>
@@ -80,9 +91,16 @@ import imgPerformance from '@/assets/instrumentsDetail/Oral_Squamous_Cell_Carcin
   position: relative;
 }
 .main-img {
-  width: 100%;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  width: 70%;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.main-img:hover {
+  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  transform: scale(1.04);
 }
 .main-img-icon {
   position: absolute;
@@ -122,10 +140,16 @@ import imgPerformance from '@/assets/instrumentsDetail/Oral_Squamous_Cell_Carcin
   margin: 18px 0 0 0;
 }
 .saliva-img {
-  max-width: 420px;
-  width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 2px 12px rgba(25,118,210,0.08);
+  max-width: 500px;
+  width: 70%;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.saliva-img:hover {
+  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  transform: scale(1.04);
 }
 .main-btns {
   display: flex;
@@ -179,10 +203,16 @@ import imgPerformance from '@/assets/instrumentsDetail/Oral_Squamous_Cell_Carcin
   margin-bottom: 18px;
 }
 .section-img {
-  width: 80%;
-  max-width: 800px;
+  width: 70%;
+  max-width: 500px;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(25,118,210,0.08);
+  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.section-img:hover {
+  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  transform: scale(1.04);
 }
 .breadcrumb-nav {
   font-size: 1.05rem;
@@ -207,5 +237,21 @@ import imgPerformance from '@/assets/instrumentsDetail/Oral_Squamous_Cell_Carcin
     max-width: 420px;
     margin: 0 auto;
   }
+}
+.img-preview-mask {
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-preview-large {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(25,118,210,0.18);
+  background: #fff;
 }
 </style> 

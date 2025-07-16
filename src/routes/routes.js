@@ -337,9 +337,6 @@ const lifeScienceChildren = [
     component: () => import(`../views/LifeScience/${item.file}.vue`),
   })),
 
-
-
-
   {
     path: "cell_sorting_activation",
     name: "CellSortingActivation",
@@ -434,6 +431,12 @@ const routes = [
         },
         component: () => import("../views/Products/products.vue"),
         redirect: "/reagent/chemiluminescence",
+      },
+      {
+        path: "/products/page/:pageNum",
+        name: "ProductsPage",
+        meta: { title: "INSTRUMENTS" },
+        component: () => import("../views/Products/instruments.vue"),
       },
       {
         path: "/services",
@@ -644,6 +647,22 @@ const routes = [
         component: () =>
           import(
             "../views/instrumentDetail/Oral_Squamous_Cell_Carcinoma_Multiplex_Gene_Detection_Kit_with_Disposable_Saliva_Collector.vue"
+          ),
+      },
+      {
+        path: "/instrumentDetail/Other_Pathogen_Detection_Kits",
+        name: "Other_Pathogen_Detection_Kits",
+        meta: { title: "Other Pathogen Detection Kits" },
+        component: () =>
+          import("../views/instrumentDetail/Other_Pathogen_Detection_Kits.vue"),
+      },
+      {
+        path: "/instrumentDetail/ProteoSenseTM_Protein_Detection_Open_Kit_Set",
+        name: "ProteoSenseTM_Protein_Detection_Open_Kit_Set",
+        meta: { title: "ProteoSense™ Protein Detection Open Kit Set" },
+        component: () =>
+          import(
+            "../views/instrumentDetail/ProteoSenseTM_Protein_Detection_Open_Kit_Set.vue"
           ),
       },
       // Services子路由

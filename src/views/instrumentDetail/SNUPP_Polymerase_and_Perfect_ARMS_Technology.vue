@@ -7,7 +7,7 @@
     <!-- 顶部主模块：左图右文按钮 -->
     <div class="main-info-row">
       <div class="main-img-col">
-        <img :src="imgMain" class="main-img" alt="SNUPP Polymerase and Perfect-ARMS Technology" />
+        <img :src="imgMain" class="main-img previewable" alt="SNUPP Polymerase and Perfect-ARMS Technology" @click="openPreview(imgMain)" />
       </div>
       <div class="main-info-col">
         <h1 class="main-title highlight-title">SNUPP Polymerase and Perfect-ARMS Technology</h1>
@@ -32,14 +32,14 @@
         <span>SNUPP is an ultra-high specific DNA polymerase that can identify single base mismatches with high precision, thus reducing the non-specific amplification of NTC and samples. It can be widely used in SNP analysis, genotyping, tumor mutation detection, pathogen detection, gene editing detection, and more.</span>
       </div>
       <div class="section-img-row">
-        <img :src="imgTech" class="section-img" alt="SNUPP Technology" />
+        <img :src="imgTech" class="section-img previewable" alt="SNUPP Technology" @click="openPreview(imgTech)" />
       </div>
     </section>
 
     <section class="section-block">
       <h2 class="section-title">Perfect-ARMS Technology</h2>
       <div class="section-img-row">
-        <img :src="imgARMS" class="section-img" alt="Perfect-ARMS Technology" />
+        <img :src="imgARMS" class="section-img previewable" alt="Perfect-ARMS Technology" @click="openPreview(imgARMS)" />
       </div>
     </section>
 
@@ -48,13 +48,24 @@
       <a class="prev" href="javascript:;">Prev：None</a>
       <a class="next" href="javascript:;">Next：None</a>
     </div>
+    <div v-if="previewImg" class="img-preview-mask" @click="closePreview">
+      <img :src="previewImg" class="img-preview-large" @click.stop />
+    </div>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import imgMain from '@/assets/instrumentsDetail/SNUPP_Polymerase_and_Perfect_ARMS_Technology/10001.jpg';
 import imgTech from '@/assets/instrumentsDetail/SNUPP_Polymerase_and_Perfect_ARMS_Technology/10002.png';
 import imgARMS from '@/assets/instrumentsDetail/SNUPP_Polymerase_and_Perfect_ARMS_Technology/10003.png';
+const previewImg = ref(null);
+function openPreview(img) {
+  previewImg.value = img;
+}
+function closePreview() {
+  previewImg.value = null;
+}
 </script>
 
 <style scoped>
@@ -74,9 +85,16 @@ import imgARMS from '@/assets/instrumentsDetail/SNUPP_Polymerase_and_Perfect_ARM
   flex: 0 0 420px;
 }
 .main-img {
-  width: 100%;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  width: 70%;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.main-img:hover {
+  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  transform: scale(1.04);
 }
 .main-info-col {
   flex: 1;
@@ -154,10 +172,16 @@ import imgARMS from '@/assets/instrumentsDetail/SNUPP_Polymerase_and_Perfect_ARM
   margin-bottom: 18px;
 }
 .section-img {
-  width: 80%;
-  max-width: 800px;
+  width: 70%;
+  max-width: 500px;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(25,118,210,0.08);
+  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.section-img:hover {
+  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  transform: scale(1.04);
 }
 .breadcrumb-nav {
   font-size: 1.05rem;
@@ -186,5 +210,21 @@ import imgARMS from '@/assets/instrumentsDetail/SNUPP_Polymerase_and_Perfect_ARM
 }
 .prev-next-row a:hover {
   text-decoration: underline;
+}
+.img-preview-mask {
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-preview-large {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(25,118,210,0.18);
+  background: #fff;
 }
 </style> 

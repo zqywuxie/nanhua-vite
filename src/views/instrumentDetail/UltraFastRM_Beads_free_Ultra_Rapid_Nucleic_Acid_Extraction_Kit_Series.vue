@@ -7,7 +7,7 @@
     <!-- 顶部主模块：左图右文按钮 -->
     <div class="main-info-row">
       <div class="main-img-col">
-        <img :src="imgMain" class="main-img" alt="UltraFastRM Beads-free Ultra-Rapid Nucleic Acid Extraction Kit Series" />
+        <img :src="imgMain" class="main-img previewable" alt="UltraFastRM Beads-free Ultra-Rapid Nucleic Acid Extraction Kit Series" @click="openPreview(imgMain)" />
       </div>
       <div class="main-info-col">
         <h1 class="main-title highlight-title">UltraFastRM Beads-free Ultra-Rapid Nucleic Acid Extraction Kit Series</h1>
@@ -48,7 +48,7 @@
         <b>Product Catalog</b>
       </div>
       <div class="section-img-row">
-        <img :src="imgCatalog" class="section-img" alt="Product Catalog" />
+        <img :src="imgCatalog" class="section-img previewable" alt="Product Catalog" @click="openPreview(imgCatalog)" />
       </div>
     </section>
 
@@ -57,12 +57,23 @@
       <a class="prev" href="javascript:;">Prev：None</a>
       <a class="next" href="javascript:;">Next：None</a>
     </div>
+    <div v-if="previewImg" class="img-preview-mask" @click="closePreview">
+      <img :src="previewImg" class="img-preview-large" @click.stop />
+    </div>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import imgMain from '@/assets/instrumentsDetail/UltraFastRM_Beads_free_Ultra_Rapid_Nucleic_Acid_Extraction_Kit_Series/10001.jpg';
 import imgCatalog from '@/assets/instrumentsDetail/UltraFastRM_Beads_free_Ultra_Rapid_Nucleic_Acid_Extraction_Kit_Series/10002.png';
+const previewImg = ref(null);
+function openPreview(img) {
+  previewImg.value = img;
+}
+function closePreview() {
+  previewImg.value = null;
+}
 </script>
 
 <style scoped>
@@ -82,9 +93,16 @@ import imgCatalog from '@/assets/instrumentsDetail/UltraFastRM_Beads_free_Ultra_
   flex: 0 0 420px;
 }
 .main-img {
-  width: 100%;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  width: 70%;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.main-img:hover {
+  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  transform: scale(1.04);
 }
 .main-info-col {
   flex: 1;
@@ -162,10 +180,16 @@ import imgCatalog from '@/assets/instrumentsDetail/UltraFastRM_Beads_free_Ultra_
   margin-bottom: 18px;
 }
 .section-img {
-  width: 80%;
-  max-width: 800px;
+  width: 70%;
+  max-width: 500px;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(25,118,210,0.08);
+  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.section-img:hover {
+  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  transform: scale(1.04);
 }
 .breadcrumb-nav {
   font-size: 1.05rem;
@@ -194,5 +218,21 @@ import imgCatalog from '@/assets/instrumentsDetail/UltraFastRM_Beads_free_Ultra_
 }
 .prev-next-row a:hover {
   text-decoration: underline;
+}
+.img-preview-mask {
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-preview-large {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(25,118,210,0.18);
+  background: #fff;
 }
 </style> 

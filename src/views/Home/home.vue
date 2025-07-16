@@ -71,7 +71,7 @@
     </section>
 
     <!-- 公司理念模块 -->
-    <section class="philosophy-section">
+    <section class="philosophy-section" :style="{ background: `linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%), url(${aboutus03}) no-repeat center right`, backgroundSize: 'cover, contain' }">
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">We go fast, You go forward</h2>
@@ -99,42 +99,42 @@
         <div class="values-content">
           <div class="values-visual">
             <div class="values-bg">
-              <img src="/src/assets/home/We go fast/bg.png" alt="Background">
+              <img :src="bg" alt="Background">
             </div>
             <div class="values-planets">
-              <img src="/src/assets/home/We go fast/bg1.png" alt="Planet Background 1">
-              <img src="/src/assets/home/We go fast/bg2.png" alt="Planet Background 2">
-              <img src="/src/assets/home/We go fast/bg3.png" alt="Planet Background 3">
+              <img :src="bg1" alt="Planet Background 1">
+              <img :src="bg2" alt="Planet Background 2">
+              <img :src="bg3" alt="Planet Background 3">
             </div>
             <div class="values-main">
-              <img src="/src/assets/home/We go fast/bgmain.png" alt="Main">
+              <img :src="bgmain" alt="Main">
             </div>
           </div>
           <ul class="values-list">
             <li>
               <span class="value-icon">
-                <img src="/src/assets/home/We go fast/Customer Focus.png" alt="Customer Focus">
+                <img :src="customerFocus" alt="Customer Focus">
               </span>
               <strong><span>Customer Focus</span></strong>
               <p>We prioritize our clients' needs, offering tailored solutions, responsive support, and a seamless experience.</p>
             </li>
             <li>
               <span class="value-icon">
-                <img src="/src/assets/home/We go fast/Excellence in Quality.png" alt="Excellence in Quality">
+                <img :src="excellenceQuality" alt="Excellence in Quality">
               </span>
               <strong><span>Excellence in Quality</span></strong>
               <p>We are dedicated to delivering high-quality, accurate, and reliable bioscience solutions to advance scientific research.</p>
             </li>
             <li>
               <span class="value-icon">
-                <img src="/src/assets/home/We go fast/Innovation.png" alt="Innovation">
+                <img :src="innovation" alt="Innovation">
               </span>
               <strong><span>Innovation</span></strong>
               <p>We embrace cutting-edge technologies and continuously improve our services to drive scientific breakthroughs.</p>
             </li>
             <li>
               <span class="value-icon">
-                <img src="/src/assets/home/We go fast/Collaboration.png" alt="Collaboration">
+                <img :src="collaboration" alt="Collaboration">
               </span>
               <strong><span>Collaboration</span></strong>
               <p>We foster a culture of teamwork and continuous learning, working alongside researchers to accelerate discovery and innovation.</p>
@@ -154,7 +154,7 @@
         <ul class="services-list">
           <li>
             <a href="/products/reagent">
-              <figure class="service-image" style="background-image: url('/src/assets/services/QC.png');"></figure>
+              <figure class="service-image" :style="{ backgroundImage: `url(${qc})` }"></figure>
               <div class="service-text">
                 <h3 class="service-title">试剂与仪器</h3>
                 <p class="service-desc">采用iRepertoire的免疫组库建库产品，以及全自动建库系统</p>
@@ -164,7 +164,7 @@
           
           <li>
             <a href="/services/health-assessment">
-              <figure class="service-image" style="background-image: url('/src/assets/services/QC.png');"></figure>
+              <figure class="service-image" :style="{ backgroundImage: `url(${qc})` }"></figure>
               <div class="service-text">
                 <h3 class="service-title">健康评估监测</h3>
                 <p class="service-desc">用指尖血样本与免疫基因组技术来科学评估健康状况的检测服务</p>
@@ -174,7 +174,7 @@
           
           <li>
             <a href="/services/disease-diagnosis">
-              <figure class="service-image" style="background-image: url('/src/assets/services/Strong emp.png');"></figure>
+              <figure class="service-image" :style="{ backgroundImage: `url(${strongEmp})` }"></figure>
               <div class="service-text">
                 <h3 class="service-title">疾病诊疗相关服务</h3>
                 <p class="service-desc">肿瘤相关MRD、伴随诊断、预后判断等</p>
@@ -184,7 +184,7 @@
           
           <li>
             <a href="/services/drug-development">
-              <figure class="service-image" style="background-image: url('/src/assets/ngs/nextGene01.png');"></figure>
+              <figure class="service-image" :style="{ backgroundImage: `url(${nextGene01Service})` }"></figure>
               <div class="service-text">
                 <h3 class="service-title">药物和疫苗开发</h3>
                 <p class="service-desc">筛选肿瘤，感染，自身免疫疾病治疗相关的抗体或靶点</p>
@@ -196,29 +196,8 @@
     </section>
 
     <!-- 推广区域 -->
-    <section class="promo-section">
-      <div class="container">
-        <div class="promo-card">
-          <div class="promo-bg" :style="{ backgroundImage: 'url(/src/assets/about/aboutus02.png)' }"></div>
-          <div class="promo-content">
-            <div class="promo-header">
-              <h2 class="promo-title">
-                <span class="promo-price">$4.99</span>
-                PlasmidExpress Nanopore Sequencing
-                <img src="/src/assets/promotions/50OFF.png" class="promo-tag" alt="50% OFF">
-              </h2>
-              <p class="promo-subtitle">5 FREE SAMPLES</p>
-            </div>
-            <div class="promo-action">
-              <a href="/nanopore-sequencing-service/" class="promo-btn">
-                Discover more
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
+    <!-- $4.99 PlasmidExpress Nanopore Sequencing 模块已删除 -->
+    
     <!-- 联系表单和合作伙伴 -->
     <section class="contact-section">
       <div class="container">
@@ -319,33 +298,55 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import WeGoFastFooter from '/src/components/WeGoFastFooter.vue'
-
+import WeGoFastFooter from '@/components/WeGoFastFooter.vue'
+// 图片 import
+import aboutus01 from '@/assets/about/aboutus01.png'
+import nextGene01 from '@/assets/ngs/nextGene01.png'
+import homeCard1 from '@/assets/home/home_card1.jpg'
+import homeCard2 from '@/assets/home/home_card2.jpg'
+import homeCard3 from '@/assets/home/home_card3.jpg'
+import bg from '@/assets/home/We go fast/bg.png'
+import bg1 from '@/assets/home/We go fast/bg1.png'
+import bg2 from '@/assets/home/We go fast/bg2.png'
+import bg3 from '@/assets/home/We go fast/bg3.png'
+import bgmain from '@/assets/home/We go fast/bgmain.png'
+import customerFocus from '@/assets/home/We go fast/Customer Focus.png'
+import excellenceQuality from '@/assets/home/We go fast/Excellence in Quality.png'
+import innovation from '@/assets/home/We go fast/Innovation.png'
+import collaboration from '@/assets/home/We go fast/Collaboration.png'
+import qc from '@/assets/services/QC.png'
+import strongEmp from '@/assets/services/Strong emp.png'
+import nextGene01Service from '@/assets/ngs/nextGene01.png'
+import aboutus02 from '@/assets/about/aboutus02.png'
+import promo50off from '@/assets/promotions/50OFF.png'
+import logo from '@/assets/ui/logo.png'
+import footLogo from '@/assets/ui/foot_logo.png'
+import aboutus03 from '@/assets/about/aboutus03.png'
 
 // 轮播图数据（根据主营业务重新设计）
 const bannerSlides = ref([
   {
-    bgImage: '/src/assets/about/aboutus01.png',
-    title: '<strong>$5 Amazon Gift Card for New Registration</strong>',
-    subtitle: 'Act fast - limited to 20 per day',
-    buttonText: 'Register Today',
-    buttonLink: 'https://store.quintarabio.com/user/register',
+    bgImage: aboutus01, // 保持原背景
+    title: '<strong>Comprehensive Life Science Solutions</strong>',
+    subtitle: 'High-end research tools for protein purification, cell sorting, and homogeneous luminescence, empowering cutting-edge life science research',
+    buttonText: 'Explore Life Science Products',
+    buttonLink: '/life_science',
     loaded: false
   },
   {
-          bgImage: '/src/assets/ngs/nextGene01.png',
-    title: '<strong>$4.99 PlasmidExpress Nanopore Sequencing</strong>',
-    subtitle: 'We Go Fast, You Go Forward',
-    buttonText: 'Discover more',
-    buttonLink: '/nanopore-sequencing-service/',
+    bgImage: nextGene01, // 保持原背景
+    title: '<strong>Diagnostic Materials & Molecular Diagnostics</strong>',
+    subtitle: 'Chemiluminescent magnetic beads, molecular diagnostics, nucleic acid extraction and more for precise detection',
+    buttonText: 'View Diagnostic Materials',
+    buttonLink: '/reagent/chemiluminescence',
     loaded: false
   },
   {
-    bgImage: '/src/assets/about/aboutus01.png',
-    title: '<strong>$35 Gene Synthesis Now Live</strong>',
-    subtitle: 'Big Science. Small Price.',
-    buttonText: 'Discover more',
-    buttonLink: '/gene-synthesis/',
+    bgImage: aboutus01, // 保持原背景
+    title: '<strong>Digital PCR & Innovative Instruments</strong>',
+    subtitle: 'Fully automated digital PCR, multiplex detection, ultra-high throughput, driving a new era of molecular testing',
+    buttonText: 'Learn about Digital PCR & Instruments',
+    buttonLink: '/instruments',
     loaded: false
   }
 ])
@@ -354,7 +355,7 @@ const bannerSlides = ref([
 const services = ref([
   {
     title: 'DNA Reading',
-    image: '/src/assets/home/home_card1.jpg',
+    image: homeCard1,
     links: [
       { text: 'Sanger Sequencing', url: '/sanger-sequencing/' },
       { text: 'Next Generation Sequencing', url: '/next-generation-sequencing/' },
@@ -364,7 +365,7 @@ const services = ref([
   },
   {
     title: 'DNA Writing',
-    image: '/src/assets/home/home_card2.jpg',
+    image: homeCard2,
     links: [
       { text: 'Oligo Synthesis', url: '/oligo-synthesis/' },
       { text: 'Gene Synthesis', url: '/gene-synthesis/' },
@@ -373,7 +374,7 @@ const services = ref([
   },
   {
     title: 'DNA Analysis',
-    image: '/src/assets/home/home_card3.jpg',
+    image: homeCard3,
     links: [
       { text: 'Plasmid Preparation', url: '/plasmid-preparation/' },
       { text: 'Quality Control', url: '/quality-control/' },
@@ -386,16 +387,16 @@ const services = ref([
 
 // 合作伙伴数据
 const partners = ref([
-  { name: 'Partner 1', logo: '/src/assets/ui/logo.png' },
-  { name: 'Partner 2', logo: '/src/assets/ui/foot_logo.png' },
-  { name: 'Partner 3', logo: '/src/assets/ui/logo.png' },
-  { name: 'Partner 4', logo: '/src/assets/ui/foot_logo.png' },
-  { name: 'Partner 5', logo: '/src/assets/ui/logo.png' },
-  { name: 'Partner 6', logo: '/src/assets/ui/foot_logo.png' },
-  { name: 'Partner 7', logo: '/src/assets/ui/logo.png' },
-  { name: 'Partner 8', logo: '/src/assets/ui/foot_logo.png' },
-  { name: 'Partner 9', logo: '/src/assets/ui/logo.png' },
-  { name: 'Partner 10', logo: '/src/assets/ui/foot_logo.png' }
+  { name: 'Partner 1', logo: logo },
+  { name: 'Partner 2', logo: footLogo },
+  { name: 'Partner 3', logo: logo },
+  { name: 'Partner 4', logo: footLogo },
+  { name: 'Partner 5', logo: logo },
+  { name: 'Partner 6', logo: footLogo },
+  { name: 'Partner 7', logo: logo },
+  { name: 'Partner 8', logo: footLogo },
+  { name: 'Partner 9', logo: logo },
+  { name: 'Partner 10', logo: footLogo }
 ])
 
 // 合作伙伴轮播图数据（每页5个）
@@ -486,7 +487,7 @@ onUnmounted(() => {
 })
 </script>
 
-<style lang="less" scoped>
+<style lang="css" scoped>
 .home-page {
   width: 100%;
   min-height: 100vh;
@@ -522,10 +523,9 @@ onUnmounted(() => {
   height: 100%;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
-  
-  &.active {
-    opacity: 1;
-  }
+}
+.banner-slide.active {
+  opacity: 1;
 }
 
 .banner-bg {
@@ -537,17 +537,16 @@ onUnmounted(() => {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%);
-    z-index: 1;
-  }
+}
+.banner-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%);
+  z-index: 1;
 }
 
 .banner-content {
@@ -564,54 +563,49 @@ onUnmounted(() => {
   max-width: 800px;
   margin-left: 10%;
   margin-top: 0;
-  
-  h1 {
-    font-size: 3.2rem;
-    font-weight: 700;
-    margin-bottom: 1.2rem;
-    line-height: 1.2;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    
-    strong {
-      color: #fff;
-    }
-  }
-  
-  .banner-divider {
-    width: 80%;
-    height: 3px;
-    margin: 1.5rem 0;
-    background: none;
-    border: none;
-    border-radius: 1px;
-    position: relative;
-    
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: repeating-linear-gradient(
-        90deg,
-        transparent 0px,
-        transparent 4px,
-        #00bc97 4px,
-        #00bc97 8px,
-        transparent 8px,
-        transparent 12px
-      );
-      background-size: 12px 3px;
-    }
-  }
-  
-  p {
-    font-size: 1.3rem;
-    margin-bottom: 1.5rem;
-    opacity: 0.9;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  }
+}
+.banner-text h1 {
+  font-size: 3.2rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.banner-text h1 strong {
+  color: #fff;
+}
+.banner-text .banner-divider {
+  width: 80%;
+  height: 3px;
+  margin: 1.5rem 0;
+  background: none;
+  border: none;
+  border-radius: 1px;
+  position: relative;
+}
+.banner-text .banner-divider::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 4px,
+    #00bc97 4px,
+    #00bc97 8px,
+    transparent 8px,
+    transparent 12px
+  );
+  background-size: 12px 3px;
+}
+.banner-text p {
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .banner-buttons {
@@ -628,11 +622,10 @@ onUnmounted(() => {
   font-weight: 600;
   font-size: 1rem;
   transition: all 0.3s ease;
-  
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0, 188, 151, 0.3);
-  }
+}
+.banner-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 188, 151, 0.3);
 }
 
 .banner-controls {
@@ -670,33 +663,29 @@ onUnmounted(() => {
   justify-content: center;
   position: relative;
   overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
-    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1;
-  }
-  
-  &:hover {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.35) 100%);
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: scale(1.1);
-    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
-    
-    &::before {
-      left: 0;
-    }
-  }
-  
-  &:active {
-    transform: scale(0.95);
-  }
+}
+.banner-arrow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+  transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+.banner-arrow:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.35) 100%);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+}
+.banner-arrow:hover::before {
+  left: 0;
+}
+.banner-arrow:active {
+  transform: scale(0.95);
 }
 
 .banner-dots {
@@ -713,39 +702,34 @@ onUnmounted(() => {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   border: 2px solid transparent;
   position: relative;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  &:hover {
-    background: rgba(255, 255, 255, 0.6);
-    transform: scale(1.2);
-    
-    &::before {
-      transform: translate(-50%, -50%) scale(1);
-    }
-  }
-  
-  &.active {
-    background: #fff;
-    border-color: rgba(255, 255, 255, 0.3);
-    transform: scale(1.3);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-    
-    &::before {
-      transform: translate(-50%, -50%) scale(1);
-    }
-  }
+}
+.dot::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.dot:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.2);
+}
+.dot:hover::before {
+  transform: translate(-50%, -50%) scale(1);
+}
+.dot.active {
+  background: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.3);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+.dot.active::before {
+  transform: translate(-50%, -50%) scale(1);
 }
 
 /* 加载动画 */
@@ -830,11 +814,10 @@ onUnmounted(() => {
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   height: 500px;
-  
-  &:hover {
-    transform: translateY(-15px) scale(1.02);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-  }
+}
+.service-card:hover {
+  transform: translateY(-15px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
 }
 
 .service-bg {
@@ -847,17 +830,16 @@ onUnmounted(() => {
   background-position: center;
   background-repeat: no-repeat;
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%);
-    z-index: 1;
-  }
+}
+.service-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%);
+  z-index: 1;
 }
 
 .service-content {
@@ -869,15 +851,14 @@ onUnmounted(() => {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  
-  h3 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 3rem;
-    text-align: left;
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  }
+}
+.service-content h3 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  text-align: left;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .service-links {
@@ -903,61 +884,144 @@ onUnmounted(() => {
   display: inline-block;
   min-width: 200px;
   text-align: left;
-  
-  &::before {
-    content: '>';
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-weight: bold;
-    font-size: 1.1rem;
-    z-index: 2;
-  }
-  
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
-    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1;
-  }
-  
-  &:hover {
-    color: #fff;
-    transform: translateX(8px);
-    border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 8px 25px rgba(0, 188, 151, 0.3);
-    
-    &::after {
-      left: 0;
-    }
-  }
+}
+.service-link::before {
+  content: '>';
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: bold;
+  font-size: 1.1rem;
+  z-index: 2;
+}
+.service-link::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+.service-link:hover {
+  color: #fff;
+  transform: translateX(8px);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 25px rgba(0, 188, 151, 0.3);
+}
+.service-link:hover::after {
+  left: 0;
 }
 
-/* 公司理念模块 */
+.services-list li:hover .service-image::before {
+  opacity: 1;
+}
+
+.service-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 188, 151, 0.1) 0%, rgba(78, 63, 165, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.value-icon {
+  display: block;
+  width: 70px;
+  height: 70px;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #00bc97 0%, #4e3fa5 100%);
+  border-radius: 15px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.value-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.values-list strong {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
+}
+.values-list strong span {
+  background: linear-gradient(135deg, #00bc97 0%, #4e3fa5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.values-list p {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.values-list li {
+  padding: 30px 40px;
+  background: #fff;
+  border-radius: 20px;
+  border: 2px solid #e9ecef;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.values-list li::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(135deg, #00bc97 0%, #4e3fa5 100%);
+  transform: scaleX(0);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.values-list li:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-color: #00bc97;
+}
+.values-list li:hover::before {
+  transform: scaleX(1);
+}
+
 .philosophy-section {
   padding: 100px 0;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   position: relative;
   overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-          background: url('/src/assets/about/aboutus03.png') no-repeat center right;
-    background-size: contain;
-    opacity: 0.1;
-    z-index: 1;
-  }
+}
+
+.philosophy-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* 动态背景图已移除，改为模板绑定 */
+  background-size: contain;
+  opacity: 0.1;
+  z-index: 1;
 }
 
 .philosophy-content {
@@ -966,10 +1030,6 @@ onUnmounted(() => {
   text-align: center;
   max-width: 800px;
   margin: 0 auto;
-}
-
-.philosophy-action {
-  margin-top: 2rem;
 }
 
 .philosophy-action {
@@ -988,27 +1048,24 @@ onUnmounted(() => {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
-    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1;
-  }
-  
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(0, 188, 151, 0.3);
-    
-    &::before {
-      left: 0;
-    }
-  }
+}
+.philosophy-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+.philosophy-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(0, 188, 151, 0.3);
+}
+.philosophy-btn:hover::before {
+  left: 0;
 }
 
 /* 核心价值观模块 */
@@ -1124,28 +1181,25 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(135deg, #00bc97 0%, #4e3fa5 100%);
-    transform: scaleX(0);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    border-color: #00bc97;
-    
-    &::before {
-      transform: scaleX(1);
-    }
-  }
+}
+.values-list li::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(135deg, #00bc97 0%, #4e3fa5 100%);
+  transform: scaleX(0);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.values-list li:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-color: #00bc97;
+}
+.values-list li:hover::before {
+  transform: scaleX(1);
 }
 
 .value-icon {
@@ -1159,13 +1213,12 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
-  }
+}
+.value-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
 }
 
 .values-list strong {
@@ -1174,15 +1227,13 @@ onUnmounted(() => {
   font-weight: 700;
   color: #333;
   margin-bottom: 15px;
-  
-  span {
-    background: linear-gradient(135deg, #00bc97 0%, #4e3fa5 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
 }
-
+.values-list strong span {
+  background: linear-gradient(135deg, #00bc97 0%, #4e3fa5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 .values-list p {
   font-size: 1.1rem;
   color: #666;
@@ -1525,22 +1576,191 @@ onUnmounted(() => {
   justify-content: center;
   flex-shrink: 0;
   z-index: 10;
+}
+.partner-arrow:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 25px rgba(0, 188, 151, 0.3);
+}
+.partner-arrow.prev {
+  transform: rotate(180deg);
+}
+.partner-arrow.prev:hover {
+  transform: rotate(180deg) scale(1.1);
+}
+
+.partner-arrow.next {
+  /* No specific styles needed for next arrow */
+}
+.partner-arrow.next:hover {
+  /* No specific styles needed for next arrow hover */
+}
+
+.partner-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.partner-dot {
+  width: 10px;
+  height: 10px;
+}
+
+/* 地图模块 */
+.map-section {
+  padding: 100px 0;
+  background: #f8f9fa;
+}
+
+.map-content {
+  display: flex;
+  gap: 60px;
+  align-items: stretch;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.map-visual {
+  flex: 2;
+  min-height: 600px;
+}
+
+.map-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  background: #fff;
+}
+
+.location-info {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.location-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 50px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+}
+
+.location-icon {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.location-pin {
+  font-size: 3rem;
+  display: block;
+}
+
+.location-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
+  background: linear-gradient(135deg, #00bc97 0%, #4e3fa5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.location-address {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.location-contact {
+  margin-bottom: 40px;
+}
+
+.contact-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #f0f0f0;
   
-  &:hover {
-    transform: scale(1.1);
-    box-shadow: 0 10px 25px rgba(0, 188, 151, 0.3);
+  &:last-child {
+    border-bottom: none;
   }
+}
+
+.contact-label {
+  font-weight: 600;
+  color: #333;
+  font-size: 1rem;
+}
+
+.contact-value {
+  color: #666;
+  font-size: 1rem;
+}
+
+.location-actions {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.map-btn {
+  display: inline-block;
+  padding: 15px 30px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+  flex: 1;
+  min-width: 140px;
   
-  &.prev {
-    transform: rotate(180deg);
+  &.primary {
+    background: linear-gradient(135deg, #00bc97 0%, #4e3fa5 100%);
+    color: #fff;
     
     &:hover {
-      transform: rotate(180deg) scale(1.1);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(0, 188, 151, 0.3);
+    }
+  }
+  
+  &.secondary {
+    background: #fff;
+    color: #00bc97;
+    border: 2px solid #00bc97;
+    
+    &:hover {
+      background: #00bc97;
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(0, 188, 151, 0.2);
     }
   }
 }
 
+/* 动画效果 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+.fadeInUp {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
 
 /* 响应式设计 */
 @media (max-width: 1024px) {
@@ -1844,162 +2064,5 @@ onUnmounted(() => {
   .map-btn {
     width: 100%;
   }
-}
-
-/* 地图模块 */
-.map-section {
-  padding: 100px 0;
-  background: #f8f9fa;
-}
-
-.map-content {
-  display: flex;
-  gap: 60px;
-  align-items: stretch;
-  max-width: 1600px;
-  margin: 0 auto;
-}
-
-.map-visual {
-  flex: 2;
-  min-height: 600px;
-}
-
-.map-container {
-  width: 100%;
-  height: 100%;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-  background: #fff;
-}
-
-.location-info {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.location-card {
-  background: #fff;
-  border-radius: 20px;
-  padding: 50px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 600px;
-}
-
-.location-icon {
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-.location-pin {
-  font-size: 3rem;
-  display: block;
-}
-
-.location-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 15px;
-  background: linear-gradient(135deg, #00bc97 0%, #4e3fa5 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.location-address {
-  font-size: 1.2rem;
-  color: #666;
-  margin-bottom: 30px;
-  line-height: 1.5;
-}
-
-.location-contact {
-  margin-bottom: 40px;
-}
-
-.contact-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 0;
-  border-bottom: 1px solid #f0f0f0;
-  
-  &:last-child {
-    border-bottom: none;
-  }
-}
-
-.contact-label {
-  font-weight: 600;
-  color: #333;
-  font-size: 1rem;
-}
-
-.contact-value {
-  color: #666;
-  font-size: 1rem;
-}
-
-.location-actions {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
-.map-btn {
-  display: inline-block;
-  padding: 15px 30px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  text-align: center;
-  flex: 1;
-  min-width: 140px;
-  
-  &.primary {
-    background: linear-gradient(135deg, #00bc97 0%, #4e3fa5 100%);
-    color: #fff;
-    
-    &:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 35px rgba(0, 188, 151, 0.3);
-    }
-  }
-  
-  &.secondary {
-    background: #fff;
-    color: #00bc97;
-    border: 2px solid #00bc97;
-    
-    &:hover {
-      background: #00bc97;
-      color: #fff;
-      transform: translateY(-3px);
-      box-shadow: 0 15px 35px rgba(0, 188, 151, 0.2);
-    }
-  }
-}
-
-/* 动画效果 */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.fadeInUp {
-  animation: fadeInUp 0.6s ease-out forwards;
 }
 </style>

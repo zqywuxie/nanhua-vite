@@ -3,7 +3,7 @@
     <!-- 顶部主模块：左图右文按钮 -->
     <div class="main-info-row">
       <div class="main-img-col">
-        <img :src="imgMain" class="main-img" alt="DigitalFuge" />
+        <img :src="imgMain" class="main-img previewable" alt="DigitalFuge" @click="openPreview(imgMain)" />
       </div>
       <div class="main-info-col">
         <h1 class="main-title highlight-title">DigitalFuge</h1>
@@ -43,14 +43,25 @@
         </div>
       </div>
       <div class="section-img-row">
-        <img :src="imgFeature" class="section-img" alt="DigitalFuge Features" />
+        <img :src="imgFeature" class="section-img previewable" alt="DigitalFuge Features" @click="openPreview(imgFeature)" />
       </div>
     </section>
+    <div v-if="previewImg" class="img-preview-mask" @click="closePreview">
+      <img :src="previewImg" class="img-preview-large" @click.stop />
+    </div>
   </div>
 </template>
 <script setup>
+import { ref } from 'vue';
 import imgMain from '@/assets/instrumentsDetail/DigitalFuge/10001.jpg';
 import imgFeature from '@/assets/instrumentsDetail/DigitalFuge/10002.png';
+const previewImg = ref(null);
+function openPreview(img) {
+  previewImg.value = img;
+}
+function closePreview() {
+  previewImg.value = null;
+}
 </script>
 <style scoped>
 .detail-page {
@@ -69,9 +80,16 @@ import imgFeature from '@/assets/instrumentsDetail/DigitalFuge/10002.png';
   flex: 0 0 420px;
 }
 .main-img {
-  width: 100%;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  width: 70%;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.main-img:hover {
+  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  transform: scale(1.04);
 }
 .main-info-col {
   flex: 1;
@@ -193,10 +211,32 @@ import imgFeature from '@/assets/instrumentsDetail/DigitalFuge/10002.png';
   margin-bottom: 18px;
 }
 .section-img {
-  width: 90%;
-  max-width: 900px;
+  width: 70%;
+  max-width: 500px;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(25,118,210,0.08);
+  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.section-img:hover {
+  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  transform: scale(1.04);
+}
+.img-preview-mask {
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-preview-large {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(25,118,210,0.18);
+  background: #fff;
 }
 @media (max-width: 900px) {
   .main-info-row {

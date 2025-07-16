@@ -7,7 +7,7 @@
     <!-- 顶部主模块：左图右文按钮 -->
     <div class="main-info-row">
       <div class="main-img-col">
-        <img :src="imgMain" class="main-img" alt="Reagent Kits and Consumables" />
+        <img :src="imgMain" class="main-img previewable" alt="Reagent Kits and Consumables" @click="openPreview(imgMain)" />
       </div>
       <div class="main-info-col">
         <h1 class="main-title highlight-title">Reagent Kits and Consumables</h1>
@@ -29,13 +29,13 @@
         <span><b>Universal Reagent Kits - Product Catalog</b></span>
       </div>
       <div class="section-img-row">
-        <img :src="imgCatalog1" class="section-img" alt="Universal Reagent Kits Catalog" />
+        <img :src="imgCatalog1" class="section-img previewable" alt="Universal Reagent Kits Catalog" @click="openPreview(imgCatalog1)" />
       </div>
       <div class="section-highlight-block">
         <span><b>Consumables - Product Catalog</b></span>
       </div>
       <div class="section-img-row">
-        <img :src="imgCatalog2" class="section-img" alt="Consumables Catalog" />
+        <img :src="imgCatalog2" class="section-img previewable" alt="Consumables Catalog" @click="openPreview(imgCatalog2)" />
       </div>
     </section>
     <!-- Prev/Next 区块 -->
@@ -43,13 +43,24 @@
       <a class="prev" href="javascript:;">Prev：None</a>
       <a class="next" href="javascript:;">Next：None</a>
     </div>
+    <div v-if="previewImg" class="img-preview-mask" @click="closePreview">
+      <img :src="previewImg" class="img-preview-large" @click.stop />
+    </div>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import imgMain from '@/assets/instrumentsDetail/Reagent Kits and Consumables/10001.png';
 import imgCatalog1 from '@/assets/instrumentsDetail/Reagent Kits and Consumables/10002.png';
 import imgCatalog2 from '@/assets/instrumentsDetail/Reagent Kits and Consumables/10003.png';
+const previewImg = ref(null);
+function openPreview(img) {
+  previewImg.value = img;
+}
+function closePreview() {
+  previewImg.value = null;
+}
 </script>
 
 <style scoped>
@@ -69,9 +80,16 @@ import imgCatalog2 from '@/assets/instrumentsDetail/Reagent Kits and Consumables
   flex: 0 0 420px;
 }
 .main-img {
-  width: 100%;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  width: 70%;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.main-img:hover {
+  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  transform: scale(1.04);
 }
 .main-info-col {
   flex: 1;
@@ -143,10 +161,16 @@ import imgCatalog2 from '@/assets/instrumentsDetail/Reagent Kits and Consumables
   margin-bottom: 18px;
 }
 .section-img {
-  width: 80%;
-  max-width: 800px;
+  width: 70%;
+  max-width: 500px;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(25,118,210,0.08);
+  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.section-img:hover {
+  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  transform: scale(1.04);
 }
 .breadcrumb-nav {
   font-size: 1.05rem;
@@ -175,5 +199,21 @@ import imgCatalog2 from '@/assets/instrumentsDetail/Reagent Kits and Consumables
 }
 .prev-next-row a:hover {
   text-decoration: underline;
+}
+.img-preview-mask {
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-preview-large {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(25,118,210,0.18);
+  background: #fff;
 }
 </style> 

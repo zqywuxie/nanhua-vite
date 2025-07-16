@@ -1,0 +1,228 @@
+<template>
+  <div class="detail-page">
+    <!-- 面包屑导航 -->
+    <nav class="breadcrumb-nav">
+      <a href="/">Home</a> &gt;&gt; <a href="/products">PRODUCTS</a> &gt;&gt; <a href="/instrumentDetail/Digital_Immunoassay_Kits">Digital Immunoassay Kits</a>
+    </nav>
+    <!-- 顶部主模块：左图右文按钮 -->
+    <div class="main-info-row">
+      <div class="main-img-col">
+        <img :src="imgMain" class="main-img previewable" alt="ProteoSense™ Protein Detection Open Kit Set" @click="openPreview(imgMain)" />
+      </div>
+      <div class="main-info-col">
+        <h1 class="main-title highlight-title">ProteoSense™ Protein Detection Open Kit Set</h1>
+        <div class="main-desc">
+          <ul>
+            <li><b>Customization to enable immunoassay</b></li>
+            <li><b>Theoretically detects any protein target</b></li>
+            <li><b>Simple workflow requires as little as 10 μg of antibody</b></li>
+          </ul>
+        </div>
+        <div class="main-btns">
+          <a href="/contact_us" class="main-btn contact">Contact Us</a>
+          <a href="#" class="main-btn online">Online</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 详细介绍区块 -->
+    <section class="section-block">
+      <h2 class="section-title">Detailed Introduction</h2>
+      <div class="section-highlight-block">
+        <span>The ProteoSense™ Protein Detection Open Kit Set enables personalized customization and can theoretically detect any protein target with a sensitivity to fg/mL.</span>
+      </div>
+      <div class="section-highlight-block">
+        <ul>
+          <li>This kit set contains a pair of meticulously designed oligonucleotide probes for preparing ProteoSense™ protein detection antibody-oligo conjugated probes, along with the ProteoSense™ Antibody-Oligo Conjugation Kit, ProteoSense™ Protein Detection Buffer Kit. Customer will need to supply unconjugated antibodies.</li>
+          <li>With a simple workflow, it requires as little as 10 μg of antibody to generate conjugated probes for over 400 quantitative detections of the target protein. Total hands-on time is under 5 hours.</li>
+        </ul>
+      </div>
+      <div class="section-img-row">
+        <img :src="imgWorkflow" class="section-img previewable" alt="Workflow" @click="openPreview(imgWorkflow)" />
+      </div>
+    </section>
+
+    <!-- Prev/Next 区块 -->
+    <div class="prev-next-row">
+      <a class="prev" href="/instrumentDetail/ProteoSenseTM_Antibody_Oligo_Conjugation_Kit">Prev：ProteoSense™ Antibody-Oligo Conjugation Kit</a>
+      <a class="next" href="javascript:;">Next：None</a>
+    </div>
+    <div v-if="previewImg" class="img-preview-mask" @click="closePreview">
+      <img :src="previewImg" class="img-preview-large" @click.stop />
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+import imgMain from '@/assets/instrumentsDetail/ProteoSenseTM_Protein_Detection_Open_Kit_Set/1751009832614265.png';
+import imgWorkflow from '@/assets/instrumentsDetail/ProteoSenseTM_Protein_Detection_Open_Kit_Set/1751009699300816.png';
+const previewImg = ref(null);
+function openPreview(img) {
+  previewImg.value = img;
+}
+function closePreview() {
+  previewImg.value = null;
+}
+</script>
+
+<style scoped>
+.detail-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 24px 60px 24px;
+  background: #fff;
+}
+.main-info-row {
+  display: flex;
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 48px;
+}
+.main-img-col {
+  flex: 0 0 420px;
+}
+.main-img {
+  width: 70%;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.main-img:hover {
+  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  transform: scale(1.04);
+}
+.main-info-col {
+  flex: 1;
+}
+.main-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 18px;
+  color: #1a237e;
+}
+.highlight-title {
+  border-left: 8px solid #1976d2;
+  padding-left: 18px;
+  background: linear-gradient(90deg, #e3f2fd 60%, transparent 100%);
+}
+.main-desc {
+  font-size: 1.2rem;
+  margin-bottom: 24px;
+}
+.main-desc ul {
+  padding-left: 18px;
+}
+.main-desc li {
+  margin-bottom: 10px;
+}
+.main-btns {
+  display: flex;
+  gap: 18px;
+}
+.main-btn {
+  display: inline-block;
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 8px;
+  background: #1976d2;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(25,118,210,0.08);
+  transition: background 0.2s;
+}
+.main-btn.contact {
+  background: #43a047;
+}
+.main-btn.online {
+  background: #1976d2;
+}
+.main-btn:hover {
+  background: #1565c0;
+}
+.section-block {
+  margin-bottom: 56px;
+}
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #1976d2;
+  border-left: 6px solid #1976d2;
+  padding-left: 16px;
+}
+.section-highlight-block {
+  background: #e3f2fd;
+  border-radius: 10px;
+  padding: 24px 32px;
+  font-size: 1.18rem;
+  margin-bottom: 28px;
+  color: #1a237e;
+  font-weight: 500;
+  text-align: center;
+}
+.section-img-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+.section-img {
+  width: 70%;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.section-img:hover {
+  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  transform: scale(1.04);
+}
+.breadcrumb-nav {
+  font-size: 1.05rem;
+  margin-bottom: 18px;
+  color: #888;
+}
+.breadcrumb-nav a {
+  color: #1976d2;
+  text-decoration: none;
+  margin: 0 2px;
+}
+.breadcrumb-nav a:hover {
+  text-decoration: underline;
+}
+.prev-next-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 24px;
+  margin-top: 24px;
+  font-size: 1.08rem;
+  color: #888;
+}
+.prev-next-row a {
+  color: #1976d2;
+  text-decoration: none;
+}
+.prev-next-row a:hover {
+  text-decoration: underline;
+}
+.img-preview-mask {
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-preview-large {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(25,118,210,0.18);
+  background: #fff;
+}
+</style> 
