@@ -4,7 +4,7 @@
     <div class="topbar">
       <div class="topbar-content">
         <div class="topbar-left">
-          <img src="../assets/ui/logo.png" height="54">
+          <img src="../assets/logo.png" height="120">
         </div>
 
         <!-- 右侧功能区已移除 -->
@@ -1141,20 +1141,20 @@ const handleMobileSubMenuClick = (item) => {
 }
 
 .fixed-panel {
-  left: 40px;
+  left: 5vw;
   right: 0;
-  margin: 0 auto;
+  
   top: 100%;
   position: absolute;
   z-index: 999;
-  min-width: 1600px;
-  max-width: 1600px;
+  min-width: 1250px;
+  max-width: 1250px;
   
   // 大屏幕 (1400px+)
   @media (min-width: 1400px) {
-    min-width: 1400px;
-    max-width: 1400px;
-    left: 0;
+    min-width: 1250px;
+    max-width: 1250px;
+    left: 5vw;
     right: 0;
   }
   
