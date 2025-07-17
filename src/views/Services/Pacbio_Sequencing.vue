@@ -8,6 +8,7 @@
 
 <script setup>
 import WeGoFastFooter from '@/components/WeGoFastFooter.vue'
+</script>
 <style scoped>
 .pacbio-sequencing-page {
   padding: 20px;

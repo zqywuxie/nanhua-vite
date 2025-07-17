@@ -56,7 +56,7 @@
 <script setup>
 const imgA = '/src/assets/Background/a.jpg'
 const imgB = '/src/assets/Background/b.jpg'
-const imgC = '/src/assets/Background/RighInfo002225-img4.jpg'
+const imgC = '/src/assets/Background/c.jpg'
 </script>
 
 <style scoped>

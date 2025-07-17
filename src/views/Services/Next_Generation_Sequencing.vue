@@ -179,18 +179,13 @@
         </div>
       </div>
     </section>
-<<<<<<< HEAD
     <WeGoFastFooter />
-=======
->>>>>>> a85aacbf69e04152f888476142b4d29cb12bfd11
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
 // Image imports
 import nextGene01 from '@/assets/ngs/nextGene01.png'
 import nextGene02 from '@/assets/ngs/nextGene02.png'
@@ -203,9 +198,7 @@ import nextGene08 from '@/assets/ngs/nextGene08.png'
 import nextGene09 from '@/assets/ngs/nextGene09.png'
 import sangerS07 from '@/assets/sanger/sangerS07.png'
 import WeGoFastFooter from '@/components/WeGoFastFooter.vue'
->>>>>>> 79e943e (完善product和整体翻译)
-=======
->>>>>>> a85aacbf69e04152f888476142b4d29cb12bfd11
+
 
 const services = [
   {

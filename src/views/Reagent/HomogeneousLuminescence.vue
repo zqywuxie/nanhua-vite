@@ -53,7 +53,7 @@
 <script setup>
 import { ref } from 'vue'
 // 图片采用import相对路径
-import mainImg from '@/assets/Reagent/homogeneous/10001.jpg'
+import mainImg from '@/assets/Reagent/homogeneous/trans/10001.jpg'
 
 const previewImg = ref(null)
 function openPreview(img) {
