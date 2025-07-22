@@ -2,7 +2,7 @@
   <section class="contact-info-gradient">
     <div class="contact-top">
       <div class="contact-top-left">
-        <img class="contact-logo" src="/src/assets/ui/foot_logo.png" alt="logo" />
+        <img class="contact-logo" :src="logoImg" alt="logo" />
         <div class="contact-slogan">We Go Fast, You Go Forward</div>
       </div>
       <div class="contact-top-right">
@@ -120,6 +120,7 @@
 </template>
 
 <script setup>
+import logoImg from '@/assets/logo.png'
 // No props for now, static content as in Oligo_Synthesis.vue
 </script>
 
@@ -165,6 +166,12 @@
   background: transparent;
   box-shadow: none;
   object-fit: contain;
+  /* 让白底logo适配渐变背景 */
+  mix-blend-mode: multiply;
+  /* 兼容性处理：白色变透明 */
+  background-color: transparent;
+  /* 可选：如需更强效果可用filter */
+  /* filter: brightness(0) invert(1) opacity(0.85); */
 }
 
 .contact-slogan {

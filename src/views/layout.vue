@@ -56,7 +56,7 @@
         
         <!-- 桌面端悬浮下拉面板 -->
         <div 
-          v-if="activeNav && !isMobile"
+          v-if="activeNav && !isMobile && (currentNav?.children?.filter(child => child.children && child.children.length > 0)?.length > 0)"
           class="dropdown-panel fixed-panel"
           @mouseenter="handlePanelHover"
           @mouseleave="handlePanelLeave"
@@ -66,7 +66,7 @@
             <div class="panel-column">
               <ul class="menu-list">
                 <li 
-                  v-for="subItem in currentNav?.children" 
+                  v-for="subItem in (currentNav?.children?.filter(child => child.children && child.children.length > 0) || [])" 
                   :key="subItem.key"
                   class="menu-item"
                   @mouseenter="handleFirstMenuHover(subItem)"
@@ -90,25 +90,6 @@
                   <span class="submenu-text">{{ subSubItem.title }}</span>
                 </li>
               </ul>
-            </div>
-            <!-- 第三栏：推荐内容 -->
-            <div class="panel-column">
-              <div class="recommend-content">
-                <div class="recommend-item" @click="handleRecommendClick('products')">
-                  <img src="https://via.placeholder.com/80x60" alt="Recommendation Image" />
-                  <div class="recommend-info">
-                    <h5>Hot Products</h5>
-                    <p>View the latest hot product information</p>
-                  </div>
-                </div>
-                <div class="recommend-item" @click="handleRecommendClick('services')">
-                  <img src="https://via.placeholder.com/80x60" alt="Recommendation Image" />
-                  <div class="recommend-info">
-                    <h5>Latest Services</h5>
-                    <p>Learn about our latest services</p>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -242,13 +223,11 @@ const navItems = ref([
     key: 'home',
     title: 'HOME',
     path: '/home',
-    children: []
   },
   {
     key: 'background',
     title: 'BACKGROUND',
     path: '/background',
-    children: []
   },
   {
     key: 'products',
@@ -316,6 +295,7 @@ const navItems = ref([
             title: 'Flow Beads',
             path: '/reagent/flow_beads',
             children: [
+              { key: 'beadstar_mplex_microspheres', title: 'Beadstar-mPlex® Magnetic Fluorescent Encoded Microspheres', path: '/reagent/flow_beads/beadstar_mplex_microspheres' },
               { key: 'magnetic_fluorescent_beads', title: 'Magnetic Fluorescent Encoded Beads', path: '/reagent/flow_beads/magnetic_fluorescent_beads' },
               { key: 'absolute_count_beads', title: 'Absolute Count Beads', path: '/reagent/flow_beads/absolute_count_beads' }
             ]
@@ -392,11 +372,11 @@ const navItems = ref([
         ]
       },
       // 修改原instruments为技术
-      {
-        key: 'technology',
-        title: 'Technology',
-        path: '/technology',
-      },
+      // {
+      //   key: 'technology',
+      //   title: 'Technology',
+      //   path: '/technology',
+      // },
       // 新增instruments，children为11个产品类别
       {
         key: 'instruments',
@@ -464,38 +444,24 @@ const navItems = ref([
     key: 'resources',
     title: 'RESOURCES',
     path: '/resources',
-    children: []
+
   },
   {
     key: 'news',
     title: 'NEWS',
     path: '/news',
-    children: []
+  
   },
   {
     key: 'about_us',
     title: 'ABOUT US',
     path: '/about_us',
-    children: [
-      {
-        key: 'About us',
-        title: 'About us',
-        path: '/about_us',
-        children: []
-      },
-      {
-        key: 'Careers at Quintara',
-        title: 'Careers at Quintara',
-        path: '/Careers_at_Quintara',
-        children: []
-      }
-    ]
   },
   {
     key: 'contact_us',
     title: 'CONTACT US',
     path: '/contact_us',
-    children: []
+
   }
 ])
 

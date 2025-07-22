@@ -1,0 +1,121 @@
+function afUpOrder()
+{
+	"use strict";
+
+	jQuery( 'body' ).trigger( 'update_checkout' );
+}
+
+jQuery( document ).ready(function($){
+
+	$(document).on('blur', '#aftax_vat_field_checkout', function handler() {
+		$(document).off('blur', '#aftax_vat_field_checkout');
+	
+		$('body').trigger('update_checkout');
+	
+		setTimeout(function() {
+			$(document).on('blur', '#aftax_vat_field_checkout', handler);
+		}, 2000);
+	});
+	
+})
+
+
+
+
+jQuery( document ).ready(function($){
+    if (jQuery('body').hasClass('woocommerce-checkout')) {
+		jQuery(document).on('change','select[name="billing_country"]',function(){
+            showHideEUOnly();
+			handleCheckboxDisplay(jQuery('select[name="billing_country"]').val(),jQuery('select[name="billing_state"]').val());
+
+        });
+
+
+		jQuery(document).on('change','select[name="billing_state"]',function(){
+            handleCheckboxDisplay(jQuery('select[name="billing_country"]').val(),jQuery('select[name="billing_state"]').val());
+		})
+
+
+		jQuery('#billing_company').on('input', function() {
+            showHideEUOnly();
+        });
+		
+        showHideEUOnly();
+		handleCheckboxDisplay(jQuery('select[name="billing_country"]').val(),jQuery('select[name="billing_state"]').val());
+
+    }
+});
+
+
+function showHideEUOnly() {
+	var val = jQuery('select[name="billing_country"]').val();
+    var eu = ['AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'ES', 'SE', 'GB'];
+    if (eu.indexOf(val) != -1 ) {
+		if(jQuery('.aftax_dependable') && jQuery('.aftax_dependable').length>0){
+			if(jQuery('#billing_company').val() && jQuery('#billing_company').val().length >0){
+				jQuery('.aftax-eu-only').show();
+			}
+			else{				
+				jQuery('.aftax-eu-only').hide();
+				jQuery('.aftax-eu-only input').val("");
+				jQuery('body').trigger('update_checkout');
+			}
+		}
+		else{
+			jQuery('.aftax-eu-only').show();
+		}
+    }
+    else {
+        jQuery('.aftax-eu-only').hide();
+		jQuery('.aftax-eu-only input').val("");
+		jQuery('body').trigger('update_checkout');
+
+    }
+}
+
+
+function handleCheckboxDisplay(billing_country,billing_state){
+
+		jQuery.ajax({
+			type: 'POST',
+			url: aftax_php_var.admin_url,
+			dataType: 'json',
+			data: {
+				action: 'aftax_handle_tax_exemption_on_billing_address',
+				nonce:aftax_php_var.nonce,
+				aftax_billing_country: billing_country,
+				aftax_billing_state : billing_state,
+	
+			},
+			success: function(response) {
+
+				if (response.data.status == 'pass') {
+					jQuery('#tax_exemption_checkbox_div').show();
+					if(response.data.exemption_method == 'auto'){
+						if(response.data.refresh){
+							afUpOrder();
+						}
+					}
+				}
+				else{
+					jQuery('#tax_exemption_checkbox_div').hide();
+					
+					if(response.data.refresh){
+						afUpOrder();
+					}
+						
+					if(jQuery('#tax_exemption_checkbox').is(":checked")){
+						jQuery('#tax_exemption_checkbox').prop('checked',false);
+							afUpOrder();
+					}
+				}
+			},
+			error: function(error) {
+				// Handle the error if needed
+			}
+		});
+
+}
+
+
+

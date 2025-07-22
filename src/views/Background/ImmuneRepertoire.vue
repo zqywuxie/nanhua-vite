@@ -54,9 +54,9 @@
 </template>
 
 <script setup>
-const imgA = '/src/assets/Background/a.jpg'
-const imgB = '/src/assets/Background/b.jpg'
-const imgC = '/src/assets/Background/c.jpg'
+import imgA from '@/assets/Background/a.jpg'
+import imgB from '@/assets/Background/b.jpg'
+import imgC from '@/assets/Background/c.jpg'
 </script>
 
 <style scoped>

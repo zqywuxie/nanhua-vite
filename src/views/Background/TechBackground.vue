@@ -46,9 +46,9 @@
 </template>
 
 <script setup>
-const gifImg = '/src/assets/Background/20181119134940515.gif'
-const icon1 = '/src/assets/Background/1.gif'
-const iconLogo = '/src/assets/Background/Top002394-logo.jpg'
+import gifImg from '@/assets/Background/20181119134940515.gif'
+import icon1 from '@/assets/Background/1.gif'
+import iconLogo from '@/assets/Background/Top002394-logo.jpg'
 const solutions = [
   'Comprehensive Coverage',
   'Uniform Target Amplification',

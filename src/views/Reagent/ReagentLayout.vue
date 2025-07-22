@@ -102,6 +102,7 @@ const menuItems = [
     key: 'flow_beads',
     title: 'Flow Beads',
     children: [
+      { key: 'beadstar_mplex_microspheres', title: 'Beadstar-mPlex® Magnetic Fluorescent Encoded Microspheres' },
       { key: 'magnetic_fluorescent_beads', title: 'Magnetic Fluorescent Coded Beads' },
       { key: 'absolute_count_beads', title: 'Absolute Count Beads' }
     ]

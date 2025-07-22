@@ -53,6 +53,11 @@ const latexTurbidimetryChildren = [
 
 const flowBeadsChildren = [
   {
+    key: "beadstar_mplex_microspheres",
+    title: "Beadstar-mPlex® Magnetic Fluorescent Encoded Microspheres",
+    file: "BeadstarMplexMicrospheres",
+  },
+  {
     key: "magnetic_fluorescent_beads",
     title: "磁性荧光编码微球",
     file: "MagneticFluorescentBeads",

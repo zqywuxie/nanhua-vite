@@ -1,0 +1,639 @@
+// /**
+//  * External dependencies
+//  */
+// import { useEffect, useState } from '@wordpress/element';
+// import { __ } from '@wordpress/i18n';
+// import apiFetch from '@wordpress/api-fetch';
+
+// export const Block = ({ checkoutExtensionData }) => {	
+	
+// 	//update code 
+// 	jQuery(document).ready(function($){		
+// 		$(document).on('focus','#aftax-vat-number',function(){
+// 			$('.tax_exempt_vat_inner_div').addClass('is-active')
+// 		})
+// 	})
+
+// 	let isHandleCheckoxAjaxProcessing = false;
+
+// 	useEffect(() => {
+// 		const handleCheckboxDisplay = (billingCountry, billingState) => {
+		
+// 		if (isHandleCheckoxAjaxProcessing) {
+// 			return; 
+// 		}
+// 		isHandleCheckoxAjaxProcessing = true;
+
+// 		  jQuery.ajax({
+// 			type: 'POST',
+// 			url: aftax_php_vars.admin_url,
+// 			dataType: 'json',
+// 			data: {
+// 			  action: 'aftax_handle_tax_exemption_on_billing_address_checkout_block',
+// 			  nonce: aftax_php_vars.aftax_nonce,
+// 			  aftax_billing_country: billingCountry,
+// 			  aftax_billing_state: billingState,
+// 			},
+// 			success: function(response) {	
+
+// 			  if (response.data.status === 'pass') {
+// 				jQuery('.wp-block-af_vat_tax_exempt_block-tax-exempt').show();
+
+// 				jQuery('.wp-block-af_vat_tax_exempt_block-tax-exempt').insertAfter('.wp-block-woocommerce-checkout-order-note-block');
+				
+// 				if (response.data.exemption_method === 'auto') {
+// 					refreshCheckoutPage(true);
+// 				}
+				
+// 			  } else {				
+// 					refreshCheckoutPage(false);
+
+// 				if((is_user_logged_in && enable_message_for_logged_in_user ) || (!is_user_logged_in && enable_message_for_guest_user) ){
+					
+// 					jQuery('.wp-block-af_vat_tax_exempt_block-tax-exempt').insertAfter('.wp-block-woocommerce-checkout-order-note-block');
+// 					jQuery('.wp-block-af_vat_tax_exempt_block-tax-exempt').show();
+// 					jQuery('.taxExemptInnerDiv').show();
+// 					jQuery('#removeTaxExemptNotification').hide();
+// 				}
+// 				else{
+// 					jQuery('.wp-block-af_vat_tax_exempt_block-tax-exempt').hide();
+// 				}
+
+// 				if (jQuery('#tax_exemption_checkbox').is(":checked")) {
+// 					jQuery('#tax_exemption_checkbox').prop('checked', false);
+// 				}
+// 			  }
+// 			},
+// 			error: function(error) {
+// 			  console.error('Error:', error);
+// 			},
+// 			complete: function() {
+// 				setTimeout(function() {
+// 					if (jQuery('.wp-block-woocommerce-checkout-order-summary-taxes-block').length > 1) {
+// 						jQuery('.wp-block-woocommerce-checkout-order-summary-taxes-block').not(':first').hide();
+// 					}
+// 				}, 3000);
+// 				isHandleCheckoxAjaxProcessing = false;
+// 			}
+// 		  });
+// 		};
+
+// 		let isHandleVatAjaxProcessing =false;
+
+// 		const handleVatFieldChange = () =>{
+
+// 			if(jQuery('#aftax-vat-number') && jQuery('#aftax-vat-number').length){
+// 				var vat_number =jQuery('#aftax-vat-number').val();
+
+// 				if(jQuery("#aftax-vat-number").val() != ''){
+// 					jQuery('.tax_exempt_vat_inner_div').addClass('is-active')
+// 				}
+// 				else{
+// 					jQuery('.tax_exempt_vat_inner_div').removeClass('is-active')
+// 				}
+
+
+// 				if (isHandleCheckoxAjaxProcessing) {
+// 					setTimeout(handleVatFieldChange, 1000);
+// 					return;
+// 				}
+
+// 				if('' != vat_number){
+
+// 					if (isHandleVatAjaxProcessing) {
+// 						return; 
+// 					}
+// 					isHandleVatAjaxProcessing = true;
+
+// 					jQuery('.wc-block-components-checkout-place-order-button')
+// 					.prop('disabled', true);
+
+// 					jQuery.ajax({
+// 						type: 'POST',
+// 						url: aftax_php_vars.admin_url,
+// 						data: {
+// 							action: 'aftax_validate_vat_number_checkout_block',
+// 							aftax_vat_number: vat_number,
+// 							nonce: aftax_php_vars.nonce,
+// 						},
+// 						success: function(response) {	
+							
+// 							if (response.data.status == 'pass') {
+// 								refreshCheckoutPage(true);
+// 								setTimeout(function(){
+// 									jQuery('#aftax-vat-number').attr('data-validated', '1');
+// 								},2000);
+
+// 								jQuery('#invalidVatNotice').remove();
+// 							}
+// 							else{
+// 								jQuery('#aftax-vat-number').attr('data-validated', '0');
+// 								refreshCheckoutPage(false);
+
+// 								if(vat_number != ''){
+// 									if (jQuery('#invalidVatNotice').length === 0) {
+// 										jQuery('#main').before(
+// 											'<div class="wc-block-components-notice-banner is-error" id="invalidVatNotice" role="alert">' +
+// 											'<div class="wc-block-components-notice-banner__content">' +
+// 											aftax_php_vars.aftax_invalid_vat_notice +
+// 											'</div></div>'
+// 										);
+// 										// window.scrollTo(0, 0);
+// 										window.scrollTo({
+// 											top: 0,
+// 											behavior: 'smooth'
+// 										});
+			
+// 									}
+		
+// 								}
+// 							}
+// 						},
+// 						error: function(error) {
+// 							// Handle the error if needed
+// 						},
+// 						complete: function() {
+// 							isHandleVatAjaxProcessing = false;
+// 							jQuery('.wc-block-components-checkout-place-order-button')
+// 							.prop('disabled', false);
+// 						}
+// 					});	
+// 				}
+// 				else{
+// 					refreshCheckoutPage(false);
+// 					jQuery('#invalidVatNotice').remove();
+// 				}
+// 			}
+		
+			
+// 		};
+
+//         wp.hooks.addAction('experimental__woocommerce_blocks-checkout-set-billing-address', 'a-cm-cart-block', triggerChangeEvent);
+       
+// 		function triggerChangeEvent(){
+// 			bindEventsAndDisplay();
+// 		}
+	
+// 		const bindEventsAndDisplay = () => {
+			
+			
+// 			if(jQuery('#billing-country') && jQuery('#billing-country').length){
+// 				jQuery(document).on('change','billing-country',function(){
+// 				  showHideEUOnly(jQuery('#billing-country').val());
+// 				  handleCheckboxDisplay(jQuery(this).val(), jQuery('#billing-state').val());
+// 				  handleVatFieldChange();
+	
+// 				});
+		
+	
+// 				jQuery(document).on('change','#billing-state',function(){
+// 					handleCheckboxDisplay(jQuery('#billing-country').val(), jQuery(this).val());
+// 				}) 
+	
+// 				jQuery(document).on('input','#billing-company',function(){
+// 				  showHideEUOnly(jQuery('#billing-country').val());
+// 				});
+	
+// 				jQuery(document).on('blur', '#aftax-vat-number', function(){
+// 					handleVatFieldChange();
+// 				})
+// 				handleCheckboxDisplay(jQuery('#billing-country').val(), jQuery('#billing-state').val());
+// 				showHideEUOnly(jQuery('#billing-country').val()); 
+
+
+// 			}
+// 			else{				
+// 				jQuery(document).on('change','#shipping-country',function(){
+// 				  showHideEUOnly(jQuery('#shipping-country').val());
+// 				  handleVatFieldChange();
+// 				  handleCheckboxDisplay(jQuery(this).val(), jQuery('#shipping-state').val());
+	
+// 				});
+		
+	
+// 				jQuery(document).on('change','#shiping-state',function(){
+// 					handleCheckboxDisplay(jQuery('#shipping-country').val(), jQuery(this).val());
+// 				}) 
+	
+// 				jQuery(document).on('input','#shipping-company',function(){					
+// 				  showHideEUOnly(jQuery('#shipping-country').val());
+// 				});
+	
+// 				jQuery(document).on('blur', '#aftax-vat-number', function(){
+// 					handleVatFieldChange();
+// 				})
+
+// 				handleCheckboxDisplay(jQuery('#shipping-country').val(), jQuery('#shipping-state').val());
+// 				showHideEUOnly(jQuery('#shipping-country').val()); 
+
+// 			}
+			
+// 			handleVatFieldChange();
+// 		};
+	
+// 		setTimeout(function(){
+// 			jQuery('.wc-block-checkout__use-address-for-billing input[type="checkbox"]').on('change', function () {
+// 				bindEventsAndDisplay();
+				
+// 			});
+// 		},500);
+
+// 		setTimeout(bindEventsAndDisplay, 1000);
+
+	
+// 	  }, []); 
+	
+
+// 	  function showHideEUOnly(countryName) {
+		
+// 		var eu = ['AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'ES', 'SE', 'GB'];
+// 		if (eu.indexOf(countryName) != -1 ) {			
+// 			if(jQuery('.aftax_dependable') && jQuery('.aftax_dependable').length>0){	
+										
+// 				if(jQuery('.wc-block-checkout__use-address-for-billing').length && !jQuery('.wc-block-checkout__use-address-for-billing input[type="checkbox"]').is(':checked')){
+// 					if(jQuery('#billing-company')&& jQuery('#billing-company').length){
+// 						if(jQuery('#billing-company') && jQuery('#billing-company').val().length >0){
+// 							jQuery('.aftax-eu-only').show();
+// 							jQuery('.aftax-eu-only').insertAfter(
+// 								'.wp-block-woocommerce-checkout-order-note-block'
+// 							);
+// 						}
+// 						else{
+// 							jQuery('.aftax-eu-only').hide();
+// 							setVatNumber('');
+// 						}
+// 					}
+// 				}
+// 				else if(jQuery('.wc-block-checkout__use-address-for-billing') && jQuery('.wc-block-checkout__use-address-for-billing').length && jQuery('.wc-block-checkout__use-address-for-billing input[type="checkbox"]').is(':checked')){				
+// 					if(jQuery('#shipping-company')&& jQuery('#shipping-company').length){
+// 						if(jQuery('#shipping-company') && jQuery('#shipping-company').val().length >0){
+// 							jQuery('.aftax-eu-only').show();
+// 							jQuery('.aftax-eu-only').insertAfter(
+// 								'.wp-block-woocommerce-checkout-order-note-block'
+// 							);
+// 						}
+// 						else{
+// 							jQuery('.aftax-eu-only').hide();
+// 							setVatNumber('');
+
+// 						}
+// 					}
+// 				}			
+// 			}
+// 			else{
+// 				jQuery('.aftax-eu-only').show();
+// 				jQuery('.aftax-eu-only').insertAfter(
+// 					'.wp-block-woocommerce-checkout-order-note-block'
+// 				);
+// 			}
+// 		}
+// 		else {
+	
+// 			jQuery('.aftax-eu-only').hide();
+// 			setVatNumber('');
+// 			// jQuery('body').trigger('update_checkout');
+	
+// 		}
+// 	}
+
+// 	const aftax_vat_filed_label 						= aftax_php_vars.vat_field_label;
+// 	const dependable_class_name 						= aftax_php_vars.dependable_class_name;
+// 	const aftax_vat_number_block						= aftax_php_vars.aftax_vat_number_block;	
+	
+// 	const is_user_logged_in 							= aftax_php_vars.is_user_logged_in;
+// 	const enable_checkbox_for_logged_in_user  			= aftax_php_vars.enable_checkbox_for_logged_in_user;
+// 	const enable_message_for_logged_in_user   			= aftax_php_vars.enable_message_for_logged_in_user;
+// 	const enable_vat_for_logged_in_user       			= aftax_php_vars.enable_vat_for_logged_in_user;
+// 	const enable_checkbox_for_guest_user 				= aftax_php_vars.enable_checkbox_for_guest_user;
+// 	const enable_message_for_guest_user  				= aftax_php_vars.enable_message_for_guest_user;
+// 	const enable_vat_for_guest_user  					= aftax_php_vars.enable_vat_for_guest_user;
+// 	const aftax_guest_message 							= aftax_php_vars.aftax_guest_message;
+// 	const aftax_logged_in_user_message 					= aftax_php_vars.aftax_logged_in_user_message;
+
+// 	const aftax_translation_tax_exempt_message			= aftax_php_vars.aftax_translation_tax_exempt_message;
+// 	const aftax_translation_tax_exempt_heading			= aftax_php_vars.aftax_translation_tax_exempt_heading;
+// 	const aftax_translation_tax_exempt_notification		= aftax_php_vars.aftax_translation_tax_exempt_notification;
+// 	const aftax_currency_symbol_data 					= aftax_php_vars.aftax_currency_symbol_data;
+
+
+
+
+	
+// 	jQuery(document).ready(function () {
+// 		if (
+// 			is_user_logged_in && enable_message_for_logged_in_user
+// 					) {
+// 			jQuery('.taxExemptInnerDiv').html(
+// 				'<div class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox wc-block-components-checkout-step__container">' +
+// 					aftax_logged_in_user_message +
+// 					'</div>'
+// 			);
+// 		} else if (
+// 			!is_user_logged_in  && enable_message_for_guest_user
+// 		) {
+// 			jQuery('.taxExemptInnerDiv').html(
+// 				'<div class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox wc-block-components-checkout-step__container">' +
+// 					aftax_guest_message +
+// 					'</div>'
+// 			);
+// 		}	
+// 	});
+
+
+// 	const { setExtensionData } = checkoutExtensionData;
+
+// 	const [vatNumber, setVatNumber] = useState(aftax_vat_number_block);
+
+
+
+// 	const [taxExemptCheckboxIsChecked, setTaxExemptCheckboxIsChecked] =useState(false);
+
+// 	const handleCheckboxChange = (event) => {
+// 		const isChecked = event.target.checked;
+
+// 		const stringValue = isChecked ? 'checked' : 'not checked';
+
+// 		var billing_country =  '';
+// 		var billing_state   =  '';
+
+// 		setTimeout(function(){
+// 			//billing
+// 			if(jQuery('.wc-block-checkout__use-address-for-billing') && jQuery('.wc-block-checkout__use-address-for-billing').length && !jQuery('.wc-block-checkout__use-address-for-billing input[type="checkbox"]').is(':checked')){
+// 				billing_country = jQuery('#billing-country').val();
+// 				billing_state   = jQuery('#billing-state').val();
+// 			}
+// 			//shipping
+// 			else if(jQuery('.wc-block-checkout__use-address-for-billing') && jQuery('.wc-block-checkout__use-address-for-billing').length && jQuery('.wc-block-checkout__use-address-for-billing input[type="checkbox"]').is(':checked')){				
+// 				billing_country = jQuery('#shipping-country').val();
+// 				billing_state   = jQuery('#shipping-state').val();
+// 			}	
+
+			
+// 			jQuery.ajax({
+// 				type: 'POST',
+// 				url: aftax_php_vars.admin_url,
+// 				data: {
+// 					action: 'set_tax_exempt_val',
+// 					af_tax_checkbox_is_checked: stringValue,
+// 					nonce: aftax_php_vars.nonce,
+// 					billing_country:billing_country,
+// 					billing_state:billing_state
+// 				},
+// 				success: function (response) {				
+// 					if (response.data.status === 'pass') {
+// 						refreshCheckoutPage();						
+// 					}
+					
+// 				},
+// 				error: function (error) {},
+// 			});
+
+// 		},100);
+		
+
+		
+// 	};
+
+// 	useEffect(() => {
+// 		setExtensionData(
+// 			'af_vat_tax_exempt_block',
+// 			'addifyIsTaxExemptChecked',
+// 			taxExemptCheckboxIsChecked
+// 		);
+
+// 		//trigger checkbox on page load so that tax is added if it removed before
+// 		if(jQuery('#tax_exemption_checkbox') && jQuery('#tax_exemption_checkbox').length){
+// 			handleCheckboxChange({ target: { checked: jQuery('#tax_exemption_checkbox').checked } });
+// 		}
+
+
+// 	}, [setExtensionData, taxExemptCheckboxIsChecked]);
+
+
+
+
+// 	function makePriceFormatable(value){
+// 		var value = value.toString();
+// 		var decimal_position = value.length - aftax_currency_symbol_data.aftax_num_decimals;
+
+// 		if(decimal_position != value.length){
+// 			value = value.slice(0, decimal_position) + "." + value.slice(decimal_position);
+// 		}else{
+// 			value = value;
+// 		}
+
+// 		//thousand seperator
+// 		let parts = value.toString().split(".");
+// 		parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, aftax_currency_symbol_data.aftax_thousand_sep);
+// 		value =  parts.join(".");
+
+// 		var value_with_currency_symbol;
+// 		switch (aftax_currency_symbol_data.aftax_currency_pos) {
+// 			case 'left':
+// 				value_with_currency_symbol = `${aftax_currency_symbol_data.aftax_currency_symbol}${value}`;
+// 				break;
+// 			case 'right':
+// 				value_with_currency_symbol = `${value}${aftax_currency_symbol_data.aftax_currency_symbol}`;
+// 				break;
+// 			case 'left_space':
+// 				value_with_currency_symbol = `${aftax_currency_symbol_data.aftax_currency_symbol} ${value}`;
+// 				break;
+// 			case 'right_space':
+// 				value_with_currency_symbol = `${value} ${aftax_currency_symbol_data.aftax_currency_symbol}`;
+// 				break;
+// 			default:
+// 				value_with_currency_symbol = `${aftax_currency_symbol_data.aftax_currency_symbol}${value}`;
+// 		}
+
+// 		return value_with_currency_symbol.toString().replace('.', aftax_currency_symbol_data.aftax_decimal_sep)
+// 	}
+
+
+// 	function refreshCheckoutPage(refresh_anyway = false){
+// 		jQuery('.wc-block-components-totals-footer-item')
+// 						.find('.wc-block-components-totals-item__value')
+// 						.each(function () {
+// 							apiFetch({ path: '/wc/store/v1/cart' }).then(
+// 								(posts) => {
+									
+// 									jQuery(this).text(makePriceFormatable(posts.totals.total_price));
+									
+
+// 									if (jQuery('#tax_exemption_checkbox').is(':checked')  || refresh_anyway) {
+										
+// 										var findtaxesBlocks = jQuery(
+// 											'.wp-block-woocommerce-checkout-order-summary-taxes-block'
+// 										);
+
+// 										if (findtaxesBlocks.length > 1) {
+// 											// findtaxesBlocks.first().remove();
+// 											findtaxesBlocks.first().hide();
+// 										}
+
+// 										if (jQuery('#removeTaxExemptNotification') && jQuery('#removeTaxExemptNotification').length === 0) {
+
+// 											jQuery('#main').before(
+// 												'<div class="wc-block-components-notice-banner is-info" id="removeTaxExemptNotification" role="alert">' +
+// 												'<div class="wc-block-components-notice-banner__content">' +
+// 												aftax_translation_tax_exempt_notification +
+// 												'</div></div>'
+// 											);
+// 											// window.scrollTo(0, 0);
+// 											if(jQuery('#tax_exemption_checkbox').is(':checked')){
+// 												window.scrollTo({
+// 													top: 0,
+// 													behavior: 'smooth'
+// 												});
+// 											}
+											
+// 											if('1' != jQuery('#aftax-vat-number').attr('data-validated')){
+// 												window.scrollTo({
+// 													top: 0,
+// 													behavior: 'smooth'
+// 												});
+// 											}
+
+// 										}
+										
+// 										jQuery(
+// 											'.wp-block-woocommerce-checkout-order-summary-taxes-block'
+// 										).hide();
+// 									} else {
+// 										jQuery(
+// 											'#removeTaxExemptNotification'
+// 										).remove();
+
+// 										var taxesBlock = jQuery(document).find(
+// 											'.wp-block-woocommerce-checkout-order-summary-taxes-block'
+// 										);						
+
+// 										if (!(taxesBlock.length > 0)) {
+											
+// 											jQuery(
+// 												'.wp-block-woocommerce-checkout-order-summary-taxes-block'
+// 											).hide();
+
+// 											var innerTaxDiv =
+// 												'<div class="wp-block-woocommerce-checkout-order-summary-taxes-block wc-block-components-totals-wrapper">';
+
+
+// 											posts.totals.tax_lines.forEach(
+// 												function (taxLine) {
+// 													innerTaxDiv +=
+// 																'<div class="wc-block-components-totals-item wc-block-components-totals-taxes"><span class="wc-block-components-totals-item__label">' +
+// 																taxLine.name +
+// 																'</span><span class="wc-block-formatted-money-amount wc-block-components-formatted-money-amount wc-block-components-totals-item__value">' +
+// 																makePriceFormatable(taxLine.price) +
+// 																'</span><div class="wc-block-components-totals-item__description"></div></div>';
+													
+// 												}
+// 											);
+// 											innerTaxDiv += '</div>';
+
+// 											if(jQuery('.wp-block-woocommerce-checkout-order-summary-shipping-block') && jQuery('.wp-block-woocommerce-checkout-order-summary-shipping-block').length){
+// 												jQuery(
+// 													'.wp-block-woocommerce-checkout-order-summary-shipping-block'
+// 												).after(innerTaxDiv);
+// 												}
+// 											else{
+// 												jQuery(
+// 													'.wp-block-woocommerce-checkout-order-summary-totals-block'
+// 												).after(innerTaxDiv);
+// 											}
+// 										} else {
+// 											jQuery(
+// 												'.wp-block-woocommerce-checkout-order-summary-taxes-block'
+// 											).show();
+// 										}
+// 									}
+// 								}
+// 							);
+// 						});
+
+// 	}
+
+// 	const aftaxVatNumberChange = (e) => {
+//         const { id, value } = e.target;
+// 		setVatNumber(value);
+//     };
+	
+
+// 	return (
+// 		<>
+// 		{((is_user_logged_in && (enable_checkbox_for_logged_in_user || enable_message_for_logged_in_user)) || (!is_user_logged_in && (enable_checkbox_for_guest_user || enable_message_for_guest_user))) ? (
+
+// 			<div className="wc-block-components-checkout-step wc-block-components-checkout-step--with-step-number wp-block-af_vat_tax_exempt_block-tax-exempt"
+// 				style={{ display: "none", marginBottom: "10px" }}
+// 				>
+// 				<div className="wc-block-components-checkout-step__container">
+// 					<div className="wc-block-components-checkout-step__heading">
+// 					<h2
+// 						className="wc-block-components-title wc-block-components-checkout-step__title"
+// 						aria-hidden="true"
+// 					>
+// 						{aftax_translation_tax_exempt_heading}
+// 					</h2>
+// 					</div>
+// 					<div className="wc-block-components-checkout-step__content">
+// 					<div className="taxExemptInnerDiv">
+// 						<div className="wc-block-components-checkbox">
+// 						{((is_user_logged_in && enable_checkbox_for_logged_in_user) || (!is_user_logged_in && enable_checkbox_for_guest_user)) ? (
+						
+// 							<label htmlFor="tax_exemption_checkbox">
+// 							<input
+// 								className="wc-block-components-checkbox__input woocommerce-form__input woocommerce-form__input-checkbox input-checkbox"
+// 								id="tax_exemption_checkbox"
+// 								type="checkbox"
+// 								name="tax_exemption_checkbox"
+// 								onChange={handleCheckboxChange}
+// 							/>
+// 							<svg
+// 								className="wc-block-components-checkbox__mark"
+// 								aria-hidden="true"
+// 								xmlns="http://www.w3.org/2000/svg"
+// 								viewBox="0 0 24 20"
+// 							>
+// 								<path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"></path>
+// 							</svg>
+// 							<span className="wc-block-components-checkbox__label">
+// 								{aftax_translation_tax_exempt_message}
+// 							</span>
+// 							</label>
+// 						) : null}
+// 						</div>
+// 					</div>
+// 					</div>
+// 				</div>
+// 				</div>
+
+
+
+// 		) : null}
+
+
+// 		{((is_user_logged_in && enable_vat_for_logged_in_user) || (!is_user_logged_in && enable_vat_for_guest_user)) ? (
+// 			<fieldset 
+// 				className={`wc-block-components-checkout-step wc-block-components-checkout-step--with-step-number wp-block-af_vat_tax_exempt aftax-eu-only ${dependable_class_name}`}
+// 				style={{ display: 'none' }}
+// 			>
+				
+// 				<div className="wc-block-components-text-input tax_exempt_vat_inner_div">
+// 					<input type="text" 
+// 							id="aftax-vat-number"  
+// 							value={vatNumber} 
+// 							onChange = {aftaxVatNumberChange}
+// 					/>
+// 					<label htmlFor="vat-number">{aftax_vat_filed_label}</label>
+// 				</div>
+// 			</fieldset>
+// 		) : null}
+
+// 		</>
+		
+// 	);
+// };
+
+
+
+
+

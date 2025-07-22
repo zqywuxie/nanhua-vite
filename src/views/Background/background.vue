@@ -2,7 +2,7 @@
   <div class="background-page">
     <!-- Banner -->
     <div class="background-banner">
-      <img src="/src/assets/Background/Banner001847-ban_wap.jpg" alt="banner" />
+      <img :src="bannerImg" alt="banner" />
     </div>
 
     <!-- Tab切换模块 -->
@@ -40,6 +40,15 @@ import ImmuneRepertoire from './ImmuneRepertoire.vue'
 import TechBackground from './TechBackground.vue'
 import PatentPapers from './PatentPapers.vue'
 
+// 图片import
+import bannerImg from '@/assets/Background/Banner001847-ban_wap.jpg'
+import pic1 from '@/assets/Background/20210618162019508.jpg'
+import pic2 from '@/assets/Background/20210618161654075.png'
+import pic3 from '@/assets/Background/20210618162547528.png'
+import pic4 from '@/assets/Background/20210618162953285.jpg'
+import team1 from '@/assets/Background/1.gif'
+import team2 from '@/assets/Background/2.png'
+import team3 from '@/assets/Background/1234.jpg'
 
 const tabs = [
   { key: 'immune', label: 'Immune Repertoire' },
@@ -47,46 +56,44 @@ const tabs = [
   { key: 'patent', label: 'Patents & Papers' },
 ]
 
-
 const currentTab = ref(0)
 const picList = [
   {
-
-    img: '/src/assets/Background/20210618162019508.jpg',
+    img: pic1,
     title: '专注于免疫基因组学的临床应用与开发',
     desc: '将免疫组测序及分析技术应用于疾病的临床诊疗相关领域',
   },
   {
-    img: '/src/assets/Background/20210618161654075.png',
+    img: pic2,
     title: '健力谱免疫系统健康评估',
     desc: '利用指尖血即可完成个体免疫力动态监测，进而评估个体健康状态',
   },
   {
-    img: '/src/assets/Background/20210618162547528.png',
+    img: pic3,
     title: '多样的免疫组库研究服务',
     desc: '对人、小鼠的bulk样本以及单细胞样本进行全面、定量的免疫组库分析服务',
   },
   {
-    img: '/src/assets/Background/20210618162953285.jpg',
+    img: pic4,
     title: '抗体药物与疫苗开发',
     desc: '筛选肿瘤，感染，自身免疫疾病治疗相关的抗体或靶点，助力药物和疫苗开发',
   },
 ]
 const teamList = [
   {
-    img: '/src/assets/Background/1.gif',
+    img: team1,
     name: 'Zhang San',
     role: 'R&D Director',
     desc: 'Many years of experience in bioinformatics analysis and team management, leading multiple national projects.'
   },
   {
-    img: '/src/assets/Background/2.png',
+    img: team2,
     name: 'Li Si',
     role: 'Technical Director',
     desc: 'Specialized in high-throughput sequencing platform development, with extensive laboratory management experience.'
   },
   {
-    img: '/src/assets/Background/1234.jpg',
+    img: team3,
     name: 'Wang Wu',
     role: 'Marketing Director',
     desc: 'Responsible for company marketing strategy and brand promotion, driving continuous business growth.'
