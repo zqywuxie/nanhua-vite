@@ -78,19 +78,14 @@
           <div class="chief-scientist-section">
             <div class="chief-content">
               <div class="chief-photo">
-                <img :src="aboutus07" alt="Han Jian" />
+                <img :src="PHDWang" alt="Han Jian" />
               </div>
               <div class="chief-info">
                 <div class="chief-name">Han Jian</div>
                 <div class="chief-role">MD, PhD; Chief Scientist</div>
                 <div class="chief-hr"></div>
                 <div class="chief-desc">
-                  <p>Dr. Han Jian is an innovative and entrepreneurial scientist, serving as Chief Investigator and Professor at the HudsonAlpha Institute for Biotechnology in the United States. Dr. Han has invented several major patented technologies, including tem-PCR, arm-PCR, dam-PCR, and Immuno Repertoireomics, which have revolutionized clinical diagnostic methods. He has received numerous awards, such as the 2006 Frost & Sullivan Technology Innovation and Leadership Award, the 2007 Wall Street Journal Technology Innovation Award, and the 2018 China NGS Innovator Conference "Outstanding Contribution to Gene Application Award".</p>
-                  <p>Dr. Han has successfully founded four companies, two of which, Genaco and Diatherix, have been acquired by internationally renowned enterprises. He currently operates/manages iCubate and iRepertoire. iCubate focuses on the development of molecular diagnostic technology platforms and products, while iRepertoire specializes in immune repertoire-related product development.</p>
-                  <p>Dr. Han has been researching high-throughput immune repertoire sequencing technologies and their applications for many years, publishing over ten academic papers in top international journals. By combining multiplex PCR technology with next-generation sequencing platforms and advanced bioinformatics, he studies immune repertoires and disease mechanisms, identifies new early diagnostic and efficacy evaluation markers for major diseases, and develops new therapeutic approaches with promising prospects.</p>
-                  <p>Dr. Han is the initiator and leader of the international R10K project for large-scale immune repertoire sequencing.</p>
-                  <p>Dr. Han graduated from Suzhou Medical College and Shanghai Second Medical College, obtained his PhD in Clinical Medical Genetics from the University of Alabama, USA, and holds a specialist license in clinical medical genetics. He has served as Director of the Clinical Medical Genetics Laboratory and Assistant Professor of Pediatrics at the University of Alabama, and is currently Chief Investigator at the HudsonAlpha Institute for Biotechnology. Dr. Han is also a visiting professor at Fudan University, a council member of the China Association for Maternal and Child Health, a council member of the Association of Chinese Geneticists in America, and a biotechnology advisor to the Governor of Alabama.</p>
-                  <p>In addition, Dr. Han is a well-known science writer, having published nearly a thousand blog posts on biotechnology innovation and entrepreneurship on ScienceNet and Sina.com.</p>
+                  <p>简介待补充。</p>
                 </div>
               </div>
             </div>
@@ -140,7 +135,7 @@
         <div class="partner-item" v-for="partner in partners" :key="partner.name">
           <div class="partner-logo">
             <img v-if="partner.logo" :src="partner.logo" :alt="partner.name" />
-            <svg v-else width="36" height="36" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="12" fill="#4e3fa5"/><path d="M7 12h10M12 7v10" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+            <svg v-else width="36" height="36" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="12" fill="#4e3fa5"/><path d="M7 12h10M12 7v10" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
           <div class="partner-info">
             <div class="partner-name">{{ partner.name }}</div>
@@ -164,9 +159,8 @@ import aboutus03 from '@/assets/about/aboutus03.png'
 import aboutus04 from '@/assets/about/aboutus04.png'
 import aboutus05 from '@/assets/about/aboutus05.png'
 import aboutus06 from '@/assets/about/aboutus06.png'
-import member01 from '@/assets/about/aboutus07.png'
-import member02 from '@/assets/about/aboutus07.png'
-import member03 from '@/assets/about/aboutus07.png'
+import PHDWang from '@/assets/about/PHD-wang.jpg'
+import HakeemO from '@/assets/about/Hakeem O. Lawal, Ph.D..jpg'
 import WeGoFastFooter from '@/components/WeGoFastFooter.vue'
 const scrollTo = (id) => {
   const el = document.getElementById(id);
@@ -224,24 +218,11 @@ const businessList = [
 
 const teamList = [
   {
-    img: member01,
-    name: 'Zhang San',
-    role: 'R&D Director',
-    desc: 'Many years of experience in bioinformatics analysis and team management, leading multiple national projects.'
-  },
-  {
-    img: member02,
-    name: 'Li Si',
-    role: 'Technical Director',
-    desc: 'Specialized in high-throughput sequencing platform development, with extensive laboratory management experience.'
-  },
-  {
-    img: member03,
-    name: 'Wang Wu',
-    role: 'Marketing Director',
-    desc: 'Responsible for company marketing strategy and brand promotion, driving continuous business growth.'
-  },
-  // ...add more as needed
+    img: HakeemO,
+    name: 'Hakeem O. Lawal, Ph.D.',
+    role: 'Professor & Vice Chair',
+    desc: `Professor & Vice Chair, Department of Biological Sciences, Delaware State University. Dr. Lawal received his B.S. in Microbiology from the University of Lagos, and his M.S. and Ph.D. in Molecular and Cell Biology from The University of Alabama. He completed postdoctoral training at UCLA. His research focuses on the molecular mechanisms underlying neurodegenerative diseases such as Parkinson’s and Alzheimer’s, with expertise in neuroscience, imaging, electrophysiology, and Drosophila genetics. Dr. Lawal has led multiple NSF and NIH-funded projects, published extensively on neurotransmitter transporters and neurobiology, and is committed to mentoring, collaborative research, and fostering inclusive excellence in STEM.`
+  }
 ];
 
 const awards = [
