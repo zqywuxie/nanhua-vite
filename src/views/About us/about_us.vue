@@ -78,10 +78,10 @@
           <div class="chief-scientist-section">
             <div class="chief-content">
               <div class="chief-photo">
-                <img :src="PHDWang" alt="Han Jian" />
+                <img :src="PHDWang" alt="Wang Zhe" />
               </div>
               <div class="chief-info">
-                <div class="chief-name">Han Jian</div>
+                <div class="chief-name">Wang Zhe</div>
                 <div class="chief-role">MD, PhD; Chief Scientist</div>
                 <div class="chief-hr"></div>
                 <div class="chief-desc">
