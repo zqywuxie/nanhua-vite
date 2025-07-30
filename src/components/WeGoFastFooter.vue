@@ -12,11 +12,72 @@
             <ul class="contact-nav-sub">
               <li class="contact-nav-item">
                 <span class="contact-nav-dotline">
-                  <svg width="6" height="28" viewBox="0 0 6 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle v-for="i in 5" :key="i" :cy="3+5*(i-1)" cx="3" :r="0.8+0.2*i" fill="#fff" />
+                  <svg
+                    width="6"
+                    height="28"
+                    viewBox="0 0 6 28"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      v-for="i in 5"
+                      :key="i"
+                      :cy="3 + 5 * (i - 1)"
+                      cx="3"
+                      :r="0.8 + 0.2 * i"
+                      fill="#fff"
+                    />
                   </svg>
                 </span>
-                <a class="contact-nav-link" href="#">Reagent</a>
+                <a class="contact-nav-link" href="/life_science"
+                  >Life Science Solutions</a
+                >
+              </li>
+              <li class="contact-nav-item">
+                <span class="contact-nav-dotline">
+                  <svg
+                    width="6"
+                    height="28"
+                    viewBox="0 0 6 28"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      v-for="i in 5"
+                      :key="i"
+                      :cy="3 + 5 * (i - 1)"
+                      cx="3"
+                      :r="0.8 + 0.2 * i"
+                      fill="#fff"
+                    />
+                  </svg>
+                </span>
+                <a class="contact-nav-link" href="/reagent"
+                  >Diagnostic Materials</a
+                >
+              </li>
+              <li class="contact-nav-item">
+                <span class="contact-nav-dotline">
+                  <svg
+                    width="6"
+                    height="28"
+                    viewBox="0 0 6 28"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      v-for="i in 5"
+                      :key="i"
+                      :cy="3 + 5 * (i - 1)"
+                      cx="3"
+                      :r="0.8 + 0.2 * i"
+                      fill="#fff"
+                    />
+                  </svg>
+                </span>
+                <a class="contact-nav-link" href="/instruments"
+                  >Digital PCR & Instruments</a
+                >
               </li>
             </ul>
           </li>
@@ -25,27 +86,72 @@
             <ul class="contact-nav-sub">
               <li class="contact-nav-item">
                 <span class="contact-nav-dotline">
-                  <svg width="6" height="28" viewBox="0 0 6 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle v-for="i in 5" :key="i" :cy="3+5*(i-1)" cx="3" :r="0.8+0.2*i" fill="#fff" />
+                  <svg
+                    width="6"
+                    height="28"
+                    viewBox="0 0 6 28"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      v-for="i in 5"
+                      :key="i"
+                      :cy="3 + 5 * (i - 1)"
+                      cx="3"
+                      :r="0.8 + 0.2 * i"
+                      fill="#fff"
+                    />
                   </svg>
                 </span>
-                <a class="contact-nav-link" href="#">DNA Reading</a>
+                <a class="contact-nav-link" href="/services/health-assessment"
+                  >Health Assessment</a
+                >
               </li>
               <li class="contact-nav-item">
                 <span class="contact-nav-dotline">
-                  <svg width="6" height="28" viewBox="0 0 6 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle v-for="i in 5" :key="i" :cy="3+5*(i-1)" cx="3" :r="0.8+0.2*i" fill="#fff" />
+                  <svg
+                    width="6"
+                    height="28"
+                    viewBox="0 0 6 28"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      v-for="i in 5"
+                      :key="i"
+                      :cy="3 + 5 * (i - 1)"
+                      cx="3"
+                      :r="0.8 + 0.2 * i"
+                      fill="#fff"
+                    />
                   </svg>
                 </span>
-                <a class="contact-nav-link" href="#">DNA Writing</a>
+                <a class="contact-nav-link" href="/services/disease-diagnosis"
+                  >Disease Diagnosis</a
+                >
               </li>
               <li class="contact-nav-item">
                 <span class="contact-nav-dotline">
-                  <svg width="6" height="28" viewBox="0 0 6 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle v-for="i in 5" :key="i" :cy="3+5*(i-1)" cx="3" :r="0.8+0.2*i" fill="#fff" />
+                  <svg
+                    width="6"
+                    height="28"
+                    viewBox="0 0 6 28"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      v-for="i in 5"
+                      :key="i"
+                      :cy="3 + 5 * (i - 1)"
+                      cx="3"
+                      :r="0.8 + 0.2 * i"
+                      fill="#fff"
+                    />
                   </svg>
                 </span>
-                <a class="contact-nav-link" href="#">DNA Production</a>
+                <a class="contact-nav-link" href="/services/drug-development"
+                  >Drug Development</a
+                >
               </li>
             </ul>
           </li>
@@ -54,16 +160,42 @@
             <ul class="contact-nav-sub">
               <li class="contact-nav-item">
                 <span class="contact-nav-dotline">
-                  <svg width="6" height="28" viewBox="0 0 6 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle v-for="i in 5" :key="i" :cy="3+5*(i-1)" cx="3" :r="0.8+0.2*i" fill="#fff" />
+                  <svg
+                    width="6"
+                    height="28"
+                    viewBox="0 0 6 28"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      v-for="i in 5"
+                      :key="i"
+                      :cy="3 + 5 * (i - 1)"
+                      cx="3"
+                      :r="0.8 + 0.2 * i"
+                      fill="#fff"
+                    />
                   </svg>
                 </span>
                 <a class="contact-nav-link" href="#">Marketing Materials</a>
               </li>
               <li class="contact-nav-item">
                 <span class="contact-nav-dotline">
-                  <svg width="6" height="28" viewBox="0 0 6 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle v-for="i in 5" :key="i" :cy="3+5*(i-1)" cx="3" :r="0.8+0.2*i" fill="#fff" />
+                  <svg
+                    width="6"
+                    height="28"
+                    viewBox="0 0 6 28"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      v-for="i in 5"
+                      :key="i"
+                      :cy="3 + 5 * (i - 1)"
+                      cx="3"
+                      :r="0.8 + 0.2 * i"
+                      fill="#fff"
+                    />
                   </svg>
                 </span>
                 <a class="contact-nav-link" href="#">Events</a>
@@ -72,7 +204,9 @@
           </li>
           <li class="contact-nav-col contact-nav-col-right">
             <div class="contact-nav-group-title">
-              <a class="contact-nav-link" href="/about_us" style="padding:0;">Company</a>
+              <a class="contact-nav-link" href="/about_us" style="padding: 0"
+                >Company</a
+              >
             </div>
             <ul class="contact-nav-sub">
               <li class="contact-nav-item">
@@ -86,41 +220,54 @@
     <div class="contact-divider"></div>
     <div class="contact-bottom">
       <div class="contact-location">
-        <div class="contact-location-title"><span class="contact-icon">🏢</span>CALIFORNIA</div>
-        <div class="contact-location-row"><span class="contact-icon">✉️</span>sales.us@quintarabio.com</div>
-        <div class="contact-location-row"><span class="contact-icon">📞</span>1-510-397-0215</div>
-        <div class="contact-location-row"><span class="contact-icon">📍</span>3563 Investment Blvd, #2, Hayward, CA 94545</div>
+        <div class="contact-location-title">
+          <span class="contact-icon">🏢</span>南京总部 (暂定)
+        </div>
+        <div class="contact-location-row">
+          <span class="contact-icon">✉️</span>info@company.com (暂定)
+        </div>
+        <div class="contact-location-row">
+          <span class="contact-icon">📞</span>4008-281-191 (暂定)
+        </div>
+        <div class="contact-location-row">
+          <span class="contact-icon">📍</span
+          >南京经济开发区恒泰路8号汇智科技园A9栋第4层 (暂定)
+        </div>
       </div>
       <div class="contact-location">
-        <div class="contact-location-title"><span class="contact-icon">🏢</span>MASSACHUSETTS</div>
-        <div class="contact-location-row"><span class="contact-icon">✉️</span>sales.us@quintarabio.com</div>
-        <div class="contact-location-row"><span class="contact-icon">📞</span>1-617-943-2768</div>
-        <div class="contact-location-row"><span class="contact-icon">📍</span>625 Mt Auburn Street, Suite 105 Cambridge, MA 02138</div>
+        <div class="contact-location-title">
+          <span class="contact-icon">🏢</span>北京分公司 (暂定)
+        </div>
+        <div class="contact-location-row">
+          <span class="contact-icon">✉️</span>beijing@company.com (暂定)
+        </div>
+        <div class="contact-location-row">
+          <span class="contact-icon">📞</span>010-XXXX-XXXX (暂定)
+        </div>
+        <div class="contact-location-row">
+          <span class="contact-icon">📍</span>北京市朝阳区XX路XX号 (暂定)
+        </div>
       </div>
       <div class="contact-location">
-        <div class="contact-location-title"><span class="contact-icon">🏢</span>TEXAS</div>
-        <div class="contact-location-row"><span class="contact-icon">✉️</span>sales.us@quintarabio.com</div>
-        <div class="contact-location-row"><span class="contact-icon">📞</span>1-346-239-9971</div>
-        <div class="contact-location-row"><span class="contact-icon">📍</span>10410 Corporate Dr. Suite 118, Sugar Land, TX 77478</div>
-      </div>
-      <div class="contact-location">
-        <div class="contact-location-title"><span class="contact-icon">🏢</span>Michigan</div>
-        <div class="contact-location-row"><span class="contact-icon">✉️</span>sales.us@quintarabio.com</div>
-        <div class="contact-location-row"><span class="contact-icon">📞</span>734-476-9826</div>
-        <div class="contact-location-row"><span class="contact-icon">📍</span>2301 Moss Ross Ct, Ann Arbor. Ml 48103</div>
-      </div>
-      <div class="contact-location">
-        <div class="contact-location-title"><span class="contact-icon">🏢</span>CA San Diego</div>
-        <div class="contact-location-row"><span class="contact-icon">✉️</span>sales.us@quintarabio.com</div>
-        <div class="contact-location-row"><span class="contact-icon">📞</span>1-510-397-0215</div>
-        <div class="contact-location-row"><span class="contact-icon">📍</span>6364 Ferris Square, Suite 102, San Diego, CA 92121</div>
+        <div class="contact-location-title">
+          <span class="contact-icon">🏢</span>上海分公司 (暂定)
+        </div>
+        <div class="contact-location-row">
+          <span class="contact-icon">✉️</span>shanghai@company.com (暂定)
+        </div>
+        <div class="contact-location-row">
+          <span class="contact-icon">📞</span>021-XXXX-XXXX (暂定)
+        </div>
+        <div class="contact-location-row">
+          <span class="contact-icon">📍</span>上海市浦东新区XX路XX号 (暂定)
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-import logoImg from '@/assets/logo.png'
+import logoImg from "@/assets/logo.png";
 // No props for now, static content as in Oligo_Synthesis.vue
 </script>
 
@@ -293,7 +440,7 @@ import logoImg from '@/assets/logo.png'
 }
 
 .contact-location {
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 0.75rem;
   padding: 1.5rem 2rem;
   flex: 1;
@@ -338,12 +485,12 @@ import logoImg from '@/assets/logo.png'
     gap: 2rem;
     padding: 1.5rem 1.5rem 1rem 1.5rem;
   }
-  
+
   .contact-bottom {
     gap: 1.25rem;
     padding: 1.25rem 1.5rem 0 1.5rem;
   }
-  
+
   .contact-location {
     padding: 1.25rem 1.75rem;
   }
@@ -353,7 +500,7 @@ import logoImg from '@/assets/logo.png'
   .contact-info-gradient {
     padding: 1.5rem 0 2rem 0;
   }
-  
+
   .contact-top {
     flex-direction: column;
     align-items: center;
@@ -361,42 +508,42 @@ import logoImg from '@/assets/logo.png'
     gap: 1.5rem;
     padding: 1.5rem 1rem 1rem 1rem;
   }
-  
+
   .contact-top-left {
     align-items: center;
     min-width: auto;
   }
-  
+
   .contact-slogan {
     text-align: center;
   }
-  
+
   .contact-top-right {
     width: 100%;
   }
-  
+
   .contact-nav {
     justify-content: center;
     gap: 1.5rem;
   }
-  
+
   .contact-nav-col {
     min-width: 110px;
     margin: 0;
   }
-  
+
   .contact-nav-col-left,
   .contact-nav-col-right {
     margin: 0;
   }
-  
+
   .contact-bottom {
     flex-direction: column;
     align-items: center;
     gap: 0.875rem;
     padding: 1.25rem 1rem 0 1rem;
   }
-  
+
   .contact-location {
     width: 100%;
     max-width: 380px;
@@ -409,39 +556,39 @@ import logoImg from '@/assets/logo.png'
   .contact-info-gradient {
     padding: 1rem 0 1.5rem 0;
   }
-  
+
   .contact-top {
     padding: 1rem 0.75rem 0.75rem 0.75rem;
   }
-  
+
   .contact-nav {
     flex-direction: column;
     gap: 1.25rem;
     align-items: center;
   }
-  
+
   .contact-nav-col {
     min-width: auto;
     width: 100%;
     align-items: center;
   }
-  
+
   .contact-nav-item {
     justify-content: center;
   }
-  
+
   .contact-bottom {
     padding: 0.875rem 0.75rem 0 0.75rem;
   }
-  
+
   .contact-location {
     padding: 1rem;
   }
-  
+
   .contact-location-title {
     font-size: 1rem;
   }
-  
+
   .contact-location-row {
     font-size: 0.75rem;
   }
@@ -452,11 +599,11 @@ import logoImg from '@/assets/logo.png'
   .contact-top {
     max-width: 1600px;
   }
-  
+
   .contact-bottom {
     max-width: 1600px;
   }
-  
+
   .contact-location {
     max-width: 420px;
   }
@@ -468,13 +615,13 @@ import logoImg from '@/assets/logo.png'
     background: #f5f5f5 !important;
     color: #333 !important;
   }
-  
+
   .contact-location {
     background: #fff !important;
     color: #333 !important;
     border: 1px solid #ddd;
   }
-  
+
   .contact-nav-link,
   .contact-slogan,
   .contact-location-title,
