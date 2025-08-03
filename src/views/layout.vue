@@ -434,12 +434,12 @@ const navItems = ref([
       },
     ]
   },
-  {
-    key: 'support',
-    title: 'SUPPORT',
-    path: '/support',
-    children: []
-  },
+  // {
+  //   key: 'support',
+  //   title: 'SUPPORT',
+  //   path: '/support',
+  //   children: []
+  // },
   {
     key: 'resources',
     title: 'RESOURCES',

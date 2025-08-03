@@ -150,8 +150,9 @@
         <div class="section-header">
           <h2 class="section-title">Core Values</h2>
           <p class="section-desc">
-            Our fundamental principles that guide everything we do and shape our
-            culture of excellence and innovation.
+            Our fundamental principles that drive innovation in immune
+            repertoire sequencing, digital PCR technology, and molecular
+            diagnostics solutions.
           </p>
         </div>
         <div class="values-content">
@@ -171,42 +172,47 @@
           <ul class="values-list">
             <li>
               <span class="value-icon">
-                <img :src="customerFocus" alt="Customer Focus" />
+                <img :src="customerFocus" alt="Scientific Excellence" />
               </span>
-              <strong><span>Customer Focus</span></strong>
+              <strong><span>Scientific Excellence</span></strong>
               <p>
-                We prioritize our clients' needs, offering tailored solutions,
-                responsive support, and a seamless experience.
+                We pursue the highest standards in immune repertoire sequencing
+                and digital PCR technologies, delivering precise and reliable
+                results for advancing scientific research and clinical
+                applications.
               </p>
             </li>
             <li>
               <span class="value-icon">
-                <img :src="excellenceQuality" alt="Excellence in Quality" />
+                <img :src="excellenceQuality" alt="Innovation Leadership" />
               </span>
-              <strong><span>Excellence in Quality</span></strong>
+              <strong><span>Innovation Leadership</span></strong>
               <p>
-                We are dedicated to delivering high-quality, accurate, and
-                reliable bioscience solutions to advance scientific research.
+                We continuously develop cutting-edge automated NGS library
+                construction systems and multiplex digital PCR platforms to
+                drive breakthroughs in molecular diagnostics.
               </p>
             </li>
             <li>
               <span class="value-icon">
-                <img :src="innovation" alt="Innovation" />
+                <img :src="innovation" alt="Quality Assurance" />
               </span>
-              <strong><span>Innovation</span></strong>
+              <strong><span>Quality Assurance</span></strong>
               <p>
-                We embrace cutting-edge technologies and continuously improve
-                our services to drive scientific breakthroughs.
+                We maintain rigorous quality control standards across all our
+                products and services, ensuring reproducible and accurate
+                results for immune health monitoring and disease diagnosis.
               </p>
             </li>
             <li>
               <span class="value-icon">
-                <img :src="collaboration" alt="Collaboration" />
+                <img :src="collaboration" alt="Customer Partnership" />
               </span>
-              <strong><span>Collaboration</span></strong>
+              <strong><span>Customer Partnership</span></strong>
               <p>
-                We foster a culture of teamwork and continuous learning, working
-                alongside researchers to accelerate discovery and innovation.
+                We work closely with researchers, clinicians, and pharmaceutical
+                companies to provide comprehensive solutions from sample
+                processing to data analysis and interpretation.
               </p>
             </li>
           </ul>
@@ -220,73 +226,78 @@
         <div class="section-header">
           <h2 class="section-title">Products & Services</h2>
           <p class="section-desc">
-            Comprehensive solutions for your research and development needs
+            Advanced biotechnology solutions for immune repertoire analysis,
+            molecular diagnostics, and life science research applications
           </p>
         </div>
         <ul class="services-list">
           <li>
-            <a href="/products/reagent">
+            <a href="/instruments">
               <figure
                 class="service-image"
-                :style="{ backgroundImage: `url(${qc})` }"
-              ></figure>
-              <div class="service-text">
-                <h3 class="service-title">Reagents & Instrumentation</h3>
-                <p class="service-desc">
-                  Advanced immune repertoire library preparation products and
-                  fully automated library construction systems utilizing
-                  iRepertoire technology
-                </p>
-              </div>
-            </a>
-          </li>
-
-          <li>
-            <a href="/services/health-assessment">
-              <figure
-                class="service-image"
-                :style="{ backgroundImage: `url(${qc})` }"
-              ></figure>
-              <div class="service-text">
-                <h3 class="service-title">Health Assessment & Monitoring</h3>
-                <p class="service-desc">
-                  Scientific health status evaluation services using fingertip
-                  blood samples and immunogenomic technologies
-                </p>
-              </div>
-            </a>
-          </li>
-
-          <li>
-            <a href="/services/disease-diagnosis">
-              <figure
-                class="service-image"
-                :style="{ backgroundImage: `url(${strongEmp})` }"
+                :style="{ backgroundImage: `url(${ngsLibrarySystem})` }"
               ></figure>
               <div class="service-text">
                 <h3 class="service-title">
-                  Disease Diagnosis & Treatment Services
+                  Automated NGS Library Construction Systems
                 </h3>
                 <p class="service-desc">
-                  Tumor-related MRD, companion diagnostics, prognostic
-                  assessment, and therapeutic monitoring
+                  Fully automated library construction systems for immune
+                  repertoire sequencing, featuring high-throughput processing
+                  and standardized workflows for TCR/BCR analysis
                 </p>
               </div>
             </a>
           </li>
 
           <li>
-            <a href="/services/drug-development">
+            <a href="/reagent/chemiluminescence">
+              <figure
+                class="service-image"
+                :style="{ backgroundImage: `url(${digitalPcrKit})` }"
+              ></figure>
+              <div class="service-text">
+                <h3 class="service-title">Digital PCR Detection Kits</h3>
+                <p class="service-desc">
+                  Multiplex and ultra-multiplex digital PCR kits for respiratory
+                  pathogens, gastrointestinal pathogens, tumor detection, and
+                  other clinical applications
+                </p>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a href="/Sanger_Sequencing">
+              <figure
+                class="service-image"
+                :style="{ backgroundImage: `url(${sangerSequencing})` }"
+              ></figure>
+              <div class="service-text">
+                <h3 class="service-title">
+                  Immune Repertoire Sequencing Services
+                </h3>
+                <p class="service-desc">
+                  Comprehensive immune repertoire analysis services including
+                  sample processing, library construction, sequencing, and
+                  bioinformatics analysis for research and clinical applications
+                </p>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a href="/life_science/homogeneous_luminescence">
               <figure
                 class="service-image"
                 :style="{ backgroundImage: `url(${nextGene01Service})` }"
               ></figure>
               <div class="service-text">
-                <h3 class="service-title">Drug & Vaccine Development</h3>
+                <h3 class="service-title">Life Science Solutions</h3>
                 <p class="service-desc">
-                  Screening and identification of antibodies and therapeutic
-                  targets for oncology, infectious diseases, and autoimmune
-                  disorders
+                  Homogeneous luminescence detection systems, chromatography
+                  media, cell sorting systems, and protein purification
+                  solutions for research applications
                 </p>
               </div>
             </a>
@@ -436,10 +447,12 @@ import customerFocus from "@/assets/home/We go fast/Customer Focus.png";
 import excellenceQuality from "@/assets/home/We go fast/Excellence in Quality.png";
 import innovation from "@/assets/home/We go fast/Innovation.png";
 import collaboration from "@/assets/home/We go fast/Collaboration.png";
-import qc from "@/assets/services/QC.png";
-import strongEmp from "@/assets/services/Strong emp.png";
 import nextGene01Service from "@/assets/ngs/nextGene01.png";
 import aboutus02 from "@/assets/about/aboutus02.png";
+// 新增服务相关图片
+import ngsLibrarySystem from "@/assets/home/PCR.jpeg";
+import digitalPcrKit from "@/assets/home/instrument.jpeg";
+import sangerSequencing from "@/assets/home/sequence.jpeg";
 import promo50off from "@/assets/promotions/50OFF.png";
 import logo from "@/assets/ui/logo.png";
 import footLogo from "@/assets/ui/foot_logo.png";
@@ -637,7 +650,7 @@ onUnmounted(() => {
 });
 </script>
 
-<style lang="css" scoped>
+<style lang="less" scoped>
 .home-page {
   width: 100%;
   min-height: 100vh;
