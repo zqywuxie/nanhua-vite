@@ -11,18 +11,29 @@
         <div class="side-menu-title">Life Science Classification</div>
         <ul class="side-menu-list">
           <li v-for="item in menuItems" :key="item.key">
-            <div class="side-menu-category"
-                 :class="{active: isActiveCategory(item)}"
-                 @click="handleCategoryClick(item)">
+            <div
+              class="side-menu-category"
+              :class="{ active: isActiveCategory(item) }"
+              @click="handleCategoryClick(item)"
+            >
               <span>{{ item.title }}</span>
-              <span v-if="item.children?.length" class="arrow"
-                    :class="{open: isOpenCategory(item)}">▶</span>
+              <span
+                v-if="item.children?.length"
+                class="arrow"
+                :class="{ open: isOpenCategory(item) }"
+                >▶</span
+              >
             </div>
-            <ul v-if="item.children?.length && isOpenCategory(item)" class="side-submenu">
-              <li v-for="sub in item.children"
-                  :key="sub.key"
-                  :class="{active: isActiveProduct(sub)}"
-                  @click.stop="handleProductClick(item, sub)">
+            <ul
+              v-if="item.children?.length && isOpenCategory(item)"
+              class="side-submenu"
+            >
+              <li
+                v-for="sub in item.children"
+                :key="sub.key"
+                :class="{ active: isActiveProduct(sub) }"
+                @click.stop="handleProductClick(item, sub)"
+              >
                 {{ sub.title }}
               </li>
             </ul>
@@ -42,127 +53,260 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-import bannerImg from '@/assets/LifeScience/banner.jpg'
-const router = useRouter()
-const route = useRoute()
+import { ref, computed, watch, nextTick } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import bannerImg from "@/assets/LifeScience/banner.jpg";
+const router = useRouter();
+const route = useRoute();
 // 菜单、栏目、标题、按钮等所有用户可见中文翻译为英文
 // 生命科学菜单结构
 const menuItems = [
   {
-    key: 'chromatography_media',
-    title: 'Layer Chromatography Media',
-    path: '/life_science/chromatography_media',
+    key: "chromatography_media",
+    title: "Layer Chromatography Media",
+    path: "/life_science/chromatography_media",
     children: [
-      { key: 'gel_filtration', title: 'Gel Filtration Chromatography', path: '/life_science/chromatography_media/gel_filtration' },
-      { key: 'ion_exchange', title: 'Ion Exchange Chromatography', path: '/life_science/chromatography_media/ion_exchange' },
-      { key: 'affinity', title: 'Affinity Chromatography', path: '/life_science/chromatography_media/affinity' },
-      { key: 'hydrophobic', title: 'Hydrophobic Chromatography', path: '/life_science/chromatography_media/hydrophobic' },
-      { key: 'mixed_mode', title: 'Mixed Mode Chromatography', path: '/life_science/chromatography_media/mixed_mode' },
-      { key: 'empty_column', title: 'Chromatography Empty Column', path: '/life_science/chromatography_media/empty_column' },
+      {
+        key: "gel_filtration",
+        title: "Gel Filtration Chromatography",
+        path: "/life_science/chromatography_media/gel_filtration",
+      },
+      {
+        key: "ion_exchange",
+        title: "Ion Exchange Chromatography",
+        path: "/life_science/chromatography_media/ion_exchange",
+      },
+      {
+        key: "affinity",
+        title: "Affinity Chromatography",
+        path: "/life_science/chromatography_media/affinity",
+      },
+      {
+        key: "hydrophobic",
+        title: "Hydrophobic Chromatography",
+        path: "/life_science/chromatography_media/hydrophobic",
+      },
+      {
+        key: "mixed_mode",
+        title: "Mixed Mode Chromatography",
+        path: "/life_science/chromatography_media/mixed_mode",
+      },
+      {
+        key: "empty_column",
+        title: "Chromatography Empty Column",
+        path: "/life_science/chromatography_media/empty_column",
+      },
     ],
   },
   {
-    key: 'homogeneous_luminescence',
-    title: 'Homogeneous Luminescence',
-    path: '/life_science/homogeneous_luminescence',
+    key: "homogeneous_luminescence",
+    title: "Homogeneous Luminescence",
+    path: "/life_science/homogeneous_luminescence",
     children: [
-      { key: 'homogeneous_solution', title: 'Homogeneous Luminescence Comprehensive Solution', path: '/life_science/homogeneous_luminescence/homogeneous_solution' },
-      { key: 'igg_wide_range_kit', title: 'IgG Detection Kit (Wide Range)', path: '/life_science/homogeneous_luminescence/igg_wide_range_kit' },
-      { key: 'monoclonal_screening', title: 'Monoclonal Antibody Screening Kit', path: '/life_science/homogeneous_luminescence/monoclonal_screening' },
-      { key: 'cytokine_detection_kit', title: 'Cytokine Detection Kit', path: '/life_science/homogeneous_luminescence/cytokine_detection_kit' },
-      { key: 'mouse_pair_screening', title: 'Mouse Pair Antibody Screening Kit', path: '/life_science/homogeneous_luminescence/mouse_pair_screening' }
-    ]
+      {
+        key: "homogeneous_solution",
+        title: "Homogeneous Luminescence Comprehensive Solution",
+        path: "/life_science/homogeneous_luminescence/homogeneous_solution",
+      },
+      {
+        key: "igg_wide_range_kit",
+        title: "IgG Detection Kit (Wide Range)",
+        path: "/life_science/homogeneous_luminescence/igg_wide_range_kit",
+      },
+      {
+        key: "monoclonal_screening",
+        title: "Monoclonal Antibody Screening Kit",
+        path: "/life_science/homogeneous_luminescence/monoclonal_screening",
+      },
+      {
+        key: "cytokine_detection_kit",
+        title: "Cytokine Detection Kit",
+        path: "/life_science/homogeneous_luminescence/cytokine_detection_kit",
+      },
+      {
+        key: "mouse_pair_screening",
+        title: "Mouse Pair Antibody Screening Kit",
+        path: "/life_science/homogeneous_luminescence/mouse_pair_screening",
+      },
+    ],
   },
   {
-    key: 'protein_purification',
-    title: 'Protein Purification',
-    path: '/life_science/protein_purification',
+    key: "protein_purification",
+    title: "Protein Purification",
+    path: "/life_science/protein_purification",
     children: [
-      { key: 'protein_a', title: 'Protein A Agarose Magnetic Microspheres', path: '/life_science/protein_purification/protein_a' },
-      { key: 'protein_g', title: 'Protein G Agarose Magnetic Microspheres', path: '/life_science/protein_purification/protein_g' },
-      { key: 'ni_nta', title: 'Ni-NTA Agarose Magnetic Microspheres', path: '/life_science/protein_purification/ni_nta' },
-      { key: 'ni_ted', title: 'Ni-TED Agarose Magnetic Microspheres', path: '/life_science/protein_purification/ni_ted' },
-      { key: 'auto_purifier', title: 'Fully Automated Protein Purification System', path: '/life_science/protein_purification/auto_purifier' }
-    ]
+      {
+        key: "protein_a",
+        title: "Protein A Agarose Magnetic Microspheres",
+        path: "/life_science/protein_purification/protein_a",
+      },
+      {
+        key: "protein_g",
+        title: "Protein G Agarose Magnetic Microspheres",
+        path: "/life_science/protein_purification/protein_g",
+      },
+      {
+        key: "ni_nta",
+        title: "Ni-NTA Agarose Magnetic Microspheres",
+        path: "/life_science/protein_purification/ni_nta",
+      },
+      {
+        key: "ni_ted",
+        title: "Ni-TED Agarose Magnetic Microspheres",
+        path: "/life_science/protein_purification/ni_ted",
+      },
+      {
+        key: "auto_purifier",
+        title: "Fully Automated Protein Purification System",
+        path: "/life_science/protein_purification/auto_purifier",
+      },
+    ],
   },
   {
-    key: 'cell_sorting_activation',
-    title: 'Cell Sorting and Activation Magnetic Beads',
-    path: '/life_science/cell_sorting_activation',
+    key: "cell_sorting_activation",
+    title: "Cell Sorting and Activation Magnetic Beads",
+    path: "/life_science/cell_sorting_activation",
     children: [
-      { key: 'cell_sorting_beads', title: 'Cell Sorting Magnetic Beads', path: '/life_science/cell_sorting_activation/cell_sorting_beads' },
-      { key: 'cell_activation_beads', title: 'Cell Activation Magnetic Beads', path: '/life_science/cell_sorting_activation/cell_activation_beads' },
-      { key: 'magnetic_rack', title: 'Magnetic Rack', path: '/life_science/cell_sorting_activation/magnetic_rack' }
-    ]
+      {
+        key: "cell_sorting_beads",
+        title: "Cell Sorting Magnetic Beads",
+        path: "/life_science/cell_sorting_activation/cell_sorting_beads",
+      },
+      {
+        key: "cell_activation_beads",
+        title: "Cell Activation Magnetic Beads",
+        path: "/life_science/cell_sorting_activation/cell_activation_beads",
+      },
+      {
+        key: "magnetic_rack",
+        title: "Magnetic Rack",
+        path: "/life_science/cell_sorting_activation/magnetic_rack",
+      },
+    ],
   },
   {
-    key: 'nano_flow_cytometer',
-    title: 'Nano Flow Cytometer',
-    path: '/life_science/nano_flow_cytometer',
-    children: []
-  }
-]
+    key: "nano_flow_cytometer",
+    title: "Nano Flow Cytometer",
+    path: "/life_science/nano_flow_cytometer",
+    children: [],
+  },
+];
 
-const openKeys = ref(['chromatography_media'])
+const openKeys = ref(["chromatography_media"]);
 
 const currentPageTitle = computed(() => {
-  const pathSegments = route.path.split('/')
-  const lastSegment = pathSegments[pathSegments.length - 1]
+  const pathSegments = route.path.split("/");
+  const lastSegment = pathSegments[pathSegments.length - 1];
   for (const category of menuItems) {
     if (category.key === lastSegment) {
-      return category.title
+      return category.title;
     }
     if (category.children) {
       for (const product of category.children) {
         if (product.key === lastSegment) {
-          return product.title
+          return product.title;
         }
       }
     }
   }
-  return 'Life Science'
-})
+  return "Life Science";
+});
 
 function handleCategoryClick(item) {
+  // 立即重置滚动位置
+  resetScrollPosition();
+
   if (openKeys.value.includes(item.key)) {
-    openKeys.value = []
+    openKeys.value = [];
   } else {
-    openKeys.value = [item.key]
+    openKeys.value = [item.key];
   }
   if (item.path) {
-    router.push(item.path)
+    router.push(item.path);
   }
 }
 
 function handleProductClick(category, product) {
+  // 立即重置滚动位置
+  resetScrollPosition();
+
   if (product.path) {
-    router.push(product.path)
+    router.push(product.path);
   }
 }
 
 function isActiveCategory(item) {
-  return route.path.startsWith(`/life_science/${item.key}`)
+  return route.path.startsWith(`/life_science/${item.key}`);
 }
 
 function isActiveProduct(product) {
-  return route.path === product.path || route.path.startsWith(product.path + '/')
+  return (
+    route.path === product.path || route.path.startsWith(product.path + "/")
+  );
 }
 
 function isOpenCategory(item) {
-  return openKeys.value.includes(item.key)
+  return openKeys.value.includes(item.key);
 }
 
-watch(() => route.path, (newPath) => {
-  const pathSegments = newPath.split('/')
-  if (pathSegments.length >= 3) {
-    const categoryKey = pathSegments[2]
-    if (!openKeys.value.includes(categoryKey)) {
-      openKeys.value = [categoryKey]
+watch(
+  () => route.path,
+  (newPath) => {
+    const pathSegments = newPath.split("/");
+    if (pathSegments.length >= 3) {
+      const categoryKey = pathSegments[2];
+      if (!openKeys.value.includes(categoryKey)) {
+        openKeys.value = [categoryKey];
+      }
     }
+  },
+  { immediate: true }
+);
+
+// 监听路由变化，重置滚动位置
+watch(route, (to, from) => {
+  if (to.path !== from.path) {
+    // 立即重置
+    resetScrollPosition();
+
+    // 延迟重置，确保DOM更新完成
+    nextTick(() => {
+      resetScrollPosition();
+    });
+
+    // 再次延迟重置，确保所有异步操作完成
+    setTimeout(() => {
+      resetScrollPosition();
+    }, 50);
   }
-}, { immediate: true })
+});
+
+// 重置滚动位置的函数
+function resetScrollPosition() {
+  // 重置所有可能的滚动容器
+  const containers = [
+    ".lifescience-layout",
+    ".main-content",
+    ".content-area",
+    ".layout-container",
+  ];
+
+  containers.forEach((selector) => {
+    const element = document.querySelector(selector);
+    if (element) {
+      element.scrollTop = 0;
+      element.scrollLeft = 0;
+      if (element.scrollTo) {
+        element.scrollTo(0, 0);
+      }
+    }
+  });
+
+  // 重置整个页面的滚动位置
+  window.scrollTo(0, 0);
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
 </script>
 
 <style scoped>
@@ -173,14 +317,12 @@ watch(() => route.path, (newPath) => {
 .banner {
   position: relative;
   width: 100%;
-  aspect-ratio: 4/0.7;
+  height: 450px;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 2vw;
-  min-height: 70px;
-  max-height: 12vw;
 }
 .banner-img {
   width: 100%;
@@ -197,7 +339,7 @@ watch(() => route.path, (newPath) => {
   font-size: 2.5vw;
   font-weight: bold;
   letter-spacing: 2px;
-  text-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   white-space: nowrap;
 }
 .main-content {
@@ -241,7 +383,7 @@ watch(() => route.path, (newPath) => {
   transition: background 0.2s, color 0.2s, font-weight 0.2s;
   font-weight: 400;
 }
-.side-menu-category.active, 
+.side-menu-category.active,
 .side-menu-category:hover {
   background: #e6f7ff;
   color: #2b7bbf;
@@ -270,7 +412,7 @@ watch(() => route.path, (newPath) => {
   border-radius: 0.3vw;
   transition: background 0.2s, color 0.2s;
 }
-.side-submenu > li.active, 
+.side-submenu > li.active,
 .side-submenu > li:hover {
   background: #f0f8ff;
   color: #2b7bbf;
@@ -293,6 +435,10 @@ watch(() => route.path, (newPath) => {
   transform: translateX(-20px);
 }
 @media (max-width: 900px) {
+  .banner {
+    height: 400px;
+  }
+
   .main-content {
     flex-direction: column;
     padding: 0;
@@ -320,6 +466,12 @@ watch(() => route.path, (newPath) => {
   }
   .banner-title {
     font-size: 5vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .banner {
+    height: 350px;
   }
 }
 </style> 

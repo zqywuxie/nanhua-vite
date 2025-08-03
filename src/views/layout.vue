@@ -4,7 +4,7 @@
     <div class="topbar">
       <div class="topbar-content">
         <div class="topbar-left">
-          <img src="../assets/logo.png" height="120">
+          <img src="../assets/logo.png" height="120" />
         </div>
 
         <!-- 右侧功能区已移除 -->
@@ -15,8 +15,8 @@
       <div class="header-content">
         <!-- 汉堡按钮放在导航前 -->
         <div class="mobile-menu-btn">
-          <a-button 
-            type="text" 
+          <a-button
+            type="text"
             @click="showMobileMenu = true"
             class="hamburger-btn"
           >
@@ -28,8 +28,8 @@
         <!-- 桌面端导航 -->
         <nav class="nav desktop-nav">
           <ul class="nav-list">
-            <li 
-              v-for="item in filteredNavItems" 
+            <li
+              v-for="item in filteredNavItems"
               :key="item.key"
               class="nav-item"
               @mouseenter="handleNavHover(item)"
@@ -38,25 +38,35 @@
             >
               <span class="nav-link">
                 {{ item.title }}
-                <span v-if="item.children && item.children.length > 0" class="nav-arrow">▼</span>
+                <span
+                  v-if="item.children && item.children.length > 0"
+                  class="nav-arrow"
+                  >▼</span
+                >
               </span>
             </li>
           </ul>
         </nav>
-        
+
         <div class="header-actions">
-          <a-button 
-            v-if="!isMobile && !isTablet" 
-            type="primary" 
+          <a-button
+            v-if="!isMobile && !isTablet"
+            type="primary"
             @click="handleContactClick"
           >
             CONTACT US
           </a-button>
         </div>
-        
+
         <!-- 桌面端悬浮下拉面板 -->
-        <div 
-          v-if="activeNav && !isMobile && (currentNav?.children?.filter(child => child.children && child.children.length > 0)?.length > 0)"
+        <div
+          v-if="
+            activeNav &&
+            !isMobile &&
+            currentNav?.children?.filter(
+              (child) => child.children && child.children.length > 0
+            )?.length > 0
+          "
           class="dropdown-panel fixed-panel"
           @mouseenter="handlePanelHover"
           @mouseleave="handlePanelLeave"
@@ -65,8 +75,10 @@
             <!-- 第一栏：一级菜单 -->
             <div class="panel-column">
               <ul class="menu-list">
-                <li 
-                  v-for="subItem in (currentNav?.children?.filter(child => child.children && child.children.length > 0) || [])" 
+                <li
+                  v-for="subItem in currentNav?.children?.filter(
+                    (child) => child.children && child.children.length > 0
+                  ) || []"
                   :key="subItem.key"
                   class="menu-item"
                   @mouseenter="handleFirstMenuHover(subItem)"
@@ -80,8 +92,8 @@
             <!-- 第二栏：二级菜单 -->
             <div class="panel-column">
               <ul class="submenu-list">
-                <li 
-                  v-for="subSubItem in activeFirstMenu?.children" 
+                <li
+                  v-for="subSubItem in activeFirstMenu?.children"
                   :key="subSubItem.key"
                   class="submenu-item"
                   @click="handleSubSubMenuClick(subSubItem)"
@@ -110,7 +122,13 @@
         <a-button
           type="primary"
           class="contact-drawer-btn"
-          @click="() => { router.push('/contact_us'); showMobileMenu = false }"
+          @click="
+            () => {
+              resetScrollPosition();
+              router.push('/contact_us');
+              showMobileMenu = false;
+            }
+          "
           block
         >
           CONTACT US
@@ -121,22 +139,27 @@
             :selected-keys="[activeMobileMenu]"
             @select="handleMobileMenuSelect"
           >
-            <template v-for="item in filteredNavItems.filter(i => i.key !== 'contact_us')" :key="item.key">
+            <template
+              v-for="item in filteredNavItems.filter(
+                (i) => i.key !== 'contact_us'
+              )"
+              :key="item.key"
+            >
               <!-- 有子菜单的项目 -->
-              <a-sub-menu 
-                v-if="item.children && item.children.length > 0" 
+              <a-sub-menu
+                v-if="item.children && item.children.length > 0"
                 :key="`submenu-${item.key}`"
                 :title="item.title"
               >
                 <template v-for="subItem in item.children" :key="subItem.key">
                   <!-- 二级子菜单 -->
-                  <a-sub-menu 
-                    v-if="subItem.children && subItem.children.length > 0" 
+                  <a-sub-menu
+                    v-if="subItem.children && subItem.children.length > 0"
                     :key="`submenu-${subItem.key}`"
                     :title="subItem.title"
                   >
-                    <a-menu-item 
-                      v-for="subSubItem in subItem.children" 
+                    <a-menu-item
+                      v-for="subSubItem in subItem.children"
                       :key="subSubItem.key"
                       @click="handleMobileSubMenuClick(subSubItem)"
                     >
@@ -147,7 +170,7 @@
                     </a-menu-item>
                   </a-sub-menu>
                   <!-- 一级子菜单 -->
-                  <a-menu-item 
+                  <a-menu-item
                     v-else
                     :key="`item-${subItem.key}`"
                     @click="handleMobileSubMenuClick(subItem)"
@@ -160,7 +183,7 @@
                 </template>
               </a-sub-menu>
               <!-- 无子菜单的项目 -->
-              <a-menu-item 
+              <a-menu-item
                 v-else
                 :key="`item-${item.key}`"
                 @click="handleMobileMenuClick(item)"
@@ -188,188 +211,346 @@
 </template>
 
 <script setup>
-import { ref, nextTick, computed, onMounted, onUnmounted } from 'vue'
-import { useRouter } from 'vue-router'
-import { MenuOutlined } from '@ant-design/icons-vue'
+import { ref, nextTick, computed, onMounted, onUnmounted, watch } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { MenuOutlined } from "@ant-design/icons-vue";
 
-const router = useRouter()
+const router = useRouter();
+const route = useRoute();
 
 // 响应式状态
-const isMobile = ref(false)
-const isTablet = ref(false)
-const showMobileMenu = ref(false)
-const activeMobileMenu = ref('')
+const isMobile = ref(false);
+const isTablet = ref(false);
+const showMobileMenu = ref(false);
+const activeMobileMenu = ref("");
 
 // 检测屏幕尺寸
 const checkScreenSize = () => {
-  const width = window.innerWidth
-  isMobile.value = width < 768
-  isTablet.value = width >= 768 && width < 1024
-}
+  const width = window.innerWidth;
+  isMobile.value = width < 768;
+  isTablet.value = width >= 768 && width < 1024;
+};
 
 // 监听窗口大小变化
 onMounted(() => {
-  checkScreenSize()
-  window.addEventListener('resize', checkScreenSize)
-})
+  checkScreenSize();
+  window.addEventListener("resize", checkScreenSize);
+});
 
 onUnmounted(() => {
-  window.removeEventListener('resize', checkScreenSize)
-})
+  window.removeEventListener("resize", checkScreenSize);
+});
 
 // 导航数据
 const navItems = ref([
   {
-    key: 'home',
-    title: 'HOME',
-    path: '/home',
+    key: "home",
+    title: "HOME",
+    path: "/home",
   },
   {
-    key: 'background',
-    title: 'BACKGROUND',
-    path: '/background',
+    key: "background",
+    title: "BACKGROUND",
+    path: "/background",
   },
   {
-    key: 'products',
-    title: 'PRODUCTS',
-    path: '/products',
+    key: "products",
+    title: "PRODUCTS",
+    path: "/products",
     children: [
       {
-        key: 'Reagent',
-        title: 'Reagent',
-        path: '/reagent/chemiluminescence',
+        key: "Reagent",
+        title: "Reagent",
+        path: "/reagent/chemiluminescence",
         children: [
           // 新增：化学发光相关菜单
           {
-            key: 'chemiluminescence',
-            title: 'Chemiluminescence',
-            path: '/reagent/chemiluminescence',
+            key: "chemiluminescence",
+            title: "Chemiluminescence",
+            path: "/reagent/chemiluminescence",
             children: [
-              { key: 'chemiluminescent_magnetic_beads', title: 'Chemiluminescent Magnetic Beads', path: '/reagent/chemiluminescence/magnetic_beads' }
-            ]
+              {
+                key: "chemiluminescent_magnetic_beads",
+                title: "Chemiluminescent Magnetic Beads",
+                path: "/reagent/chemiluminescence/magnetic_beads",
+              },
+            ],
           },
           {
-            key: 'homogeneous_luminescence',
-            title: 'Homogeneous Luminescence',
-            path: '/reagent/homogeneous_luminescence',
+            key: "homogeneous_luminescence",
+            title: "Homogeneous Luminescence",
+            path: "/reagent/homogeneous_luminescence",
             children: [
-              { key: 'donor_acceptor_beads', title: 'Donor-Acceptor Beads', path: '/reagent/homogeneous_luminescence/donor_acceptor_beads' }
-            ]
+              {
+                key: "donor_acceptor_beads",
+                title: "Donor-Acceptor Beads",
+                path: "/reagent/homogeneous_luminescence/donor_acceptor_beads",
+              },
+            ],
           },
           {
-            key: 'molecular_diagnosis',
-            title: 'Molecular Diagnosis',
-            path: '/reagent/molecular_diagnosis',
+            key: "molecular_diagnosis",
+            title: "Molecular Diagnosis",
+            path: "/reagent/molecular_diagnosis",
             children: [
-              { key: 'nucleic_acid_extraction', title: 'Nucleic Acid Extraction & Purification', path: '/reagent/molecular_diagnosis/nucleic_acid_extraction' },
-              { key: 'mrna_extraction_beads', title: 'mRNA Extraction & Purification Magnetic Beads', path: '/reagent/molecular_diagnosis/mrna_extraction_beads' },
-              { key: 'cfDNA_extraction', title: 'cfDNA Extraction', path: '/reagent/molecular_diagnosis/cfDNA_extraction' },
-              { key: 'hpv_dna_beads', title: 'HPV DNA Extraction Beads', path: '/reagent/molecular_diagnosis/hpv_dna_beads' },
-              { key: 'blood_genome_beads', title: 'Blood Genome DNA Extraction Reagent', path: '/reagent/molecular_diagnosis/blood_genome_beads' },
-              { key: 'target_capture', title: 'Target Capture', path: '/reagent/molecular_diagnosis/target_capture' },
-              { key: 'ngs_sequencing', title: 'NGS Sequencing', path: '/reagent/molecular_diagnosis/ngs_sequencing' },
-              { key: 'single_cell_sequencing', title: 'Single Cell Sequencing', path: '/reagent/molecular_diagnosis/single_cell_sequencing' },
-              { key: 'magnetic_rack', title: 'Magnetic Rack', path: '/reagent/molecular_diagnosis/magnetic_rack' }
-            ]
+              {
+                key: "nucleic_acid_extraction",
+                title: "Nucleic Acid Extraction & Purification",
+                path: "/reagent/molecular_diagnosis/nucleic_acid_extraction",
+              },
+              {
+                key: "mrna_extraction_beads",
+                title: "mRNA Extraction & Purification Magnetic Beads",
+                path: "/reagent/molecular_diagnosis/mrna_extraction_beads",
+              },
+              {
+                key: "cfDNA_extraction",
+                title: "cfDNA Extraction",
+                path: "/reagent/molecular_diagnosis/cfDNA_extraction",
+              },
+              {
+                key: "hpv_dna_beads",
+                title: "HPV DNA Extraction Beads",
+                path: "/reagent/molecular_diagnosis/hpv_dna_beads",
+              },
+              {
+                key: "blood_genome_beads",
+                title: "Blood Genome DNA Extraction Reagent",
+                path: "/reagent/molecular_diagnosis/blood_genome_beads",
+              },
+              {
+                key: "target_capture",
+                title: "Target Capture",
+                path: "/reagent/molecular_diagnosis/target_capture",
+              },
+              {
+                key: "ngs_sequencing",
+                title: "NGS Sequencing",
+                path: "/reagent/molecular_diagnosis/ngs_sequencing",
+              },
+              {
+                key: "single_cell_sequencing",
+                title: "Single Cell Sequencing",
+                path: "/reagent/molecular_diagnosis/single_cell_sequencing",
+              },
+              {
+                key: "magnetic_rack",
+                title: "Magnetic Rack",
+                path: "/reagent/molecular_diagnosis/magnetic_rack",
+              },
+            ],
           },
           {
-            key: 'lateral_chromatography',
-            title: 'Lateral Chromatography',
-            path: '/reagent/lateral_chromatography',
+            key: "lateral_chromatography",
+            title: "Lateral Chromatography",
+            path: "/reagent/lateral_chromatography",
             children: [
-              { key: 'colored_beads', title: 'Colored Beads', path: '/reagent/lateral_chromatography/colored_beads' },
-              { key: 'fluorescent_beads', title: 'Fluorescent Beads', path: '/reagent/lateral_chromatography/fluorescent_beads' },
-              { key: 'time_resolved_beads', title: 'Time-Resolved Fluorescent Beads', path: '/reagent/lateral_chromatography/time_resolved_beads' }
-            ]
+              {
+                key: "colored_beads",
+                title: "Colored Beads",
+                path: "/reagent/lateral_chromatography/colored_beads",
+              },
+              {
+                key: "fluorescent_beads",
+                title: "Fluorescent Beads",
+                path: "/reagent/lateral_chromatography/fluorescent_beads",
+              },
+              {
+                key: "time_resolved_beads",
+                title: "Time-Resolved Fluorescent Beads",
+                path: "/reagent/lateral_chromatography/time_resolved_beads",
+              },
+            ],
           },
           {
-            key: 'latex_turbidimetry',
-            title: 'Latex Turbidimetry',
-            path: '/reagent/latex_turbidimetry',
+            key: "latex_turbidimetry",
+            title: "Latex Turbidimetry",
+            path: "/reagent/latex_turbidimetry",
             children: [
-              { key: 'carboxyl_latex_beads', title: 'Carboxyl Latex Beads', path: '/reagent/latex_turbidimetry/carboxyl_latex_beads' }
-            ]
+              {
+                key: "carboxyl_latex_beads",
+                title: "Carboxyl Latex Beads",
+                path: "/reagent/latex_turbidimetry/carboxyl_latex_beads",
+              },
+            ],
           },
           {
-            key: 'flow_beads',
-            title: 'Flow Beads',
-            path: '/reagent/flow_beads',
+            key: "flow_beads",
+            title: "Flow Beads",
+            path: "/reagent/flow_beads",
             children: [
-              { key: 'beadstar_mplex_microspheres', title: 'Beadstar-mPlex® Magnetic Fluorescent Encoded Microspheres', path: '/reagent/flow_beads/beadstar_mplex_microspheres' },
-              { key: 'magnetic_fluorescent_beads', title: 'Magnetic Fluorescent Encoded Beads', path: '/reagent/flow_beads/magnetic_fluorescent_beads' },
-              { key: 'absolute_count_beads', title: 'Absolute Count Beads', path: '/reagent/flow_beads/absolute_count_beads' }
-            ]
+              {
+                key: "beadstar_mplex_microspheres",
+                title:
+                  "Beadstar-mPlex® Magnetic Fluorescent Encoded Microspheres",
+                path: "/reagent/flow_beads/beadstar_mplex_microspheres",
+              },
+              {
+                key: "magnetic_fluorescent_beads",
+                title: "Magnetic Fluorescent Encoded Beads",
+                path: "/reagent/flow_beads/magnetic_fluorescent_beads",
+              },
+              {
+                key: "absolute_count_beads",
+                title: "Absolute Count Beads",
+                path: "/reagent/flow_beads/absolute_count_beads",
+              },
+            ],
           },
           {
-            key: 'standard_beads',
-            title: 'Standard Beads',
-            path: '/reagent/standard_beads',
+            key: "standard_beads",
+            title: "Standard Beads",
+            path: "/reagent/standard_beads",
             children: [
-              { key: 'size_standard_beads', title: 'Size Standard Beads', path: '/reagent/standard_beads/size_standard_beads' },
-              { key: 'count_standard_beads', title: 'Count Standard Beads', path: '/reagent/standard_beads/count_standard_beads' }
-            ]
-          }
-        ]
+              {
+                key: "size_standard_beads",
+                title: "Size Standard Beads",
+                path: "/reagent/standard_beads/size_standard_beads",
+              },
+              {
+                key: "count_standard_beads",
+                title: "Count Standard Beads",
+                path: "/reagent/standard_beads/count_standard_beads",
+              },
+            ],
+          },
+        ],
       },
       {
-        key: 'life_science',
-        title: 'Life Science',
-        path: '/life_science',
+        key: "life_science",
+        title: "Life Science",
+        path: "/life_science",
         children: [
           {
-            key: 'chromatography_media',
-            title: 'Chromatography Media',
-            path: '/life_science/chromatography_media',
+            key: "chromatography_media",
+            title: "Chromatography Media",
+            path: "/life_science/chromatography_media",
             children: [
-              { key: 'gel_filtration', title: 'Gel Filtration Chromatography', path: '/life_science/chromatography_media/gel_filtration' },
-              { key: 'ion_exchange', title: 'Ion Exchange Chromatography', path: '/life_science/chromatography_media/ion_exchange' },
-              { key: 'affinity', title: 'Affinity Chromatography', path: '/life_science/chromatography_media/affinity' },
-              { key: 'hydrophobic', title: 'Hydrophobic Chromatography', path: '/life_science/chromatography_media/hydrophobic' },
-              { key: 'mixed_mode', title: 'Mixed Mode Chromatography', path: '/life_science/chromatography_media/mixed_mode' },
-              { key: 'empty_column', title: 'Chromatography Empty Column', path: '/life_science/chromatography_media/empty_column' }
-            ]
+              {
+                key: "gel_filtration",
+                title: "Gel Filtration Chromatography",
+                path: "/life_science/chromatography_media/gel_filtration",
+              },
+              {
+                key: "ion_exchange",
+                title: "Ion Exchange Chromatography",
+                path: "/life_science/chromatography_media/ion_exchange",
+              },
+              {
+                key: "affinity",
+                title: "Affinity Chromatography",
+                path: "/life_science/chromatography_media/affinity",
+              },
+              {
+                key: "hydrophobic",
+                title: "Hydrophobic Chromatography",
+                path: "/life_science/chromatography_media/hydrophobic",
+              },
+              {
+                key: "mixed_mode",
+                title: "Mixed Mode Chromatography",
+                path: "/life_science/chromatography_media/mixed_mode",
+              },
+              {
+                key: "empty_column",
+                title: "Chromatography Empty Column",
+                path: "/life_science/chromatography_media/empty_column",
+              },
+            ],
           },
           {
-            key: 'homogeneous_luminescence',
-            title: 'Homogeneous Luminescence',
-            path: '/life_science/homogeneous_luminescence',
+            key: "homogeneous_luminescence",
+            title: "Homogeneous Luminescence",
+            path: "/life_science/homogeneous_luminescence",
             children: [
-              { key: 'solution', title: 'Homogeneous Luminescence Comprehensive Solution', path: '/life_science/homogeneous_luminescence/solution' },
-              { key: 'igg_kit', title: 'IgG Detection Kit (Wide Range)', path: '/life_science/homogeneous_luminescence/igg_kit' },
-              { key: 'monoclonal_screening', title: 'Monoclonal Screening Kit', path: '/life_science/homogeneous_luminescence/monoclonal_screening' },
-              { key: 'cytokine_kit', title: 'Cytokine Detection Kit', path: '/life_science/homogeneous_luminescence/cytokine_kit' },
-              { key: 'mouse_pair_kit', title: 'Mouse Pairing Antibody Screening Kit', path: '/life_science/homogeneous_luminescence/mouse_pair_kit' }
-            ]
+              {
+                key: "solution",
+                title: "Homogeneous Luminescence Comprehensive Solution",
+                path: "/life_science/homogeneous_luminescence/solution",
+              },
+              {
+                key: "igg_kit",
+                title: "IgG Detection Kit (Wide Range)",
+                path: "/life_science/homogeneous_luminescence/igg_kit",
+              },
+              {
+                key: "monoclonal_screening",
+                title: "Monoclonal Screening Kit",
+                path: "/life_science/homogeneous_luminescence/monoclonal_screening",
+              },
+              {
+                key: "cytokine_kit",
+                title: "Cytokine Detection Kit",
+                path: "/life_science/homogeneous_luminescence/cytokine_kit",
+              },
+              {
+                key: "mouse_pair_kit",
+                title: "Mouse Pairing Antibody Screening Kit",
+                path: "/life_science/homogeneous_luminescence/mouse_pair_kit",
+              },
+            ],
           },
           {
-            key: 'protein_purification',
-            title: 'Protein Purification',
-            path: '/life_science/protein_purification',
+            key: "protein_purification",
+            title: "Protein Purification",
+            path: "/life_science/protein_purification",
             children: [
-              { key: 'protein_a', title: 'Protein A Agarose Magnetic Beads', path: '/life_science/protein_purification/protein_a' },
-              { key: 'protein_g', title: 'Protein G Agarose Magnetic Beads', path: '/life_science/protein_purification/protein_g' },
-              { key: 'ni_nta', title: 'Ni-NTA Agarose Magnetic Beads', path: '/life_science/protein_purification/ni_nta' },
-              { key: 'ni_ted', title: 'Ni-TED Agarose Magnetic Beads', path: '/life_science/protein_purification/ni_ted' },
-              { key: 'auto_purifier', title: 'Automatic Protein Purification System', path: '/life_science/protein_purification/auto_purifier' }
-            ]
+              {
+                key: "protein_a",
+                title: "Protein A Agarose Magnetic Beads",
+                path: "/life_science/protein_purification/protein_a",
+              },
+              {
+                key: "protein_g",
+                title: "Protein G Agarose Magnetic Beads",
+                path: "/life_science/protein_purification/protein_g",
+              },
+              {
+                key: "ni_nta",
+                title: "Ni-NTA Agarose Magnetic Beads",
+                path: "/life_science/protein_purification/ni_nta",
+              },
+              {
+                key: "ni_ted",
+                title: "Ni-TED Agarose Magnetic Beads",
+                path: "/life_science/protein_purification/ni_ted",
+              },
+              {
+                key: "auto_purifier",
+                title: "Automatic Protein Purification System",
+                path: "/life_science/protein_purification/auto_purifier",
+              },
+            ],
           },
           {
-            key: 'cell_sorting_activation',
-            title: 'Cell Sorting & Activation Magnetic Beads',
-            path: '/life_science/cell_sorting_activation',
+            key: "cell_sorting_activation",
+            title: "Cell Sorting & Activation Magnetic Beads",
+            path: "/life_science/cell_sorting_activation",
             children: [
-              { key: 'cell_sorting_beads', title: 'Cell Sorting Magnetic Beads', path: '/life_science/cell_sorting_activation/cell_sorting_beads' },
-              { key: 'cell_activation_beads', title: 'Cell Activation Magnetic Beads', path: '/life_science/cell_sorting_activation/cell_activation_beads' },
-              { key: 'magnetic_rack', title: 'Magnetic Rack', path: '/life_science/cell_sorting_activation/magnetic_rack' }
-            ]
+              {
+                key: "cell_sorting_beads",
+                title: "Cell Sorting Magnetic Beads",
+                path: "/life_science/cell_sorting_activation/cell_sorting_beads",
+              },
+              {
+                key: "cell_activation_beads",
+                title: "Cell Activation Magnetic Beads",
+                path: "/life_science/cell_sorting_activation/cell_activation_beads",
+              },
+              {
+                key: "magnetic_rack",
+                title: "Magnetic Rack",
+                path: "/life_science/cell_sorting_activation/magnetic_rack",
+              },
+            ],
           },
           {
-            key: 'nano_flow_cytometer',
-            title: 'Nano Flow Cytometer',
-            path: '/life_science/nano_flow_cytometer',
-            children: []
-          }
-        ]
+            key: "nano_flow_cytometer",
+            title: "Nano Flow Cytometer",
+            path: "/life_science/nano_flow_cytometer",
+            children: [],
+          },
+        ],
       },
       // 修改原instruments为技术
       // {
@@ -379,29 +560,73 @@ const navItems = ref([
       // },
       // 新增instruments，children为11个产品类别
       {
-        key: 'instruments',
-        title: 'Instruments',
-        path: '/instruments',
+        key: "instruments",
+        title: "Instruments",
+        path: "/instruments",
         children: [
-          { key: 'Digital_PCR_Systems', title: 'Digital PCR Systems', path: '/Digital_PCR_Systems' },
-          { key: 'Digital_Isothermal_System', title: 'Digital Isothermal System', path: '/Digital_Isothermal_System' },
-          { key: 'Digital_Omni_Molecular_System', title: 'Digital Omni Molecular System', path: '/Digital_Omni_Molecular_System' },
-          { key: 'Gradient_Thermal_Cycler', title: 'Gradient Thermal Cycler', path: '/Gradient_Thermal_Cycler' },
-          { key: 'Mini_Centrifuge', title: 'Mini Centrifuge', path: '/Mini_Centrifuge' },
-          { key: 'Universal_Kits_and_Consumables', title: 'Universal Kits and Consumables', path: '/Universal_Kits_and_Consumables' },
-          { key: 'Digital_PCR_Panels', title: 'Digital PCR Panels', path: '/Digital_PCR_Panels' },
-          { key: 'Digital_Immunoassay_Kits', title: 'Digital Immunoassay Kits', path: '/Digital_Immunoassay_Kits' },
-          { key: 'SNUPP_Polymerase', title: 'SNUPP Polymerase', path: '/SNUPP_Polymerase' },
-          { key: 'Beads_free_Nucleic_Acid_Extraction_Kits', title: 'Beads-free Nucleic Acid Extraction Kits', path: '/Beads_free_Nucleic_Acid_Extraction_Kits' },
-          { key: 'qPCR_Test_Kit', title: 'qPCR Test Kit', path: '/qPCR_Test_Kit' },
-        ]
-      }
-    ]
+          {
+            key: "Digital_PCR_Systems",
+            title: "Digital PCR Systems",
+            path: "/Digital_PCR_Systems",
+          },
+          {
+            key: "Digital_Isothermal_System",
+            title: "Digital Isothermal System",
+            path: "/Digital_Isothermal_System",
+          },
+          {
+            key: "Digital_Omni_Molecular_System",
+            title: "Digital Omni Molecular System",
+            path: "/Digital_Omni_Molecular_System",
+          },
+          {
+            key: "Gradient_Thermal_Cycler",
+            title: "Gradient Thermal Cycler",
+            path: "/Gradient_Thermal_Cycler",
+          },
+          {
+            key: "Mini_Centrifuge",
+            title: "Mini Centrifuge",
+            path: "/Mini_Centrifuge",
+          },
+          {
+            key: "Universal_Kits_and_Consumables",
+            title: "Universal Kits and Consumables",
+            path: "/Universal_Kits_and_Consumables",
+          },
+          {
+            key: "Digital_PCR_Panels",
+            title: "Digital PCR Panels",
+            path: "/Digital_PCR_Panels",
+          },
+          {
+            key: "Digital_Immunoassay_Kits",
+            title: "Digital Immunoassay Kits",
+            path: "/Digital_Immunoassay_Kits",
+          },
+          {
+            key: "SNUPP_Polymerase",
+            title: "SNUPP Polymerase",
+            path: "/SNUPP_Polymerase",
+          },
+          {
+            key: "Beads_free_Nucleic_Acid_Extraction_Kits",
+            title: "Beads-free Nucleic Acid Extraction Kits",
+            path: "/Beads_free_Nucleic_Acid_Extraction_Kits",
+          },
+          {
+            key: "qPCR_Test_Kit",
+            title: "qPCR Test Kit",
+            path: "/qPCR_Test_Kit",
+          },
+        ],
+      },
+    ],
   },
   {
-    key: 'services',
-    title: 'SERVICES',
-    path: '/services',
+    key: "services",
+    title: "SERVICES",
+    path: "/services",
     children: [
       // {
       //   key: 'DNA_Reading',
@@ -425,14 +650,18 @@ const navItems = ref([
       //   ]
       // },
       {
-        key: 'DNA_Production',
-        title: 'Analysis',
-        path: '/DNA_Production',
+        key: "DNA_Production",
+        title: "Analysis",
+        path: "/DNA_Production",
         children: [
-          { key: 'Plasmid_Preparation', title: 'Analysis Platform', path: '/Plasmid_Preparation' }
-        ]
+          {
+            key: "Plasmid_Preparation",
+            title: "Analysis Platform",
+            path: "/Plasmid_Preparation",
+          },
+        ],
       },
-    ]
+    ],
   },
   // {
   //   key: 'support',
@@ -441,180 +670,243 @@ const navItems = ref([
   //   children: []
   // },
   {
-    key: 'resources',
-    title: 'RESOURCES',
-    path: '/resources',
-
+    key: "resources",
+    title: "RESOURCES",
+    path: "/resources",
   },
   {
-    key: 'news',
-    title: 'NEWS',
-    path: '/news',
-  
+    key: "news",
+    title: "NEWS",
+    path: "/news",
   },
   {
-    key: 'about_us',
-    title: 'ABOUT US',
-    path: '/about_us',
+    key: "about_us",
+    title: "ABOUT US",
+    path: "/about_us",
   },
   {
-    key: 'contact_us',
-    title: 'CONTACT US',
-    path: '/contact_us',
-
-  }
-])
+    key: "contact_us",
+    title: "CONTACT US",
+    path: "/contact_us",
+  },
+]);
 
 // 响应式数据
-const activeNav = ref(null)
-const activeFirstMenu = ref(null)
-const hoverTimer = ref(null)
-const isHoveringPanel = ref(false)
-const isHoveringNav = ref(false)
+const activeNav = ref(null);
+const activeFirstMenu = ref(null);
+const hoverTimer = ref(null);
+const isHoveringPanel = ref(false);
+const isHoveringNav = ref(false);
 
 // 新增：当前激活的nav对象
-const currentNav = computed(() => navItems.value.find(item => item.key === activeNav.value))
+const currentNav = computed(() =>
+  navItems.value.find((item) => item.key === activeNav.value)
+);
 
 // 新增：过滤后的导航项（移动端显示CONTACT US，桌面端不显示）
 const filteredNavItems = computed(() => {
   if (isMobile.value || isTablet.value) {
-    return navItems.value
+    return navItems.value;
   } else {
-    return navItems.value.filter(item => item.key !== 'contact_us')
+    return navItems.value.filter((item) => item.key !== "contact_us");
   }
-})
+});
 
 // 处理导航hover
 const handleNavHover = (item) => {
-  if (isMobile.value || isTablet.value) return
-  if (item.key === 'home') return // HOME不激活下拉面板
-  clearTimeout(hoverTimer.value)
-  isHoveringNav.value = true
-  isHoveringPanel.value = false
+  if (isMobile.value || isTablet.value) return;
+  if (item.key === "home") return; // HOME不激活下拉面板
+  clearTimeout(hoverTimer.value);
+  isHoveringNav.value = true;
+  isHoveringPanel.value = false;
   nextTick(() => {
-    activeNav.value = item.key
-    activeFirstMenu.value = item.children[0] || null
-  })
-}
+    activeNav.value = item.key;
+    activeFirstMenu.value = item.children[0] || null;
+  });
+};
 
 // 处理导航离开
 const handleNavLeave = () => {
-  if (isMobile.value || isTablet.value) return
-  if (activeNav.value === 'home') return // HOME不激活下拉面板
-  isHoveringNav.value = false
+  if (isMobile.value || isTablet.value) return;
+  if (activeNav.value === "home") return; // HOME不激活下拉面板
+  isHoveringNav.value = false;
   if (!isHoveringPanel.value) {
     hoverTimer.value = setTimeout(() => {
       if (!isHoveringNav.value && !isHoveringPanel.value) {
-        activeNav.value = null
-        activeFirstMenu.value = null
+        activeNav.value = null;
+        activeFirstMenu.value = null;
       }
-    }, 200)
+    }, 200);
   }
-}
+};
 
 // 处理面板hover
 const handlePanelHover = () => {
-  if (isMobile.value || isTablet.value) return
-  
-  clearTimeout(hoverTimer.value)
-  isHoveringPanel.value = true
-}
+  if (isMobile.value || isTablet.value) return;
+
+  clearTimeout(hoverTimer.value);
+  isHoveringPanel.value = true;
+};
 
 // 处理面板离开
 const handlePanelLeave = () => {
-  if (isMobile.value || isTablet.value) return
-  
-  isHoveringPanel.value = false
-  
+  if (isMobile.value || isTablet.value) return;
+
+  isHoveringPanel.value = false;
+
   if (!isHoveringNav.value) {
     hoverTimer.value = setTimeout(() => {
       if (!isHoveringNav.value && !isHoveringPanel.value) {
-        activeNav.value = null
-        activeFirstMenu.value = null
+        activeNav.value = null;
+        activeFirstMenu.value = null;
       }
-    }, 200)
+    }, 200);
   }
-}
+};
 
 // 处理一级菜单hover
 const handleFirstMenuHover = (item) => {
-  if (isMobile.value || isTablet.value) return
-  activeFirstMenu.value = item
-}
+  if (isMobile.value || isTablet.value) return;
+  activeFirstMenu.value = item;
+};
 
 // 新增：处理导航点击
 const handleNavClick = (item) => {
-  if (item.key === 'services') {
-    router.push('/Sanger_Sequencing')
-    activeNav.value = null
-    activeFirstMenu.value = null
-    return
+  // 立即重置滚动位置
+  resetScrollPosition();
+
+  if (item.key === "services") {
+    router.push("/Sanger_Sequencing");
+    activeNav.value = null;
+    activeFirstMenu.value = null;
+    return;
   }
   if (item.path) {
-    router.push(item.path)
+    router.push(item.path);
     // 关闭下拉面板
-    if (item.key !== 'home') {
-      activeNav.value = null
-      activeFirstMenu.value = null
+    if (item.key !== "home") {
+      activeNav.value = null;
+      activeFirstMenu.value = null;
     }
   }
-}
+};
 
 // 修改下拉面板左侧一级菜单点击逻辑
 // 在 handleSubMenuClick 里，无论 item 是否有 children，都先跳转到 item.path
 const handleSubMenuClick = (item) => {
+  // 立即重置滚动位置
+  resetScrollPosition();
+
   if (item.path) {
-    router.push(item.path)
+    router.push(item.path);
     // 关闭下拉面板
-    activeNav.value = null
-    activeFirstMenu.value = null
+    activeNav.value = null;
+    activeFirstMenu.value = null;
   }
-}
+};
 
 // 新增：处理二级子菜单点击
 const handleSubSubMenuClick = (item) => {
+  // 立即重置滚动位置
+  resetScrollPosition();
+
   if (item.path) {
-    router.push(item.path)
+    router.push(item.path);
     // 关闭下拉面板
-    activeNav.value = null
-    activeFirstMenu.value = null
+    activeNav.value = null;
+    activeFirstMenu.value = null;
   }
-}
+};
 
 // 新增：处理推荐内容点击
 const handleRecommendClick = (type) => {
-  if (type === 'products') {
-    router.push('/products')
-  } else if (type === 'services') {
-    router.push('/services')
+  // 立即重置滚动位置
+  resetScrollPosition();
+
+  if (type === "products") {
+    router.push("/products");
+  } else if (type === "services") {
+    router.push("/services");
   }
   // 关闭下拉面板
-  activeNav.value = null
-  activeFirstMenu.value = null
-}
+  activeNav.value = null;
+  activeFirstMenu.value = null;
+};
 
 // 新增：处理联系按钮点击
 const handleContactClick = () => {
-  router.push('/contact_us')
-}
+  // 立即重置滚动位置
+  resetScrollPosition();
+
+  router.push("/contact_us");
+};
 
 // 移动端菜单处理
 const handleMobileMenuSelect = ({ key }) => {
-  activeMobileMenu.value = key
-}
+  activeMobileMenu.value = key;
+};
 
 const handleMobileMenuClick = (item) => {
+  // 立即重置滚动位置
+  resetScrollPosition();
+
   if (item.path) {
-    router.push(item.path)
-    showMobileMenu.value = false
+    router.push(item.path);
+    showMobileMenu.value = false;
   }
-}
+};
 
 const handleMobileSubMenuClick = (item) => {
+  // 立即重置滚动位置
+  resetScrollPosition();
+
   if (item.path) {
-    router.push(item.path)
-    showMobileMenu.value = false
+    router.push(item.path);
+    showMobileMenu.value = false;
   }
+};
+
+// 监听路由变化，重置滚动位置
+watch(route, (to, from) => {
+  if (to.path !== from.path) {
+    // 立即重置，不等待nextTick
+    resetScrollPosition();
+
+    // 也在nextTick中再次重置，确保DOM更新后也重置
+    nextTick(() => {
+      resetScrollPosition();
+    });
+  }
+});
+
+// 重置滚动位置的函数
+function resetScrollPosition() {
+  // 重置主内容区域的滚动位置
+  const mainContent = document.querySelector(".main-content");
+  if (mainContent) {
+    mainContent.scrollTop = 0;
+    mainContent.scrollLeft = 0;
+  }
+
+  // 重置所有可能的滚动容器
+  const scrollableElements = document.querySelectorAll(
+    '[style*="overflow"], .main-content, .content-area, .reagent-layout, .lifescience-layout'
+  );
+  scrollableElements.forEach((element) => {
+    if (element.scrollTo) {
+      element.scrollTo(0, 0);
+    } else {
+      element.scrollTop = 0;
+      element.scrollLeft = 0;
+    }
+  });
+
+  // 重置整个页面的滚动位置
+  window.scrollTo(0, 0);
+
+  // 重置body和html的滚动位置
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
 }
 </script>
 
@@ -635,14 +927,14 @@ const handleMobileSubMenuClick = (item) => {
   padding: 0;
   margin: 0;
 }
-.topbar-text{
+.topbar-text {
   font-size: 18px;
   color: #243b7b;
-  &:hover{
-    color: #4CACBA;
+  &:hover {
+    color: #4cacba;
   }
 }
-:deep(.ant-input-affix-wrapper){
+:deep(.ant-input-affix-wrapper) {
   padding: 0;
 }
 .topbar-content {
@@ -676,7 +968,7 @@ const handleMobileSubMenuClick = (item) => {
 }
 
 .header {
-  background: linear-gradient(to right,#00bc97 0%,#4e3fa5 80%);
+  background: linear-gradient(to right, #00bc97 0%, #4e3fa5 80%);
   position: relative;
   z-index: 1000;
   flex-shrink: 0;
@@ -702,7 +994,7 @@ const handleMobileSubMenuClick = (item) => {
 .nav.desktop-nav {
   flex: 1;
   margin: 0 40px;
-  
+
   @media (max-width: 1023px) {
     display: none;
   }
@@ -721,7 +1013,7 @@ const handleMobileSubMenuClick = (item) => {
   position: relative;
   cursor: pointer;
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 100%;
     left: 0;
@@ -741,10 +1033,11 @@ const handleMobileSubMenuClick = (item) => {
   display: inline-block;
   letter-spacing: 0.5px;
   cursor: pointer;
-  &:hover, &.active {
+  &:hover,
+  &.active {
     background: #fff;
     color: #2b7bbf;
-    box-shadow: 0 2px 8px rgba(59,123,191,0.08);
+    box-shadow: 0 2px 8px rgba(59, 123, 191, 0.08);
   }
 }
 
@@ -776,7 +1069,7 @@ const handleMobileSubMenuClick = (item) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   &:hover {
     background: rgba(255, 255, 255, 0.1) !important;
   }
@@ -786,7 +1079,7 @@ const handleMobileSubMenuClick = (item) => {
   display: flex;
   align-items: center;
   gap: 12px;
-  
+
   @media (max-width: 767px) {
     .ant-btn-primary {
       display: none;
@@ -830,7 +1123,7 @@ const handleMobileSubMenuClick = (item) => {
   padding: 20px 0;
   border-bottom: 1px solid #f0f0f0;
   text-align: center;
-  
+
   h3 {
     margin: 0;
     color: #2b7bbf;
@@ -843,20 +1136,20 @@ const handleMobileSubMenuClick = (item) => {
   flex: 1;
   overflow-y: auto;
   padding: 16px 0;
-  
+
   .ant-menu {
     border-right: none;
-    
+
     .ant-menu-submenu-title {
       font-size: 16px;
       font-weight: 500;
     }
-    
+
     .ant-menu-item {
       font-size: 14px;
       padding-left: 48px !important;
     }
-    
+
     .ant-menu-submenu .ant-menu-item {
       padding-left: 72px !important;
     }
@@ -872,12 +1165,12 @@ const handleMobileSubMenuClick = (item) => {
   min-width: 1600px;
   padding: 0;
   margin-top: 0;
-  animation: fadeInDown 0.25s cubic-bezier(.4,0,.2,1);
+  animation: fadeInDown 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   overflow: hidden;
   border: 1px solid #e6eaf0;
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -12px;
     left: 0;
@@ -886,7 +1179,7 @@ const handleMobileSubMenuClick = (item) => {
     background: transparent;
   }
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: -20px;
     left: 0;
@@ -894,7 +1187,7 @@ const handleMobileSubMenuClick = (item) => {
     height: 20px;
     background: transparent;
   }
-  
+
   @media (max-width: 1023px) {
     display: none;
   }
@@ -927,7 +1220,7 @@ const handleMobileSubMenuClick = (item) => {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  
+
   // 小屏幕调整
   @media (min-width: 1024px) and (max-width: 1199px) {
     min-width: 180px;
@@ -952,11 +1245,12 @@ const handleMobileSubMenuClick = (item) => {
   color: #222;
   background: none;
   transition: all 0.2s;
-  &:hover, &.active {
+  &:hover,
+  &.active {
     background: #e6eaf0;
     color: #2b7bbf;
   }
-  
+
   // 小屏幕调整
   @media (min-width: 1024px) and (max-width: 1199px) {
     font-size: 15px;
@@ -979,7 +1273,7 @@ const handleMobileSubMenuClick = (item) => {
   min-width: 0;
   padding: 32px 32px 32px 32px;
   border-right: none;
-  
+
   // 小屏幕调整
   @media (min-width: 1024px) and (max-width: 1199px) {
     padding: 24px 20px 24px 20px;
@@ -1038,13 +1332,13 @@ const handleMobileSubMenuClick = (item) => {
   padding: 16px;
   border-radius: 10px;
   background: #f7f7f7;
-  box-shadow: 0 2px 8px rgba(59,123,191,0.06);
+  box-shadow: 0 2px 8px rgba(59, 123, 191, 0.06);
   cursor: pointer;
   transition: all 0.3s;
   border: 1px solid #e6eaf0;
   &:hover {
     background: #e6f7ff;
-    box-shadow: 0 6px 18px rgba(59,123,191,0.10);
+    box-shadow: 0 6px 18px rgba(59, 123, 191, 0.1);
   }
   img {
     width: 120px;
@@ -1052,7 +1346,7 @@ const handleMobileSubMenuClick = (item) => {
     border-radius: 6px;
     margin-right: 18px;
     object-fit: cover;
-    
+
     // 小屏幕调整
     @media (min-width: 1024px) and (max-width: 1199px) {
       width: 100px;
@@ -1088,7 +1382,7 @@ const handleMobileSubMenuClick = (item) => {
 .main-content {
   flex: 1;
   overflow: auto;
-  background: rgba(0,0,0,0);
+  background: rgba(0, 0, 0, 0);
   position: relative;
 }
 
@@ -1109,13 +1403,13 @@ const handleMobileSubMenuClick = (item) => {
 .fixed-panel {
   left: 5vw;
   right: 0;
-  
+
   top: 100%;
   position: absolute;
   z-index: 999;
   min-width: 1250px;
   max-width: 1250px;
-  
+
   // 大屏幕 (1400px+)
   @media (min-width: 1400px) {
     min-width: 1250px;
@@ -1123,7 +1417,7 @@ const handleMobileSubMenuClick = (item) => {
     left: 5vw;
     right: 0;
   }
-  
+
   // 中等屏幕 (1200px - 1399px)
   @media (min-width: 1200px) and (max-width: 1399px) {
     min-width: 1150px;
@@ -1131,7 +1425,7 @@ const handleMobileSubMenuClick = (item) => {
     left: 20px;
     right: 20px;
   }
-  
+
   // 小屏幕 (1024px - 1199px)
   @media (min-width: 1024px) and (max-width: 1199px) {
     min-width: 1000px;
@@ -1146,7 +1440,7 @@ const handleMobileSubMenuClick = (item) => {
   .header-content {
     padding: 0 16px;
   }
-  
+
   .logo h2 {
     font-size: 18px;
   }
@@ -1157,19 +1451,19 @@ const handleMobileSubMenuClick = (item) => {
     padding: 0 12px;
     height: 56px;
   }
-  
+
   .logo h2 {
     font-size: 16px;
   }
-  
+
   .main-content {
     padding: 0;
   }
-  
+
   .footer {
     padding: 16px 0;
   }
-  
+
   .footer-content {
     padding: 0 16px;
   }

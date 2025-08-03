@@ -2,7 +2,32 @@
   <div class="background-page">
     <!-- Banner -->
     <div class="background-banner">
-      <img :src="bannerImg" alt="banner" />
+      <div class="banner-bg">
+        <img :src="bannerImg" alt="banner" />
+      </div>
+      <div class="banner-content">
+        <div class="banner-text">
+          <h1 class="banner-title">Our Background</h1>
+          <hr class="banner-divider" />
+          <p class="banner-subtitle">
+            Pioneering Innovation in Life Sciences and Biotechnology
+          </p>
+          <div class="banner-highlights">
+            <div class="highlight-item">
+              <span class="highlight-icon">🔬</span>
+              <span>Advanced Research</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-icon">🧬</span>
+              <span>Cutting-edge Technology</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-icon">🏆</span>
+              <span>Industry Leadership</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Tab切换模块 -->
@@ -10,7 +35,7 @@
       <div
         v-for="(tab, idx) in tabs"
         :key="tab.key"
-        :class="['background-tab', {active: currentTab === idx}]"
+        :class="['background-tab', { active: currentTab === idx }]"
         @click="currentTab = idx"
       >
         {{ tab.label }}
@@ -35,78 +60,78 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import ImmuneRepertoire from './ImmuneRepertoire.vue'
-import TechBackground from './TechBackground.vue'
-import PatentPapers from './PatentPapers.vue'
+import { ref } from "vue";
+import ImmuneRepertoire from "./ImmuneRepertoire.vue";
+import TechBackground from "./TechBackground.vue";
+import PatentPapers from "./PatentPapers.vue";
 
 // 图片import
-import bannerImg from '@/assets/Background/Banner001847-ban_wap.jpg'
-import pic1 from '@/assets/Background/20210618162019508.jpg'
-import pic2 from '@/assets/Background/20210618161654075.png'
-import pic3 from '@/assets/Background/20210618162547528.png'
-import pic4 from '@/assets/Background/20210618162953285.jpg'
-import team1 from '@/assets/Background/1.gif'
-import team2 from '@/assets/Background/2.png'
-import team3 from '@/assets/Background/1234.jpg'
+import bannerImg from "@/assets/Background/Banner001847-ban_wap.jpg";
+import pic1 from "@/assets/Background/20210618162019508.jpg";
+import pic2 from "@/assets/Background/20210618161654075.png";
+import pic3 from "@/assets/Background/20210618162547528.png";
+import pic4 from "@/assets/Background/20210618162953285.jpg";
+import team1 from "@/assets/Background/1.gif";
+import team2 from "@/assets/Background/2.png";
+import team3 from "@/assets/Background/1234.jpg";
 
 const tabs = [
-  { key: 'immune', label: 'Immune Repertoire' },
-  { key: 'tech', label: 'Technical Background' },
-  { key: 'patent', label: 'Patents & Papers' },
-]
+  { key: "immune", label: "Immune Repertoire" },
+  { key: "tech", label: "Technical Background" },
+  { key: "patent", label: "Patents & Papers" },
+];
 
-const currentTab = ref(0)
+const currentTab = ref(0);
 const picList = [
   {
     img: pic1,
-    title: '专注于免疫基因组学的临床应用与开发',
-    desc: '将免疫组测序及分析技术应用于疾病的临床诊疗相关领域',
+    title: "专注于免疫基因组学的临床应用与开发",
+    desc: "将免疫组测序及分析技术应用于疾病的临床诊疗相关领域",
   },
   {
     img: pic2,
-    title: '健力谱免疫系统健康评估',
-    desc: '利用指尖血即可完成个体免疫力动态监测，进而评估个体健康状态',
+    title: "健力谱免疫系统健康评估",
+    desc: "利用指尖血即可完成个体免疫力动态监测，进而评估个体健康状态",
   },
   {
     img: pic3,
-    title: '多样的免疫组库研究服务',
-    desc: '对人、小鼠的bulk样本以及单细胞样本进行全面、定量的免疫组库分析服务',
+    title: "多样的免疫组库研究服务",
+    desc: "对人、小鼠的bulk样本以及单细胞样本进行全面、定量的免疫组库分析服务",
   },
   {
     img: pic4,
-    title: '抗体药物与疫苗开发',
-    desc: '筛选肿瘤，感染，自身免疫疾病治疗相关的抗体或靶点，助力药物和疫苗开发',
+    title: "抗体药物与疫苗开发",
+    desc: "筛选肿瘤，感染，自身免疫疾病治疗相关的抗体或靶点，助力药物和疫苗开发",
   },
-]
+];
 const teamList = [
   {
     img: team1,
-    name: 'Zhang San',
-    role: 'R&D Director',
-    desc: 'Many years of experience in bioinformatics analysis and team management, leading multiple national projects.'
+    name: "Zhang San",
+    role: "R&D Director",
+    desc: "Many years of experience in bioinformatics analysis and team management, leading multiple national projects.",
   },
   {
     img: team2,
-    name: 'Li Si',
-    role: 'Technical Director',
-    desc: 'Specialized in high-throughput sequencing platform development, with extensive laboratory management experience.'
+    name: "Li Si",
+    role: "Technical Director",
+    desc: "Specialized in high-throughput sequencing platform development, with extensive laboratory management experience.",
   },
   {
     img: team3,
-    name: 'Wang Wu',
-    role: 'Marketing Director',
-    desc: 'Responsible for company marketing strategy and brand promotion, driving continuous business growth.'
+    name: "Wang Wu",
+    role: "Marketing Director",
+    desc: "Responsible for company marketing strategy and brand promotion, driving continuous business growth.",
   },
-]
+];
 const techSolutions = [
-  'Comprehensive Coverage',
-  'Uniform Target Amplification',
-  'High Specificity',
-  'High Sensitivity',
-  'Multiplex Capability',
-  'Quantitative',
-]
+  "Comprehensive Coverage",
+  "Uniform Target Amplification",
+  "High Specificity",
+  "High Sensitivity",
+  "Multiplex Capability",
+  "Quantitative",
+];
 </script>
 
 <style scoped>
@@ -118,20 +143,134 @@ const techSolutions = [
 }
 .background-banner {
   width: 100%;
-  height: 260px;
-  background: #f7fafd;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 450px;
+  position: relative;
   overflow: hidden;
   margin-bottom: 40px;
 }
-.background-banner img {
+
+.banner-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.banner-bg img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
   display: block;
+  filter: brightness(0.7);
+}
+
+.banner-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  z-index: 1;
+}
+
+.banner-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  color: #fff;
+}
+
+.banner-text {
+  max-width: 800px;
+  margin-left: 10%;
+  margin-top: 0;
+}
+
+.banner-title {
+  font-size: 3.2rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+.banner-divider {
+  width: 80%;
+  height: 3px;
+  margin: 1.5rem 0;
+  background: none;
+  border: none;
+  border-radius: 1px;
+  position: relative;
+}
+
+.banner-divider::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    #00bc97 0%,
+    #4e3fa5 50%,
+    transparent 8px,
+    transparent 12px
+  );
+  background-size: 12px 3px;
+}
+
+.banner-subtitle {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+.banner-highlights {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.highlight-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  color: #fff !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) !important;
+  padding: 0.5rem 1rem !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 20px !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  transition: all 0.3s ease !important;
+}
+
+.highlight-item:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  transform: translateY(-2px) !important;
+}
+
+.highlight-icon {
+  font-size: 1.2rem;
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5));
 }
 .background-about {
   display: flex;
@@ -148,7 +287,7 @@ const techSolutions = [
   height: 260px;
   object-fit: cover;
   border-radius: 14px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
 }
 .about-content {
   flex: 1;
@@ -185,7 +324,7 @@ const techSolutions = [
   padding: 10px 28px;
   font-weight: 500;
   text-decoration: none;
-  box-shadow: 0 2px 8px rgba(59,123,191,0.10);
+  box-shadow: 0 2px 8px rgba(59, 123, 191, 0.1);
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 }
 .about-btn img {
@@ -196,7 +335,7 @@ const techSolutions = [
 .about-btn:hover {
   background: linear-gradient(90deg, #2b7bbf 0%, #00bc97 100%);
   color: #fff;
-  box-shadow: 0 4px 16px rgba(59,123,191,0.16);
+  box-shadow: 0 4px 16px rgba(59, 123, 191, 0.16);
 }
 .background-piclist {
   max-width: 1200px;
@@ -211,7 +350,7 @@ const techSolutions = [
 .piclist-item {
   background: #fff;
   border-radius: 14px;
-  box-shadow: 0 4px 24px rgba(59,123,191,0.08);
+  box-shadow: 0 4px 24px rgba(59, 123, 191, 0.08);
   padding: 36px 24px 28px 24px;
   text-align: center;
   transition: box-shadow 0.2s, transform 0.2s;
@@ -220,7 +359,7 @@ const techSolutions = [
   align-items: center;
 }
 .piclist-item:hover {
-  box-shadow: 0 8px 32px rgba(59,123,191,0.16);
+  box-shadow: 0 8px 32px rgba(59, 123, 191, 0.16);
   transform: translateY(-4px) scale(1.03);
 }
 .piclist-img-wrap {
@@ -268,11 +407,63 @@ const techSolutions = [
     padding: 0;
   }
 }
+@media (max-width: 900px) {
+  .banner-title {
+    font-size: 2.8rem;
+  }
+
+  .banner-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .banner-highlights {
+    gap: 1.5rem;
+  }
+
+  .highlight-item {
+    font-size: 0.9rem !important;
+    padding: 0.4rem 0.8rem !important;
+  }
+}
+
 @media (max-width: 600px) {
   .background-banner {
-    height: 140px;
+    height: 350px;
     margin-bottom: 24px;
   }
+
+  .banner-text {
+    margin-left: 5%;
+  }
+
+  .banner-title {
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+  }
+
+  .banner-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .banner-divider {
+    width: 70%;
+  }
+
+  .banner-highlights {
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .highlight-item {
+    font-size: 0.85rem !important;
+    padding: 0.4rem 0.8rem !important;
+    justify-content: center !important;
+  }
+}
+
+@media (max-width: 600px) {
   .background-about {
     padding: 0 8px;
     margin-bottom: 32px;
@@ -360,7 +551,7 @@ const techSolutions = [
   background: #f7fafd;
   border-radius: 12px;
   text-align: center;
-  box-shadow: 0 2px 12px 0 rgba(30,34,90,0.06);
+  box-shadow: 0 2px 12px 0 rgba(30, 34, 90, 0.06);
 }
 .tab-placeholder-title {
   font-size: 1.3rem;
@@ -409,7 +600,7 @@ const techSolutions = [
   background: #f7fafd;
   border-radius: 10px;
   padding: 14px 22px;
-  box-shadow: 0 2px 8px rgba(59,123,191,0.06);
+  box-shadow: 0 2px 8px rgba(59, 123, 191, 0.06);
   min-width: 220px;
   max-width: 320px;
 }
@@ -458,7 +649,7 @@ const techSolutions = [
   max-height: 420px;
   object-fit: cover;
   border-radius: 14px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
 }
 .about-rows-col {
   flex: 1;
@@ -473,7 +664,7 @@ const techSolutions = [
   padding: 32px 24px 48px 24px;
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 2px 16px rgba(59,123,191,0.06);
+  box-shadow: 0 2px 16px rgba(59, 123, 191, 0.06);
 }
 .tech-title {
   font-size: 2rem;
@@ -507,7 +698,7 @@ const techSolutions = [
   object-fit: contain;
   border-radius: 50%;
   background: #f7fafd;
-  box-shadow: 0 2px 8px rgba(59,123,191,0.08);
+  box-shadow: 0 2px 8px rgba(59, 123, 191, 0.08);
 }
 .solution-title {
   font-size: 1.08rem;
@@ -531,43 +722,43 @@ const techSolutions = [
   width: 100%;
   height: auto;
   border-radius: 16px;
-  box-shadow: 0 2px 16px rgba(59,123,191,0.13);
+  box-shadow: 0 2px 16px rgba(59, 123, 191, 0.13);
 }
 .solution-item-0 {
   background: linear-gradient(90deg, #e0f7fa 0%, #b2ebf2 100%);
   color: #00796b;
   border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(0,188,212,0.08);
+  box-shadow: 0 2px 8px rgba(0, 188, 212, 0.08);
 }
 .solution-item-1 {
   background: linear-gradient(90deg, #fffde7 0%, #fff9c4 100%);
   color: #fbc02d;
   border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(251,192,45,0.08);
+  box-shadow: 0 2px 8px rgba(251, 192, 45, 0.08);
 }
 .solution-item-2 {
   background: linear-gradient(90deg, #fce4ec 0%, #f8bbd0 100%);
   color: #c2185b;
   border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(194,24,91,0.08);
+  box-shadow: 0 2px 8px rgba(194, 24, 91, 0.08);
 }
 .solution-item-3 {
   background: linear-gradient(90deg, #e8f5e9 0%, #a5d6a7 100%);
   color: #388e3c;
   border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(56,142,60,0.08);
+  box-shadow: 0 2px 8px rgba(56, 142, 60, 0.08);
 }
 .solution-item-4 {
   background: linear-gradient(90deg, #ede7f6 0%, #b39ddb 100%);
   color: #512da8;
   border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(81,45,168,0.08);
+  box-shadow: 0 2px 8px rgba(81, 45, 168, 0.08);
 }
 .solution-item-5 {
   background: linear-gradient(90deg, #fff3e0 0%, #ffcc80 100%);
   color: #f57c00;
   border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(245,124,0,0.08);
+  box-shadow: 0 2px 8px rgba(245, 124, 0, 0.08);
 }
 .solution-item {
   display: flex;
@@ -607,7 +798,7 @@ const techSolutions = [
   gap: 18px;
   background: #f7fafd;
   border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(59,123,191,0.08);
+  box-shadow: 0 2px 8px rgba(59, 123, 191, 0.08);
   padding: 22px 32px;
   min-width: 320px;
   max-width: 420px;
