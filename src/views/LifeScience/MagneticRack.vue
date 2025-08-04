@@ -1,11 +1,9 @@
 <template>
-  <div class="affinity-page">
-    <h1 class="main-title">Magnetic Rack</h1>
-    <div class="tab-nav">
-      <div v-for="tab in tabs" :key="tab.key" :class="['tab-item', {active: currentTab === tab.key}]" @click="currentTab = tab.key">
-        {{ tab.label }}
-      </div>
-    </div>
+  <MobileOptimizedContent>
+    <div class="affinity-page">
+      <h1 class="main-title">Magnetic Rack</h1>
+
+      <MobileOptimizedTabs :tabs="tabs" v-model="currentTab">
     <section v-if="currentTab === 'intro'" class="intro">
       <div class="section-title">Product Introduction</div>
       <p style="text-align: justify; font-size: 14px;">VDO 5 mL single-tube ultra-strong magnetic rack is specially designed for column-free cell sorting. It adopts a high-strength magnetic pole structure, which can quickly and efficiently adsorb magnetically labeled cells or bead-cell complexes. Suitable for 5 mL standard centrifuge tubes, compatible with various cell sorting experiments, easy to operate, no complex consumables required, and significantly improves sorting efficiency.</p>
@@ -31,22 +29,28 @@
     <!-- Image Preview Modal -->
     <div v-if="previewImg" class="img-preview-modal" @click.self="closePreview">
       <img :src="previewImg" class="img-preview-large" @click.stop />
-      <span class="img-preview-close" @click="closePreview">×</span>
+        <span class="img-preview-close" @click="closePreview">×</span>
+      </div>
+      </MobileOptimizedTabs>
     </div>
-  </div>
+  </MobileOptimizedContent>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-const tabs = [
-  { key: 'intro', label: 'Product Introduction' }
-]
-const currentTab = ref('intro')
-import img2 from '@/assets/LifeScience/cell/cell-4/6fdd06278acf403f92cd7198b1ab1840.png'
-import img1 from '@/assets/LifeScience/cell/cell-4/9caf925979464f089ebe8d2bd294a910.png'
-const previewImg = ref('')
-function openPreview(img) { previewImg.value = img }
-function closePreview() { previewImg.value = '' }
+import { ref } from "vue";
+import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
+const tabs = [{ key: "intro", label: "Product Introduction" }];
+const currentTab = ref("intro");
+import img2 from "@/assets/LifeScience/cell/cell-4/6fdd06278acf403f92cd7198b1ab1840.png";
+import img1 from "@/assets/LifeScience/cell/cell-4/9caf925979464f089ebe8d2bd294a910.png";
+const previewImg = ref("");
+function openPreview(img) {
+  previewImg.value = img;
+}
+function closePreview() {
+  previewImg.value = "";
+}
 </script>
 
 <style scoped>
@@ -56,7 +60,7 @@ function closePreview() { previewImg.value = '' }
   padding: 40px 24px 48px 24px;
   background: #f8fafc;
   min-height: 100vh;
-  font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans', Arial, sans-serif;
+  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans", Arial, sans-serif;
 }
 .main-title {
   text-align: center;
@@ -106,7 +110,8 @@ function closePreview() { previewImg.value = '' }
   margin: 32px 0;
   border: none;
 }
-ul, ol {
+ul,
+ol {
   padding-left: 24px;
   margin-bottom: 18px;
 }
@@ -135,8 +140,11 @@ li {
 }
 .img-preview-modal {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.55);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.55);
   z-index: 1000;
   display: flex;
   align-items: center;

@@ -1,37 +1,52 @@
 <template>
-  <ReagentLayout>
-    <template #default>
-      <div class="standard-beads-page">
-        <h1 class="main-title">标准微球</h1>
-        <div class="section-title">产品介绍</div>
-        <div class="base-richtext">
-          <p>标准微球是一系列含有聚合物微球的水溶液。我们的产品拥有100nm 至 10μm 的粒径范围，可实现在宽范围内对仪器进行标定和监测。</p>
-          <p>尺度标准微球是由一系列粒度分析仪的验证而得，包括光子相关光谱仪（PCS)、离心式圆盘光度计（PCP）、可调电阻脉冲传感（TRPS）、纳米粒子跟踪分析（NTA）或激光衍射（LD）等。</p>
-          <p>计数标准微球具有高度的NIST可溯源性。可满足ISO9000、ISO10012、ANSI/NCSL-Z540以及GMP/GLP等可溯源合规的要求，通过严格的再悬浮程序以及粒子计数检测，得到具有准确粒子数量的微球悬浮体，是标定粒子计数仪器的必备工具。</p>
-        </div>
-
-        <div class="divider"></div>
-        <div class="section-title">标准微球的种类</div>
-        <div class="product-type-list">
-          <div class="product-type-item">尺度标准微球</div>
-          <div class="product-type-item">计数标准微球</div>
-        </div>
-
-
+  <MobileOptimizedContent>
+    <div class="standard-beads-page">
+      <h1 class="main-title">Standard Beads</h1>
+      <div class="section-title">Product Introduction</div>
+      <div class="base-richtext">
+        <p>
+          Standard beads are a series of aqueous solutions containing polymer
+          microspheres. Our products have a particle size range from 100nm to
+          10μm, enabling instrument calibration and monitoring over a wide
+          range.
+        </p>
+        <p>
+          Size standard beads are validated by a series of particle size
+          analyzers, including Photon Correlation Spectroscopy (PCS),
+          Centrifugal Disc Photometry (CDP), Tunable Resistive Pulse Sensing
+          (TRPS), Nanoparticle Tracking Analysis (NTA), or Laser Diffraction
+          (LD).
+        </p>
+        <p>
+          Counting standard beads have high NIST traceability. They meet the
+          traceability compliance requirements of ISO9000, ISO10012,
+          ANSI/NCSL-Z540, and GMP/GLP. Through strict resuspension procedures
+          and particle counting detection, microsphere suspensions with accurate
+          particle numbers are obtained, making them essential tools for
+          calibrating particle counting instruments.
+        </p>
       </div>
-    </template>
-  </ReagentLayout>
+
+      <div class="divider"></div>
+      <div class="section-title">Types of Standard Beads</div>
+      <div class="product-type-list">
+        <div class="product-type-item">Size Standard Beads</div>
+        <div class="product-type-item">Counting Standard Beads</div>
+      </div>
+    </div>
+  </MobileOptimizedContent>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-const modalImg = ref(null)
+import { ref } from "vue";
+import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+const modalImg = ref(null);
 const openModal = (img) => {
-  modalImg.value = img
-}
+  modalImg.value = img;
+};
 const closeModal = () => {
-  modalImg.value = null
-}
+  modalImg.value = null;
+};
 </script>
 
 <style scoped>
@@ -41,7 +56,7 @@ const closeModal = () => {
   padding: 40px 24px 48px 24px;
   background: #f8fafc;
   min-height: 100vh;
-  font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans', Arial, sans-serif;
+  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans", Arial, sans-serif;
 }
 .main-title {
   text-align: center;
@@ -83,13 +98,13 @@ const closeModal = () => {
   width: 100%;
   max-height: 400px;
   border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(34,58,94,0.10);
+  box-shadow: 0 2px 16px rgba(34, 58, 94, 0.1);
   cursor: pointer;
   transition: box-shadow 0.25s, border 0.25s, transform 0.25s;
   border: 2px solid transparent;
 }
 .main-img:hover {
-  box-shadow: 0 8px 32px rgba(64,158,255,0.18);
+  box-shadow: 0 8px 32px rgba(64, 158, 255, 0.18);
   border: 2px solid #409eff;
   transform: scale(1.04);
 }
@@ -105,13 +120,16 @@ const closeModal = () => {
   font-size: 1.1rem;
   color: #223a5e;
   font-weight: 600;
-  box-shadow: 0 1px 4px 0 rgba(34,58,94,0.06);
+  box-shadow: 0 1px 4px 0 rgba(34, 58, 94, 0.06);
 }
 .img-modal {
   position: fixed;
   z-index: 1000;
-  left: 0; top: 0; right: 0; bottom: 0;
-  background: rgba(34,58,94,0.65);
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(34, 58, 94, 0.65);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -121,7 +139,7 @@ const closeModal = () => {
   background: #fff;
   border-radius: 16px;
   padding: 32px 32px 16px 32px;
-  box-shadow: 0 8px 40px rgba(34,58,94,0.18);
+  box-shadow: 0 8px 40px rgba(34, 58, 94, 0.18);
   max-width: 90vw;
   max-height: 90vh;
   display: flex;
@@ -132,7 +150,7 @@ const closeModal = () => {
   max-width: 800px;
   max-height: 70vh;
   border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(34,58,94,0.10);
+  box-shadow: 0 2px 16px rgba(34, 58, 94, 0.1);
 }
 .close-btn {
   position: absolute;

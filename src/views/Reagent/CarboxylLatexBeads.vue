@@ -1,26 +1,37 @@
 <template>
-  <ReagentLayout>
-    <template #default>
-      <div class="carboxyl-latex-beads-page">
-        <h1 class="main-title">Carboxyl Latex Beads</h1>
-        <div class="tab-nav">
-          <div
-            v-for="item in tabList"
-            :key="item.key"
-            :class="['tab-item', {active: tab === item.key}]"
-            @click="tab = item.key"
-          >
-            {{ item.label }}
-          </div>
-        </div>
-        <section v-if="tab==='intro'">
+  <MobileOptimizedContent>
+    <div class="carboxyl-latex-beads-page">
+      <h1 class="main-title">Carboxyl Latex Beads</h1>
+
+      <MobileOptimizedTabs :tabs="tabList" v-model="tab">
+        <section v-if="tab === 'intro'">
           <div class="section-title">Product Description</div>
           <div class="base-richtext">
-            <p>This series of latex microspheres is composed of polystyrene as the base material. Through unique surface modification technology, microspheres are equipped with different functional groups, and the number of functional groups can be controlled. We can provide customized services to prepare microspheres of various particle sizes to meet customer requirements for sensitivity and linear range. This series of latex microspheres has a wide range of applications, such as "Particle Enhanced Immuno-Nephelometry (PET)", "Solid Phase Immunoassay", "Latex Agglutination Test", and "Microsphere Capture Enzyme-Linked Immunosorbent Assay".</p>
-            <p>This series of latex microspheres can produce batches of 100L or more, with small batch-to-batch differences, providing high-quality products for customers' large-scale production.</p>
+            <p>
+              This series of latex microspheres is composed of polystyrene as
+              the base material. Through unique surface modification technology,
+              microspheres are equipped with different functional groups, and
+              the number of functional groups can be controlled. We can provide
+              customized services to prepare microspheres of various particle
+              sizes to meet customer requirements for sensitivity and linear
+              range. This series of latex microspheres has a wide range of
+              applications, such as "Particle Enhanced Immuno-Nephelometry
+              (PET)", "Solid Phase Immunoassay", "Latex Agglutination Test", and
+              "Microsphere Capture Enzyme-Linked Immunosorbent Assay".
+            </p>
+            <p>
+              This series of latex microspheres can produce batches of 100L or
+              more, with small batch-to-batch differences, providing
+              high-quality products for customers' large-scale production.
+            </p>
           </div>
           <div class="img-center">
-            <img :src="img1" alt="Product Image" class="main-img" @click="openModal(img1)" />
+            <img
+              :src="img1"
+              alt="Product Image"
+              class="main-img"
+              @click="openModal(img1)"
+            />
           </div>
           <div class="divider"></div>
           <div class="section-title">Technical Parameters</div>
@@ -38,16 +49,33 @@
           <div class="divider"></div>
           <div class="section-title">Performance Characteristics</div>
           <ul class="feature-list">
-            <li>Sufficient Functional Groups: Can Efficiently Couple Sufficient Target Proteins</li>
-            <li>Uniform Particle Size and Stable Functional Group Control: Good Repeatability</li>
-            <li>Batch Capacity Can Reach 100L or More: Small Batch-to-Batch Differences, Stable Supply for Large-scale Production</li>
-            <li>Customizable Microsphere Particle Size and Surface Functional Group Number: Meet Customer's Different Product Development Needs</li>
+            <li>
+              Sufficient Functional Groups: Can Efficiently Couple Sufficient
+              Target Proteins
+            </li>
+            <li>
+              Uniform Particle Size and Stable Functional Group Control: Good
+              Repeatability
+            </li>
+            <li>
+              Batch Capacity Can Reach 100L or More: Small Batch-to-Batch
+              Differences, Stable Supply for Large-scale Production
+            </li>
+            <li>
+              Customizable Microsphere Particle Size and Surface Functional
+              Group Number: Meet Customer's Different Product Development Needs
+            </li>
           </ul>
         </section>
-        <section v-if="tab==='order'">
+        <section v-if="tab === 'order'">
           <div class="section-title">Order Information</div>
           <div class="img-center">
-            <img :src="img2" alt="Order Information" class="main-img" @click="openModal(img2)" />
+            <img
+              :src="img2"
+              alt="Order Information"
+              class="main-img"
+              @click="openModal(img2)"
+            />
           </div>
           <div v-if="modalImg" class="img-modal" @click.self="closeModal">
             <div class="modal-content">
@@ -55,42 +83,54 @@
               <button class="close-btn" @click="closeModal">×</button>
             </div>
           </div>
-          <div class="base-richtext" style="margin-top: 12px;">
-            <span style="color: #000000; font-size: 14px;">Other functional groups and particle sizes can be customized according to customer requirements</span>
+          <div class="base-richtext" style="margin-top: 12px">
+            <span style="color: #000000; font-size: 14px"
+              >Other functional groups and particle sizes can be customized
+              according to customer requirements</span
+            >
           </div>
         </section>
-        <section v-if="tab==='manual'">
+        <section v-if="tab === 'manual'">
           <div class="section-title">Manual</div>
           <div class="base-richtext">
             <ul>
-              <li><a href="/src/assets/Reagent/Latex/Latex-2/LatexBeads-Manual.pdf" download target="_blank">Latex Microsphere Product Manual (PDF)</a></li>
+              <li>
+                <a
+                  href="/src/assets/Reagent/Latex/Latex-2/LatexBeads-Manual.pdf"
+                  download
+                  target="_blank"
+                  >Latex Microsphere Product Manual (PDF)</a
+                >
+              </li>
             </ul>
           </div>
         </section>
-      </div>
-    </template>
-  </ReagentLayout>
+      </MobileOptimizedTabs>
+    </div>
+  </MobileOptimizedContent>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import img1 from '@/assets/Reagent/Latex/Latex-2/10001.png'
-import img2 from '@/assets/Reagent/Latex/Latex-2/10002.png'
+import { ref } from "vue";
+import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
+import img1 from "@/assets/Reagent/Latex/Latex-2/10001.png";
+import img2 from "@/assets/Reagent/Latex/Latex-2/10002.png";
 const tabList = [
-  { key: 'intro', label: 'Product Introduction' },
+  { key: "intro", label: "Product Introduction" },
   // { key: 'specs', label: 'Technical Parameters' },
   // { key: 'features', label: 'Performance Characteristics' },
-  { key: 'order', label: 'Order Information' },
-  { key: 'manual', label: 'Manual' }
-]
-const tab = ref('intro')
-const modalImg = ref(null)
+  { key: "order", label: "Order Information" },
+  { key: "manual", label: "Manual" },
+];
+const tab = ref("intro");
+const modalImg = ref(null);
 const openModal = (img) => {
-  modalImg.value = img
-}
+  modalImg.value = img;
+};
 const closeModal = () => {
-  modalImg.value = null
-}
+  modalImg.value = null;
+};
 </script>
 
 <style scoped>
@@ -100,7 +140,7 @@ const closeModal = () => {
   padding: 40px 24px 48px 24px;
   background: #f8fafc;
   min-height: 100vh;
-  font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans', Arial, sans-serif;
+  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans", Arial, sans-serif;
 }
 .main-title {
   text-align: center;
@@ -135,10 +175,18 @@ const closeModal = () => {
 .tab-item:hover {
   color: #2b7bbf;
 }
-.product-tabs { display: none; }
-:deep(.el-tabs__nav) { display: none; }
-:deep(.el-tabs__item) { display: none; }
-:deep(.el-tabs__item.is-active) { display: none; }
+.product-tabs {
+  display: none;
+}
+:deep(.el-tabs__nav) {
+  display: none;
+}
+:deep(.el-tabs__item) {
+  display: none;
+}
+:deep(.el-tabs__item.is-active) {
+  display: none;
+}
 .section-title {
   font-size: 1.35rem;
   font-weight: 600;
@@ -180,21 +228,24 @@ const closeModal = () => {
   width: 100%;
   max-height: 400px;
   border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(34,58,94,0.10);
+  box-shadow: 0 2px 16px rgba(34, 58, 94, 0.1);
   cursor: pointer;
   transition: box-shadow 0.25s, border 0.25s, transform 0.25s;
   border: 2px solid transparent;
 }
 .main-img:hover {
-  box-shadow: 0 8px 32px rgba(64,158,255,0.18);
+  box-shadow: 0 8px 32px rgba(64, 158, 255, 0.18);
   border: 2px solid #409eff;
   transform: scale(1.04);
 }
 .img-modal {
   position: fixed;
   z-index: 1000;
-  left: 0; top: 0; right: 0; bottom: 0;
-  background: rgba(34,58,94,0.65);
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(34, 58, 94, 0.65);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -204,7 +255,7 @@ const closeModal = () => {
   background: #fff;
   border-radius: 16px;
   padding: 32px 32px 16px 32px;
-  box-shadow: 0 8px 40px rgba(34,58,94,0.18);
+  box-shadow: 0 8px 40px rgba(34, 58, 94, 0.18);
   max-width: 90vw;
   max-height: 90vh;
   display: flex;
@@ -215,7 +266,7 @@ const closeModal = () => {
   max-width: 800px;
   max-height: 70vh;
   border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(34,58,94,0.10);
+  box-shadow: 0 2px 16px rgba(34, 58, 94, 0.1);
 }
 .close-btn {
   position: absolute;

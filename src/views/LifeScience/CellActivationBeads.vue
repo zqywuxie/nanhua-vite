@@ -1,95 +1,152 @@
 <template>
-  <div class="affinity-page">
-    <h1 class="main-title">Cell Activation Magnetic Beads</h1>
-    <!-- Tab Navigation -->
-    <div class="tab-nav">
-      <div
-        v-for="tab in tabs"
-        :key="tab.key"
-        :class="['tab-item', {active: currentTab === tab.key}]"
-        @click="currentTab = tab.key"
-      >
-        {{ tab.label }}
-      </div>
+  <MobileOptimizedContent>
+    <div class="affinity-page">
+      <h1 class="main-title">Cell Activation Magnetic Beads</h1>
+
+      <MobileOptimizedTabs :tabs="tabs" v-model="currentTab">
+        <!-- Tab Content: Product Introduction -->
+        <section v-if="currentTab === 'intro'" class="intro">
+          <div class="section-title">Product Introduction</div>
+          <p style="text-align: justify; font-size: 14px">
+            VDO Biotech provides 4.5 μm CD3 and CD28 activation magnetic beads.
+            The CD3 and CD28 antibodies on the bead surface simulate the signals
+            of antigen-presenting cells (APCs), strongly inducing T cell
+            activation and proliferation to perform immune functions.
+          </p>
+          <div class="img-block">
+            <img
+              :src="img1"
+              alt="CD3/CD28 Activation Magnetic Beads Product Image"
+              class="intro-img"
+              @click="openPreview(img1)"
+            />
+            <div style="color: #888; font-size: 14px; margin-top: 8px">
+              CD3/CD28 Activation Magnetic Beads Product Image
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="section-title">Product Advantages</div>
+          <ul>
+            <li>
+              Efficient expansion: Achieve 150-fold cell proliferation in a
+              single 9-day stimulation, meeting high-yield requirements.
+            </li>
+            <li>
+              Uniform particle size: Highly consistent bead size (CV &lt; 5%),
+              clear flow cytometry grouping, stable results.
+            </li>
+            <li>
+              Protects cell viability: Gentle activation avoids overstimulation,
+              ensuring high cell viability and functionality.
+            </li>
+            <li>
+              Easy operation: Beads are easy to separate, compatible with
+              automation, reducing manual error and improving reproducibility.
+            </li>
+          </ul>
+          <div class="divider"></div>
+          <div class="section-title">Performance Validation</div>
+          <div class="img-block">
+            <img
+              :src="img2"
+              alt="CD3/CD28 Activation Magnetic Beads Performance Validation"
+              class="intro-img"
+              @click="openPreview(img2)"
+            />
+            <div style="color: #888; font-size: 14px; margin-top: 8px">
+              CD3/CD28 Activation Magnetic Beads Performance Validation
+            </div>
+          </div>
+          <p style="font-size: 14px">
+            After co-stimulation of T cells with VDO and competitor CD3/CD28
+            activation magnetic beads, T cells can be effectively expanded. T
+            cells were counted at 3, 6, and 9 days, and the results showed no
+            significant difference in T cell numbers compared to competitors.
+          </p>
+          <div class="divider"></div>
+          <div class="section-title">Product List</div>
+          <div class="img-block">
+            <img
+              :src="img3"
+              alt="CD3/CD28 Activation Magnetic Beads Product List"
+              class="intro-img"
+              @click="openPreview(img3)"
+            />
+            <div style="color: #888; font-size: 14px; margin-top: 8px">
+              CD3/CD28 Activation Magnetic Beads Product List
+            </div>
+          </div>
+        </section>
+        <!-- Tab Content: Manual -->
+        <section v-if="currentTab === 'manual'" class="manuals">
+          <div class="section-title">Manual Download</div>
+          <ul class="manual-list">
+            <li v-for="file in manualFiles" :key="file.name">
+              <a :href="file.url" :download="file.name" target="_blank">
+                <i
+                  class="el-icon-document"
+                  style="margin-right: 6px; color: #409eff"
+                ></i
+                >{{ file.name }}
+              </a>
+            </li>
+          </ul>
+        </section>
+        <!-- Image Preview Modal -->
+        <div
+          v-if="previewImg"
+          class="img-preview-modal"
+          @click.self="closePreview"
+        >
+          <img :src="previewImg" class="img-preview-large" @click.stop />
+          <span class="img-preview-close" @click="closePreview">×</span>
+        </div>
+      </MobileOptimizedTabs>
     </div>
-    <!-- Tab Content: Product Introduction -->
-    <section v-if="currentTab === 'intro'" class="intro">
-      <div class="section-title">Product Introduction</div>
-      <p style="text-align: justify; font-size: 14px;">VDO Biotech provides 4.5 μm CD3 and CD28 activation magnetic beads. The CD3 and CD28 antibodies on the bead surface simulate the signals of antigen-presenting cells (APCs), strongly inducing T cell activation and proliferation to perform immune functions.</p>
-      <div class="img-block">
-        <img :src="img1" alt="CD3/CD28 Activation Magnetic Beads Product Image" class="intro-img" @click="openPreview(img1)" />
-        <div style="color:#888;font-size:14px;margin-top:8px;">CD3/CD28 Activation Magnetic Beads Product Image</div>
-      </div>
-      <div class="divider"></div>
-      <div class="section-title">Product Advantages</div>
-      <ul>
-        <li>Efficient expansion: Achieve 150-fold cell proliferation in a single 9-day stimulation, meeting high-yield requirements.</li>
-        <li>Uniform particle size: Highly consistent bead size (CV &lt; 5%), clear flow cytometry grouping, stable results.</li>
-        <li>Protects cell viability: Gentle activation avoids overstimulation, ensuring high cell viability and functionality.</li>
-        <li>Easy operation: Beads are easy to separate, compatible with automation, reducing manual error and improving reproducibility.</li>
-      </ul>
-      <div class="divider"></div>
-      <div class="section-title">Performance Validation</div>
-      <div class="img-block">
-        <img :src="img2" alt="CD3/CD28 Activation Magnetic Beads Performance Validation" class="intro-img" @click="openPreview(img2)" />
-        <div style="color:#888;font-size:14px;margin-top:8px;">CD3/CD28 Activation Magnetic Beads Performance Validation</div>
-      </div>
-      <p style="font-size: 14px;">After co-stimulation of T cells with VDO and competitor CD3/CD28 activation magnetic beads, T cells can be effectively expanded. T cells were counted at 3, 6, and 9 days, and the results showed no significant difference in T cell numbers compared to competitors.</p>
-      <div class="divider"></div>
-      <div class="section-title">Product List</div>
-      <div class="img-block">
-        <img :src="img3" alt="CD3/CD28 Activation Magnetic Beads Product List" class="intro-img" @click="openPreview(img3)" />
-        <div style="color:#888;font-size:14px;margin-top:8px;">CD3/CD28 Activation Magnetic Beads Product List</div>
-      </div>
-    </section>
-    <!-- Tab Content: Manual -->
-    <section v-if="currentTab === 'manual'" class="manuals">
-      <div class="section-title">Manual Download</div>
-      <ul class="manual-list">
-        <li v-for="file in manualFiles" :key="file.name">
-          <a :href="file.url" :download="file.name" target="_blank">
-            <i class="el-icon-document" style="margin-right:6px;color:#409eff;"></i>{{ file.name }}
-          </a>
-        </li>
-      </ul>
-    </section>
-    <!-- Image Preview Modal -->
-    <div v-if="previewImg" class="img-preview-modal" @click.self="closePreview">
-      <img :src="previewImg" class="img-preview-large" @click.stop />
-      <span class="img-preview-close" @click="closePreview">×</span>
-    </div>
-  </div>
+  </MobileOptimizedContent>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
+import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
 // Tab Configuration
 const tabs = [
-  { key: 'intro', label: 'Product Introduction' },
-  { key: 'manual', label: 'Manual' }
-]
-const currentTab = ref('intro')
+  { key: "intro", label: "Product Introduction" },
+  { key: "manual", label: "Manual" },
+];
+const currentTab = ref("intro");
 // Image Resources
-import img3 from '@/assets/LifeScience/cell/cell-3/dbb1359d772d4fcdb46aa33a9c95e3d1.png'
-import img2 from '@/assets/LifeScience/cell/cell-3/38ccfd7cfd3b4bd2b22ede1d3a013d53.png'
-import img1 from '@/assets/LifeScience/cell/cell-3/e47de1b575ad4c94bc0413dc8597a5c8.png'
+import img3 from "@/assets/LifeScience/cell/cell-3/dbb1359d772d4fcdb46aa33a9c95e3d1.png";
+import img2 from "@/assets/LifeScience/cell/cell-3/38ccfd7cfd3b4bd2b22ede1d3a013d53.png";
+import img1 from "@/assets/LifeScience/cell/cell-3/e47de1b575ad4c94bc0413dc8597a5c8.png";
 
 const allImgs = [
-  { src: img1, alt: 'Cell Activation Magnetic Beads Product Image 1' },
-  { src: img2, alt: 'Cell Activation Magnetic Beads Product Image 2' },
-  { src: img3, alt: 'Cell Activation Magnetic Beads Product Image 3' },
-]
+  { src: img1, alt: "Cell Activation Magnetic Beads Product Image 1" },
+  { src: img2, alt: "Cell Activation Magnetic Beads Product Image 2" },
+  { src: img3, alt: "Cell Activation Magnetic Beads Product Image 3" },
+];
 // PDF Manuals
-import pdf1 from '@/assets/LifeScience/cell/cell-3/CS1007.pdf'
-import pdf2 from '@/assets/LifeScience/cell/cell-3/CS1008.pdf'
+import pdf1 from "@/assets/LifeScience/cell/cell-3/CS1007.pdf";
+import pdf2 from "@/assets/LifeScience/cell/cell-3/CS1008.pdf";
 const manualFiles = [
-  { name: 'CS1007-Human CD3/CD28 Activation Magnetic Beads Manual.pdf', url: pdf1 },
-  { name: 'CS1008-Mouse CD3/CD28 Activation Magnetic Beads Manual.pdf', url: pdf2 },
-]
+  {
+    name: "CS1007-Human CD3/CD28 Activation Magnetic Beads Manual.pdf",
+    url: pdf1,
+  },
+  {
+    name: "CS1008-Mouse CD3/CD28 Activation Magnetic Beads Manual.pdf",
+    url: pdf2,
+  },
+];
 // Image Preview Modal
-const previewImg = ref('')
-function openPreview(img) { previewImg.value = img }
-function closePreview() { previewImg.value = '' }
+const previewImg = ref("");
+function openPreview(img) {
+  previewImg.value = img;
+}
+function closePreview() {
+  previewImg.value = "";
+}
 </script>
 
 <style scoped>
@@ -99,7 +156,7 @@ function closePreview() { previewImg.value = '' }
   padding: 40px 24px 48px 24px;
   background: #f8fafc;
   min-height: 100vh;
-  font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans', Arial, sans-serif;
+  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans", Arial, sans-serif;
 }
 .main-title {
   text-align: center;
@@ -149,7 +206,8 @@ function closePreview() { previewImg.value = '' }
   margin: 32px 0;
   border: none;
 }
-ul, ol {
+ul,
+ol {
   padding-left: 24px;
   margin-bottom: 18px;
 }
@@ -194,8 +252,11 @@ li {
 }
 .img-preview-modal {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.55);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.55);
   z-index: 1000;
   display: flex;
   align-items: center;

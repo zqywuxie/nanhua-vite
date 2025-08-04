@@ -1,27 +1,26 @@
 <template>
-  <ReagentLayout>
-    <template #default>
-      <div class="beadstar-mplex-microspheres-page">
-        <h1 class="main-title">Beadstar-mPlex® Magnetic Fluorescent Encoded Microspheres</h1>
-        <div class="tab-nav">
-          <div
-            v-for="item in tabList"
-            :key="item.key"
-            :class="['tab-item', {active: tab === item.key}]"
-            @click="tab = item.key"
-          >
-            {{ item.label }}
-          </div>
-        </div>
+  <MobileOptimizedContent>
+    <div class="beadstar-mplex-microspheres-page">
+      <h1 class="main-title">
+        Beadstar-mPlex® Magnetic Fluorescent Encoded Microspheres
+      </h1>
+
+      <MobileOptimizedTabs :tabs="tabList" v-model="tab">
         <!-- Product Introduction Tab -->
-        <section v-if="tab==='intro'">
+        <section v-if="tab === 'intro'">
           <div class="section-block">
             <div class="section-title">Product Overview</div>
             <div class="base-richtext">
-              <p>Beadstar-mPlex® Magnetic Fluorescent Encoded Microspheres are primarily used for high-throughput, multiplex biological assays based on suspension-array and flow-cytometry platforms.</p>
+              <p>
+                Beadstar-mPlex® Magnetic Fluorescent Encoded Microspheres are
+                primarily used for high-throughput, multiplex biological assays
+                based on suspension-array and flow-cytometry platforms.
+              </p>
               <div class="overview-list">
                 <div class="overview-row">
-                  <span class="overview-label">Diameter / Encoding Capacity:</span>
+                  <span class="overview-label"
+                    >Diameter / Encoding Capacity:</span
+                  >
                   <ul class="overview-sublist">
                     <li><b>3 µm</b>: ~40-plex fluorescence codes</li>
                     <li><b>6 µm</b>: ~80-plex fluorescence codes (Figure)</li>
@@ -30,11 +29,17 @@
                 </div>
                 <div class="overview-row">
                   <span class="overview-label">Functional Groups:</span>
-                  <span>COOH, SA (streptavidin), PDT (pyridyl disulfide), etc.</span>
+                  <span
+                    >COOH, SA (streptavidin), PDT (pyridyl disulfide),
+                    etc.</span
+                  >
                   <ul class="overview-sublist">
                     <li>Magnetic response time: 30–60 s</li>
                     <li>CV of size: ≤5 %</li>
-                    <li>Fluorescence stability: 2–8 °C, protected from light, 24 months</li>
+                    <li>
+                      Fluorescence stability: 2–8 °C, protected from light, 24
+                      months
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -44,12 +49,35 @@
           <div class="section-block">
             <div class="section-title">Technical Advantage</div>
             <ul class="feature-list">
-              <li><b>Low-adsorption:</b> The second-generation low-adsorption microspheres are enveloped in a proprietary hydrophilic polymer layer (BS10K) that acts as an inert shield, dramatically reducing non-specific binding of antibodies, antigens, or nucleic-acid probes.</li>
-              <li><b>Thermal Stability:</b> The carboxyl-functional microspheres exhibit exceptional thermal stability and can withstand stringent hybridization conditions, including 95 °C for 10 min without loss of encoding fluorescence intensity or bead integrity.</li>
-              <li><b>Platform-Specific Optimization:</b> Magnetic fluorescent encoded microspheres optimized for conventional flow cytometers, Luminex 200™ suspension-array systems, and MAGPIX® instruments.</li>
+              <li>
+                <b>Low-adsorption:</b> The second-generation low-adsorption
+                microspheres are enveloped in a proprietary hydrophilic polymer
+                layer (BS10K) that acts as an inert shield, dramatically
+                reducing non-specific binding of antibodies, antigens, or
+                nucleic-acid probes.
+              </li>
+              <li>
+                <b>Thermal Stability:</b> The carboxyl-functional microspheres
+                exhibit exceptional thermal stability and can withstand
+                stringent hybridization conditions, including 95 °C for 10 min
+                without loss of encoding fluorescence intensity or bead
+                integrity.
+              </li>
+              <li>
+                <b>Platform-Specific Optimization:</b> Magnetic fluorescent
+                encoded microspheres optimized for conventional flow cytometers,
+                Luminex 200™ suspension-array systems, and MAGPIX® instruments.
+              </li>
             </ul>
             <div class="img-row">
-              <img v-for="(img, idx) in techImgs" :key="img" :src="img" :alt="`Technical Advantage ${idx+1}`" class="adv-img" @click="openModal(img)" />
+              <img
+                v-for="(img, idx) in techImgs"
+                :key="img"
+                :src="img"
+                :alt="`Technical Advantage ${idx + 1}`"
+                class="adv-img"
+                @click="openModal(img)"
+              />
             </div>
           </div>
           <div class="divider"></div>
@@ -59,13 +87,24 @@
               <div class="overview-row">
                 <span class="overview-label">Multiplex protein detection:</span>
                 <ul class="overview-sublist">
-                  <li>Tumor markers: simultaneous screening of 10–20 analytes such as AFP, CEA, CA125, CA19-9, PSA, CYFRA21-1</li>
-                  <li>Cytokines: any combination up to 80-plex, e.g., IL-2, IL-4, IL-6, IL-10, IL-17A, TNF-α, IFN-γ</li>
-                  <li>Autoimmune antibodies: profiling including ANA, dsDNA, SSA/SSB, CCP, Sm, RNP</li>
+                  <li>
+                    Tumor markers: simultaneous screening of 10–20 analytes such
+                    as AFP, CEA, CA125, CA19-9, PSA, CYFRA21-1
+                  </li>
+                  <li>
+                    Cytokines: any combination up to 80-plex, e.g., IL-2, IL-4,
+                    IL-6, IL-10, IL-17A, TNF-α, IFN-γ
+                  </li>
+                  <li>
+                    Autoimmune antibodies: profiling including ANA, dsDNA,
+                    SSA/SSB, CCP, Sm, RNP
+                  </li>
                 </ul>
               </div>
               <div class="overview-row">
-                <span class="overview-label">Multiplex nucleic-acid detection:</span>
+                <span class="overview-label"
+                  >Multiplex nucleic-acid detection:</span
+                >
                 <ul class="overview-sublist">
                   <li>HPV genotyping</li>
                   <li>Thalassemia mutations</li>
@@ -75,7 +114,9 @@
           </div>
           <div class="divider"></div>
           <div class="section-block">
-            <div class="section-title">Product Classification & Specifications</div>
+            <div class="section-title">
+              Product Classification & Specifications
+            </div>
             <div class="table-wrapper">
               <table class="spec-table">
                 <thead>
@@ -124,15 +165,23 @@
           <div class="section-block">
             <div class="section-title">Application Example</div>
             <div class="base-richtext">
-              The kit is used for quantitative analysis of the concentrations of IL-1β, IL-2, IL-4, IL-5, IL-8, IL-6, IL-10, IL-12p70, IL-17A, TNF-α, IFN-γ, and IFN-α2 in human cultured cell supernatants and human serum samples.
+              The kit is used for quantitative analysis of the concentrations of
+              IL-1β, IL-2, IL-4, IL-5, IL-8, IL-6, IL-10, IL-12p70, IL-17A,
+              TNF-α, IFN-γ, and IFN-α2 in human cultured cell supernatants and
+              human serum samples.
             </div>
             <div class="img-center">
-              <img :src="imgExample" alt="Application Example" class="main-img" @click="openModal(imgExample)" />
+              <img
+                :src="imgExample"
+                alt="Application Example"
+                class="main-img"
+                @click="openModal(imgExample)"
+              />
             </div>
           </div>
         </section>
         <!-- FAQ Tab -->
-        <section v-if="tab==='faq'">
+        <section v-if="tab === 'faq'">
           <div class="section-block">
             <div class="section-title">Frequently Asked Questions (FAQ)</div>
             <div class="faq-list">
@@ -144,10 +193,15 @@
           </div>
         </section>
         <!-- Order Tab -->
-        <section v-if="tab==='order'">
+        <section v-if="tab === 'order'">
           <div class="section-title">Order Information</div>
           <div class="img-center">
-            <img :src="imgOrder" alt="Order Information" class="main-img" @click="openModal(imgOrder)" />
+            <img
+              :src="imgOrder"
+              alt="Order Information"
+              class="main-img"
+              @click="openModal(imgOrder)"
+            />
           </div>
           <div v-if="modalImg" class="img-modal" @click.self="closeModal">
             <div class="modal-content">
@@ -157,11 +211,16 @@
           </div>
         </section>
         <!-- Manual Tab -->
-        <section v-if="tab==='manual'">
+        <section v-if="tab === 'manual'">
           <div class="section-title">Manual</div>
           <div class="base-richtext">
             <ul>
-              <li><a href="#" download target="_blank">Beadstar-mPlex® Magnetic Fluorescent Encoded Microspheres Product Manual (PDF)</a></li>
+              <li>
+                <a href="#" download target="_blank"
+                  >Beadstar-mPlex® Magnetic Fluorescent Encoded Microspheres
+                  Product Manual (PDF)</a
+                >
+              </li>
             </ul>
           </div>
         </section>
@@ -172,51 +231,53 @@
             <button class="close-btn" @click="closeModal">×</button>
           </div>
         </div>
-      </div>
-    </template>
-  </ReagentLayout>
+      </MobileOptimizedTabs>
+    </div>
+  </MobileOptimizedContent>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import techImg1 from '@/assets/Reagent/cytometric/cytometric-3/1001.png'
-import techImg2 from '@/assets/Reagent/cytometric/cytometric-3/1002.png'
-import techImg3 from '@/assets/Reagent/cytometric/cytometric-3/1003.png'
-import imgExample from '@/assets/Reagent/cytometric/cytometric-3/1004.png'
-const imgOrder = 'https://via.placeholder.com/600x400?text=Order+Info'
-const techImgs = [techImg1, techImg2, techImg3]
+import { ref } from "vue";
+import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
+import techImg1 from "@/assets/Reagent/cytometric/cytometric-3/1001.png";
+import techImg2 from "@/assets/Reagent/cytometric/cytometric-3/1002.png";
+import techImg3 from "@/assets/Reagent/cytometric/cytometric-3/1003.png";
+import imgExample from "@/assets/Reagent/cytometric/cytometric-3/1004.png";
+const imgOrder = "https://via.placeholder.com/600x400?text=Order+Info";
+const techImgs = [techImg1, techImg2, techImg3];
 const tabList = [
-  { key: 'intro', label: 'Product Introduction' },
-  { key: 'faq', label: 'FAQ' },
-  { key: 'order', label: 'Order Information' },
-  { key: 'manual', label: 'Manual' }
-]
-const tab = ref('intro')
-const modalImg = ref(null)
+  { key: "intro", label: "Product Introduction" },
+  { key: "faq", label: "FAQ" },
+  { key: "order", label: "Order Information" },
+  { key: "manual", label: "Manual" },
+];
+const tab = ref("intro");
+const modalImg = ref(null);
 const openModal = (img) => {
-  modalImg.value = img
-}
+  modalImg.value = img;
+};
 const closeModal = () => {
-  modalImg.value = null
-}
+  modalImg.value = null;
+};
 const faqList = [
   {
-    q: 'Compared to the first-generation microspheres, what technological improvements have been made in the second-generation low-adsorption magnetic fluorescent encoded microspheres?',
-    a: 'The second-generation magnetic fluorescent encoded microspheres are coated with a high-molecular-weight material BS10K, which significantly reduces non-specific adsorption and minimizes background noise.'
+    q: "Compared to the first-generation microspheres, what technological improvements have been made in the second-generation low-adsorption magnetic fluorescent encoded microspheres?",
+    a: "The second-generation magnetic fluorescent encoded microspheres are coated with a high-molecular-weight material BS10K, which significantly reduces non-specific adsorption and minimizes background noise.",
   },
   {
-    q: 'What types of magnetic fluorescent encoded microspheres are available?',
-    a: 'We offer a variety of magnetic fluorescent encoded microspheres, including:<br>Diameter: 3 µm, 6 µm, and 8 µm<br>Encoding Capacity: Up to 80-plex<br>Surface Functional Groups: Including carboxyl (COOH), streptavidin (SA), pyridyl disulfide (PDT), etc<br>Packaging: 1 mL, 5 mL, 50 mL, or custom bulk packaging'
+    q: "What types of magnetic fluorescent encoded microspheres are available?",
+    a: "We offer a variety of magnetic fluorescent encoded microspheres, including:<br>Diameter: 3 µm, 6 µm, and 8 µm<br>Encoding Capacity: Up to 80-plex<br>Surface Functional Groups: Including carboxyl (COOH), streptavidin (SA), pyridyl disulfide (PDT), etc<br>Packaging: 1 mL, 5 mL, 50 mL, or custom bulk packaging",
   },
   {
-    q: 'For immunoassays, should you couple a polyclonal or monoclonal antibody to the microspheres?',
-    a: 'Monoclonal antibodies are recommended because of their specificity. Polyclonal antibodies can be used after an affinity purification step. If options are limited, use what is available and check for possible cross-reactivity with other analytes in the sample. The success of the assay achieving the desired sensitivity and specificity will depend on the quality of the reagents.'
+    q: "For immunoassays, should you couple a polyclonal or monoclonal antibody to the microspheres?",
+    a: "Monoclonal antibodies are recommended because of their specificity. Polyclonal antibodies can be used after an affinity purification step. If options are limited, use what is available and check for possible cross-reactivity with other analytes in the sample. The success of the assay achieving the desired sensitivity and specificity will depend on the quality of the reagents.",
   },
   {
-    q: 'What precautions should be taken when using magnetic fluorescent encoded microspheres?',
-    a: 'When using the microspheres, please note the following:<br>• Avoid Organic Solvents: The microspheres are soluble in organic solvents such as acetone and chloroform; avoid contact with these solvents.<br>• Avoid Freezing: Do not freeze the product.'
-  }
-]
+    q: "What precautions should be taken when using magnetic fluorescent encoded microspheres?",
+    a: "When using the microspheres, please note the following:<br>• Avoid Organic Solvents: The microspheres are soluble in organic solvents such as acetone and chloroform; avoid contact with these solvents.<br>• Avoid Freezing: Do not freeze the product.",
+  },
+];
 </script>
 
 <style scoped>
@@ -226,7 +287,7 @@ const faqList = [
   padding: 40px 24px 48px 24px;
   background: #f8fafc;
   min-height: 100vh;
-  font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans', Arial, sans-serif;
+  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans", Arial, sans-serif;
 }
 .main-title {
   text-align: center;
@@ -307,14 +368,14 @@ const faqList = [
   width: 100%;
   max-height: 220px;
   border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(34,58,94,0.10);
+  box-shadow: 0 2px 16px rgba(34, 58, 94, 0.1);
   cursor: pointer;
   transition: box-shadow 0.25s, border 0.25s, transform 0.25s;
   border: 2px solid transparent;
   object-fit: cover;
 }
 .adv-img:hover {
-  box-shadow: 0 8px 32px rgba(64,158,255,0.18);
+  box-shadow: 0 8px 32px rgba(64, 158, 255, 0.18);
   border: 2px solid #409eff;
   transform: scale(1.04);
 }
@@ -327,11 +388,12 @@ const faqList = [
   border-collapse: collapse;
   min-width: 480px;
   background: #fff;
-  box-shadow: 0 2px 12px rgba(34,58,94,0.06);
+  box-shadow: 0 2px 12px rgba(34, 58, 94, 0.06);
   border-radius: 10px;
   overflow: hidden;
 }
-.spec-table th, .spec-table td {
+.spec-table th,
+.spec-table td {
   padding: 12px 18px;
   text-align: center;
   font-size: 1.05rem;
@@ -355,7 +417,7 @@ const faqList = [
 .faq-item {
   background: #f7f9fb;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(34,58,94,0.06);
+  box-shadow: 0 2px 8px rgba(34, 58, 94, 0.06);
   padding: 24px 28px;
 }
 .faq-q {
@@ -380,21 +442,24 @@ const faqList = [
   width: 100%;
   max-height: 400px;
   border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(34,58,94,0.10);
+  box-shadow: 0 2px 16px rgba(34, 58, 94, 0.1);
   cursor: pointer;
   transition: box-shadow 0.25s, border 0.25s, transform 0.25s;
   border: 2px solid transparent;
 }
 .main-img:hover {
-  box-shadow: 0 8px 32px rgba(64,158,255,0.18);
+  box-shadow: 0 8px 32px rgba(64, 158, 255, 0.18);
   border: 2px solid #409eff;
   transform: scale(1.04);
 }
 .img-modal {
   position: fixed;
   z-index: 1000;
-  left: 0; top: 0; right: 0; bottom: 0;
-  background: rgba(34,58,94,0.65);
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(34, 58, 94, 0.65);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -404,7 +469,7 @@ const faqList = [
   background: #fff;
   border-radius: 16px;
   padding: 32px 32px 16px 32px;
-  box-shadow: 0 8px 40px rgba(34,58,94,0.18);
+  box-shadow: 0 8px 40px rgba(34, 58, 94, 0.18);
   max-width: 90vw;
   max-height: 90vh;
   display: flex;
@@ -415,7 +480,7 @@ const faqList = [
   max-width: 800px;
   max-height: 70vh;
   border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(34,58,94,0.10);
+  box-shadow: 0 2px 16px rgba(34, 58, 94, 0.1);
 }
 .close-btn {
   position: absolute;

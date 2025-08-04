@@ -1,86 +1,123 @@
 <template>
-  <div class="time-resolved-beads-page">
-    <h1 class="main-title">Time Resolved Beads</h1>
-    <div class="tab-nav">
-      <div
-        v-for="item in tabList"
-        :key="item.key"
-        :class="['tab-item', {active: tab === item.key}]"
-        @click="tab = item.key"
-      >
-        {{ item.label }}
-      </div>
-    </div>
-    <section v-if="tab==='intro'">
-      <div class="section-title">Product Introduction</div>
-      <p>Time Resolved Fluorescent Beads are nanometer particles containing rare earth elements (Eu), with long fluorescence lifetime, large Stokes shift, and stable properties. High-signal time-resolved fluorescent beads are particularly suitable for the development of ultra-high sensitivity immunochromatography products, with higher signal intensity and sensitivity compared to ordinary time-resolved fluorescent beads, and can meet the trace detection requirements of the analyte, achieving accurate detection.</p>
-      <div class="divider"></div>
-      <div class="section-title">Product Advantages</div>
-      <ul>
-        <li>Easy to operate: short detection time, suitable for on-site detection</li>
-        <li>High sensitivity: higher signal intensity, larger signal-to-noise ratio</li>
-        <li>Quantitative detection: specific concentration of the analyte can be given based on the built-in standard curve</li>
-        <li>Strong anti-interference: rare earth ion-labeled compounds, long half-life, large Stokes shift</li>
-      </ul>
-      <div class="divider"></div>
-      <div class="section-title">Technical Parameters</div>
-      <ul>
-        <li>Material: polymeric polymer containing rare earth elements</li>
-        <li>Uniformity: CV&lt;5%</li>
-        <li>Size range: 200nm—400nm</li>
-        <li>Surface functional groups: carboxyl (COOH), streptavidin (SA)</li>
-        <li>Additives: trace surface active agents</li>
-        <li>Storage conditions: carboxyl-modified beads stored at 2-25℃, streptavidin (SA)-modified beads stored at 2-8℃, do not freeze</li>
-      </ul>
-    </section>
-    <section v-if="tab==='order'">
-      <div class="section-title">Order Information</div>
-      <div class="order-imgs">
-        <div v-for="(img, idx) in orderImgs" :key="idx" class="img-center">
-          <p v-if="orderImgLabels[idx]">{{ orderImgLabels[idx] }}</p>
-          <img :src="img" :alt="orderImgLabels[idx] || 'Order Image'" class="main-img" @click="openModal(img)" />
+  <MobileOptimizedContent>
+    <div class="time-resolved-beads-page">
+      <h1 class="main-title">Time Resolved Beads</h1>
+
+      <MobileOptimizedTabs :tabs="tabList" v-model="tab">
+        <section v-if="tab === 'intro'">
+          <div class="section-title">Product Introduction</div>
+          <p>
+            Time Resolved Fluorescent Beads are nanometer particles containing
+            rare earth elements (Eu), with long fluorescence lifetime, large
+            Stokes shift, and stable properties. High-signal time-resolved
+            fluorescent beads are particularly suitable for the development of
+            ultra-high sensitivity immunochromatography products, with higher
+            signal intensity and sensitivity compared to ordinary time-resolved
+            fluorescent beads, and can meet the trace detection requirements of
+            the analyte, achieving accurate detection.
+          </p>
+          <div class="divider"></div>
+          <div class="section-title">Product Advantages</div>
+          <ul>
+            <li>
+              Easy to operate: short detection time, suitable for on-site
+              detection
+            </li>
+            <li>
+              High sensitivity: higher signal intensity, larger signal-to-noise
+              ratio
+            </li>
+            <li>
+              Quantitative detection: specific concentration of the analyte can
+              be given based on the built-in standard curve
+            </li>
+            <li>
+              Strong anti-interference: rare earth ion-labeled compounds, long
+              half-life, large Stokes shift
+            </li>
+          </ul>
+          <div class="divider"></div>
+          <div class="section-title">Technical Parameters</div>
+          <ul>
+            <li>Material: polymeric polymer containing rare earth elements</li>
+            <li>Uniformity: CV&lt;5%</li>
+            <li>Size range: 200nm—400nm</li>
+            <li>
+              Surface functional groups: carboxyl (COOH), streptavidin (SA)
+            </li>
+            <li>Additives: trace surface active agents</li>
+            <li>
+              Storage conditions: carboxyl-modified beads stored at 2-25℃,
+              streptavidin (SA)-modified beads stored at 2-8℃, do not freeze
+            </li>
+          </ul>
+        </section>
+        <section v-if="tab === 'order'">
+          <div class="section-title">Order Information</div>
+          <div class="order-imgs">
+            <div v-for="(img, idx) in orderImgs" :key="idx" class="img-center">
+              <p v-if="orderImgLabels[idx]">{{ orderImgLabels[idx] }}</p>
+              <img
+                :src="img"
+                :alt="orderImgLabels[idx] || 'Order Image'"
+                class="main-img"
+                @click="openModal(img)"
+              />
+            </div>
+          </div>
+        </section>
+        <section v-if="tab === 'manual'">
+          <div class="section-title">Manual</div>
+          <ul>
+            <li>
+              <a
+                href="/src/assets/Reagent/lateral/lateral-4/TimeResolvedBeads-Manual.pdf"
+                download
+                target="_blank"
+                >Time Resolved Fluorescent Beads Product Manual (PDF)</a
+              >
+            </li>
+          </ul>
+        </section>
+      </MobileOptimizedTabs>
+
+      <!-- Image Modal -->
+      <div v-if="modalImg" class="img-modal" @click.self="closeModal">
+        <div class="modal-content">
+          <img :src="modalImg" alt="Preview Image" />
+          <button class="close-btn" @click="closeModal">×</button>
         </div>
       </div>
-    </section>
-    <section v-if="tab==='manual'">
-      <div class="section-title">Manual</div>
-      <ul>
-        <li><a href="/src/assets/Reagent/lateral/lateral-4/TimeResolvedBeads-Manual.pdf" download target="_blank">Time Resolved Fluorescent Beads Product Manual (PDF)</a></li>
-      </ul>
-    </section>
-    <div v-if="modalImg" class="img-modal" @click.self="closeModal">
-      <div class="modal-content">
-        <img :src="modalImg" alt="Preview Image" />
-        <button class="close-btn" @click="closeModal">×</button>
-      </div>
     </div>
-  </div>
+  </MobileOptimizedContent>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import img1 from '@/assets/Reagent/lateral/lateral-4/10001.png'
-import img2 from '@/assets/Reagent/lateral/lateral-4/10001.png'
-import img3 from '@/assets/Reagent/lateral/lateral-4/10001.png'
+import { ref } from "vue";
+import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
+import img1 from "@/assets/Reagent/lateral/lateral-4/10001.png";
+import img2 from "@/assets/Reagent/lateral/lateral-4/10001.png";
+import img3 from "@/assets/Reagent/lateral/lateral-4/10001.png";
 const tabList = [
-  { key: 'intro', label: 'Product Introduction' },
-  { key: 'order', label: 'Order Information' },
-  { key: 'manual', label: 'Manual' }
-]
-const tab = ref('intro')
-const orderImgs = [img1, img2, img3]
+  { key: "intro", label: "Product Introduction" },
+  { key: "order", label: "Order Information" },
+  { key: "manual", label: "Manual" },
+];
+const tab = ref("intro");
+const orderImgs = [img1, img2, img3];
 const orderImgLabels = [
-  'Carboxyl-modified Time Resolved Fluorescent Beads',
-  'Streptavidin (SA)-modified Time Resolved Fluorescent Beads',
-  'High-signal Carboxyl-modified Time Resolved Fluorescent Beads'
-]
-const modalImg = ref(null)
+  "Carboxyl-modified Time Resolved Fluorescent Beads",
+  "Streptavidin (SA)-modified Time Resolved Fluorescent Beads",
+  "High-signal Carboxyl-modified Time Resolved Fluorescent Beads",
+];
+const modalImg = ref(null);
 const openModal = (img) => {
-  modalImg.value = img
-}
+  modalImg.value = img;
+};
 const closeModal = () => {
-  modalImg.value = null
-}
+  modalImg.value = null;
+};
 </script>
 
 <style scoped>
@@ -90,7 +127,7 @@ const closeModal = () => {
   padding: 40px 24px 48px 24px;
   background: #f8fafc;
   min-height: 100vh;
-  font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans', Arial, sans-serif;
+  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans", Arial, sans-serif;
 }
 .main-title {
   text-align: center;
@@ -125,7 +162,9 @@ const closeModal = () => {
 .tab-item:hover {
   color: #2b7bbf;
 }
-.tab-bar { display: none; }
+.tab-bar {
+  display: none;
+}
 .section-title {
   font-size: 1.35rem;
   font-weight: 600;
@@ -169,14 +208,14 @@ li {
   width: 100%;
   max-height: 240px;
   border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(34,58,94,0.10);
+  box-shadow: 0 2px 16px rgba(34, 58, 94, 0.1);
   cursor: pointer;
   transition: box-shadow 0.25s, border 0.25s, transform 0.25s;
   border: 2px solid transparent;
   margin-top: 8px;
 }
 .main-img:hover {
-  box-shadow: 0 8px 32px rgba(64,158,255,0.18);
+  box-shadow: 0 8px 32px rgba(64, 158, 255, 0.18);
   border: 2px solid #409eff;
   transform: scale(1.04);
 }
@@ -189,8 +228,11 @@ li {
 .img-modal {
   position: fixed;
   z-index: 1000;
-  left: 0; top: 0; right: 0; bottom: 0;
-  background: rgba(34,58,94,0.65);
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(34, 58, 94, 0.65);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -200,7 +242,7 @@ li {
   background: #fff;
   border-radius: 16px;
   padding: 32px 32px 16px 32px;
-  box-shadow: 0 8px 40px rgba(34,58,94,0.18);
+  box-shadow: 0 8px 40px rgba(34, 58, 94, 0.18);
   max-width: 90vw;
   max-height: 90vh;
   display: flex;
@@ -211,7 +253,7 @@ li {
   max-width: 800px;
   max-height: 70vh;
   border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(34,58,94,0.10);
+  box-shadow: 0 2px 16px rgba(34, 58, 94, 0.1);
 }
 .close-btn {
   position: absolute;

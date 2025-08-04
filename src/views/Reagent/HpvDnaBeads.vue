@@ -1,16 +1,9 @@
 <template>
-  <div class="hpv-dna-beads-page">
-    <h1 class="main-title">HPV DNA Beads</h1>
-    <div class="tab-nav">
-      <div
-        v-for="item in tabList"
-        :key="item.key"
-        :class="['tab-item', {active: tab === item.key}]"
-        @click="tab = item.key"
-      >
-        {{ item.label }}
-      </div>
-    </div>
+  <MobileOptimizedContent>
+    <div class="hpv-dna-beads-page">
+      <h1 class="main-title">HPV DNA Beads</h1>
+
+      <MobileOptimizedTabs :tabs="tabList" v-model="tab">
     <section v-if="tab==='intro'" class="intro">
       <div class="section-title">Product Introduction</div>
       <p>Human papilloma virus (HPV), including more than 100 gene subtypes, of which HPV 16 and 18 types account for nearly 50% of cervical cancer precancers. Currently, molecular diagnosis is usually used to detect HPV genomic DNA, which can detect almost all high-risk HPV subtypes that cause cervical cancer. For the development of HPV test kits, we have developed a magnetic bead suitable for HPV DNA extraction. This magnetic bead has excellent capture ability, fast magnetic response, and superparamagnetic, with better dispersion after surface modification with silicon hydroxyl groups, making it an ideal choice for HPV DNA extraction.</p>
@@ -67,13 +60,17 @@
     <!-- 图片预览弹窗 -->
     <div v-if="previewImg" class="img-preview-modal" @click.self="closePreview">
       <img :src="previewImg" class="img-preview-large" @click.stop />
-      <span class="img-preview-close" @click="closePreview">×</span>
+        <span class="img-preview-close" @click="closePreview">×</span>
+      </div>
+      </MobileOptimizedTabs>
     </div>
-  </div>
+  </MobileOptimizedContent>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
 import imgElution from '@/assets/Reagent/diagnosis/diagnosis-5/10015.png'
 import imgCtAlcohol from '@/assets/Reagent/diagnosis/diagnosis-5/10016.png'
 import imgCtNoAlcohol from '@/assets/Reagent/diagnosis/diagnosis-5/10017.png'

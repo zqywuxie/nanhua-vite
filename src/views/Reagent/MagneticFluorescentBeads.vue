@@ -1,33 +1,58 @@
 <template>
-  <ReagentLayout>
-    <template #default>
-      <div class="magnetic-fluorescent-beads-page">
-        <h1 class="main-title">Magnetic Fluorescent Coded Beads</h1>
-        <div class="tab-nav">
-          <div
-            v-for="item in tabList"
-            :key="item.key"
-            :class="['tab-item', {active: tab === item.key}]"
-            @click="tab = item.key"
-          >
-            {{ item.label }}
-          </div>
-        </div>
-        <section v-if="tab==='intro'">
+  <MobileOptimizedContent>
+    <div class="magnetic-fluorescent-beads-page">
+      <h1 class="main-title">Magnetic Fluorescent Coded Beads</h1>
+
+      <MobileOptimizedTabs :tabs="tabList" v-model="tab">
+        <section v-if="tab === 'intro'">
           <div class="section-title">Product Overview</div>
           <div class="base-richtext">
-            <p>Flow cytometry technology is based on flow cytometry, using one or more particle sizes and carrying different fluorescence signals as solid phase carriers, which can simultaneously detect multiple substances in the sample for analysis, achieving high-throughput detection. It has many advantages such as high throughput, wide linear range, high accuracy, and good repeatability. Currently, flow cytometry technology is widely used in clinical diagnosis and medical research fields, such as tumor-related diseases, autoimmune diseases, cardiovascular diseases, inflammatory infections, infectious diseases, etc., providing higher clinical value for disease diagnosis, treatment monitoring, and disease assessment. We have launched 4μm and 5μm particle size 9-plex Magnetic Fluorescent Coded Beads, capable of detecting 18 indicators simultaneously. The product size is uniform and has superparamagnetism, making it an ideal choice for automated detection.</p>
+            <p>
+              Flow cytometry technology is based on flow cytometry, using one or
+              more particle sizes and carrying different fluorescence signals as
+              solid phase carriers, which can simultaneously detect multiple
+              substances in the sample for analysis, achieving high-throughput
+              detection. It has many advantages such as high throughput, wide
+              linear range, high accuracy, and good repeatability. Currently,
+              flow cytometry technology is widely used in clinical diagnosis and
+              medical research fields, such as tumor-related diseases,
+              autoimmune diseases, cardiovascular diseases, inflammatory
+              infections, infectious diseases, etc., providing higher clinical
+              value for disease diagnosis, treatment monitoring, and disease
+              assessment. We have launched 4μm and 5μm particle size 9-plex
+              Magnetic Fluorescent Coded Beads, capable of detecting 18
+              indicators simultaneously. The product size is uniform and has
+              superparamagnetism, making it an ideal choice for automated
+              detection.
+            </p>
           </div>
           <div class="img-center">
-            <img :src="img1" alt="Magnetic Fluorescent Coded Beads Schematic" class="main-img" @click="openModal(img1)" />
+            <img
+              :src="img1"
+              alt="Magnetic Fluorescent Coded Beads Schematic"
+              class="main-img"
+              @click="openModal(img1)"
+            />
           </div>
           <div class="divider"></div>
           <div class="section-title">Product Advantages</div>
           <ul class="feature-list">
-            <li>Strong fluorescence intensity and stable persistence, small CV within a single peak, improving detection precision</li>
-            <li>Rich surface groups, capable of coupling sufficient antibodies and other ligands, improving detection sensitivity</li>
-            <li>High-throughput detection of multiple substances simultaneously in the sample, ensuring detection efficiency</li>
-            <li>Uniform particle size and superparamagnetism, suitable for automated detection platforms</li>
+            <li>
+              Strong fluorescence intensity and stable persistence, small CV
+              within a single peak, improving detection precision
+            </li>
+            <li>
+              Rich surface groups, capable of coupling sufficient antibodies and
+              other ligands, improving detection sensitivity
+            </li>
+            <li>
+              High-throughput detection of multiple substances simultaneously in
+              the sample, ensuring detection efficiency
+            </li>
+            <li>
+              Uniform particle size and superparamagnetism, suitable for
+              automated detection platforms
+            </li>
           </ul>
           <div class="divider"></div>
           <div class="section-title">Technical Parameters</div>
@@ -42,14 +67,27 @@
           <div class="divider"></div>
           <div class="section-title">Performance Verification</div>
           <div class="img-center">
-            <img :src="img2" alt="Performance Verification" class="main-img" @click="openModal(img2)" />
+            <img
+              :src="img2"
+              alt="Performance Verification"
+              class="main-img"
+              @click="openModal(img2)"
+            />
           </div>
-          <p class="img-caption">Distinct separation between signal peaks, small CV within a single peak, capable of detecting 18 indicators simultaneously.</p>
+          <p class="img-caption">
+            Distinct separation between signal peaks, small CV within a single
+            peak, capable of detecting 18 indicators simultaneously.
+          </p>
         </section>
-        <section v-if="tab==='order'">
+        <section v-if="tab === 'order'">
           <div class="section-title">Order Information</div>
           <div class="img-center">
-            <img :src="img3" alt="Order Information" class="main-img" @click="openModal(img3)" />
+            <img
+              :src="img3"
+              alt="Order Information"
+              class="main-img"
+              @click="openModal(img3)"
+            />
           </div>
           <div v-if="modalImg" class="img-modal" @click.self="closeModal">
             <div class="modal-content">
@@ -58,37 +96,46 @@
             </div>
           </div>
         </section>
-        <section v-if="tab==='manual'">
+        <section v-if="tab === 'manual'">
           <div class="section-title">Manual</div>
           <div class="base-richtext">
             <ul>
-              <li><a href="/src/assets/Reagent/cytometric/cytometric-1/MagneticFluorescentBeads-Manual.pdf" download target="_blank">Magnetic Fluorescent Coded Beads Product Manual (PDF)</a></li>
+              <li>
+                <a
+                  href="/src/assets/Reagent/cytometric/cytometric-1/MagneticFluorescentBeads-Manual.pdf"
+                  download
+                  target="_blank"
+                  >Magnetic Fluorescent Coded Beads Product Manual (PDF)</a
+                >
+              </li>
             </ul>
           </div>
         </section>
-      </div>
-    </template>
-  </ReagentLayout>
+      </MobileOptimizedTabs>
+    </div>
+  </MobileOptimizedContent>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import img1 from '@/assets/Reagent/cytometric/cytometric-1/10001.jpg'
-import img2 from '@/assets/Reagent/cytometric/cytometric-1/10002.png'
-import img3 from '@/assets/Reagent/cytometric/cytometric-1/10003.png'
+import { ref } from "vue";
+import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
+import img1 from "@/assets/Reagent/cytometric/cytometric-1/10001.jpg";
+import img2 from "@/assets/Reagent/cytometric/cytometric-1/10002.png";
+import img3 from "@/assets/Reagent/cytometric/cytometric-1/10003.png";
 const tabList = [
-  { key: 'intro', label: 'Product Introduction' },
-  { key: 'order', label: 'Order Information' },
-  { key: 'manual', label: 'Manual' }
-]
-const tab = ref('intro')
-const modalImg = ref(null)
+  { key: "intro", label: "Product Introduction" },
+  { key: "order", label: "Order Information" },
+  { key: "manual", label: "Manual" },
+];
+const tab = ref("intro");
+const modalImg = ref(null);
 const openModal = (img) => {
-  modalImg.value = img
-}
+  modalImg.value = img;
+};
 const closeModal = () => {
-  modalImg.value = null
-}
+  modalImg.value = null;
+};
 </script>
 
 <style scoped>
@@ -98,7 +145,7 @@ const closeModal = () => {
   padding: 40px 24px 48px 24px;
   background: #f8fafc;
   min-height: 100vh;
-  font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans', Arial, sans-serif;
+  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans", Arial, sans-serif;
 }
 .main-title {
   text-align: center;
@@ -133,10 +180,18 @@ const closeModal = () => {
 .tab-item:hover {
   color: #2b7bbf;
 }
-.product-tabs { display: none; }
-:deep(.el-tabs__nav) { display: none; }
-:deep(.el-tabs__item) { display: none; }
-:deep(.el-tabs__item.is-active) { display: none; }
+.product-tabs {
+  display: none;
+}
+:deep(.el-tabs__nav) {
+  display: none;
+}
+:deep(.el-tabs__item) {
+  display: none;
+}
+:deep(.el-tabs__item.is-active) {
+  display: none;
+}
 .section-title {
   font-size: 1.35rem;
   font-weight: 600;
@@ -178,21 +233,24 @@ const closeModal = () => {
   width: 100%;
   max-height: 400px;
   border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(34,58,94,0.10);
+  box-shadow: 0 2px 16px rgba(34, 58, 94, 0.1);
   cursor: pointer;
   transition: box-shadow 0.25s, border 0.25s, transform 0.25s;
   border: 2px solid transparent;
 }
 .main-img:hover {
-  box-shadow: 0 8px 32px rgba(64,158,255,0.18);
+  box-shadow: 0 8px 32px rgba(64, 158, 255, 0.18);
   border: 2px solid #409eff;
   transform: scale(1.04);
 }
 .img-modal {
   position: fixed;
   z-index: 1000;
-  left: 0; top: 0; right: 0; bottom: 0;
-  background: rgba(34,58,94,0.65);
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(34, 58, 94, 0.65);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -202,7 +260,7 @@ const closeModal = () => {
   background: #fff;
   border-radius: 16px;
   padding: 32px 32px 16px 32px;
-  box-shadow: 0 8px 40px rgba(34,58,94,0.18);
+  box-shadow: 0 8px 40px rgba(34, 58, 94, 0.18);
   max-width: 90vw;
   max-height: 90vh;
   display: flex;
@@ -213,7 +271,7 @@ const closeModal = () => {
   max-width: 800px;
   max-height: 70vh;
   border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(34,58,94,0.10);
+  box-shadow: 0 2px 16px rgba(34, 58, 94, 0.1);
 }
 .close-btn {
   position: absolute;
@@ -238,7 +296,7 @@ const closeModal = () => {
 .img-caption {
   text-align: center;
   font-size: 0.98rem;
-  color: #4D4A49;
+  color: #4d4a49;
   margin-bottom: 18px;
 }
 @media (max-width: 900px) {

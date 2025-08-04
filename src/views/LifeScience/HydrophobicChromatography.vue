@@ -1,83 +1,137 @@
 <template>
-  <div class="hydrophobic-page">
-    <h1 class="main-title">Hydrophobic Interaction Chromatography</h1>
-    <!-- Tab Navigation -->
-    <div class="tab-nav">
-      <div
-        v-for="tab in tabs"
-        :key="tab.key"
-        :class="['tab-item', {active: currentTab === tab.key}]"
-        @click="currentTab = tab.key"
-      >
-        {{ tab.label }}
-      </div>
+  <MobileOptimizedContent>
+    <div class="hydrophobic-page">
+      <h1 class="main-title">Hydrophobic Interaction Chromatography</h1>
+
+      <MobileOptimizedTabs :tabs="tabs" v-model="currentTab">
+        <!-- Tab Content: Product Introduction -->
+        <section v-if="currentTab === 'intro'" class="intro">
+          <div class="section-title">Product Introduction</div>
+          <p>
+            Hydrophobic interaction chromatography (HIC) separates proteins
+            based on differences in hydrophobicity, i.e., by the reversible
+            interaction between proteins and hydrophobic groups on the media
+            surface. Hydrophobic interactions are enhanced at high ionic
+            strength, so binding occurs in high salt conditions, and elution is
+            usually achieved by decreasing the salt concentration. This unique
+            adsorption and separation mode makes HIC an ideal purification
+            method after ammonium sulfate precipitation or high-salt elution
+            from ion exchange chromatography.
+          </p>
+          <img
+            :src="img1"
+            alt="Principle of Hydrophobic Interaction Chromatography"
+            width="800"
+            class="intro-img"
+            @click="openPreview(img1)"
+            style="margin: 24px 0"
+          />
+          <div class="divider"></div>
+          <div class="section-title">Application Cases</div>
+          <ol>
+            <li>
+              Separation of Proteins with Different Hydrophobicity by Phenyl
+              Focurose FF(HS) and Phenyl Focurose HP<br /><img
+                :src="img2"
+                alt="Case 1"
+                width="760"
+                class="intro-img"
+                @click="openPreview(img2)"
+              />
+            </li>
+          </ol>
+          <div class="divider"></div>
+          <div class="section-title">Product List</div>
+          <img
+            :src="img3"
+            alt="Product List"
+            width="800"
+            class="intro-img"
+            @click="openPreview(img3)"
+          />
+          <div class="divider"></div>
+          <div class="section-title">
+            Pre-packed Column Ordering Information
+          </div>
+          <img
+            :src="img4"
+            alt="Pre-packed Column Ordering Information"
+            width="450"
+            class="intro-img"
+            @click="openPreview(img4)"
+          />
+          <div class="divider"></div>
+          <div class="section-title">Tips</div>
+          <ul>
+            <li>
+              The hydrophobic interaction strength varies with different ligands
+              and ligand concentrations.
+            </li>
+            <li>
+              The salt concentration in the buffer varies for different proteins
+              or when using different HIC media for purification.
+            </li>
+            <li>
+              Temperature and pH have a significant effect on protein
+              hydrophobicity; pH and temperature should be kept constant during
+              HIC.
+            </li>
+          </ul>
+        </section>
+        <!-- Tab Content: Manuals -->
+        <section v-if="currentTab === 'manual'" class="manuals">
+          <div class="section-title">Manual Download</div>
+          <ul class="manual-list">
+            <li v-for="file in manualFiles" :key="file.name">
+              <a :href="file.url" :download="file.name" target="_blank">
+                <i
+                  class="el-icon-document"
+                  style="margin-right: 6px; color: #409eff"
+                ></i
+                >{{ file.name }}
+              </a>
+            </li>
+          </ul>
+        </section>
+        <!-- Image Preview Modal -->
+        <div
+          v-if="previewImg"
+          class="img-preview-modal"
+          @click.self="closePreview"
+        >
+          <img :src="previewImg" class="img-preview-large" @click.stop />
+          <span class="img-preview-close" @click="closePreview">×</span>
+        </div>
+      </MobileOptimizedTabs>
     </div>
-    <!-- Tab Content: Product Introduction -->
-    <section v-if="currentTab === 'intro'" class="intro">
-      <div class="section-title">Product Introduction</div>
-      <p>Hydrophobic interaction chromatography (HIC) separates proteins based on differences in hydrophobicity, i.e., by the reversible interaction between proteins and hydrophobic groups on the media surface. Hydrophobic interactions are enhanced at high ionic strength, so binding occurs in high salt conditions, and elution is usually achieved by decreasing the salt concentration. This unique adsorption and separation mode makes HIC an ideal purification method after ammonium sulfate precipitation or high-salt elution from ion exchange chromatography.</p>
-      <img :src="img1" alt="Principle of Hydrophobic Interaction Chromatography" width="800" class="intro-img" @click="openPreview(img1)" style="margin: 24px 0;" />
-      <div class="divider"></div>
-      <div class="section-title">Application Cases</div>
-      <ol>
-        <li>Separation of Proteins with Different Hydrophobicity by Phenyl Focurose FF(HS) and Phenyl Focurose HP<br><img :src="img2" alt="Case 1" width="760" class="intro-img" @click="openPreview(img2)" /></li>
-      </ol>
-      <div class="divider"></div>
-      <div class="section-title">Product List</div>
-      <img :src="img3" alt="Product List" width="800" class="intro-img" @click="openPreview(img3)" />
-      <div class="divider"></div>
-      <div class="section-title">Pre-packed Column Ordering Information</div>
-      <img :src="img4" alt="Pre-packed Column Ordering Information" width="450" class="intro-img" @click="openPreview(img4)" />
-      <div class="divider"></div>
-      <div class="section-title">Tips</div>
-      <ul>
-        <li>The hydrophobic interaction strength varies with different ligands and ligand concentrations.</li>
-        <li>The salt concentration in the buffer varies for different proteins or when using different HIC media for purification.</li>
-        <li>Temperature and pH have a significant effect on protein hydrophobicity; pH and temperature should be kept constant during HIC.</li>
-      </ul>
-    </section>
-    <!-- Tab Content: Manuals -->
-    <section v-if="currentTab === 'manual'" class="manuals">
-      <div class="section-title">Manual Download</div>
-      <ul class="manual-list">
-        <li v-for="file in manualFiles" :key="file.name">
-          <a :href="file.url" :download="file.name" target="_blank">
-            <i class="el-icon-document" style="margin-right:6px;color:#409eff;"></i>{{ file.name }}
-          </a>
-        </li>
-      </ul>
-    </section>
-    <!-- Image Preview Modal -->
-    <div v-if="previewImg" class="img-preview-modal" @click.self="closePreview">
-      <img :src="previewImg" class="img-preview-large" @click.stop />
-      <span class="img-preview-close" @click="closePreview">×</span>
-    </div>
-  </div>
+  </MobileOptimizedContent>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
+import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
 const tabs = [
-  { key: 'intro', label: 'Product Introduction' },
-  { key: 'manual', label: 'Manuals' }
-]
-const currentTab = ref('intro')
-import img1 from '@/assets/LifeScience/chromatography/chromatography-5/89f177c7ed044704a5d1fab9b50c3fef.png'
-import img2 from '@/assets/LifeScience/chromatography/chromatography-5/7979b6da58d048d0bc2d7f888bfd7ae4.png'
-import img3 from '@/assets/LifeScience/chromatography/chromatography-5/5419f1a084b14f09a23357488fbb3dc4.png'
-import img4 from '@/assets/LifeScience/chromatography/chromatography-5/3224da8d5f9340d7be9623a68221b88e.png'
-import pdf1 from '@/assets/LifeScience/chromatography/chromatography-5/HS060302.pdf'
-import pdf2 from '@/assets/LifeScience/chromatography/chromatography-5/HS060202.pdf'
+  { key: "intro", label: "Product Introduction" },
+  { key: "manual", label: "Manuals" },
+];
+const currentTab = ref("intro");
+import img1 from "@/assets/LifeScience/chromatography/chromatography-5/89f177c7ed044704a5d1fab9b50c3fef.png";
+import img2 from "@/assets/LifeScience/chromatography/chromatography-5/7979b6da58d048d0bc2d7f888bfd7ae4.png";
+import img3 from "@/assets/LifeScience/chromatography/chromatography-5/5419f1a084b14f09a23357488fbb3dc4.png";
+import img4 from "@/assets/LifeScience/chromatography/chromatography-5/3224da8d5f9340d7be9623a68221b88e.png";
+import pdf1 from "@/assets/LifeScience/chromatography/chromatography-5/HS060302.pdf";
+import pdf2 from "@/assets/LifeScience/chromatography/chromatography-5/HS060202.pdf";
 const manualFiles = [
-  { name: 'HS060302.pdf', url: pdf1 },
-  { name: 'HS060202.pdf', url: pdf2 }
-]
-const previewImg = ref('')
+  { name: "HS060302.pdf", url: pdf1 },
+  { name: "HS060202.pdf", url: pdf2 },
+];
+const previewImg = ref("");
 function openPreview(img) {
-  previewImg.value = img
+  previewImg.value = img;
 }
 function closePreview() {
-  previewImg.value = ''
+  previewImg.value = "";
 }
 </script>
 
@@ -88,7 +142,7 @@ function closePreview() {
   padding: 40px 24px 48px 24px;
   background: #f8fafc;
   min-height: 100vh;
-  font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans', Arial, sans-serif;
+  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans", Arial, sans-serif;
 }
 .main-title {
   text-align: center;
@@ -138,7 +192,8 @@ function closePreview() {
   margin: 32px 0;
   border: none;
 }
-ul, ol {
+ul,
+ol {
   padding-left: 24px;
   margin-bottom: 18px;
 }
@@ -177,8 +232,11 @@ li {
 }
 .img-preview-modal {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(30,40,60,0.65);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(30, 40, 60, 0.65);
   z-index: 9999;
   display: flex;
   align-items: center;

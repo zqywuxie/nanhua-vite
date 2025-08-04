@@ -311,7 +311,7 @@ const lifeScienceChildren = [
   },
   ...chromatographyMediaChildren.map((item) => ({
     path: `chromatography_media/${item.key}`,
-    name: item.file,
+    name: `LifeScience${item.file}`,
     meta: { title: item.title },
     component: () => import(`../views/LifeScience/${item.file}.vue`),
   })),
@@ -324,7 +324,7 @@ const lifeScienceChildren = [
   },
   ...proteinPurificationChildren.map((item) => ({
     path: `protein_purification/${item.key}`,
-    name: item.file,
+    name: `LifeScience${item.file}`,
     meta: { title: item.title },
     component: () => import(`../views/LifeScience/${item.file}.vue`),
   })),
@@ -337,7 +337,7 @@ const lifeScienceChildren = [
   },
   ...homogeneousLuminescenceLSChildren.map((item) => ({
     path: `homogeneous_luminescence/${item.key}`,
-    name: item.file,
+    name: `LifeScience${item.file}`,
     meta: { title: item.title },
     component: () => import(`../views/LifeScience/${item.file}.vue`),
   })),
@@ -350,7 +350,7 @@ const lifeScienceChildren = [
   },
   ...cellSortingActivationChildren.map((item) => ({
     path: `cell_sorting_activation/${item.key}`,
-    name: item.file,
+    name: `LifeScience${item.file}`,
     meta: { title: item.title },
     component: () => import(`../views/LifeScience/${item.file}.vue`),
   })),

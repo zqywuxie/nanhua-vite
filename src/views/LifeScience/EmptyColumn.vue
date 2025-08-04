@@ -1,17 +1,9 @@
 <template>
-  <div class="empty-column-page">
-    <h1 class="main-title">Empty Chromatography Columns</h1>
-    <!-- Tab Navigation (Product Introduction Only) -->
-    <div class="tab-nav">
-      <div
-        v-for="tab in tabs"
-        :key="tab.key"
-        :class="['tab-item', {active: currentTab === tab.key}]"
-        @click="currentTab = tab.key"
-      >
-        {{ tab.label }}
-      </div>
-    </div>
+  <MobileOptimizedContent>
+    <div class="empty-column-page">
+      <h1 class="main-title">Empty Chromatography Columns</h1>
+
+      <MobileOptimizedTabs :tabs="tabs" v-model="currentTab">
     <!-- Tab Content: Product Introduction -->
     <section v-if="currentTab === 'intro'" class="intro">
       <div class="section-title">Media Screening Columns</div>
@@ -28,13 +20,17 @@
     <!-- Image Preview Modal -->
     <div v-if="previewImg" class="img-preview-modal" @click.self="closePreview">
       <img :src="previewImg" class="img-preview-large" @click.stop />
-      <span class="img-preview-close" @click="closePreview">×</span>
+        <span class="img-preview-close" @click="closePreview">×</span>
+      </div>
+      </MobileOptimizedTabs>
     </div>
-  </div>
+  </MobileOptimizedContent>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
 const tabs = [
   { key: 'intro', label: 'Product Introduction' }
 ]

@@ -1,50 +1,91 @@
 <template>
-  <div class="affinity-page">
-    <h1 class="main-title">Cell Sorting and Activation Magnetic Beads</h1>
-    <div class="tab-nav">
-      <div v-for="tab in tabs" :key="tab.key" :class="['tab-item', {active: currentTab === tab.key}]" @click="currentTab = tab.key">
-        {{ tab.label }}
+  <MobileOptimizedContent>
+    <div class="affinity-page">
+      <h1 class="main-title">Cell Sorting and Activation Magnetic Beads</h1>
+
+      <MobileOptimizedTabs :tabs="tabs" v-model="currentTab">
+        <section v-if="currentTab === 'intro'" class="intro">
+          <div class="section-title">Product Introduction</div>
+          <p style="text-align: justify; font-size: 14px">
+            Leveraging years of expertise in magnetic bead synthesis and
+            antibody development, VDO Biotech has developed a series of
+            superparamagnetic nano-magnetic beads with excellent
+            biocompatibility, providing efficient solutions for target cell
+            separation, purification, and activation for industrial and research
+            customers. Currently, we offer two core product systems:
+          </p>
+          <ul style="font-size: 15px; margin-bottom: 0">
+            <li>
+              Column-based sorting beads — suitable for traditional MACS
+              sorting, stable operation, strong compatibility
+            </li>
+            <li>
+              Column-free sorting beads (with ultra-strong magnets) — simpler
+              workflow, improved sorting efficiency
+            </li>
+          </ul>
+          <p style="font-size: 14px; margin-top: 10px">
+            In addition, we offer cell activation beads that can efficiently
+            stimulate T cell activation and expansion, meeting the needs of cell
+            therapy, immunology research, and other applications.
+          </p>
+          <div class="img-block">
+            <img
+              :src="img1"
+              alt="Cell Sorting and Activation Magnetic Beads Product Image"
+              class="intro-img"
+              @click="openPreview(img1)"
+            />
+            <div style="color: #888; font-size: 14px; margin-top: 8px">
+              Cell Sorting and Activation Magnetic Beads Product Image
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="section-title">Product Advantages</div>
+          <ul>
+            <li>High safety: Naturally biodegradable materials</li>
+            <li>
+              Efficient and convenient: Achieve high-purity, high-recovery
+              sorting in 20 minutes
+            </li>
+            <li>
+              Excellent performance: Sorting purity ≥90%, cell recovery ≥85%
+            </li>
+            <li>
+              In-stock supply: Mainstream marker beads (CD3+/CD4+/CD8+/CD34+/SA,
+              etc.)
+            </li>
+          </ul>
+        </section>
+      </MobileOptimizedTabs>
+
+      <!-- Image Preview Modal -->
+      <div
+        v-if="previewImg"
+        class="img-preview-modal"
+        @click.self="closePreview"
+      >
+        <img :src="previewImg" class="img-preview-large" @click.stop />
+        <span class="img-preview-close" @click="closePreview">×</span>
       </div>
     </div>
-    <section v-if="currentTab === 'intro'" class="intro">
-      <div class="section-title">Product Introduction</div>
-      <p style="text-align: justify; font-size: 14px;">Leveraging years of expertise in magnetic bead synthesis and antibody development, VDO Biotech has developed a series of superparamagnetic nano-magnetic beads with excellent biocompatibility, providing efficient solutions for target cell separation, purification, and activation for industrial and research customers. Currently, we offer two core product systems:</p>
-      <ul style="font-size: 15px; margin-bottom: 0;">
-        <li>Column-based sorting beads — suitable for traditional MACS sorting, stable operation, strong compatibility</li>
-        <li>Column-free sorting beads (with ultra-strong magnets) — simpler workflow, improved sorting efficiency</li>
-      </ul>
-      <p style="font-size: 14px; margin-top: 10px;">In addition, we offer cell activation beads that can efficiently stimulate T cell activation and expansion, meeting the needs of cell therapy, immunology research, and other applications.</p>
-      <div class="img-block">
-        <img :src="img1" alt="Cell Sorting and Activation Magnetic Beads Product Image" class="intro-img" @click="openPreview(img1)" />
-        <div style="color:#888;font-size:14px;margin-top:8px;">Cell Sorting and Activation Magnetic Beads Product Image</div>
-      </div>
-      <div class="divider"></div>
-      <div class="section-title">Product Advantages</div>
-      <ul>
-        <li>High safety: Naturally biodegradable materials</li>
-        <li>Efficient and convenient: Achieve high-purity, high-recovery sorting in 20 minutes</li>
-        <li>Excellent performance: Sorting purity ≥90%, cell recovery ≥85%</li>
-        <li>In-stock supply: Mainstream marker beads (CD3+/CD4+/CD8+/CD34+/SA, etc.)</li>
-      </ul>
-    </section>
-    <!-- Image Preview Modal -->
-    <div v-if="previewImg" class="img-preview-modal" @click.self="closePreview">
-      <img :src="previewImg" class="img-preview-large" @click.stop />
-      <span class="img-preview-close" @click="closePreview">×</span>
-    </div>
-  </div>
+  </MobileOptimizedContent>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-const tabs = [
-  { key: 'intro', label: 'Product Introduction' }
-]
-const currentTab = ref('intro')
-import img1 from '@/assets/LifeScience/cell/cell-1/63a2758c8d5c4583a29b4aa289aece97.jpg'
-const previewImg = ref('')
-function openPreview(img) { previewImg.value = img }
-function closePreview() { previewImg.value = '' }
+import { ref } from "vue";
+import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
+const tabs = [{ key: "intro", label: "Product Introduction" }];
+const currentTab = ref("intro");
+import img1 from "@/assets/LifeScience/cell/cell-1/63a2758c8d5c4583a29b4aa289aece97.jpg";
+const previewImg = ref("");
+function openPreview(img) {
+  previewImg.value = img;
+}
+function closePreview() {
+  previewImg.value = "";
+}
 </script>
 
 <style scoped>
@@ -54,7 +95,7 @@ function closePreview() { previewImg.value = '' }
   padding: 40px 24px 48px 24px;
   background: #f8fafc;
   min-height: 100vh;
-  font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans', Arial, sans-serif;
+  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans", Arial, sans-serif;
 }
 .main-title {
   text-align: center;
@@ -104,7 +145,8 @@ function closePreview() { previewImg.value = '' }
   margin: 32px 0;
   border: none;
 }
-ul, ol {
+ul,
+ol {
   padding-left: 24px;
   margin-bottom: 18px;
 }
@@ -133,8 +175,11 @@ li {
 }
 .img-preview-modal {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.55);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.55);
   z-index: 1000;
   display: flex;
   align-items: center;

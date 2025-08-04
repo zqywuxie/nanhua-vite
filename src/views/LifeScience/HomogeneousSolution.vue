@@ -1,7 +1,8 @@
 <template>
-  <div class="homogeneous-page">
-    <h1 class="main-title">Comprehensive Homogeneous Luminescence Solution</h1>
-    <section class="intro">
+  <MobileOptimizedContent>
+    <div class="homogeneous-page">
+      <h1 class="main-title">Comprehensive Homogeneous Luminescence Solution</h1>
+      <section class="intro">
       <div class="section-title">Product Introduction</div>
       <p>Homogeneous luminescence is a significant milestone in the field of chemiluminescent immunoassays, enabling direct chemiluminescent detection without the need for separation and washing steps. This technology offers multiple advantages, including high throughput, low background, excellent reproducibility and sensitivity, simple operation, minimal sample requirements, and a wide detection range, making it suitable for the development of automated detection systems.</p>
       <div style="text-align:center;margin:32px 0 12px 0;">
@@ -47,30 +48,36 @@
     <!-- 图片预览弹窗 -->
     <div v-if="previewImg" class="img-preview-modal" @click.self="closePreview">
       <img :src="previewImg" class="img-preview-large" @click.stop />
-      <span class="img-preview-close" @click="closePreview">×</span>
+        <span class="img-preview-close" @click="closePreview">×</span>
+      </div>
     </div>
-  </div>
+  </MobileOptimizedContent>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import imgPrinciple from '@/assets/LifeScience/homogeneous/homogeneous-2/2291fd0eddc849a5a2194c8163a76755.png';
-import imgFlow from '@/assets/LifeScience/homogeneous/homogeneous-2/4ae62add3a254c6daae7cc697f63d2e4.png';
-import imgHsctni1 from '@/assets/LifeScience/homogeneous/homogeneous-2/337c329aa9854d13a49e74cc8976482c.png';
-import imgHsctni2 from '@/assets/LifeScience/homogeneous/homogeneous-2/82d6540ee3b444a8b1adf26f66f4b284.png';
-import imgPct1 from '@/assets/LifeScience/homogeneous/homogeneous-2/2b8d2c862a7943d5824552b78fc9cf95.png';
-import imgPct2 from '@/assets/LifeScience/homogeneous/homogeneous-2/b5064364dbaa41bda46d23ed54d531eb.png';
-import imgIl61 from '@/assets/LifeScience/homogeneous/homogeneous-2/76534732a02a4f0e94ceba31eaf18fb5.png';
-import imgIl62 from '@/assets/LifeScience/homogeneous/homogeneous-2/66854e29ea5d43429b263d04c10d42b2.png';
-import imgList1 from '@/assets/LifeScience/homogeneous/homogeneous-2/38f0f4dce27e42e1a65cc555c7fce119.png';
-import imgList2 from '@/assets/LifeScience/homogeneous/homogeneous-2/a2729444d4684ecc9e3e174aa5cb76a1.png';
-import imgList3 from '@/assets/LifeScience/homogeneous/homogeneous-2/74e24cb373c446d2ab8c5f3d267e7382.png';
-import imgList4 from '@/assets/LifeScience/homogeneous/homogeneous-2/54e38ca228f04e0bb8da32c30325427a.png';
-import imgList5 from '@/assets/LifeScience/homogeneous/homogeneous-2/a3a58d40631e4508a593fe3d43b51c6a.png';
+import { ref } from "vue";
+import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+import imgPrinciple from "@/assets/LifeScience/homogeneous/homogeneous-2/2291fd0eddc849a5a2194c8163a76755.png";
+import imgFlow from "@/assets/LifeScience/homogeneous/homogeneous-2/4ae62add3a254c6daae7cc697f63d2e4.png";
+import imgHsctni1 from "@/assets/LifeScience/homogeneous/homogeneous-2/337c329aa9854d13a49e74cc8976482c.png";
+import imgHsctni2 from "@/assets/LifeScience/homogeneous/homogeneous-2/82d6540ee3b444a8b1adf26f66f4b284.png";
+import imgPct1 from "@/assets/LifeScience/homogeneous/homogeneous-2/2b8d2c862a7943d5824552b78fc9cf95.png";
+import imgPct2 from "@/assets/LifeScience/homogeneous/homogeneous-2/b5064364dbaa41bda46d23ed54d531eb.png";
+import imgIl61 from "@/assets/LifeScience/homogeneous/homogeneous-2/76534732a02a4f0e94ceba31eaf18fb5.png";
+import imgIl62 from "@/assets/LifeScience/homogeneous/homogeneous-2/66854e29ea5d43429b263d04c10d42b2.png";
+import imgList1 from "@/assets/LifeScience/homogeneous/homogeneous-2/38f0f4dce27e42e1a65cc555c7fce119.png";
+import imgList2 from "@/assets/LifeScience/homogeneous/homogeneous-2/a2729444d4684ecc9e3e174aa5cb76a1.png";
+import imgList3 from "@/assets/LifeScience/homogeneous/homogeneous-2/74e24cb373c446d2ab8c5f3d267e7382.png";
+import imgList4 from "@/assets/LifeScience/homogeneous/homogeneous-2/54e38ca228f04e0bb8da32c30325427a.png";
+import imgList5 from "@/assets/LifeScience/homogeneous/homogeneous-2/a3a58d40631e4508a593fe3d43b51c6a.png";
 
-const previewImg = ref('')
-function openPreview(img) { previewImg.value = img }
-function closePreview() { previewImg.value = '' }
+const previewImg = ref("");
+function openPreview(img) {
+  previewImg.value = img;
+}
+function closePreview() {
+  previewImg.value = "";
+}
 </script>
 
 <style scoped>
@@ -80,7 +87,7 @@ function closePreview() { previewImg.value = '' }
   padding: 40px 24px 48px 24px;
   background: #f8fafc;
   min-height: 100vh;
-  font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans', Arial, sans-serif;
+  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans", Arial, sans-serif;
 }
 .main-title {
   text-align: center;
@@ -105,7 +112,8 @@ function closePreview() { previewImg.value = '' }
   margin: 32px 0;
   border: none;
 }
-ul, ol {
+ul,
+ol {
   padding-left: 24px;
   margin-bottom: 18px;
 }
@@ -140,8 +148,11 @@ p {
 }
 .img-preview-modal {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.55);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.55);
   z-index: 1000;
   display: flex;
   align-items: center;

@@ -1,91 +1,133 @@
 <template>
-  <div class="ngs-sequencing-page">
-    <h1 class="main-title">NGS Sequencing</h1>
-    <div class="tab-nav">
-      <div
-        v-for="item in tabList"
-        :key="item.key"
-        :class="['tab-item', {active: tab === item.key}]"
-        @click="tab = item.key"
-      >
-        {{ item.label }}
+  <MobileOptimizedContent>
+    <div class="ngs-sequencing-page">
+      <h1 class="main-title">NGS Sequencing</h1>
+
+      <MobileOptimizedTabs :tabs="tabList" v-model="tab">
+        <section v-if="tab === 'intro'" class="intro">
+          <div class="section-title">Product Description</div>
+          <p>
+            CleanNGS magnetic microspheres for high-throughput sequencing
+            product purification and fragment screening, compatible with
+            Agencourt AMPure XP reagent products 1:1 replacement, operation
+            process compatible, detection result consistency good.
+          </p>
+          <div class="divider"></div>
+          <div class="section-title">Performance Features</div>
+          <ul>
+            <li>
+              Microsphere monodisperse, uniform surface group, good suspension
+            </li>
+            <li>
+              No RNA enzyme production system, applicable to DNA purification
+              and RNA purification
+            </li>
+            <li>
+              Effective removal of dNTP, primers, primer dimers, salt ions and
+              other impurities with specific reagents
+            </li>
+            <li>
+              High amplification product recovery rate; manual operation and
+              automated workstation operation are both possible
+            </li>
+          </ul>
+          <div class="divider"></div>
+          <div class="section-title">Technical Parameters</div>
+          <ul>
+            <li>Material: Iron Oxide</li>
+            <li>Density: 1.05-3.38g/cm<sup>3</sup></li>
+            <li>Dispersion medium: Pure water</li>
+            <li>Particle refractive index: NA</li>
+            <li>Size range: 50nm-100μm</li>
+            <li>Additives: Trace surface active agent</li>
+            <li>Storage conditions: Store at 2-25℃, do not freeze</li>
+          </ul>
+          <div class="divider"></div>
+          <div class="section-title">Application Cases</div>
+          <ul>
+            <li>
+              <a
+                href="https://www.vdobiotech.com.cn/service/359c3d99cdca481faf4f9ecb3791a8ea"
+                target="_blank"
+                >Clean NGS for fragment purification and sorting</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.vdobiotech.com.cn/service/b3ff538c7dd94701b6fd4ebee4e11c41"
+                target="_blank"
+                >CleanNGS applied to high-throughput sequencing library
+                preparation</a
+              >
+            </li>
+          </ul>
+        </section>
+        <section v-if="tab === 'order'" class="order-info">
+          <div class="section-title">Order Information</div>
+          <div class="img-center">
+            <img
+              :src="imgMain"
+              alt="Order Information Table"
+              class="main-img"
+              @click="openModal(imgMain)"
+            />
+          </div>
+        </section>
+        <section v-if="tab === 'manual'" class="manuals">
+          <div class="section-title">Product Manual Download</div>
+          <ul>
+            <li>
+              <a
+                href="/src/assets/Reagent/diagnosis/diagnosis-8/CleanNGS-R User Manual v1.00.pdf"
+                download
+                target="_blank"
+                >CleanNGS-R User Manual v1.00（PDF）</a
+              >
+            </li>
+            <li>
+              <a
+                href="/src/assets/Reagent/diagnosis/diagnosis-8/CleanNGS User Manual v3.01.pdf"
+                download
+                target="_blank"
+                >CleanNGS User Manual v3.01（PDF）</a
+              >
+            </li>
+          </ul>
+        </section>
+      </MobileOptimizedTabs>
+
+      <!-- Image Modal -->
+      <div v-if="modalImg" class="img-modal" @click.self="closeModal">
+        <div class="modal-content">
+          <img :src="modalImg" alt="Preview Large Image" />
+          <button class="close-btn" @click="closeModal">×</button>
+        </div>
       </div>
     </div>
-    <section v-if="tab==='intro'" class="intro">
-      <div class="section-title">Product Description</div>
-      <p>CleanNGS magnetic microspheres for high-throughput sequencing product purification and fragment screening, compatible with Agencourt AMPure XP reagent products 1:1 replacement, operation process compatible, detection result consistency good.</p>
-      <div class="divider"></div>
-      <div class="section-title">Performance Features</div>
-      <ul>
-        <li>Microsphere monodisperse, uniform surface group, good suspension</li>
-        <li>No RNA enzyme production system, applicable to DNA purification and RNA purification</li>
-        <li>Effective removal of dNTP, primers, primer dimers, salt ions and other impurities with specific reagents</li>
-        <li>High amplification product recovery rate; manual operation and automated workstation operation are both possible</li>
-      </ul>
-      <div class="divider"></div>
-      <div class="section-title">Technical Parameters</div>
-      <ul>
-        <li>Material: Iron Oxide</li>
-        <li>Density: 1.05-3.38g/cm<sup>3</sup></li>
-        <li>Dispersion medium: Pure water</li>
-        <li>Particle refractive index: NA</li>
-        <li>Size range: 50nm-100μm</li>
-        <li>Additives: Trace surface active agent</li>
-        <li>Storage conditions: Store at 2-25℃, do not freeze</li>
-      </ul>
-      <div class="divider"></div>
-      <div class="section-title">Application Cases</div>
-      <ul>
-        <li><a href="https://www.vdobiotech.com.cn/service/359c3d99cdca481faf4f9ecb3791a8ea" target="_blank">Clean NGS for fragment purification and sorting</a></li>
-        <li><a href="https://www.vdobiotech.com.cn/service/b3ff538c7dd94701b6fd4ebee4e11c41" target="_blank">CleanNGS applied to high-throughput sequencing library preparation</a></li>
-      </ul>
-    </section>
-    <section v-if="tab==='order'" class="order-info">
-      <div class="section-title">Order Information</div>
-      <div class="img-center">
-        <img
-          :src="imgMain"
-          alt="Order Information Table"
-          class="main-img"
-          @click="openModal(imgMain)"
-        />
-      </div>
-    </section>
-    <section v-if="tab==='manual'" class="manuals">
-      <div class="section-title">Product Manual Download</div>
-      <ul>
-        <li><a href="/src/assets/Reagent/diagnosis/diagnosis-8/CleanNGS-R User Manual v1.00.pdf" download target="_blank">CleanNGS-R User Manual v1.00（PDF）</a></li>
-        <li><a href="/src/assets/Reagent/diagnosis/diagnosis-8/CleanNGS User Manual v3.01.pdf" download target="_blank">CleanNGS User Manual v3.01（PDF）</a></li>
-      </ul>
-    </section>
-    <div v-if="modalImg" class="img-modal" @click.self="closeModal">
-      <div class="modal-content">
-        <img :src="modalImg" alt="Preview Large Image" />
-        <button class="close-btn" @click="closeModal">×</button>
-      </div>
-    </div>
-  </div>
+  </MobileOptimizedContent>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import imgMain from '@/assets/Reagent/diagnosis/diagnosis-8/ngssequencing_main.png'
+import { ref } from "vue";
+import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
+import imgMain from "@/assets/Reagent/diagnosis/diagnosis-8/ngssequencing_main.png";
 const tabList = [
-  { key: 'intro', label: 'Product Introduction' },
+  { key: "intro", label: "Product Introduction" },
   // { key: 'features', label: 'Performance Features' },
   // { key: 'specs', label: 'Technical Parameters' },
   // { key: 'case', label: 'Application Cases' },
-  { key: 'order', label: 'Order Information' },
-  { key: 'manual', label: 'Manual' }
-]
-const tab = ref('intro')
-const modalImg = ref(null)
+  { key: "order", label: "Order Information" },
+  { key: "manual", label: "Manual" },
+];
+const tab = ref("intro");
+const modalImg = ref(null);
 const openModal = (img) => {
-  modalImg.value = img
-}
+  modalImg.value = img;
+};
 const closeModal = () => {
-  modalImg.value = null
-}
+  modalImg.value = null;
+};
 </script>
 
 <style scoped>
@@ -95,7 +137,7 @@ const closeModal = () => {
   padding: 40px 24px 48px 24px;
   background: #f8fafc;
   min-height: 100vh;
-  font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans', Arial, sans-serif;
+  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans", Arial, sans-serif;
 }
 .main-title {
   text-align: center;
@@ -105,7 +147,9 @@ const closeModal = () => {
   margin-bottom: 36px;
   letter-spacing: 2px;
 }
-.tab-bar { display: none; }
+.tab-bar {
+  display: none;
+}
 .tab-nav {
   display: flex;
   justify-content: center;
@@ -146,11 +190,13 @@ const closeModal = () => {
   margin: 32px 0;
   border: none;
 }
-.intro ul, .manuals ul {
+.intro ul,
+.manuals ul {
   padding-left: 24px;
   margin-bottom: 18px;
 }
-.intro li, .manuals li {
+.intro li,
+.manuals li {
   margin-bottom: 8px;
   font-size: 1.05rem;
   color: #3a4664;
@@ -166,21 +212,24 @@ const closeModal = () => {
   width: 100%;
   max-height: 400px;
   border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(34,58,94,0.10);
+  box-shadow: 0 2px 16px rgba(34, 58, 94, 0.1);
   cursor: pointer;
   transition: box-shadow 0.25s, border 0.25s, transform 0.25s;
   border: 2px solid transparent;
 }
 .main-img:hover {
-  box-shadow: 0 8px 32px rgba(64,158,255,0.18);
+  box-shadow: 0 8px 32px rgba(64, 158, 255, 0.18);
   border: 2px solid #409eff;
   transform: scale(1.04);
 }
 .img-modal {
   position: fixed;
   z-index: 1000;
-  left: 0; top: 0; right: 0; bottom: 0;
-  background: rgba(34,58,94,0.65);
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(34, 58, 94, 0.65);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -190,7 +239,7 @@ const closeModal = () => {
   background: #fff;
   border-radius: 16px;
   padding: 32px 32px 16px 32px;
-  box-shadow: 0 8px 40px rgba(34,58,94,0.18);
+  box-shadow: 0 8px 40px rgba(34, 58, 94, 0.18);
   max-width: 90vw;
   max-height: 90vh;
   display: flex;
@@ -201,7 +250,7 @@ const closeModal = () => {
   max-width: 800px;
   max-height: 70vh;
   border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(34,58,94,0.10);
+  box-shadow: 0 2px 16px rgba(34, 58, 94, 0.1);
 }
 .close-btn {
   position: absolute;

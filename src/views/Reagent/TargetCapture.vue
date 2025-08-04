@@ -1,69 +1,115 @@
 <template>
-  <div class="target-capture-page">
-    <h1 class="main-title">Target Capture</h1>
-    <div class="tab-nav">
-      <div
-        v-for="item in tabList"
-        :key="item.key"
-        :class="['tab-item', {active: tab === item.key}]"
-        @click="tab = item.key"
-      >
-        {{ item.label }}
-      </div>
+  <MobileOptimizedContent>
+    <div class="target-capture-page">
+      <h1 class="main-title">Target Capture</h1>
+
+      <MobileOptimizedTabs :tabs="tabList" v-model="tab">
+        <section v-if="tab === 'intro'" class="intro">
+          <div class="section-title">Product Introduction</div>
+          <p>
+            This series of streptavidin magnetic microspheres can efficiently
+            bind biotin derivatives, widely used in target capture, molecular
+            hybridization, immunological detection, etc. The product has high
+            binding capacity, good dispersion, and fast magnetic response speed,
+            suitable for a variety of automated and high-throughput experimental
+            platforms.
+          </p>
+          <div style="text-align: center; margin: 20px 0">
+            <img
+              :src="imgMain"
+              alt="Target Capture Main Image"
+              class="preview-img"
+              @click="openPreview(imgMain)"
+            />
+          </div>
+          <div class="divider"></div>
+          <div class="section-title">Product Advantages</div>
+          <ul>
+            <li>
+              High Binding Capacity: Streptavidin modified, capable of
+              efficiently binding biotin-labeled molecules.
+            </li>
+            <li>
+              Good Dispersion: Microspheres surface specially treated to ensure
+              good dispersion and suspension.
+            </li>
+            <li>
+              Fast Magnetic Response: Superparamagnetic, fast magnetic
+              attraction, no magnetic residue.
+            </li>
+            <li>
+              Wide Application Range: Compatible with a variety of automated and
+              high-throughput experimental platforms.
+            </li>
+          </ul>
+        </section>
+        <section v-if="tab === 'specs'" class="table-block">
+          <h2>Order Information</h2>
+          <div style="text-align: center; margin: 20px 0">
+            <img
+              :src="imgTable"
+              alt="Order Information Table"
+              class="preview-img"
+              @click="openPreview(imgTable)"
+            />
+          </div>
+        </section>
+        <section v-if="tab === 'manual'" class="manuals">
+          <h2>Product Manual Download</h2>
+          <ul>
+            <li>
+              <a
+                href="/src/assets/Reagent/diagnosis/diagnosis-7/Streptavidin-TargetCapture.pdf"
+                download
+                target="_blank"
+                >Magnetic Microspheres (Streptavidin) Product Manual - Target
+                Capture (PDF)</a
+              >
+            </li>
+            <li>
+              <a
+                href="/src/assets/Reagent/diagnosis/diagnosis-7/Carboxyl-TargetCapture.pdf"
+                download
+                target="_blank"
+                >Magnetic Microspheres (Carboxyl) Product Manual - Target
+                Capture (PDF)</a
+              >
+            </li>
+          </ul>
+        </section>
+        <!-- 图片预览弹窗 -->
+        <div
+          v-if="previewImg"
+          class="img-preview-modal"
+          @click.self="closePreview"
+        >
+          <img :src="previewImg" class="img-preview-large" @click.stop />
+          <span class="img-preview-close" @click="closePreview">×</span>
+        </div>
+      </MobileOptimizedTabs>
     </div>
-    <section v-if="tab==='intro'" class="intro">
-      <div class="section-title">Product Introduction</div>
-      <p>This series of streptavidin magnetic microspheres can efficiently bind biotin derivatives, widely used in target capture, molecular hybridization, immunological detection, etc. The product has high binding capacity, good dispersion, and fast magnetic response speed, suitable for a variety of automated and high-throughput experimental platforms.</p>
-      <div style="text-align:center;margin:20px 0;">
-        <img :src="imgMain" alt="Target Capture Main Image" class="preview-img" @click="openPreview(imgMain)" />
-      </div>
-      <div class="divider"></div>
-      <div class="section-title">Product Advantages</div>
-      <ul>
-        <li>High Binding Capacity: Streptavidin modified, capable of efficiently binding biotin-labeled molecules.</li>
-        <li>Good Dispersion: Microspheres surface specially treated to ensure good dispersion and suspension.</li>
-        <li>Fast Magnetic Response: Superparamagnetic, fast magnetic attraction, no magnetic residue.</li>
-        <li>Wide Application Range: Compatible with a variety of automated and high-throughput experimental platforms.</li>
-      </ul>
-    </section>
-    <section v-if="tab==='specs'" class="table-block">
-      <h2>Order Information</h2>
-      <div style="text-align:center;margin:20px 0;">
-        <img :src="imgTable" alt="Order Information Table" class="preview-img" @click="openPreview(imgTable)" />
-      </div>
-    </section>
-    <section v-if="tab==='manual'" class="manuals">
-      <h2>Product Manual Download</h2>
-      <ul>
-        <li><a href="/src/assets/Reagent/diagnosis/diagnosis-7/Streptavidin-TargetCapture.pdf" download target="_blank">Magnetic Microspheres (Streptavidin) Product Manual - Target Capture (PDF)</a></li>
-        <li><a href="/src/assets/Reagent/diagnosis/diagnosis-7/Carboxyl-TargetCapture.pdf" download target="_blank">Magnetic Microspheres (Carboxyl) Product Manual - Target Capture (PDF)</a></li>
-      </ul>
-    </section>
-    <!-- 图片预览弹窗 -->
-    <div v-if="previewImg" class="img-preview-modal" @click.self="closePreview">
-      <img :src="previewImg" class="img-preview-large" @click.stop />
-      <span class="img-preview-close" @click="closePreview">×</span>
-    </div>
-  </div>
+  </MobileOptimizedContent>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import imgMain from '@/assets/Reagent/diagnosis/diagnosis-7/targetcapture_main.png'
-import imgTable from '@/assets/Reagent/diagnosis/diagnosis-7/targetcapture_table.png'
+import { ref } from "vue";
+import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
+import imgMain from "@/assets/Reagent/diagnosis/diagnosis-7/targetcapture_main.png";
+import imgTable from "@/assets/Reagent/diagnosis/diagnosis-7/targetcapture_table.png";
 const tabList = [
-  { key: 'intro', label: 'Product Introduction' },
+  { key: "intro", label: "Product Introduction" },
   // { key: 'features', label: 'Product Advantages' },
-  { key: 'specs', label: 'Order Information' },
-  { key: 'manual', label: 'Manual' }
-]
-const tab = ref('intro')
-const previewImg = ref(null)
+  { key: "specs", label: "Order Information" },
+  { key: "manual", label: "Manual" },
+];
+const tab = ref("intro");
+const previewImg = ref(null);
 function openPreview(img) {
-  previewImg.value = img
+  previewImg.value = img;
 }
 function closePreview() {
-  previewImg.value = null
+  previewImg.value = null;
 }
 </script>
 
@@ -82,7 +128,9 @@ function closePreview() {
   margin-bottom: 18px;
   text-align: center;
 }
-.tab-bar { display: none; }
+.tab-bar {
+  display: none;
+}
 .tab-nav {
   display: flex;
   justify-content: center;
@@ -108,12 +156,16 @@ function closePreview() {
 .tab-item:hover {
   color: #2b7bbf;
 }
-.intro, .table-block, .manuals {
+.intro,
+.table-block,
+.manuals {
   max-width: 1200px;
   margin: 0 auto 0 auto;
   padding: 0;
 }
-.intro h2, .table-block h2, .manuals h2 {
+.intro h2,
+.table-block h2,
+.manuals h2 {
   font-size: 1.35rem;
   color: #204a6d;
   font-weight: 600;
@@ -147,7 +199,7 @@ li {
   transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
 }
 .preview-img:hover {
-  box-shadow: 0 4px 24px rgba(32,74,109,0.18);
+  box-shadow: 0 4px 24px rgba(32, 74, 109, 0.18);
   border-color: #204a6d;
   z-index: 2;
   transform: scale(1.06);
@@ -168,7 +220,10 @@ li {
   background: none;
 }
 @media (max-width: 900px) {
-  .target-capture-page, .intro, .table-block, .manuals {
+  .target-capture-page,
+  .intro,
+  .table-block,
+  .manuals {
     max-width: 100%;
     padding-left: 8px;
     padding-right: 8px;
@@ -181,8 +236,11 @@ li {
 /* 图片预览弹窗样式 */
 .img-preview-modal {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(30,40,60,0.65);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(30, 40, 60, 0.65);
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -193,7 +251,7 @@ li {
   max-width: 90vw;
   max-height: 90vh;
   border-radius: 10px;
-  box-shadow: 0 8px 32px rgba(32,74,109,0.25);
+  box-shadow: 0 8px 32px rgba(32, 74, 109, 0.25);
   background: #fff;
   border: 2px solid #204a6d;
   display: block;
@@ -214,7 +272,11 @@ li {
   color: #d23c1a;
 }
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 </style> 

@@ -3,12 +3,23 @@
     <!-- 顶部Banner -->
     <div class="banner">
       <img :src="bannerImg" alt="Reagent Banner" class="banner-img" />
-      <div class="banner-title">{{ currentPageTitle }}</div>
+      <div class="banner-title">
+        <span class="desktop-title">{{ currentPageTitle }}</span>
+        <span class="mobile-title">{{ mobilePageTitle }}</span>
+      </div>
     </div>
 
     <div class="main-content">
+      <!-- 移动端菜单切换按钮 -->
+      <div class="mobile-menu-toggle" @click="toggleMobileMenu">
+        <span class="menu-icon">☰</span>
+        <span class="menu-text">{{
+          isMobileMenuOpen ? "Hide Menu" : "Show Menu"
+        }}</span>
+      </div>
+
       <!-- 左侧菜单栏 -->
-      <aside class="side-menu">
+      <aside class="side-menu" :class="{ 'mobile-open': isMobileMenuOpen }">
         <div class="side-menu-title">Reagent Classification</div>
         <ul class="side-menu-list">
           <li v-for="item in menuItems" :key="item.key">
@@ -42,6 +53,12 @@
         </ul>
       </aside>
 
+      <!-- 移动端遮罩层 -->
+      <div
+        :class="['mobile-overlay', { show: isMobileMenuOpen && isMobile }]"
+        @click="closeMobileMenu"
+      ></div>
+
       <!-- 右侧内容区域 -->
       <section class="content-area">
         <router-view v-slot="{ Component }">
@@ -55,12 +72,52 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, nextTick } from "vue";
+import { ref, computed, watch, nextTick, onMounted, onUnmounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import bannerImg from "@/assets/Reagent/banner.jpg";
 
 const router = useRouter();
 const route = useRoute();
+
+// 移动端相关状态
+const isMobile = ref(false);
+const isMobileMenuOpen = ref(false);
+
+// 检测屏幕尺寸
+const checkScreenSize = () => {
+  isMobile.value = window.innerWidth <= 900;
+  if (!isMobile.value) {
+    isMobileMenuOpen.value = false;
+  }
+};
+
+// 移动端菜单控制
+const toggleMobileMenu = () => {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value;
+
+  // 防止背景滚动
+  if (isMobileMenuOpen.value) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
+};
+
+const closeMobileMenu = () => {
+  isMobileMenuOpen.value = false;
+  document.body.style.overflow = "";
+};
+
+onMounted(() => {
+  checkScreenSize();
+  window.addEventListener("resize", checkScreenSize);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", checkScreenSize);
+  // 确保恢复滚动
+  document.body.style.overflow = "";
+});
 
 // 菜单数据结构
 const menuItems = [
@@ -145,6 +202,18 @@ const menuItems = [
 // 菜单展开状态
 const openKeys = ref(["chemiluminescence"]);
 
+// 标题缩写映射，用于移动端显示
+const titleAbbreviations = {
+  "Beadstar-mPlex® Magnetic Fluorescent Encoded Microspheres":
+    "Beadstar-mPlex® Microspheres",
+  "mRNA Extraction & Purification Magnetic Beads": "mRNA Extraction Beads",
+  "Nucleic Acid Extraction & Purification": "Nucleic Acid Extraction",
+  "Blood Genome DNA Extraction Reagent": "Blood DNA Extraction",
+  "Time-Resolved Fluorescent Beads": "Time-Resolved Beads",
+  "Chemiluminescent Magnetic Beads": "Chemiluminescent Beads",
+  "Magnetic Fluorescent Coded Beads": "Magnetic Fluorescent Beads",
+};
+
 // 当前页面标题
 const currentPageTitle = computed(() => {
   const pathSegments = route.path.split("/");
@@ -166,6 +235,12 @@ const currentPageTitle = computed(() => {
   return "Reagent";
 });
 
+// 移动端显示标题（如果有缩写则使用缩写）
+const mobilePageTitle = computed(() => {
+  const fullTitle = currentPageTitle.value;
+  return titleAbbreviations[fullTitle] || fullTitle;
+});
+
 // 菜单交互逻辑
 function handleCategoryClick(item) {
   // 立即重置滚动位置
@@ -179,6 +254,11 @@ function handleCategoryClick(item) {
   }
   // 跳转到分类主页面
   router.push(`/reagent/${item.key}`);
+
+  // 移动端点击后关闭菜单
+  if (isMobile.value) {
+    closeMobileMenu();
+  }
 }
 
 function handleProductClick(category, product) {
@@ -187,6 +267,11 @@ function handleProductClick(category, product) {
 
   // 跳转到具体产品页面
   router.push(`/reagent/${category.key}/${product.key}`);
+
+  // 移动端点击后关闭菜单
+  if (isMobile.value) {
+    closeMobileMenu();
+  }
 }
 
 // 判断菜单状态
@@ -298,6 +383,16 @@ function resetScrollPosition() {
   letter-spacing: 2px;
   text-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   white-space: nowrap;
+  text-align: center;
+  max-width: 90%;
+}
+
+.mobile-title {
+  display: none;
+}
+
+.desktop-title {
+  display: inline;
 }
 
 .main-content {
@@ -408,6 +503,49 @@ function resetScrollPosition() {
   transform: translateX(-20px);
 }
 
+/* 移动端菜单切换按钮 */
+.mobile-menu-toggle {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #2b7bbf;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-menu-toggle:hover {
+  background: #1e5a8a;
+}
+
+.menu-icon {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* 移动端遮罩层 */
+.mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
 @media (max-width: 900px) {
   .banner {
     height: 400px;
@@ -415,37 +553,134 @@ function resetScrollPosition() {
 
   .main-content {
     flex-direction: column;
-    padding: 0;
+    padding: 0 16px;
     gap: 0;
     max-width: 100vw;
+    position: relative;
   }
+
+  /* 显示移动端菜单切换按钮 */
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
   .side-menu {
-    width: 100%;
-    min-width: 0;
-    max-width: 100vw;
-    height: auto;
-    position: static;
-    border-right: none;
-    border-bottom: 1px solid #e6eaf0;
-    padding: 2vw 0;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 280px;
+    height: 100vh;
+    background: #f4f8fb;
+    border-right: 1px solid #e6eaf0;
+    padding: 20px 0 40px 0;
+    z-index: 1000;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.15);
+    /* 确保内容从顶部开始显示 */
+    padding-top: 20px;
+    /* 防止滚动穿透 */
+    overscroll-behavior: contain;
   }
+
+  .side-menu.mobile-open {
+    left: 0;
+  }
+
+  .mobile-overlay.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
   .side-menu-title {
-    padding-left: 3vw;
+    padding-left: 20px;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
   }
+
   .side-menu-list {
-    padding-left: 3vw;
+    padding-left: 20px;
+    padding-right: 20px;
   }
+
+  .side-menu-category {
+    font-size: 16px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+  }
+
+  .side-submenu > li {
+    font-size: 14px;
+    padding: 10px 16px;
+    margin-bottom: 6px;
+    border-radius: 6px;
+  }
+
+  .arrow {
+    font-size: 14px;
+  }
+
   .content-area {
-    padding: 4vw 2vw;
+    padding: 20px 0;
+    width: 100%;
   }
+
   .banner-title {
-    font-size: 5vw;
+    font-size: 4.5vw;
+    white-space: normal;
+    line-height: 1.2;
+    max-width: 85%;
+    padding: 0 10px;
+  }
+
+  .desktop-title {
+    display: none;
+  }
+
+  .mobile-title {
+    display: inline;
   }
 }
 
 @media (max-width: 600px) {
   .banner {
-    height: 350px;
+    height: 300px;
+  }
+
+  .main-content {
+    padding: 0 12px;
+  }
+
+  .side-menu {
+    width: 260px;
+  }
+
+  .mobile-menu-toggle {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  .banner-title {
+    font-size: 5vw;
+    white-space: normal;
+    line-height: 1.1;
+    max-width: 80%;
+    padding: 0 8px;
+    word-break: break-word;
+  }
+
+  .desktop-title {
+    display: none;
+  }
+
+  .mobile-title {
+    display: inline;
+  }
+
+  .content-area {
+    padding: 16px 0;
   }
 }
 </style> 

@@ -1,16 +1,9 @@
 <template>
-  <div class="magnetic-rack-page">
-    <h1 class="main-title">Magnetic Rack</h1>
-    <div class="tab-nav">
-      <div
-        v-for="item in tabList"
-        :key="item.key"
-        :class="['tab-item', {active: tab === item.key}]"
-        @click="tab = item.key"
-      >
-        {{ item.label }}
-      </div>
-    </div>
+  <MobileOptimizedContent>
+    <div class="magnetic-rack-page">
+      <h1 class="main-title">Magnetic Rack</h1>
+
+      <MobileOptimizedTabs :tabs="tabList" v-model="tab">
     <section v-if="tab==='intro'">
       <div class="section-title">Product Introduction</div>
       <p>
@@ -33,31 +26,37 @@
         </li>
       </ul>
     </section>
-    <div v-if="modalImg" class="img-modal" @click.self="closeModal">
-      <div class="modal-content">
-        <img :src="modalImg" alt="Preview Image" />
-        <button class="close-btn" @click="closeModal">×</button>
+      </MobileOptimizedTabs>
+
+      <!-- Image Modal -->
+      <div v-if="modalImg" class="img-modal" @click.self="closeModal">
+        <div class="modal-content">
+          <img :src="modalImg" alt="Preview Image" />
+          <button class="close-btn" @click="closeModal">×</button>
+        </div>
       </div>
     </div>
-  </div>
+  </MobileOptimizedContent>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import magneticRackImg from '@/assets/Reagent/diagnosis/diagnosis-10/10001.png'
+import { ref } from "vue";
+import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
+import magneticRackImg from "@/assets/Reagent/diagnosis/diagnosis-10/10001.png";
 
 const tabList = [
-  { key: 'intro', label: 'Product Introduction' },
-  { key: 'manual', label: 'Manual' }
-]
-const tab = ref('intro')
-const modalImg = ref(null)
+  { key: "intro", label: "Product Introduction" },
+  { key: "manual", label: "Manual" },
+];
+const tab = ref("intro");
+const modalImg = ref(null);
 const openModal = (img) => {
-  modalImg.value = img
-}
+  modalImg.value = img;
+};
 const closeModal = () => {
-  modalImg.value = null
-}
+  modalImg.value = null;
+};
 </script>
 
 <style scoped>
@@ -67,7 +66,7 @@ const closeModal = () => {
   padding: 40px 24px 48px 24px;
   background: #f8fafc;
   min-height: 100vh;
-  font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans', Arial, sans-serif;
+  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans", Arial, sans-serif;
 }
 .main-title {
   text-align: center;
@@ -102,7 +101,9 @@ const closeModal = () => {
 .tab-item:hover {
   color: #2b7bbf;
 }
-.tab-bar { display: none; }
+.tab-bar {
+  display: none;
+}
 .section-title {
   font-size: 1.35rem;
   font-weight: 600;
@@ -138,21 +139,24 @@ li {
   width: 100%;
   max-height: 400px;
   border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(34,58,94,0.10);
+  box-shadow: 0 2px 16px rgba(34, 58, 94, 0.1);
   cursor: pointer;
   transition: box-shadow 0.25s, border 0.25s, transform 0.25s;
   border: 2px solid transparent;
 }
 .main-img:hover {
-  box-shadow: 0 8px 32px rgba(64,158,255,0.18);
+  box-shadow: 0 8px 32px rgba(64, 158, 255, 0.18);
   border: 2px solid #409eff;
   transform: scale(1.04);
 }
 .img-modal {
   position: fixed;
   z-index: 1000;
-  left: 0; top: 0; right: 0; bottom: 0;
-  background: rgba(34,58,94,0.65);
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(34, 58, 94, 0.65);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -162,7 +166,7 @@ li {
   background: #fff;
   border-radius: 16px;
   padding: 32px 32px 16px 32px;
-  box-shadow: 0 8px 40px rgba(34,58,94,0.18);
+  box-shadow: 0 8px 40px rgba(34, 58, 94, 0.18);
   max-width: 90vw;
   max-height: 90vh;
   display: flex;
@@ -173,7 +177,7 @@ li {
   max-width: 800px;
   max-height: 70vh;
   border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(34,58,94,0.10);
+  box-shadow: 0 2px 16px rgba(34, 58, 94, 0.1);
 }
 .close-btn {
   position: absolute;

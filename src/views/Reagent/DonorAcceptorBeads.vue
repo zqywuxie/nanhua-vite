@@ -1,90 +1,135 @@
 <template>
-  <div class="donor-acceptor-beads-page">
-    <h1 class="main-title">Donor Acceptor Microspheres</h1>
-    <div class="tab-nav">
-      <div
-        v-for="item in tabList"
-        :key="item.key"
-        :class="['tab-item', {active: tab === item.key}]"
-        @click="tab = item.key"
-      >
-        {{ item.label }}
-      </div>
+  <MobileOptimizedContent>
+    <div class="donor-acceptor-beads-page">
+      <h1 class="main-title">Donor Acceptor Microspheres</h1>
+
+      <MobileOptimizedTabs :tabs="tabList" v-model="tab">
+        <section v-if="tab === 'intro'" class="intro">
+          <div class="section-title">Product Overview</div>
+          <p>
+            This series of products is specifically designed for homogeneous
+            chemiluminescent immunoassay, with donor microspheres containing
+            photosensitizer and acceptor microspheres containing luminescent
+            dye. By using 680nm to excite donor microspheres, oxygen is
+            converted to an excited singlet oxygen state and diffused to
+            acceptor microspheres within a 200nm range, resulting in a stable
+            and efficient light signal at 615nm.
+          </p>
+          <div style="text-align: center; margin: 20px 0">
+            <img
+              :src="mainImg"
+              alt="Donor Acceptor Microspheres Main Image"
+              class="preview-img"
+              @click="openPreview(mainImg)"
+            />
+          </div>
+          <div class="divider"></div>
+          <h2 class="section-title">Technical Parameters</h2>
+          <ul>
+            <li>
+              Material: Donor Microspheres - Polystyrene microspheres containing
+              photosensitizer
+            </li>
+            <li style="text-indent: 2em">
+              Acceptor Microspheres - Polystyrene microspheres containing
+              luminescent dye
+            </li>
+            <li>Particle Size: 200nm</li>
+            <li>Surface Modification: Carboxyl (COOH), Streptavidin (SA)</li>
+            <li>Density: 1.05g/cm<sup>3</sup></li>
+            <li>Storage Solution: Pure Water</li>
+            <li>Additives: Trace Surface Active Agent</li>
+            <li>Refractive Index: 1.59 (589nm Wavelength, 25℃)</li>
+            <li>
+              Storage Conditions: Avoid Light, Store at 2-8℃, Do Not Freeze
+            </li>
+          </ul>
+        </section>
+        <section v-if="tab === 'manual'" class="manual">
+          <h2>Manual Download</h2>
+          <ul>
+            <li>
+              <a
+                href="https://www.vdobiotech.com.cn/group1/77/ddb3d63caafd4639bcf707e511f241ed.pdf"
+                target="_blank"
+                >Homogeneous Luminescent Immunoassay Product Manual</a
+              >
+            </li>
+            <li>
+              <a
+                href="/src/assets/Reagent/homogeneous/Donor Beads Manual.pdf"
+                target="_blank"
+                >Donor Beads Manual.pdf</a
+              >
+            </li>
+            <li>
+              <a
+                href="/src/assets/Reagent/homogeneous/Acceptor Beads Manual.pdf"
+                target="_blank"
+                >Acceptor Beads Manual.pdf</a
+              >
+            </li>
+          </ul>
+        </section>
+        <section v-if="tab === 'order'" class="supply">
+          <h2>Supply Information</h2>
+          <div>
+            <h3>Donor Microspheres</h3>
+            <img
+              :src="donorImg"
+              alt="Donor Microspheres"
+              class="preview-img"
+              @click="openPreview(donorImg)"
+            />
+          </div>
+          <div style="margin-top: 18px">
+            <h3>Acceptor Microspheres</h3>
+            <img
+              :src="acceptorImg"
+              alt="Acceptor Microspheres"
+              class="preview-img"
+              @click="openPreview(acceptorImg)"
+            />
+          </div>
+          <p style="margin-top: 10px; font-size: 14px">
+            Other specifications can be customized according to customer
+            requirements
+          </p>
+        </section>
+        <!-- 图片预览弹窗 -->
+        <div
+          v-if="previewImg"
+          class="img-preview-modal"
+          @click.self="closePreview"
+        >
+          <img :src="previewImg" class="img-preview-large" @click.stop />
+          <span class="img-preview-close" @click="closePreview">×</span>
+        </div>
+      </MobileOptimizedTabs>
     </div>
-    <section v-if="tab==='intro'" class="intro">
-      <div class="section-title">Product Overview</div>
-      <p>
-        This series of products is specifically designed for homogeneous chemiluminescent immunoassay, with donor microspheres containing photosensitizer and acceptor microspheres containing luminescent dye. By using 680nm to excite donor microspheres, oxygen is converted to an excited singlet oxygen state and diffused to acceptor microspheres within a 200nm range, resulting in a stable and efficient light signal at 615nm.
-      </p>
-      <div style="text-align:center;margin:20px 0;">
-        <img :src="mainImg" alt="Donor Acceptor Microspheres Main Image" class="preview-img" @click="openPreview(mainImg)" />
-      </div>
-      <div class="divider"></div>
-      <h2 class="section-title">Technical Parameters</h2>
-      <ul>
-        <li>Material: Donor Microspheres - Polystyrene microspheres containing photosensitizer</li>
-        <li style="text-indent:2em;">Acceptor Microspheres - Polystyrene microspheres containing luminescent dye</li>
-        <li>Particle Size: 200nm</li>
-        <li>Surface Modification: Carboxyl (COOH), Streptavidin (SA)</li>
-        <li>Density: 1.05g/cm<sup>3</sup></li>
-        <li>Storage Solution: Pure Water</li>
-        <li>Additives: Trace Surface Active Agent</li>
-        <li>Refractive Index: 1.59 (589nm Wavelength, 25℃)</li>
-        <li>Storage Conditions: Avoid Light, Store at 2-8℃, Do Not Freeze</li>
-      </ul>
-    </section>
-    <section v-if="tab==='manual'" class="manual">
-      <h2>Manual Download</h2>
-      <ul>
-        <li>
-          <a href="https://www.vdobiotech.com.cn/group1/77/ddb3d63caafd4639bcf707e511f241ed.pdf" target="_blank">Homogeneous Luminescent Immunoassay Product Manual</a>
-        </li>
-        <li>
-          <a href="/src/assets/Reagent/homogeneous/Donor Beads Manual.pdf" target="_blank">Donor Beads Manual.pdf</a>
-        </li>
-        <li>
-          <a href="/src/assets/Reagent/homogeneous/Acceptor Beads Manual.pdf" target="_blank">Acceptor Beads Manual.pdf</a>
-        </li>
-      </ul>
-    </section>
-    <section v-if="tab==='order'" class="supply">
-      <h2>Supply Information</h2>
-      <div>
-        <h3>Donor Microspheres</h3>
-        <img :src="donorImg" alt="Donor Microspheres" class="preview-img" @click="openPreview(donorImg)" />
-      </div>
-      <div style="margin-top:18px;">
-        <h3>Acceptor Microspheres</h3>
-        <img :src="acceptorImg" alt="Acceptor Microspheres" class="preview-img" @click="openPreview(acceptorImg)" />
-      </div>
-      <p style="margin-top:10px;font-size:14px;">Other specifications can be customized according to customer requirements</p>
-    </section>
-    <!-- 图片预览弹窗 -->
-    <div v-if="previewImg" class="img-preview-modal" @click.self="closePreview">
-      <img :src="previewImg" class="img-preview-large" @click.stop />
-      <span class="img-preview-close" @click="closePreview">×</span>
-    </div>
-  </div>
+  </MobileOptimizedContent>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
+import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
 // 图片采用import相对路径
-import mainImg from '@/assets/Reagent/homogeneous/10001.jpg'
-import donorImg from '@/assets/Reagent/homogeneous/10002.png'
-import acceptorImg from '@/assets/Reagent/homogeneous/10003.png'
+import mainImg from "@/assets/Reagent/homogeneous/10001.jpg";
+import donorImg from "@/assets/Reagent/homogeneous/10002.png";
+import acceptorImg from "@/assets/Reagent/homogeneous/10003.png";
 const tabList = [
-  { key: 'intro', label: 'Product Introduction' },
-  { key: 'manual', label: 'Manual' },
-  { key: 'order', label: 'Supply Information' }
-]
-const tab = ref('intro')
-const previewImg = ref(null)
+  { key: "intro", label: "Product Introduction" },
+  { key: "manual", label: "Manual" },
+  { key: "order", label: "Supply Information" },
+];
+const tab = ref("intro");
+const previewImg = ref(null);
 function openPreview(img) {
-  previewImg.value = img
+  previewImg.value = img;
 }
 function closePreview() {
-  previewImg.value = null
+  previewImg.value = null;
 }
 </script>
 
@@ -95,7 +140,7 @@ function closePreview() {
   padding: 40px 24px 48px 24px;
   background: #f8fafc;
   min-height: 100vh;
-  font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans', Arial, sans-serif;
+  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans", Arial, sans-serif;
 }
 .main-title {
   text-align: center;
@@ -130,7 +175,9 @@ function closePreview() {
 .tab-item:hover {
   color: #2b7bbf;
 }
-.tab-bar { display: none; }
+.tab-bar {
+  display: none;
+}
 .section-title {
   font-size: 1.35rem;
   font-weight: 600;
@@ -170,7 +217,7 @@ li {
   transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
 }
 .preview-img:hover {
-  box-shadow: 0 4px 24px rgba(32,74,109,0.18);
+  box-shadow: 0 4px 24px rgba(32, 74, 109, 0.18);
   border-color: #204a6d;
   z-index: 2;
   transform: scale(1.06);
@@ -194,14 +241,14 @@ li {
   padding: 10px 22px;
   border-radius: 8px;
   text-decoration: none;
-  box-shadow: 0 2px 8px rgba(32,74,109,0.10);
+  box-shadow: 0 2px 8px rgba(32, 74, 109, 0.1);
   transition: background 0.18s, color 0.18s, box-shadow 0.18s;
   margin: 0 auto;
 }
 .manual-download-btn:hover {
   background: #409eff;
   color: #fff;
-  box-shadow: 0 4px 16px rgba(64,158,255,0.18);
+  box-shadow: 0 4px 16px rgba(64, 158, 255, 0.18);
 }
 .icon-pdf {
   font-size: 1.25em;
@@ -219,8 +266,11 @@ li {
 /* 图片预览弹窗样式 */
 .img-preview-modal {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(30,40,60,0.65);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(30, 40, 60, 0.65);
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -231,7 +281,7 @@ li {
   max-width: 90vw;
   max-height: 90vh;
   border-radius: 10px;
-  box-shadow: 0 8px 32px rgba(32,74,109,0.25);
+  box-shadow: 0 8px 32px rgba(32, 74, 109, 0.25);
   background: #fff;
   border: 2px solid #204a6d;
   display: block;
@@ -252,7 +302,11 @@ li {
   color: #d23c1a;
 }
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 </style> 

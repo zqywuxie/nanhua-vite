@@ -1,37 +1,36 @@
 <template>
-  <ReagentLayout>
-    <template #default>
-      <div class="main-container">
-        <div class="main-title">Scale Standard Microspheres</div>
-        <div class="section">
-          <div class="section-title">Product Introduction</div>
-          <div class="section-divider"></div>
-          <p class="section-text">
-            Scale standard microspheres are a series of polymer microspheres with different particle sizes, widely used for calibration and performance verification of particle size analyzers. The product particle size range covers 100nm to 10μm, with good monodispersity and traceability, suitable for photon correlation spectroscopy (PCS), centrifugal disk photometer (PCP), adjustable resistance pulse sensor (TRPS), nanoparticle tracking analysis (NTA), laser diffraction (LD), and various particle size analysis instruments.
-          </p>
-          <div class="img-center">
-            <img :src="img1" alt="Scale Standard Microspheres Schematic 1" class="preview-img" @click="openModal(img1)" />
-          </div>
-          <p class="section-text">
-            The product has high NIST traceability, meeting traceability compliance requirements such as ISO9000, ISO10012, ANSI/NCSL-Z540, and GMP/GLP. Through strict resuspension procedures and particle counting detection, microspheres with accurate particle numbers are obtained, which is an essential tool for calibrating particle counters.
-          </p>
+  <MobileOptimizedContent>
+    <div class="main-container">
+      <h1 class="main-title">Scale Standard Microspheres</h1>
+      <div class="section">
+        <div class="section-title">Product Introduction</div>
+        <div class="section-divider"></div>
+        <p class="section-text">
+          Scale standard microspheres are a series of polymer microspheres with different particle sizes, widely used for calibration and performance verification of particle size analyzers. The product particle size range covers 100nm to 10μm, with good monodispersity and traceability, suitable for photon correlation spectroscopy (PCS), centrifugal disk photometer (PCP), adjustable resistance pulse sensor (TRPS), nanoparticle tracking analysis (NTA), laser diffraction (LD), and various particle size analysis instruments.
+        </p>
+        <div class="img-center">
+          <img :src="img1" alt="Scale Standard Microspheres Schematic 1" class="preview-img" @click="openModal(img1)" />
         </div>
-        <div class="section">
-          <div class="section-title">Main Applications</div>
-          <div class="section-divider"></div>
-          <ul class="section-list">
-            <li>Calibration and Performance Verification of Particle Size Analyzers</li>
-            <li>Particle Size Distribution Analysis</li>
-            <li>Instrument Intercomparison and Quality Control</li>
-          </ul>
-        </div>
+        <p class="section-text">
+          The product has high NIST traceability, meeting traceability compliance requirements such as ISO9000, ISO10012, ANSI/NCSL-Z540, and GMP/GLP. Through strict resuspension procedures and particle counting detection, microspheres with accurate particle numbers are obtained, which is an essential tool for calibrating particle counters.
+        </p>
       </div>
-    </template>
-  </ReagentLayout>
+      <div class="section">
+        <div class="section-title">Main Applications</div>
+        <div class="section-divider"></div>
+        <ul class="section-list">
+          <li>Calibration and Performance Verification of Particle Size Analyzers</li>
+          <li>Particle Size Distribution Analysis</li>
+          <li>Instrument Intercomparison and Quality Control</li>
+        </ul>
+      </div>
+    </div>
+  </MobileOptimizedContent>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
 import img1 from '@/assets/Reagent/standard/standard-1/10001.png'
 
 const modalVisible = ref(false)

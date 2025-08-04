@@ -1,17 +1,9 @@
 <template>
-  <div class="homogeneous-page">
-    <h1 class="main-title">Monoclonal Antibody Screening Kit</h1>
-    <!-- Tab Navigation -->
-    <div class="tab-nav">
-      <div
-        v-for="tab in tabs"
-        :key="tab.key"
-        :class="['tab-item', {active: currentTab === tab.key}]"
-        @click="currentTab = tab.key"
-      >
-        {{ tab.label }}
-      </div>
-    </div>
+  <MobileOptimizedContent>
+    <div class="homogeneous-page">
+      <h1 class="main-title">Monoclonal Antibody Screening Kit</h1>
+
+      <MobileOptimizedTabs :tabs="tabs" v-model="currentTab">
     <!-- Tab Content: Product Introduction -->
     <section v-if="currentTab === 'intro'" class="intro">
       <div class="section-title">Product Introduction</div>
@@ -75,13 +67,17 @@
     <!-- 图片预览弹窗 -->
     <div v-if="previewImg" class="img-preview-modal" @click.self="closePreview">
       <img :src="previewImg" class="img-preview-large" @click.stop />
-      <span class="img-preview-close" @click="closePreview">×</span>
+        <span class="img-preview-close" @click="closePreview">×</span>
+      </div>
+      </MobileOptimizedTabs>
     </div>
-  </div>
+  </MobileOptimizedContent>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
 import imgPrinciple from '@/assets/LifeScience/homogeneous/homogeneous-4/2ea0947a7bd84e8389ab990b844620dd.png';
 import imgPerf1 from '@/assets/LifeScience/homogeneous/homogeneous-4/d91e18064f1348548a5a3d4fb34641a8.png';
 import imgPerf2 from '@/assets/LifeScience/homogeneous/homogeneous-4/4c04827c19574df480eb14d5031a353d.png';

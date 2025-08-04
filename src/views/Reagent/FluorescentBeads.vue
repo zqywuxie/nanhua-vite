@@ -1,90 +1,132 @@
 <template>
-  <div class="fluorescent-beads-page">
-    <h1 class="main-title">Fluorescent Beads</h1>
-    <div class="tab-nav">
-      <div
-        v-for="item in tabList"
-        :key="item.key"
-        :class="['tab-item', {active: tab === item.key}]"
-        @click="tab = item.key"
-      >
-        {{ item.label }}
-      </div>
-    </div>
-    <section v-if="tab==='intro'">
-      <div class="section-title">Product Introduction</div>
-      <p>The fluorescence dye is embedded within the microsphere, filling it densely and firmly. In addition, this series of fluorescent microspheres have the characteristics of strong fluorescence intensity and stable constant, which have obvious advantages for the development of quantitative detection reagents. This series of products is particularly suitable for the research and large-scale production of lateral flow layer separation reagents, as well as for focusing microscopy, cell biology, biosensors, biochips, microfluidics and other technical platforms.</p>
-      <div class="divider"></div>
-      <div class="section-title">Product Advantages</div>
-      <ul>
-        <li>Internal dye embedding process: filling densely and firmly</li>
-        <li>Strong fluorescence intensity and stable constant: improving detection precision</li>
-        <li>Sufficient surface functional groups: can efficiently conjugate sufficient target proteins</li>
-        <li>Uniform particle size and stable surface functional groups: good experimental reproducibility</li>
-        <li>Can achieve large-scale supply and stable performance: single batch capacity can reach 50L</li>
-        <li>Customizable microsphere size and surface functional groups: meeting customer's different product development needs</li>
-      </ul>
-      <div class="divider"></div>
-      <div class="section-title">Technical Parameters</div>
-      <ul>
-        <li>Material: high-brightness fluorescent polystyrene polymer</li>
-        <li>Uniformity: CV&lt;5%</li>
-        <li>Size range: 200nm—400nm</li>
-        <li>Surface functional groups: carboxyl (COOH), streptavidin (SA)</li>
-        <li>Additives: trace surface active agents</li>
-        <li>Storage conditions: carboxyl-modified microspheres are stored at 2-25℃, streptavidin (SA)-modified microspheres are stored at 2-8℃, do not freeze</li>
-      </ul>
-    </section>
-    <section v-if="tab==='order'">
-      <div class="section-title">Order Information</div>
-      <div class="order-imgs">
-        <div v-for="(img, idx) in orderImgs" :key="idx" class="img-center">
-          <p v-if="orderImgLabels[idx]">{{ orderImgLabels[idx] }}</p>
-          <img :src="img" :alt="orderImgLabels[idx] || 'Order Image'" class="main-img" @click="openModal(img)" />
+  <MobileOptimizedContent>
+    <div class="fluorescent-beads-page">
+      <h1 class="main-title">Fluorescent Beads</h1>
+
+      <MobileOptimizedTabs :tabs="tabList" v-model="tab">
+        <section v-if="tab === 'intro'">
+          <div class="section-title">Product Introduction</div>
+          <p>
+            The fluorescence dye is embedded within the microsphere, filling it
+            densely and firmly. In addition, this series of fluorescent
+            microspheres have the characteristics of strong fluorescence
+            intensity and stable constant, which have obvious advantages for the
+            development of quantitative detection reagents. This series of
+            products is particularly suitable for the research and large-scale
+            production of lateral flow layer separation reagents, as well as for
+            focusing microscopy, cell biology, biosensors, biochips,
+            microfluidics and other technical platforms.
+          </p>
+          <div class="divider"></div>
+          <div class="section-title">Product Advantages</div>
+          <ul>
+            <li>Internal dye embedding process: filling densely and firmly</li>
+            <li>
+              Strong fluorescence intensity and stable constant: improving
+              detection precision
+            </li>
+            <li>
+              Sufficient surface functional groups: can efficiently conjugate
+              sufficient target proteins
+            </li>
+            <li>
+              Uniform particle size and stable surface functional groups: good
+              experimental reproducibility
+            </li>
+            <li>
+              Can achieve large-scale supply and stable performance: single
+              batch capacity can reach 50L
+            </li>
+            <li>
+              Customizable microsphere size and surface functional groups:
+              meeting customer's different product development needs
+            </li>
+          </ul>
+          <div class="divider"></div>
+          <div class="section-title">Technical Parameters</div>
+          <ul>
+            <li>Material: high-brightness fluorescent polystyrene polymer</li>
+            <li>Uniformity: CV&lt;5%</li>
+            <li>Size range: 200nm—400nm</li>
+            <li>
+              Surface functional groups: carboxyl (COOH), streptavidin (SA)
+            </li>
+            <li>Additives: trace surface active agents</li>
+            <li>
+              Storage conditions: carboxyl-modified microspheres are stored at
+              2-25℃, streptavidin (SA)-modified microspheres are stored at 2-8℃,
+              do not freeze
+            </li>
+          </ul>
+        </section>
+        <section v-if="tab === 'order'">
+          <div class="section-title">Order Information</div>
+          <div class="order-imgs">
+            <div v-for="(img, idx) in orderImgs" :key="idx" class="img-center">
+              <p v-if="orderImgLabels[idx]">{{ orderImgLabels[idx] }}</p>
+              <img
+                :src="img"
+                :alt="orderImgLabels[idx] || 'Order Image'"
+                class="main-img"
+                @click="openModal(img)"
+              />
+            </div>
+          </div>
+        </section>
+        <section v-if="tab === 'manual'">
+          <div class="section-title">Manual</div>
+          <ul>
+            <li>
+              <a
+                href="/src/assets/Reagent/lateral/lateral-3/FluorescentBeads-Manual.pdf"
+                download
+                target="_blank"
+                >Fluorescent Microsphere Product Manual (PDF)</a
+              >
+            </li>
+          </ul>
+        </section>
+      </MobileOptimizedTabs>
+
+      <!-- Image Modal -->
+      <div v-if="modalImg" class="img-modal" @click.self="closeModal">
+        <div class="modal-content">
+          <img :src="modalImg" alt="Preview Image" />
+          <button class="close-btn" @click="closeModal">×</button>
         </div>
       </div>
-    </section>
-    <section v-if="tab==='manual'">
-      <div class="section-title">Manual</div>
-      <ul>
-        <li><a href="/src/assets/Reagent/lateral/lateral-3/FluorescentBeads-Manual.pdf" download target="_blank">Fluorescent Microsphere Product Manual (PDF)</a></li>
-      </ul>
-    </section>
-    <div v-if="modalImg" class="img-modal" @click.self="closeModal">
-      <div class="modal-content">
-        <img :src="modalImg" alt="Preview Image" />
-        <button class="close-btn" @click="closeModal">×</button>
-      </div>
     </div>
-  </div>
+  </MobileOptimizedContent>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import img1 from '@/assets/Reagent/lateral/lateral-3/10001.png'
-import img2 from '@/assets/Reagent/lateral/lateral-3/10002.png'
-import img3 from '@/assets/Reagent/lateral/lateral-3/10003.png'
-import img4 from '@/assets/Reagent/lateral/lateral-3/10004.png'
+import { ref } from "vue";
+import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
+import img1 from "@/assets/Reagent/lateral/lateral-3/10001.png";
+import img2 from "@/assets/Reagent/lateral/lateral-3/10002.png";
+import img3 from "@/assets/Reagent/lateral/lateral-3/10003.png";
+import img4 from "@/assets/Reagent/lateral/lateral-3/10004.png";
 const tabList = [
-  { key: 'intro', label: 'Product Introduction' },
-  { key: 'order', label: 'Order Information' },
-  { key: 'manual', label: 'Manual' }
-]
-const tab = ref('intro')
-const orderImgs = [img1, img2, img3, img4]
+  { key: "intro", label: "Product Introduction" },
+  { key: "order", label: "Order Information" },
+  { key: "manual", label: "Manual" },
+];
+const tab = ref("intro");
+const orderImgs = [img1, img2, img3, img4];
 const orderImgLabels = [
-  'Carboxyl Green Fluorescent Microsphere',
-  'Streptavidin (SA) Modified Green Fluorescent Microsphere',
-  'Carboxyl Red Fluorescent Microsphere (Customizable)',
-  'Streptavidin (SA) Modified Red Fluorescent Microsphere (Customizable)'
-]
-const modalImg = ref(null)
+  "Carboxyl Green Fluorescent Microsphere",
+  "Streptavidin (SA) Modified Green Fluorescent Microsphere",
+  "Carboxyl Red Fluorescent Microsphere (Customizable)",
+  "Streptavidin (SA) Modified Red Fluorescent Microsphere (Customizable)",
+];
+const modalImg = ref(null);
 const openModal = (img) => {
-  modalImg.value = img
-}
+  modalImg.value = img;
+};
 const closeModal = () => {
-  modalImg.value = null
-}
+  modalImg.value = null;
+};
 </script>
 
 <style scoped>
@@ -94,7 +136,7 @@ const closeModal = () => {
   padding: 40px 24px 48px 24px;
   background: #f8fafc;
   min-height: 100vh;
-  font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans', Arial, sans-serif;
+  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans", Arial, sans-serif;
 }
 .main-title {
   text-align: center;
@@ -129,7 +171,9 @@ const closeModal = () => {
 .tab-item:hover {
   color: #2b7bbf;
 }
-.tab-bar { display: none; }
+.tab-bar {
+  display: none;
+}
 .section-title {
   font-size: 1.35rem;
   font-weight: 600;
@@ -173,14 +217,14 @@ li {
   width: 100%;
   max-height: 240px;
   border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(34,58,94,0.10);
+  box-shadow: 0 2px 16px rgba(34, 58, 94, 0.1);
   cursor: pointer;
   transition: box-shadow 0.25s, border 0.25s, transform 0.25s;
   border: 2px solid transparent;
   margin-top: 8px;
 }
 .main-img:hover {
-  box-shadow: 0 8px 32px rgba(64,158,255,0.18);
+  box-shadow: 0 8px 32px rgba(64, 158, 255, 0.18);
   border: 2px solid #409eff;
   transform: scale(1.04);
 }
@@ -193,8 +237,11 @@ li {
 .img-modal {
   position: fixed;
   z-index: 1000;
-  left: 0; top: 0; right: 0; bottom: 0;
-  background: rgba(34,58,94,0.65);
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(34, 58, 94, 0.65);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -204,7 +251,7 @@ li {
   background: #fff;
   border-radius: 16px;
   padding: 32px 32px 16px 32px;
-  box-shadow: 0 8px 40px rgba(34,58,94,0.18);
+  box-shadow: 0 8px 40px rgba(34, 58, 94, 0.18);
   max-width: 90vw;
   max-height: 90vh;
   display: flex;
@@ -215,7 +262,7 @@ li {
   max-width: 800px;
   max-height: 70vh;
   border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(34,58,94,0.10);
+  box-shadow: 0 2px 16px rgba(34, 58, 94, 0.1);
 }
 .close-btn {
   position: absolute;
