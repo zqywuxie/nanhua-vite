@@ -397,12 +397,12 @@ const routes = [
         component: () => import("../views/Contact us/contact_us.vue"),
       },
       {
-        path: "/background",
-        name: "background",
+        path: "/technology",
+        name: "technology",
         meta: {
-          title: "background",
+          title: "technology",
         },
-        component: () => import("../views/Background/background.vue"),
+        component: () => import("../views/Technology/technology.vue"),
       },
       {
         path: "/support",
@@ -464,14 +464,6 @@ const routes = [
           title: "QuinDyeTM Terminator",
         },
         component: () => import("../views/Products/QuinDyeTM_Terminator.vue"),
-      },
-      {
-        path: "/technology",
-        name: "technology",
-        meta: {
-          title: "technology",
-        },
-        component: () => import("../views/Products/technology.vue"),
       },
       {
         path: "/instruments",
@@ -671,82 +663,104 @@ const routes = [
           ),
       },
       // Services子路由
+      // AI Services
       {
-        path: "/DNA_Reading",
-        redirect: "/Sanger_Sequencing",
-      },
-      {
-        path: "/Sanger_Sequencing",
-        name: "Sanger_Sequencing",
+        path: "/ai-services",
+        name: "AIServices",
         meta: {
-          title: "Sanger Sequencing",
+          title: "AI Medical Multimodal Intelligence",
         },
-        component: () => import("../views/Services/Sanger_Sequencing.vue"),
+        component: () => import("../views/Services/AIServices.vue"),
       },
       {
-        path: "/Next_Generation_Sequencing",
-        name: "Next_Generation_Sequencing",
+        path: "/medical-ai",
+        name: "MedicalAI",
         meta: {
-          title: "Next Generation Sequencing",
+          title: "Medical AI Solutions",
         },
-        component: () =>
-          import("../views/Services/Next_Generation_Sequencing.vue"),
+        component: () => import("../views/Services/MedicalAI.vue"),
       },
       {
-        path: "/Nanopore_Sequencing",
-        name: "Nanopore_Sequencing",
+        path: "/multimodal-analysis",
+        name: "MultimodalAnalysis",
         meta: {
-          title: "Nanopore Sequencing",
+          title: "Multimodal Data Analysis",
         },
-        component: () => import("../views/Services/Nanopore_Sequencing.vue"),
+        component: () => import("../views/Services/MultimodalAnalysis.vue"),
       },
       {
-        path: "/Pacbio_Sequencing",
-        name: "Pacbio_Sequencing",
+        path: "/ai-diagnostics",
+        name: "AIDiagnostics",
         meta: {
-          title: "Pacbio Sequencing",
+          title: "AI-Powered Diagnostics",
         },
-        component: () => import("../views/Services/Pacbio_Sequencing.vue"),
+        component: () => import("../views/Services/AIDiagnostics.vue"),
       },
+      // Molecular Diagnostics
       {
-        path: "/DNA_Writing",
-        redirect: "/Oligo_Synthesis",
-      },
-      {
-        path: "/Oligo_Synthesis",
-        name: "Oligo_Synthesis",
+        path: "/molecular-diagnostics",
+        name: "MolecularDiagnostics",
         meta: {
-          title: "Oligo Synthesis",
+          title: "Custom Molecular Diagnostics",
         },
-        component: () => import("../views/Services/Oligo_Synthesis.vue"),
+        component: () => import("../views/Services/MolecularDiagnostics.vue"),
       },
       {
-        path: "/Gene_Synthesis",
-        name: "Gene_Synthesis",
+        path: "/assay-development",
+        name: "AssayDevelopment",
         meta: {
-          title: "Gene Synthesis",
+          title: "Assay Development",
         },
-        component: () => import("../views/Services/Gene_Synthesis.vue"),
+        component: () => import("../views/Services/AssayDevelopment.vue"),
       },
       {
-        path: "/Custom_Cloning",
-        name: "Custom_Cloning",
+        path: "/biomarker-discovery",
+        name: "BiomarkerDiscovery",
         meta: {
-          title: "Custom Cloning",
+          title: "Biomarker Discovery",
         },
-        component: () => import("../views/Services/Custom_Cloning.vue"),
+        component: () => import("../views/Services/BiomarkerDiscovery.vue"),
       },
       {
-        path: "/DNA_Production",
-        redirect: "/Plasmid_Preparation",
-      },
-      {
-        path: "/Plasmid_Preparation",
-        name: "Plasmid_Preparation",
+        path: "/diagnostic-validation",
+        name: "DiagnosticValidation",
         meta: {
-          title: "Plasmid Preparation",
+          title: "Diagnostic Validation",
         },
-        component: () => import("../views/Services/Plasmid_Preparation.vue"),
+        component: () => import("../views/Services/DiagnosticValidation.vue"),
+      },
+      // Big Data Services
+      {
+        path: "/big-data-services",
+        name: "BigDataServices",
+        meta: {
+          title: "Big Data & Database Services",
+        },
+        component: () => import("../views/Services/BigDataServices.vue"),
+      },
+      {
+        path: "/genomic-databases",
+        name: "GenomicDatabases",
+        meta: {
+          title: "Genomic Databases",
+        },
+        component: () => import("../views/Services/GenomicDatabases.vue"),
+      },
+      {
+        path: "/data-analytics",
+        name: "DataAnalytics",
+        meta: {
+          title: "Data Analytics Platform",
+        },
+        component: () => import("../views/Services/DataAnalytics.vue"),
+      },
+      {
+        path: "/cloud-computing",
+        name: "CloudComputing",
+        meta: {
+          title: "Cloud Computing Services",
+        },
+        component: () => import("../views/Services/CloudComputing.vue"),
       },
       // About us子路由
       {

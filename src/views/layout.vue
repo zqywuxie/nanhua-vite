@@ -111,7 +111,7 @@
     <!-- 移动端抽屉菜单（PC端也可见） -->
     <a-drawer
       v-model:open="showMobileMenu"
-      placement="right"
+      placement="left"
       :closable="true"
       :width="280"
       class="mobile-drawer"
@@ -249,9 +249,9 @@ const navItems = ref([
     path: "/home",
   },
   {
-    key: "background",
-    title: "BACKGROUND",
-    path: "/background",
+    key: "technology",
+    title: "TECHNOLOGY",
+    path: "/technology",
   },
   {
     key: "products",
@@ -628,36 +628,69 @@ const navItems = ref([
     title: "SERVICES",
     path: "/services",
     children: [
-      // {
-      //   key: 'DNA_Reading',
-      //   title: 'DNA Reading',
-      //   path: '/DNA_Reading',
-      //   children: [
-      //     { key: 'Sanger_Sequencing', title: 'Sanger Sequencing', path: '/Sanger_Sequencing' },
-      //     { key: 'Next_Generation_Sequencing', title: 'Next Generation Sequencing', path: '/Next_Generation_Sequencing' },
-      //     { key: 'Nanopore_Sequencing', title: 'Nanopore Sequencing',  path: '/Nanopore_Sequencing' },
-      //     { key: 'Pacbio_Sequencing', title: 'Pacbio Sequencing', path: '/Pacbio Sequencing' },
-      //   ]
-      // },
-      // {
-      //   key: 'DNA_Writing',
-      //   title: 'DNA Writing',
-      //   path: '/DNA_Writing',
-      //   children: [
-      //     { key: 'Oligo_Synthesis', title: 'Oligo Synthesis', path: '/Oligo_Synthesis' },
-      //     { key: 'Gene_Synthesis', title: 'Gene Synthesis', path: '/Gene_Synthesis' },
-      //     { key: 'Custom_Cloning', title: 'Custom Cloning',  path: '/Custom_Cloning' },
-      //   ]
-      // },
       {
-        key: "DNA_Production",
-        title: "Analysis",
-        path: "/DNA_Production",
+        key: "ai_services",
+        title: "AI Medical Multimodal Intelligence",
+        path: "/ai-services",
         children: [
           {
-            key: "Plasmid_Preparation",
-            title: "Analysis Platform",
-            path: "/Plasmid_Preparation",
+            key: "medical_ai",
+            title: "Medical AI Solutions",
+            path: "/medical-ai",
+          },
+          {
+            key: "multimodal_analysis",
+            title: "Multimodal Data Analysis",
+            path: "/multimodal-analysis",
+          },
+          {
+            key: "ai_diagnostics",
+            title: "AI-Powered Diagnostics",
+            path: "/ai-diagnostics",
+          },
+        ],
+      },
+      {
+        key: "molecular_diagnostics",
+        title: "Custom Molecular Diagnostics",
+        path: "/molecular-diagnostics",
+        children: [
+          {
+            key: "assay_development",
+            title: "Assay Development",
+            path: "/assay-development",
+          },
+          {
+            key: "biomarker_discovery",
+            title: "Biomarker Discovery",
+            path: "/biomarker-discovery",
+          },
+          {
+            key: "diagnostic_validation",
+            title: "Diagnostic Validation",
+            path: "/diagnostic-validation",
+          },
+        ],
+      },
+      {
+        key: "big_data_services",
+        title: "Big Data & Database Services",
+        path: "/big-data-services",
+        children: [
+          {
+            key: "genomic_databases",
+            title: "Genomic Databases",
+            path: "/genomic-databases",
+          },
+          {
+            key: "data_analytics",
+            title: "Data Analytics Platform",
+            path: "/data-analytics",
+          },
+          {
+            key: "cloud_computing",
+            title: "Cloud Computing Services",
+            path: "/cloud-computing",
           },
         ],
       },
@@ -669,16 +702,16 @@ const navItems = ref([
   //   path: '/support',
   //   children: []
   // },
-  {
-    key: "resources",
-    title: "RESOURCES",
-    path: "/resources",
-  },
-  {
-    key: "news",
-    title: "NEWS",
-    path: "/news",
-  },
+  // {
+  //   key: "resources",
+  //   title: "RESOURCES",
+  //   path: "/resources",
+  // },
+  // {
+  //   key: "news",
+  //   title: "NEWS",
+  //   path: "/news",
+  // },
   {
     key: "about_us",
     title: "ABOUT US",
@@ -776,7 +809,7 @@ const handleNavClick = (item) => {
   resetScrollPosition();
 
   if (item.key === "services") {
-    router.push("/Sanger_Sequencing");
+    router.push("/ai-services");
     activeNav.value = null;
     activeFirstMenu.value = null;
     return;

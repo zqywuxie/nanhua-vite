@@ -2,12 +2,12 @@
   <div class="container">
     <div class="header">
       <div class="banner-bg">
-        <img :src="aboutus01" alt="About Us Banner">
+        <img :src="aboutus01" alt="About Us Banner" />
       </div>
       <div class="banner-content">
         <div class="banner-text">
           <h1 class="banner-title">About Us</h1>
-          <hr class="banner-divider">
+          <hr class="banner-divider" />
           <p class="banner-subtitle">Your Trusted Partner in DNA Sequencing</p>
         </div>
       </div>
@@ -18,8 +18,8 @@
           <span @click="scrollTo('company')">Company</span>
           <span @click="scrollTo('ourbusiness')">Our Business</span>
           <span @click="scrollTo('ourteam')">Our Team</span>
-          <span @click="scrollTo('honoraryawards')">Honorary Awards</span>
-          <span @click="scrollTo('partners')">Partners</span>
+          <!-- <span @click="scrollTo('honoraryawards')">Honorary Awards</span>
+          <span @click="scrollTo('partners')">Partners</span> -->
         </div>
       </div>
     </div>
@@ -32,14 +32,37 @@
       </div>
       <div class="aboutus-overview-inner">
         <div class="aboutus-overview-text fade-in-left">
+          <h3>About Vivolution Biosciences</h3>
           <p>
-            Nanjing iRepertoire Biotechnology Co., Ltd. ("iRepertoire") was established in 2018 as a high-tech biotechnology company. The founder and Chief Scientific Officer is dedicated to the research and application of immune repertoire and high-throughput sequencing automation technologies. Focusing on the immune health market, iRepertoire leverages novel core amplification technologies and automated platforms to provide innovative molecular immune diagnostic products and high-quality testing services.
+            At VioBio, we specialize in advancing life science through the
+            development and production of high-performance fluorescent
+            microspheres, magnetic beads, and next-generation digital PCR
+            systems. Proudly headquartered at the HudsonAlpha Institute for
+            Biotechnology in Huntsville, Alabama, our mission is to empower
+            scientific discovery and clinical innovation by delivering precision
+            tools and intelligent data solutions.
           </p>
           <p>
-            The founding team has been engaged in human immune cell receptor research for over a decade and has achieved outstanding accomplishments in the automation of high-throughput sequencing platforms.
+            Our team combines cutting-edge materials engineering with
+            proprietary surface chemistry to create customizable microbead
+            platforms for diagnostics, therapeutics, and molecular biology.
+            VioBio's digital PCR instruments offer ultra-sensitive, quantitative
+            detection capabilities for research and clinical applications,
+            including rare mutation detection, copy number variation, and
+            infectious disease monitoring.
           </p>
           <p>
-            Building on this foundation, iRepertoire applies immune repertoire research technologies to life science research, clinical diagnostics, and drug discovery.
+            In addition, VioBio provides advanced AI-powered bioinformatics and
+            multi-omics data analysis services, bridging the gap between complex
+            biological data and actionable insight. Whether supporting academic
+            research, biotechnology development, or clinical translation, VioBio
+            is committed to accelerating progress with smart, scalable, and
+            reliable technologies.
+          </p>
+          <p>
+            We are proud to be part of the HudsonAlpha ecosystem—a vibrant
+            community of innovators and collaborators driving the future of
+            biotechnology.
           </p>
         </div>
         <div class="aboutus-overview-img fade-in-right">
@@ -56,7 +79,7 @@
           v-for="(item, idx) in businessList"
           :key="item.title"
           class="business-item"
-          :style="{ animationDelay: (0.15 * idx) + 's' }"
+          :style="{ animationDelay: 0.15 * idx + 's' }"
         >
           <div class="business-img">
             <img :src="item.img" :alt="item.title" />
@@ -95,7 +118,11 @@
           <div class="team-section">
             <div class="team-title">主要团队成员</div>
             <div class="team-list">
-              <div class="team-member" v-for="member in teamList" :key="member.name">
+              <div
+                class="team-member"
+                v-for="member in teamList"
+                :key="member.name"
+              >
                 <div class="member-photo">
                   <img :src="member.img" :alt="member.name" />
                 </div>
@@ -110,7 +137,7 @@
         </div>
       </div>
     </section>
-    <section id="honoraryawards" class="section section-awards">
+    <!-- <section id="honoraryawards" class="section section-awards">
       <div class="awards-title">
         <span>Honorary Awards</span>
       </div>
@@ -118,7 +145,16 @@
         <div class="award-item" v-for="award in awards" :key="award.name">
           <div class="award-icon">
             <img v-if="award.img" :src="award.img" :alt="award.name" />
-            <svg v-else width="40" height="40" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="#00bc97"/><path d="M8 13l2.5 2.5L16 10" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg v-else width="40" height="40" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="12" fill="#00bc97" />
+              <path
+                d="M8 13l2.5 2.5L16 10"
+                stroke="#fff"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
           </div>
           <div class="award-info">
             <div class="award-name">{{ award.name }}</div>
@@ -126,16 +162,29 @@
           </div>
         </div>
       </div>
-    </section>
-    <section id="partners" class="section section-partners">
+    </section> -->
+    <!-- <section id="partners" class="section section-partners">
       <div class="partners-title">
         <span>Partners</span>
       </div>
       <div class="partners-list">
-        <div class="partner-item" v-for="partner in partners" :key="partner.name">
+        <div
+          class="partner-item"
+          v-for="partner in partners"
+          :key="partner.name"
+        >
           <div class="partner-logo">
             <img v-if="partner.logo" :src="partner.logo" :alt="partner.name" />
-            <svg v-else width="36" height="36" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="12" fill="#4e3fa5"/><path d="M7 12h10M12 7v10" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg v-else width="36" height="36" viewBox="0 0 24 24" fill="none">
+              <rect width="24" height="24" rx="12" fill="#4e3fa5" />
+              <path
+                d="M7 12h10M12 7v10"
+                stroke="#fff"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
           </div>
           <div class="partner-info">
             <div class="partner-name">{{ partner.name }}</div>
@@ -143,112 +192,122 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
     <WeGoFastFooter />
   </div>
-  
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from "vue";
 // 图片 import
-import aboutus01 from '@/assets/about/aboutus01.png'
-import aboutus02 from '@/assets/about/aboutus02.png'
-import aboutus07 from '@/assets/about/aboutus07.png'
-import aboutus03 from '@/assets/about/aboutus03.png'
-import aboutus04 from '@/assets/about/aboutus04.png'
-import aboutus05 from '@/assets/about/aboutus05.png'
-import aboutus06 from '@/assets/about/aboutus06.png'
-import PHDWang from '@/assets/about/PHD-wang.jpg'
-import HakeemO from '@/assets/about/Hakeem O. Lawal, Ph.D..jpg'
-import WeGoFastFooter from '@/components/WeGoFastFooter.vue'
+import aboutus01 from "@/assets/about/aboutus01.png";
+import aboutus02 from "@/assets/about/aboutus02.png";
+import aboutus07 from "@/assets/about/aboutus07.png";
+import aboutus03 from "@/assets/about/aboutus03.png";
+import aboutus04 from "@/assets/about/aboutus04.png";
+import aboutus05 from "@/assets/about/aboutus05.png";
+import aboutus06 from "@/assets/about/aboutus06.png";
+import PHDWang from "@/assets/about/PHD-wang.jpg";
+import HakeemO from "@/assets/about/Hakeem O. Lawal, Ph.D..jpg";
+import WeGoFastFooter from "@/components/WeGoFastFooter.vue";
 const scrollTo = (id) => {
   const el = document.getElementById(id);
   if (el) {
     // 获取navbar的实际高度
-    const navbar = document.querySelector('.navbar');
+    const navbar = document.querySelector(".navbar");
     const navbarHeight = navbar ? navbar.offsetHeight : 50;
-    
+
     console.log(`Scrolling to ${id}:`, {
       elementTop: el.offsetTop,
-      navbarHeight: navbarHeight
+      navbarHeight: navbarHeight,
     });
-    
+
     // 使用scrollIntoView，但先滚动到目标位置上方
     const elementPosition = el.offsetTop - navbarHeight - 20;
     window.scrollTo({
       top: elementPosition,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
-    
+
     // 备用方法：如果上面的方法不工作，使用scrollIntoView
     setTimeout(() => {
-      el.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
+      el.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
       });
     }, 100);
   } else {
     console.error(`Element with id "${id}" not found`);
   }
-}
+};
 
 const businessList = [
   {
-          img: aboutus03,
-    title: 'Focus on Clinical Applications and Development of Immune Genomics',
-    desc: 'Applying immune repertoire sequencing and analysis technologies to clinical diagnosis and treatment.'
+    img: aboutus03,
+    title: "Advanced Digital PCR Systems",
+    desc: "High-performance digital PCR instruments offering ultra-sensitive quantitative detection for rare mutation analysis, copy number variation, and infectious disease monitoring in research and clinical applications.",
   },
   {
-          img: aboutus04,
-    title: 'Jianlipu Immune System Health Assessment',
-    desc: 'Dynamic monitoring of individual immunity using fingertip blood, enabling comprehensive health evaluation.'
+    img: aboutus04,
+    title: "Fluorescent Microspheres & Magnetic Beads",
+    desc: "Customizable microbead platforms engineered with proprietary surface chemistry for diagnostics, therapeutics, and molecular biology applications including nucleic acid extraction and protein purification.",
   },
   {
-          img: aboutus05,
-    title: 'Diverse Immune Repertoire Research Services',
-    desc: 'Comprehensive and quantitative immune repertoire analysis services for human and mouse bulk and single-cell samples.'
+    img: aboutus05,
+    title: "Next-Generation Sequencing Services",
+    desc: "Comprehensive NGS solutions including DNA sequencing, RNA sequencing, single-cell sequencing, and 16S/ITS microbiome analysis with fast turnaround times and expert data analysis support.",
   },
   {
-          img: aboutus06,
-    title: 'Antibody Drug and Vaccine Development',
-    desc: 'Screening antibodies or targets related to tumor, infection, and autoimmune disease treatment to support drug and vaccine development.'
-  }
+    img: aboutus06,
+    title: "AI-Powered Bioinformatics & Data Analysis",
+    desc: "Advanced multi-omics data analysis services bridging complex biological data and actionable insights, supporting academic research, biotechnology development, and clinical translation.",
+  },
 ];
 
 const teamList = [
   {
     img: HakeemO,
-    name: 'Hakeem O. Lawal, Ph.D.',
-    role: 'Professor & Vice Chair',
-    desc: `Professor & Vice Chair, Department of Biological Sciences, Delaware State University. Dr. Lawal received his B.S. in Microbiology from the University of Lagos, and his M.S. and Ph.D. in Molecular and Cell Biology from The University of Alabama. He completed postdoctoral training at UCLA. His research focuses on the molecular mechanisms underlying neurodegenerative diseases such as Parkinson’s and Alzheimer’s, with expertise in neuroscience, imaging, electrophysiology, and Drosophila genetics. Dr. Lawal has led multiple NSF and NIH-funded projects, published extensively on neurotransmitter transporters and neurobiology, and is committed to mentoring, collaborative research, and fostering inclusive excellence in STEM.`
-  }
+    name: "Hakeem O. Lawal, Ph.D.",
+    role: "Professor & Vice Chair",
+    desc: `Professor & Vice Chair, Department of Biological Sciences, Delaware State University. Dr. Lawal received his B.S. in Microbiology from the University of Lagos, and his M.S. and Ph.D. in Molecular and Cell Biology from The University of Alabama. He completed postdoctoral training at UCLA. His research focuses on the molecular mechanisms underlying neurodegenerative diseases such as Parkinson’s and Alzheimer’s, with expertise in neuroscience, imaging, electrophysiology, and Drosophila genetics. Dr. Lawal has led multiple NSF and NIH-funded projects, published extensively on neurotransmitter transporters and neurobiology, and is committed to mentoring, collaborative research, and fostering inclusive excellence in STEM.`,
+  },
 ];
 
-const awards = [
-  { name: 'Frost & Sullivan Technology Innovation and Leadership Award', year: '2006', img: '' },
-  { name: 'Wall Street Journal Technology Innovation Award', year: '2007', img: '' },
-  { name: 'China NGS Innovator Conference "Outstanding Contribution to Gene Application Award"', year: '2018', img: '' },
-  { name: 'Top 10 Innovative Biotech Companies', year: '2020', img: '' },
-  { name: 'Best Clinical Application Award', year: '2021', img: '' },
-]
+// const awards = [
+//   {
+//     name: "Frost & Sullivan Technology Innovation and Leadership Award",
+//     year: "2006",
+//     img: "",
+//   },
+//   {
+//     name: "Wall Street Journal Technology Innovation Award",
+//     year: "2007",
+//     img: "",
+//   },
+//   {
+//     name: 'China NGS Innovator Conference "Outstanding Contribution to Gene Application Award"',
+//     year: "2018",
+//     img: "",
+//   },
+//   { name: "Top 10 Innovative Biotech Companies", year: "2020", img: "" },
+//   { name: "Best Clinical Application Award", year: "2021", img: "" },
+// ];
 
-const partners = [
-  { name: 'Nanjing University', type: 'University', logo: '' },
-  { name: 'Fudan University', type: 'University', logo: '' },
-  { name: 'Peking Union Medical College Hospital', type: 'Hospital', logo: '' },
-  { name: 'Jiangsu Provincial Hospital', type: 'Hospital', logo: '' },
-  { name: 'BGI Genomics', type: 'Company', logo: '' },
-  { name: 'Thermo Fisher Scientific', type: 'Company', logo: '' },
-  { name: 'Nanjing Drum Tower Hospital', type: 'Hospital', logo: '' },
-  { name: 'Shanghai Jiao Tong University', type: 'University', logo: '' },
-  { name: 'Roche Diagnostics', type: 'Company', logo: '' },
-  { name: 'Zhongshan Hospital', type: 'Hospital', logo: '' },
-]
+// const partners = [
+//   { name: "Nanjing University", type: "University", logo: "" },
+//   { name: "Fudan University", type: "University", logo: "" },
+//   { name: "Peking Union Medical College Hospital", type: "Hospital", logo: "" },
+//   { name: "Jiangsu Provincial Hospital", type: "Hospital", logo: "" },
+//   { name: "BGI Genomics", type: "Company", logo: "" },
+//   { name: "Thermo Fisher Scientific", type: "Company", logo: "" },
+//   { name: "Nanjing Drum Tower Hospital", type: "Hospital", logo: "" },
+//   { name: "Shanghai Jiao Tong University", type: "University", logo: "" },
+//   { name: "Roche Diagnostics", type: "Company", logo: "" },
+//   { name: "Zhongshan Hospital", type: "Hospital", logo: "" },
+// ];
 </script>
 
 <style lang="less" scoped>
-
 .container {
   width: 100%;
   min-height: 100vh;
@@ -260,7 +319,7 @@ const partners = [
   padding-bottom: 0 !important;
 }
 
-.header{
+.header {
   width: 100%;
   height: 450px;
   position: relative;
@@ -273,22 +332,26 @@ const partners = [
   left: 0;
   width: 100%;
   height: 100%;
-  
+
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
   }
-  
+
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.4) 0%,
+      rgba(0, 0, 0, 0.2) 100%
+    );
     z-index: 1;
   }
 }
@@ -307,7 +370,7 @@ const partners = [
   max-width: 800px;
   margin-left: 10%;
   margin-top: 0;
-  
+
   .banner-title {
     font-size: 3.2rem;
     font-weight: 700;
@@ -315,7 +378,7 @@ const partners = [
     line-height: 1.2;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
-  
+
   .banner-divider {
     width: 80%;
     height: 3px;
@@ -325,9 +388,9 @@ const partners = [
     border-radius: 1px;
     position: relative;
   }
-  
+
   .banner-divider::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -344,7 +407,7 @@ const partners = [
     );
     background-size: 12px 3px;
   }
-  
+
   .banner-subtitle {
     font-size: 1.3rem;
     margin-bottom: 1.5rem;
@@ -352,25 +415,25 @@ const partners = [
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   }
 }
-.navbar{
+.navbar {
   width: 100%;
   height: 50px;
   position: relative;
-  background-color:rgba(42, 59, 119, 0.5) ;
+  background-color: rgba(42, 59, 119, 0.5);
   margin-top: -50px;
   z-index: 10;
-  .nav-inner-container{
+  .nav-inner-container {
     height: 100%;
     max-width: 1400px;
     margin: 0 auto;
-    .nav-container{
+    .nav-container {
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: flex-start;
       padding: 0 20px;
       gap: 30px;
-      span{
+      span {
         color: #ffffff;
         font-size: 20px;
         font-weight: 400;
@@ -379,12 +442,12 @@ const partners = [
         cursor: pointer;
         transition: all 0.3s ease;
         border-radius: 4px;
-        
+
         &:hover {
           background-color: rgba(255, 255, 255, 0.1);
           transform: translateY(-1px);
         }
-        
+
         &:active {
           transform: translateY(0);
         }
@@ -433,6 +496,18 @@ const partners = [
   transform: translateX(-40px);
   animation: fadeInLeft 1s 0.2s forwards;
 }
+
+.aboutus-overview-text h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #00bc97;
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, #00bc97 0%, #4e3fa5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .aboutus-overview-text p {
   font-size: 1.18rem;
   color: rgb(102, 102, 102);
@@ -471,21 +546,21 @@ const partners = [
   .header {
     height: 400px;
   }
-  
+
   .banner-text {
     .banner-title {
       font-size: 2.8rem;
     }
-    
+
     .banner-subtitle {
       font-size: 1.2rem;
     }
-    
+
     .banner-divider {
       width: 75%;
     }
   }
-  
+
   .aboutus-overview-inner {
     flex-direction: column;
     padding: 0 12px;
@@ -494,7 +569,8 @@ const partners = [
     width: 100%;
     margin: 0 auto;
   }
-  .aboutus-overview-text, .aboutus-overview-img {
+  .aboutus-overview-text,
+  .aboutus-overview-img {
     animation: none;
     opacity: 1;
     transform: none;
@@ -504,24 +580,24 @@ const partners = [
   .header {
     height: 350px;
   }
-  
+
   .banner-text {
     margin-left: 5%;
-    
+
     .banner-title {
       font-size: 2.2rem;
       margin-bottom: 12px;
     }
-    
+
     .banner-subtitle {
       font-size: 1.1rem;
     }
-    
+
     .banner-divider {
       width: 70%;
     }
   }
-  
+
   .aboutus-overview {
     padding: 32px 12px;
   }
@@ -533,6 +609,11 @@ const partners = [
     width: 100%;
     min-width: 0;
   }
+  .aboutus-overview-text h3 {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+  }
+
   .aboutus-overview-text p {
     font-size: 1rem;
     margin-bottom: 12px;
@@ -584,10 +665,11 @@ const partners = [
     transform: translateY(-6px) scale(1.03);
     .business-img img {
       transform: scale(1.08);
-      box-shadow: 0 8px 32px 0 rgba(90,79,207,0.10);
+      box-shadow: 0 8px 32px 0 rgba(90, 79, 207, 0.1);
     }
   }
-  &:last-child, &:nth-last-child(2) {
+  &:last-child,
+  &:nth-last-child(2) {
     border-bottom: none;
   }
 }
@@ -708,7 +790,7 @@ const partners = [
   display: block;
   background: #eee;
   border-radius: 16px;
-  box-shadow: 0 4px 32px 0 rgba(90,79,207,0.06);
+  box-shadow: 0 4px 32px 0 rgba(90, 79, 207, 0.06);
   transition: box-shadow 0.3s;
 }
 .chief-info {
@@ -765,7 +847,8 @@ const partners = [
   background: none;
   border-bottom: 1px solid #ececec;
   padding-bottom: 18px;
-  &:last-child, &:nth-last-child(2) {
+  &:last-child,
+  &:nth-last-child(2) {
     border-bottom: none;
   }
 }
@@ -779,11 +862,11 @@ const partners = [
   border: 2.5px solid #e0e7ef;
   margin-right: 24px;
   transition: transform 0.3s, box-shadow 0.3s;
-  box-shadow: 0 2px 12px 0 rgba(90,79,207,0.06);
+  box-shadow: 0 2px 12px 0 rgba(90, 79, 207, 0.06);
 }
 .team-member:hover .member-photo img {
   transform: scale(1.07);
-  box-shadow: 0 6px 24px 0 rgba(90,79,207,0.13);
+  box-shadow: 0 6px 24px 0 rgba(90, 79, 207, 0.13);
 }
 .member-info {
   flex: 1;
@@ -901,7 +984,7 @@ const partners = [
   display: block;
   background: #eee;
   border-radius: 16px;
-  box-shadow: 0 4px 32px 0 rgba(90,79,207,0.06);
+  box-shadow: 0 4px 32px 0 rgba(90, 79, 207, 0.06);
   transition: box-shadow 0.3s;
 }
 .chief-info {
@@ -958,7 +1041,8 @@ const partners = [
   background: none;
   border-bottom: 1px solid #ececec;
   padding-bottom: 18px;
-  &:last-child, &:nth-last-child(2) {
+  &:last-child,
+  &:nth-last-child(2) {
     border-bottom: none;
   }
 }
@@ -972,11 +1056,11 @@ const partners = [
   border: 2.5px solid #e0e7ef;
   margin-right: 24px;
   transition: transform 0.3s, box-shadow 0.3s;
-  box-shadow: 0 2px 12px 0 rgba(90,79,207,0.06);
+  box-shadow: 0 2px 12px 0 rgba(90, 79, 207, 0.06);
 }
 .team-member:hover .member-photo img {
   transform: scale(1.07);
-  box-shadow: 0 6px 24px 0 rgba(90,79,207,0.13);
+  box-shadow: 0 6px 24px 0 rgba(90, 79, 207, 0.13);
 }
 .member-info {
   flex: 1;
@@ -1056,7 +1140,7 @@ const partners = [
 .award-item {
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
   padding: 28px 32px;
   display: flex;
   align-items: center;
@@ -1067,7 +1151,7 @@ const partners = [
   transition: box-shadow 0.2s, transform 0.2s;
 }
 .award-item:hover {
-  box-shadow: 0 8px 32px rgba(0,188,151,0.13);
+  box-shadow: 0 8px 32px rgba(0, 188, 151, 0.13);
   transform: translateY(-4px) scale(1.03);
 }
 .award-icon {
@@ -1131,7 +1215,7 @@ const partners = [
 .partner-item {
   background: #f7fafd;
   border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   padding: 22px 28px;
   display: flex;
   align-items: center;
@@ -1142,7 +1226,7 @@ const partners = [
   transition: box-shadow 0.2s, transform 0.2s;
 }
 .partner-item:hover {
-  box-shadow: 0 8px 32px rgba(0,188,151,0.13);
+  box-shadow: 0 8px 32px rgba(0, 188, 151, 0.13);
   transform: translateY(-2px) scale(1.02);
 }
 .partner-logo {
