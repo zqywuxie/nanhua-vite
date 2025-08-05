@@ -115,7 +115,7 @@
       :closable="true"
       :width="280"
       class="mobile-drawer"
-      @close="showMobileMenu = false"
+      @close="handleMobileMenuClose"
     >
       <div class="mobile-menu-content">
         <!-- CONTACT US 蓝色按钮 -->
@@ -126,7 +126,7 @@
             () => {
               resetScrollPosition();
               router.push('/contact_us');
-              showMobileMenu = false;
+              handleMobileMenuClose();
             }
           "
           block
@@ -134,11 +134,7 @@
           CONTACT US
         </a-button>
         <div class="mobile-menu-body">
-          <a-menu
-            mode="inline"
-            :selected-keys="[activeMobileMenu]"
-            @select="handleMobileMenuSelect"
-          >
+          <div class="custom-mobile-menu">
             <template
               v-for="item in filteredNavItems.filter(
                 (i) => i.key !== 'contact_us'
@@ -146,52 +142,93 @@
               :key="item.key"
             >
               <!-- 有子菜单的项目 -->
-              <a-sub-menu
+              <div
                 v-if="item.children && item.children.length > 0"
-                :key="`submenu-${item.key}`"
-                :title="item.title"
+                class="mobile-menu-group"
               >
-                <template v-for="subItem in item.children" :key="subItem.key">
-                  <!-- 二级子菜单 -->
-                  <a-sub-menu
-                    v-if="subItem.children && subItem.children.length > 0"
-                    :key="`submenu-${subItem.key}`"
-                    :title="subItem.title"
+                <!-- 主菜单项 - 可点击 -->
+                <div
+                  class="mobile-menu-main-item"
+                  :class="{ active: activeMobileMenu === item.key }"
+                  @click="handleMobileMainMenuClick(item)"
+                >
+                  <span class="menu-title">{{ item.title }}</span>
+                  <span
+                    class="menu-arrow"
+                    :class="{ expanded: expandedMenus.includes(item.key) }"
+                    @click.stop="toggleMobileSubmenu(item.key)"
                   >
-                    <a-menu-item
-                      v-for="subSubItem in subItem.children"
-                      :key="subSubItem.key"
-                      @click="handleMobileSubMenuClick(subSubItem)"
+                    ▼
+                  </span>
+                </div>
+
+                <!-- 子菜单 -->
+                <div
+                  v-show="expandedMenus.includes(item.key)"
+                  class="mobile-submenu"
+                >
+                  <template v-for="subItem in item.children" :key="subItem.key">
+                    <!-- 二级子菜单 -->
+                    <div
+                      v-if="subItem.children && subItem.children.length > 0"
+                      class="mobile-submenu-group"
                     >
-                      <template #icon>
-                        <a-icon :type="subSubItem.icon" />
-                      </template>
-                      {{ subSubItem.title }}
-                    </a-menu-item>
-                  </a-sub-menu>
-                  <!-- 一级子菜单 -->
-                  <a-menu-item
-                    v-else
-                    :key="`item-${subItem.key}`"
-                    @click="handleMobileSubMenuClick(subItem)"
-                  >
-                    <template #icon>
-                      <a-icon :type="subItem.icon" />
-                    </template>
-                    {{ subItem.title }}
-                  </a-menu-item>
-                </template>
-              </a-sub-menu>
+                      <div
+                        class="mobile-submenu-title"
+                        :class="{ active: activeMobileMenu === subItem.key }"
+                        @click="handleMobileSubMenuClick(subItem)"
+                      >
+                        {{ subItem.title }}
+                        <span
+                          class="submenu-arrow"
+                          :class="{
+                            expanded: expandedSubMenus.includes(subItem.key),
+                          }"
+                          @click.stop="toggleMobileSubSubmenu(subItem.key)"
+                        >
+                          ▼
+                        </span>
+                      </div>
+                      <div
+                        v-show="expandedSubMenus.includes(subItem.key)"
+                        class="mobile-sub-submenu"
+                      >
+                        <div
+                          v-for="subSubItem in subItem.children"
+                          :key="subSubItem.key"
+                          class="mobile-sub-submenu-item"
+                          :class="{
+                            active: activeMobileMenu === subSubItem.key,
+                          }"
+                          @click="handleMobileSubMenuClick(subSubItem)"
+                        >
+                          {{ subSubItem.title }}
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 一级子菜单 -->
+                    <div
+                      v-else
+                      class="mobile-submenu-item"
+                      :class="{ active: activeMobileMenu === subItem.key }"
+                      @click="handleMobileSubMenuClick(subItem)"
+                    >
+                      {{ subItem.title }}
+                    </div>
+                  </template>
+                </div>
+              </div>
               <!-- 无子菜单的项目 -->
-              <a-menu-item
+              <div
                 v-else
-                :key="`item-${item.key}`"
+                class="mobile-menu-simple-item"
+                :class="{ active: activeMobileMenu === item.key }"
                 @click="handleMobileMenuClick(item)"
               >
                 {{ item.title }}
-              </a-menu-item>
+              </div>
             </template>
-          </a-menu>
+          </div>
         </div>
       </div>
     </a-drawer>
@@ -223,6 +260,8 @@ const isMobile = ref(false);
 const isTablet = ref(false);
 const showMobileMenu = ref(false);
 const activeMobileMenu = ref("");
+const expandedMenus = ref([]);
+const expandedSubMenus = ref([]);
 
 // 检测屏幕尺寸
 const checkScreenSize = () => {
@@ -884,8 +923,9 @@ const handleMobileMenuClick = (item) => {
   resetScrollPosition();
 
   if (item.path) {
+    activeMobileMenu.value = item.key;
     router.push(item.path);
-    showMobileMenu.value = false;
+    handleMobileMenuClose();
   }
 };
 
@@ -894,9 +934,58 @@ const handleMobileSubMenuClick = (item) => {
   resetScrollPosition();
 
   if (item.path) {
+    activeMobileMenu.value = item.key;
     router.push(item.path);
-    showMobileMenu.value = false;
+    handleMobileMenuClose();
   }
+};
+
+// 新增：处理主菜单项点击（可以直接跳转到主页面）
+const handleMobileMainMenuClick = (item) => {
+  // 立即重置滚动位置
+  resetScrollPosition();
+
+  if (item.path) {
+    activeMobileMenu.value = item.key;
+    router.push(item.path);
+    handleMobileMenuClose();
+  }
+};
+
+// 新增：切换子菜单展开/收起
+const toggleMobileSubmenu = (key) => {
+  const index = expandedMenus.value.indexOf(key);
+  if (index > -1) {
+    expandedMenus.value.splice(index, 1);
+    // 收起主菜单时，也收起所有子菜单
+    expandedSubMenus.value = expandedSubMenus.value.filter((subKey) => {
+      const parentItem = navItems.value.find((item) => item.key === key);
+      if (parentItem && parentItem.children) {
+        return !parentItem.children.some((child) => child.key === subKey);
+      }
+      return true;
+    });
+  } else {
+    expandedMenus.value.push(key);
+  }
+};
+
+// 新增：切换二级子菜单展开/收起
+const toggleMobileSubSubmenu = (key) => {
+  const index = expandedSubMenus.value.indexOf(key);
+  if (index > -1) {
+    expandedSubMenus.value.splice(index, 1);
+  } else {
+    expandedSubMenus.value.push(key);
+  }
+};
+
+// 新增：处理抽屉菜单关闭
+const handleMobileMenuClose = () => {
+  showMobileMenu.value = false;
+  // 重置所有展开状态
+  expandedMenus.value = [];
+  expandedSubMenus.value = [];
 };
 
 // 监听路由变化，重置滚动位置
@@ -1169,22 +1258,175 @@ function resetScrollPosition() {
   flex: 1;
   overflow-y: auto;
   padding: 16px 0;
+}
 
-  .ant-menu {
-    border-right: none;
+// 自定义移动端菜单样式
+.custom-mobile-menu {
+  .mobile-menu-group {
+    margin-bottom: 8px;
+  }
 
-    .ant-menu-submenu-title {
-      font-size: 16px;
-      font-weight: 500;
+  .mobile-menu-main-item,
+  .mobile-menu-simple-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    background: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 4px;
+    border: 1px solid #f0f0f0;
+    -webkit-tap-highlight-color: rgba(43, 123, 191, 0.2);
+    touch-action: manipulation;
+
+    &:hover {
+      background: #f8f9fa;
+      border-color: #2b7bbf;
     }
 
-    .ant-menu-item {
+    &.active {
+      background: #e6f7ff;
+      color: #2b7bbf;
+      border-color: #2b7bbf;
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+    .menu-title {
+      flex: 1;
+    }
+
+    .menu-arrow {
+      font-size: 12px;
+      color: #666;
+      transition: transform 0.3s ease;
+      padding: 4px;
+      margin-left: 8px;
+
+      &.expanded {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .mobile-submenu {
+    margin-left: 16px;
+    margin-top: 4px;
+    border-left: 2px solid #f0f0f0;
+    padding-left: 12px;
+
+    .mobile-submenu-group {
+      margin-bottom: 4px;
+    }
+
+    .mobile-submenu-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
       font-size: 14px;
-      padding-left: 48px !important;
+      font-weight: 500;
+      color: #555;
+      background: #fafafa;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 2px;
+      -webkit-tap-highlight-color: rgba(43, 123, 191, 0.2);
+      touch-action: manipulation;
+
+      &:hover {
+        background: #f0f0f0;
+        color: #2b7bbf;
+      }
+
+      &.active {
+        background: #e6f7ff;
+        color: #2b7bbf;
+      }
+
+      &:active {
+        transform: scale(0.98);
+      }
+
+      .submenu-arrow {
+        font-size: 10px;
+        color: #666;
+        transition: transform 0.3s ease;
+        padding: 2px;
+
+        &.expanded {
+          transform: rotate(180deg);
+        }
+      }
     }
 
-    .ant-menu-submenu .ant-menu-item {
-      padding-left: 72px !important;
+    .mobile-submenu-item {
+      padding: 8px 12px;
+      font-size: 14px;
+      color: #666;
+      background: #fafafa;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 2px;
+      -webkit-tap-highlight-color: rgba(43, 123, 191, 0.2);
+      touch-action: manipulation;
+
+      &:hover {
+        background: #f0f0f0;
+        color: #2b7bbf;
+      }
+
+      &.active {
+        background: #e6f7ff;
+        color: #2b7bbf;
+      }
+
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+
+    .mobile-sub-submenu {
+      margin-left: 12px;
+      margin-top: 2px;
+      border-left: 1px solid #e0e0e0;
+      padding-left: 8px;
+
+      .mobile-sub-submenu-item {
+        padding: 6px 8px;
+        font-size: 13px;
+        color: #777;
+        background: #f8f8f8;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-bottom: 2px;
+        -webkit-tap-highlight-color: rgba(43, 123, 191, 0.2);
+        touch-action: manipulation;
+
+        &:hover {
+          background: #f0f0f0;
+          color: #2b7bbf;
+        }
+
+        &.active {
+          background: #e6f7ff;
+          color: #2b7bbf;
+        }
+
+        &:active {
+          transform: scale(0.98);
+        }
+      }
     }
   }
 }

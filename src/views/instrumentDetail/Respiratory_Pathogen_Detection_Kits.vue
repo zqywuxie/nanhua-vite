@@ -1,59 +1,114 @@
 <template>
-  <div class="detail-page">
-    <!-- 面包屑导航 -->
-    <nav class="breadcrumb-nav">
-      <a href="/">Home</a> &gt;&gt; <a href="/products">PRODUCTS</a> &gt;&gt; <a href="/instrumentDetail/Digital_PCR_Panel_Catalog">Digital PCR Panels</a>
-    </nav>
-    <!-- 顶部主模块：左图右文按钮 -->
-    <div class="main-info-row">
-      <div class="main-img-col">
-        <img :src="imgMain" class="main-img previewable" alt="Respiratory Pathogen Detection Kits" @click="openPreview(imgMain)" />
-      </div>
-      <div class="main-info-col">
-        <h1 class="main-title highlight-title">Respiratory Pathogen Detection Kits</h1>
-        <div class="main-desc">
-          <ul>
-            <li><b>Based on digital PCR technology, the kits can simultaneously detect multiple common respiratory pathogens, including viruses and bacteria.</b></li>
-            <li><b>With high sensitivity and specificity, it can detect low levels of pathogen infection at early stages, providing support for timely diagnosis and treatment.</b></li>
-            <li><b>Suitable for clinical diagnosis, epidemiological research, and public health disease control monitoring.</b></li>
-            <li><b>The kits help medical institutions quickly identify and respond to respiratory infections, especially during flu seasons or outbreaks.</b></li>
-          </ul>
+  <MobileOptimizedContent>
+    <div class="detail-page">
+      <!-- 面包屑导航 -->
+      <nav class="breadcrumb-nav">
+        <a href="/">Home</a> &gt;&gt; <a href="/products">PRODUCTS</a> &gt;&gt;
+        <a href="/instrumentDetail/Digital_PCR_Panel_Catalog"
+          >Digital PCR Panels</a
+        >
+      </nav>
+      <!-- 顶部主模块：左图右文按钮 -->
+      <div class="main-info-row">
+        <div class="main-img-col">
+          <img
+            :src="imgMain"
+            class="main-img previewable"
+            alt="Respiratory Pathogen Detection Kits"
+            @click="openPreview(imgMain)"
+          />
         </div>
-        <div class="main-btns">
-          <a href="/contact_us" class="main-btn contact">Contact Us</a>
-          <a href="#" class="main-btn online">Online</a>
+        <div class="main-info-col">
+          <h1 class="main-title highlight-title">
+            Respiratory Pathogen Detection Kits
+          </h1>
+          <div class="main-desc">
+            <ul>
+              <li>
+                <b
+                  >Based on digital PCR technology, the kits can simultaneously
+                  detect multiple common respiratory pathogens, including
+                  viruses and bacteria.</b
+                >
+              </li>
+              <li>
+                <b
+                  >With high sensitivity and specificity, it can detect low
+                  levels of pathogen infection at early stages, providing
+                  support for timely diagnosis and treatment.</b
+                >
+              </li>
+              <li>
+                <b
+                  >Suitable for clinical diagnosis, epidemiological research,
+                  and public health disease control monitoring.</b
+                >
+              </li>
+              <li>
+                <b
+                  >The kits help medical institutions quickly identify and
+                  respond to respiratory infections, especially during flu
+                  seasons or outbreaks.</b
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="main-btns">
+            <a href="/contact_us" class="main-btn contact">Contact Us</a>
+            <a href="#" class="main-btn online">Online</a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- 详细介绍区块 -->
-    <section class="section-block">
-      <h2 class="section-title">Detailed Introduction</h2>
-      <div class="section-highlight-block">
-        <span>The Multiplex and Ultra-Multiplex respiratory pathogen detection kits combine digital PCR technology to achieve simultaneous detection of various common respiratory pathogens. The efficient multiplex detection capability and exceptional sensitivity play a crucial role in the early diagnosis of respiratory infections, making the kits particularly suitable for rapid response during flu seasons and outbreaks.</span>
+      <!-- 详细介绍区块 -->
+      <section class="section-block">
+        <h2 class="section-title">Detailed Introduction</h2>
+        <div class="section-highlight-block">
+          <span
+            >The Multiplex and Ultra-Multiplex respiratory pathogen detection
+            kits combine digital PCR technology to achieve simultaneous
+            detection of various common respiratory pathogens. The efficient
+            multiplex detection capability and exceptional sensitivity play a
+            crucial role in the early diagnosis of respiratory infections,
+            making the kits particularly suitable for rapid response during flu
+            seasons and outbreaks.</span
+          >
+        </div>
+        <div class="section-highlight-block">
+          <b>Product Catalog:</b>
+        </div>
+        <div class="section-img-row">
+          <img
+            :src="imgCatalog"
+            class="section-img previewable"
+            alt="Respiratory Pathogen Detection Kits Catalog"
+            @click="openPreview(imgCatalog)"
+          />
+        </div>
+      </section>
+      <!-- Prev/Next 区块 -->
+      <div class="prev-next-row">
+        <a class="prev" href="/instrumentDetail/Genetic_Disease_Detection_Kits"
+          >Prev：Genetic Disease Detection Kits</a
+        >
+        <a
+          class="next"
+          href="/instrumentDetail/Trauma_and_Vector-borne_Pathogen_Detection_Kits"
+          >Next：Trauma and Vector-borne Pathogen Detection Kits</a
+        >
       </div>
-      <div class="section-highlight-block">
-        <b>Product Catalog:</b>
+      <div v-if="previewImg" class="img-preview-mask" @click="closePreview">
+        <img :src="previewImg" class="img-preview-large" @click.stop />
       </div>
-      <div class="section-img-row">
-        <img :src="imgCatalog" class="section-img previewable" alt="Respiratory Pathogen Detection Kits Catalog" @click="openPreview(imgCatalog)" />
-      </div>
-    </section>
-    <!-- Prev/Next 区块 -->
-    <div class="prev-next-row">
-      <a class="prev" href="/instrumentDetail/Genetic_Disease_Detection_Kits">Prev：Genetic Disease Detection Kits</a>
-      <a class="next" href="/instrumentDetail/Trauma_and_Vector-borne_Pathogen_Detection_Kits">Next：Trauma and Vector-borne Pathogen Detection Kits</a>
     </div>
-    <div v-if="previewImg" class="img-preview-mask" @click="closePreview">
-      <img :src="previewImg" class="img-preview-large" @click.stop />
-    </div>
-  </div>
+  </MobileOptimizedContent>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import imgMain from '@/assets/instrumentsDetail/Respiratory_Pathogen_Detection_Kits/10001.jpeg';
-import imgCatalog from '@/assets/instrumentsDetail/Respiratory_Pathogen_Detection_Kits/10002.png';
+import { ref } from "vue";
+import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+import imgMain from "@/assets/instrumentsDetail/Respiratory_Pathogen_Detection_Kits/10001.jpeg";
+import imgCatalog from "@/assets/instrumentsDetail/Respiratory_Pathogen_Detection_Kits/10002.png";
 const previewImg = ref(null);
 function openPreview(img) {
   previewImg.value = img;
@@ -83,12 +138,12 @@ function closePreview() {
   width: 70%;
   max-width: 500px;
   border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  box-shadow: 0 4px 24px rgba(25, 118, 210, 0.08);
   transition: box-shadow 0.2s, transform 0.2s;
   cursor: pointer;
 }
 .main-img:hover {
-  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.16);
   transform: scale(1.04);
 }
 .main-info-col {
@@ -128,7 +183,7 @@ function closePreview() {
   background: #1976d2;
   color: #fff;
   text-decoration: none;
-  box-shadow: 0 2px 8px rgba(25,118,210,0.08);
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
   transition: background 0.2s;
 }
 .main-btn.contact {
@@ -170,12 +225,12 @@ function closePreview() {
   width: 70%;
   max-width: 500px;
   border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  box-shadow: 0 4px 24px rgba(25, 118, 210, 0.08);
   transition: box-shadow 0.2s, transform 0.2s;
   cursor: pointer;
 }
 .section-img:hover {
-  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.16);
   transform: scale(1.04);
 }
 .breadcrumb-nav {
@@ -209,8 +264,11 @@ function closePreview() {
 .img-preview-mask {
   position: fixed;
   z-index: 9999;
-  left: 0; top: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.7);
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -219,7 +277,158 @@ function closePreview() {
   max-width: 90vw;
   max-height: 90vh;
   border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(25,118,210,0.18);
+  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.18);
   background: #fff;
 }
-</style> 
+
+/* 移动端优化 */
+@media (max-width: 900px) {
+  .detail-page {
+    padding: 20px 16px 40px 16px;
+  }
+
+  .breadcrumb-nav {
+    font-size: 0.85rem !important;
+    margin-bottom: 20px !important;
+    text-align: center;
+  }
+
+  .breadcrumb-nav a {
+    color: #1976d2 !important;
+    text-decoration: none !important;
+    -webkit-tap-highlight-color: rgba(25, 118, 210, 0.2) !important;
+    touch-action: manipulation !important;
+  }
+
+  .main-info-row {
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  .main-img-col {
+    width: 100%;
+    flex: none;
+    text-align: center;
+  }
+
+  .main-img {
+    width: 80% !important;
+    max-width: 300px !important;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(25, 118, 210, 0.12);
+  }
+
+  .main-title {
+    font-size: 1.8rem !important;
+    margin-bottom: 16px !important;
+    text-align: center;
+  }
+
+  .main-desc {
+    text-align: left;
+    margin-bottom: 20px;
+  }
+
+  .main-desc ul {
+    padding-left: 20px !important;
+    margin: 16px 0 !important;
+  }
+
+  .main-desc li {
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 12px !important;
+  }
+
+  .main-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .main-btn {
+    width: 100% !important;
+    text-align: center !important;
+    padding: 14px 20px !important;
+    font-size: 1rem !important;
+    border-radius: 25px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    -webkit-tap-highlight-color: rgba(25, 118, 210, 0.2) !important;
+    touch-action: manipulation !important;
+  }
+
+  .main-btn:active {
+    transform: scale(0.98) !important;
+  }
+
+  .section-block {
+    margin-bottom: 32px !important;
+    padding: 0 !important;
+  }
+
+  .section-title {
+    font-size: 1.5rem !important;
+    margin-bottom: 20px !important;
+    text-align: center !important;
+  }
+
+  .section-highlight-block {
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+    text-align: justify !important;
+    padding: 16px !important;
+    margin: 20px 0 !important;
+    border-radius: 12px !important;
+  }
+
+  .section-img-row {
+    text-align: center;
+    margin: 20px 0 !important;
+  }
+
+  .section-img {
+    width: 90% !important;
+    max-width: 350px !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .navigation-section {
+    margin-top: 40px !important;
+    padding: 20px !important;
+    background: #f8f9fa !important;
+    border-radius: 12px !important;
+  }
+
+  .nav-links {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  .nav-link {
+    padding: 12px 16px !important;
+    font-size: 0.9rem !important;
+    border-radius: 8px !important;
+    text-align: center !important;
+    -webkit-tap-highlight-color: rgba(25, 118, 210, 0.2) !important;
+    touch-action: manipulation !important;
+  }
+
+  .nav-link:active {
+    transform: scale(0.98) !important;
+  }
+
+  .img-preview-mask {
+    padding: 20px !important;
+  }
+
+  .img-preview-large {
+    max-width: 95vw !important;
+    max-height: 85vh !important;
+    border-radius: 12px !important;
+  }
+}
+</style>

@@ -1,60 +1,181 @@
 <template>
-  <div class="detail-page">
-    <!-- 顶部主模块：左图右文按钮 -->
-    <div class="main-info-row">
-      <div class="main-img-col">
-        <img :src="imgMain" class="main-img previewable" alt="DigitalFuge" @click="openPreview(imgMain)" />
+  <MobileOptimizedContent>
+    <div class="detail-page">
+      <!-- 顶部主模块：左图右文按钮 -->
+      <div class="main-info-row">
+        <div class="main-img-col">
+          <img
+            :src="imgMain"
+            class="main-img previewable"
+            alt="DigitalFuge"
+            @click="openPreview(imgMain)"
+          />
+        </div>
+        <div class="main-info-col">
+          <h1 class="main-title highlight-title">DigitalFuge</h1>
+          <div class="main-desc">
+            <p>
+              <b
+                >Turtle Technology's new DigitalFuge™ Digital Mini Centrifuge is
+                designed to process up to 12 sample tubes simultaneously. Paired
+                seamlessly with Turtle Technology's Digital PCR systems, it
+                synergizes to unlock the efficiency of automation, streamlining
+                the Digital PCR testing process for maximum productivity.</b
+              >
+            </p>
+          </div>
+          <div class="main-btns">
+            <a href="/contact_us" class="main-btn contact">Contact Us</a>
+            <a href="#" class="main-btn online">Online</a>
+          </div>
+        </div>
       </div>
-      <div class="main-info-col">
-        <h1 class="main-title highlight-title">DigitalFuge</h1>
-        <div class="main-desc">
-          <p><b>Turtle Technology's new DigitalFuge™ Digital Mini Centrifuge is designed to process up to 12 sample tubes simultaneously. Paired seamlessly with Turtle Technology's Digital PCR systems, it synergizes to unlock the efficiency of automation, streamlining the Digital PCR testing process for maximum productivity.</b></p>
+      <!-- 详细介绍区块 -->
+      <section class="section-block">
+        <h2 class="section-title">Detailed Introduction</h2>
+        <div class="section-highlight-block">
+          <span
+            >The DigitalFuge™ Mini Centrifuge can process up to 12 samples in a
+            single batch, seamlessly aligning with the 12-sample capacity of
+            Turtle Technology's SCI Digital™ PCR platform. It unleashes a
+            synergistic effect of high efficiency and automation in assay
+            preparation. It also features interchangeable rotorheads compatible
+            with single tubes, 8-strip tubes, and 12-strip tubes, ideal for PCR,
+            small-volume cell or HPLC sample separation, and prevention of
+            liquid adherence to tube walls. It is the preferred choice for
+            handling small-batch centrifugation. Its advanced technology allows
+            for efficient centrifugation in a short period, ensuring uniform
+            sample distribution and optimal results. Moreover, its compact
+            design not only minimizes benchtop space but also offers exceptional
+            user convenience.</span
+          >
         </div>
-        <div class="main-btns">
-          <a href="/contact_us" class="main-btn contact">Contact Us</a>
-          <a href="#" class="main-btn online">Online</a>
+      </section>
+      <!-- 产品特性区块 -->
+      <section class="section-block">
+        <h2 class="section-title">Product Features</h2>
+        <div class="intro-features-cards">
+          <div class="feature-col">
+            <div class="feature-item">
+              <span class="dot"></span>
+              <div>
+                <b>Adjustable speed</b>
+                <div class="feature-desc">500~12000rpm</div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="dot"></span>
+              <div>
+                <b>Motor</b>
+                <div class="feature-desc">
+                  Special DC permanent magnet motor, ultra-quiet
+                </div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="dot"></span>
+              <div>
+                <b>Display</b>
+                <div class="feature-desc">
+                  LCD screen displaying speed and time simultaneously
+                </div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="dot"></span>
+              <div>
+                <b>Rotorhead snap-on design</b>
+                <div class="feature-desc">
+                  Rotorhead replacement without any auxiliary tools, convenient
+                  and fast
+                </div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="dot"></span>
+              <div>
+                <b>Timing function</b>
+                <div class="feature-desc">
+                  Effective centrifugation time range: 1-99 minutes or 1-59
+                  seconds ensuring experiment accuracy
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="feature-col">
+            <div class="feature-item">
+              <span class="dot"></span>
+              <div>
+                <b>Advanced materials</b>
+                <div class="feature-desc">
+                  Resistant to various chemical corrosions; rotorheads are heat
+                  resistance for high-temperature sterilization
+                </div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="dot"></span>
+              <div>
+                <b>Efficient speed control</b>
+                <div class="feature-desc">
+                  Faster acceleration/deceleration rates (peak acceleration time
+                  &lt;12s and peak deceleration time &lt;16s), completing
+                  experiments in a shorter time
+                </div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="dot"></span>
+              <div>
+                <b>Versatility</b>
+                <div class="feature-desc">
+                  Innovative interchangeable rotorheads for single tubes, 8-tube
+                  strips, and 12-tube strips
+                </div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="dot"></span>
+              <div>
+                <b>Exquisite design</b>
+                <div class="feature-desc">
+                  Airduct designed to significantly induce sample temperature
+                  rise during high-speed centrifugation
+                </div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="dot"></span>
+              <div>
+                <b>Size and weight</b>
+                <div class="feature-desc">
+                  Length x Width x Height 190x230x120mm, 2.0 kg (without
+                  rotorhead)
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+        <div class="section-img-row">
+          <img
+            :src="imgFeature"
+            class="section-img previewable"
+            alt="DigitalFuge Features"
+            @click="openPreview(imgFeature)"
+          />
+        </div>
+      </section>
+      <div v-if="previewImg" class="img-preview-mask" @click="closePreview">
+        <img :src="previewImg" class="img-preview-large" @click.stop />
       </div>
     </div>
-    <!-- 详细介绍区块 -->
-    <section class="section-block">
-      <h2 class="section-title">Detailed Introduction</h2>
-      <div class="section-highlight-block">
-        <span>The DigitalFuge™ Mini Centrifuge can process up to 12 samples in a single batch, seamlessly aligning with the 12-sample capacity of Turtle Technology's SCI Digital™ PCR platform. It unleashes a synergistic effect of high efficiency and automation in assay preparation. It also features interchangeable rotorheads compatible with single tubes, 8-strip tubes, and 12-strip tubes, ideal for PCR, small-volume cell or HPLC sample separation, and prevention of liquid adherence to tube walls. It is the preferred choice for handling small-batch centrifugation. Its advanced technology allows for efficient centrifugation in a short period, ensuring uniform sample distribution and optimal results. Moreover, its compact design not only minimizes benchtop space but also offers exceptional user convenience.</span>
-      </div>
-    </section>
-    <!-- 产品特性区块 -->
-    <section class="section-block">
-      <h2 class="section-title">Product Features</h2>
-      <div class="intro-features-cards">
-        <div class="feature-col">
-          <div class="feature-item"><span class="dot"></span><div><b>Adjustable speed</b><div class="feature-desc">500~12000rpm</div></div></div>
-          <div class="feature-item"><span class="dot"></span><div><b>Motor</b><div class="feature-desc">Special DC permanent magnet motor, ultra-quiet</div></div></div>
-          <div class="feature-item"><span class="dot"></span><div><b>Display</b><div class="feature-desc">LCD screen displaying speed and time simultaneously</div></div></div>
-          <div class="feature-item"><span class="dot"></span><div><b>Rotorhead snap-on design</b><div class="feature-desc">Rotorhead replacement without any auxiliary tools, convenient and fast</div></div></div>
-          <div class="feature-item"><span class="dot"></span><div><b>Timing function</b><div class="feature-desc">Effective centrifugation time range: 1-99 minutes or 1-59 seconds ensuring experiment accuracy</div></div></div>
-        </div>
-        <div class="feature-col">
-          <div class="feature-item"><span class="dot"></span><div><b>Advanced materials</b><div class="feature-desc">Resistant to various chemical corrosions; rotorheads are heat resistance for high-temperature sterilization</div></div></div>
-          <div class="feature-item"><span class="dot"></span><div><b>Efficient speed control</b><div class="feature-desc">Faster acceleration/deceleration rates (peak acceleration time <12s and peak deceleration time <16s), completing experiments in a shorter time</div></div></div>
-          <div class="feature-item"><span class="dot"></span><div><b>Versatility</b><div class="feature-desc">Innovative interchangeable rotorheads for single tubes, 8-tube strips, and 12-tube strips</div></div></div>
-          <div class="feature-item"><span class="dot"></span><div><b>Exquisite design</b><div class="feature-desc">Airduct designed to significantly induce sample temperature rise during high-speed centrifugation</div></div></div>
-          <div class="feature-item"><span class="dot"></span><div><b>Size and weight</b><div class="feature-desc">Length x Width x Height 190x230x120mm, 2.0 kg (without rotorhead)</div></div></div>
-        </div>
-      </div>
-      <div class="section-img-row">
-        <img :src="imgFeature" class="section-img previewable" alt="DigitalFuge Features" @click="openPreview(imgFeature)" />
-      </div>
-    </section>
-    <div v-if="previewImg" class="img-preview-mask" @click="closePreview">
-      <img :src="previewImg" class="img-preview-large" @click.stop />
-    </div>
-  </div>
+  </MobileOptimizedContent>
 </template>
 <script setup>
-import { ref } from 'vue';
-import imgMain from '@/assets/instrumentsDetail/DigitalFuge/10001.jpg';
-import imgFeature from '@/assets/instrumentsDetail/DigitalFuge/10002.png';
+import { ref } from "vue";
+import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+import imgMain from "@/assets/instrumentsDetail/DigitalFuge/10001.jpg";
+import imgFeature from "@/assets/instrumentsDetail/DigitalFuge/10002.png";
 const previewImg = ref(null);
 function openPreview(img) {
   previewImg.value = img;
@@ -83,12 +204,12 @@ function closePreview() {
   width: 70%;
   max-width: 500px;
   border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  box-shadow: 0 4px 24px rgba(25, 118, 210, 0.08);
   transition: box-shadow 0.2s, transform 0.2s;
   cursor: pointer;
 }
 .main-img:hover {
-  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.16);
   transform: scale(1.04);
 }
 .main-info-col {
@@ -122,7 +243,7 @@ function closePreview() {
   background: #1976d2;
   color: #fff;
   text-decoration: none;
-  box-shadow: 0 2px 8px rgba(25,118,210,0.08);
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
   transition: background 0.2s;
 }
 .main-btn.contact {
@@ -164,7 +285,7 @@ function closePreview() {
   width: 80%;
   max-width: 700px;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(25,118,210,0.08);
+  box-shadow: 0 2px 12px rgba(25, 118, 210, 0.08);
 }
 .intro-features-cards {
   display: flex;
@@ -185,7 +306,7 @@ function closePreview() {
   border-radius: 8px;
   padding: 16px 18px;
   font-size: 1.05rem;
-  box-shadow: 0 1px 4px rgba(25,118,210,0.04);
+  box-shadow: 0 1px 4px rgba(25, 118, 210, 0.04);
 }
 .feature-item .dot {
   width: 14px;
@@ -214,19 +335,22 @@ function closePreview() {
   width: 70%;
   max-width: 500px;
   border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  box-shadow: 0 4px 24px rgba(25, 118, 210, 0.08);
   transition: box-shadow 0.2s, transform 0.2s;
   cursor: pointer;
 }
 .section-img:hover {
-  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.16);
   transform: scale(1.04);
 }
 .img-preview-mask {
   position: fixed;
   z-index: 9999;
-  left: 0; top: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.7);
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -235,21 +359,156 @@ function closePreview() {
   max-width: 90vw;
   max-height: 90vh;
   border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(25,118,210,0.18);
+  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.18);
   background: #fff;
 }
+/* 移动端优化 */
 @media (max-width: 900px) {
+  .detail-page {
+    padding: 20px 16px 40px 16px;
+  }
+
   .main-info-row {
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
+    margin-bottom: 32px;
   }
+
   .main-img-col {
     width: 100%;
     flex: none;
+    text-align: center;
   }
+
+  .main-img {
+    width: 80% !important;
+    max-width: 300px !important;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(25, 118, 210, 0.12);
+  }
+
+  .main-title {
+    font-size: 1.8rem !important;
+    margin-bottom: 16px !important;
+    text-align: center;
+  }
+
+  .main-desc {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .main-desc p {
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+    margin: 8px 0 !important;
+  }
+
+  .main-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .main-btn {
+    width: 100% !important;
+    text-align: center !important;
+    padding: 14px 20px !important;
+    font-size: 1rem !important;
+    border-radius: 25px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    -webkit-tap-highlight-color: rgba(25, 118, 210, 0.2) !important;
+    touch-action: manipulation !important;
+  }
+
+  .main-btn:active {
+    transform: scale(0.98) !important;
+  }
+
+  .section-block {
+    margin-bottom: 32px !important;
+    padding: 0 !important;
+  }
+
+  .section-title {
+    font-size: 1.5rem !important;
+    margin-bottom: 20px !important;
+    text-align: center !important;
+  }
+
+  .section-highlight-block {
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+    text-align: justify !important;
+    padding: 16px !important;
+    margin: 20px 0 !important;
+    border-radius: 12px !important;
+  }
+
   .intro-features-cards {
     flex-direction: column;
-    gap: 18px;
+    gap: 16px;
+  }
+
+  .feature-col {
+    width: 100% !important;
+  }
+
+  .feature-item {
+    padding: 16px !important;
+    margin-bottom: 12px !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
+    background: #f8f9fa !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  .feature-item .dot {
+    width: 8px !important;
+    height: 8px !important;
+    background: #1976d2 !important;
+    border-radius: 50% !important;
+    margin-top: 6px !important;
+    flex-shrink: 0;
+  }
+
+  .feature-item b {
+    font-size: 1rem !important;
+    color: #1976d2 !important;
+    display: block !important;
+    margin-bottom: 8px !important;
+  }
+
+  .feature-desc {
+    font-size: 0.85rem !important;
+    line-height: 1.5 !important;
+    color: #555 !important;
+  }
+
+  .section-img-row {
+    text-align: center;
+    margin: 20px 0 !important;
+  }
+
+  .section-img-row img {
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .img-preview-mask {
+    padding: 20px !important;
+  }
+
+  .img-preview-large {
+    max-width: 95vw !important;
+    max-height: 85vh !important;
+    border-radius: 12px !important;
   }
 }
 </style> 

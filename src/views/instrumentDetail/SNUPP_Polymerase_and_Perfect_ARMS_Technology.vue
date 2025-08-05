@@ -1,64 +1,103 @@
 <template>
-  <div class="detail-page">
-    <!-- 面包屑导航 -->
-    <nav class="breadcrumb-nav">
-      <a href="/">Home</a> &gt;&gt; <a href="/products">PRODUCTS</a> &gt;&gt; <a href="/instrumentDetail/SNUPP">SNUPP Polymerase</a>
-    </nav>
-    <!-- 顶部主模块：左图右文按钮 -->
-    <div class="main-info-row">
-      <div class="main-img-col">
-        <img :src="imgMain" class="main-img previewable" alt="SNUPP Polymerase and Perfect-ARMS Technology" @click="openPreview(imgMain)" />
-      </div>
-      <div class="main-info-col">
-        <h1 class="main-title highlight-title">SNUPP Polymerase and Perfect-ARMS Technology</h1>
-        <div class="main-desc">
-          <ul>
-            <li><b>Ultra-high specific DNA polymerase for single base mismatch discrimination</b></li>
-            <li><b>Reduces non-specific amplification in NTC and samples</b></li>
-            <li><b>Widely used in SNP analysis, genotyping, tumor mutation detection, pathogen detection, gene editing, and more</b></li>
-          </ul>
+  <MobileOptimizedContent>
+    <div class="detail-page">
+      <!-- 面包屑导航 -->
+      <nav class="breadcrumb-nav">
+        <a href="/">Home</a> &gt;&gt; <a href="/products">PRODUCTS</a> &gt;&gt;
+        <a href="/instrumentDetail/SNUPP">SNUPP Polymerase</a>
+      </nav>
+      <!-- 顶部主模块：左图右文按钮 -->
+      <div class="main-info-row">
+        <div class="main-img-col">
+          <img
+            :src="imgMain"
+            class="main-img previewable"
+            alt="SNUPP Polymerase and Perfect-ARMS Technology"
+            @click="openPreview(imgMain)"
+          />
         </div>
-        <div class="main-btns">
-          <a href="/contact_us" class="main-btn contact">Contact Us</a>
-          <a href="#" class="main-btn online">Online</a>
+        <div class="main-info-col">
+          <h1 class="main-title highlight-title">
+            SNUPP Polymerase and Perfect-ARMS Technology
+          </h1>
+          <div class="main-desc">
+            <ul>
+              <li>
+                <b
+                  >Ultra-high specific DNA polymerase for single base mismatch
+                  discrimination</b
+                >
+              </li>
+              <li>
+                <b>Reduces non-specific amplification in NTC and samples</b>
+              </li>
+              <li>
+                <b
+                  >Widely used in SNP analysis, genotyping, tumor mutation
+                  detection, pathogen detection, gene editing, and more</b
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="main-btns">
+            <a href="/contact_us" class="main-btn contact">Contact Us</a>
+            <a href="#" class="main-btn online">Online</a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- 详细介绍区块 -->
-    <section class="section-block">
-      <h2 class="section-title">Detailed Introduction</h2>
-      <div class="section-highlight-block">
-        <span>SNUPP is an ultra-high specific DNA polymerase that can identify single base mismatches with high precision, thus reducing the non-specific amplification of NTC and samples. It can be widely used in SNP analysis, genotyping, tumor mutation detection, pathogen detection, gene editing detection, and more.</span>
-      </div>
-      <div class="section-img-row">
-        <img :src="imgTech" class="section-img previewable" alt="SNUPP Technology" @click="openPreview(imgTech)" />
-      </div>
-    </section>
+      <!-- 详细介绍区块 -->
+      <section class="section-block">
+        <h2 class="section-title">Detailed Introduction</h2>
+        <div class="section-highlight-block">
+          <span
+            >SNUPP is an ultra-high specific DNA polymerase that can identify
+            single base mismatches with high precision, thus reducing the
+            non-specific amplification of NTC and samples. It can be widely used
+            in SNP analysis, genotyping, tumor mutation detection, pathogen
+            detection, gene editing detection, and more.</span
+          >
+        </div>
+        <div class="section-img-row">
+          <img
+            :src="imgTech"
+            class="section-img previewable"
+            alt="SNUPP Technology"
+            @click="openPreview(imgTech)"
+          />
+        </div>
+      </section>
 
-    <section class="section-block">
-      <h2 class="section-title">Perfect-ARMS Technology</h2>
-      <div class="section-img-row">
-        <img :src="imgARMS" class="section-img previewable" alt="Perfect-ARMS Technology" @click="openPreview(imgARMS)" />
-      </div>
-    </section>
+      <section class="section-block">
+        <h2 class="section-title">Perfect-ARMS Technology</h2>
+        <div class="section-img-row">
+          <img
+            :src="imgARMS"
+            class="section-img previewable"
+            alt="Perfect-ARMS Technology"
+            @click="openPreview(imgARMS)"
+          />
+        </div>
+      </section>
 
-    <!-- Prev/Next 区块 -->
-    <div class="prev-next-row">
-      <a class="prev" href="javascript:;">Prev：None</a>
-      <a class="next" href="javascript:;">Next：None</a>
+      <!-- Prev/Next 区块 -->
+      <div class="prev-next-row">
+        <a class="prev" href="javascript:;">Prev：None</a>
+        <a class="next" href="javascript:;">Next：None</a>
+      </div>
+      <div v-if="previewImg" class="img-preview-mask" @click="closePreview">
+        <img :src="previewImg" class="img-preview-large" @click.stop />
+      </div>
     </div>
-    <div v-if="previewImg" class="img-preview-mask" @click="closePreview">
-      <img :src="previewImg" class="img-preview-large" @click.stop />
-    </div>
-  </div>
+  </MobileOptimizedContent>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import imgMain from '@/assets/instrumentsDetail/SNUPP_Polymerase_and_Perfect_ARMS_Technology/10001.jpg';
-import imgTech from '@/assets/instrumentsDetail/SNUPP_Polymerase_and_Perfect_ARMS_Technology/10002.png';
-import imgARMS from '@/assets/instrumentsDetail/SNUPP_Polymerase_and_Perfect_ARMS_Technology/10003.png';
+import { ref } from "vue";
+import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+import imgMain from "@/assets/instrumentsDetail/SNUPP_Polymerase_and_Perfect_ARMS_Technology/10001.jpg";
+import imgTech from "@/assets/instrumentsDetail/SNUPP_Polymerase_and_Perfect_ARMS_Technology/10002.png";
+import imgARMS from "@/assets/instrumentsDetail/SNUPP_Polymerase_and_Perfect_ARMS_Technology/10003.png";
 const previewImg = ref(null);
 function openPreview(img) {
   previewImg.value = img;
@@ -88,12 +127,12 @@ function closePreview() {
   width: 70%;
   max-width: 500px;
   border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  box-shadow: 0 4px 24px rgba(25, 118, 210, 0.08);
   transition: box-shadow 0.2s, transform 0.2s;
   cursor: pointer;
 }
 .main-img:hover {
-  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.16);
   transform: scale(1.04);
 }
 .main-info-col {
@@ -133,7 +172,7 @@ function closePreview() {
   background: #1976d2;
   color: #fff;
   text-decoration: none;
-  box-shadow: 0 2px 8px rgba(25,118,210,0.08);
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
   transition: background 0.2s;
 }
 .main-btn.contact {
@@ -175,12 +214,12 @@ function closePreview() {
   width: 70%;
   max-width: 500px;
   border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  box-shadow: 0 4px 24px rgba(25, 118, 210, 0.08);
   transition: box-shadow 0.2s, transform 0.2s;
   cursor: pointer;
 }
 .section-img:hover {
-  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.16);
   transform: scale(1.04);
 }
 .breadcrumb-nav {
@@ -214,8 +253,11 @@ function closePreview() {
 .img-preview-mask {
   position: fixed;
   z-index: 9999;
-  left: 0; top: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.7);
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -224,7 +266,156 @@ function closePreview() {
   max-width: 90vw;
   max-height: 90vh;
   border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(25,118,210,0.18);
+  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.18);
   background: #fff;
 }
-</style> 
+
+/* 移动端优化 */
+@media (max-width: 900px) {
+  .detail-page {
+    padding: 20px 16px 40px 16px;
+  }
+
+  .breadcrumb-nav {
+    font-size: 0.85rem !important;
+    margin-bottom: 20px !important;
+    text-align: center;
+  }
+
+  .breadcrumb-nav a {
+    color: #1976d2 !important;
+    text-decoration: none !important;
+    -webkit-tap-highlight-color: rgba(25, 118, 210, 0.2) !important;
+    touch-action: manipulation !important;
+  }
+
+  .main-info-row {
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  .main-img-col {
+    width: 100%;
+    flex: none;
+    text-align: center;
+  }
+
+  .main-img {
+    width: 80% !important;
+    max-width: 300px !important;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(25, 118, 210, 0.12);
+  }
+
+  .main-title {
+    font-size: 1.6rem !important;
+    margin-bottom: 16px !important;
+    text-align: center;
+    line-height: 1.3 !important;
+  }
+
+  .main-desc {
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 1rem !important;
+  }
+
+  .main-desc ul {
+    padding-left: 20px !important;
+    margin: 16px 0 !important;
+  }
+
+  .main-desc li {
+    font-size: 0.85rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 12px !important;
+  }
+
+  .main-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .main-btn {
+    width: 100% !important;
+    text-align: center !important;
+    padding: 14px 20px !important;
+    font-size: 1rem !important;
+    border-radius: 25px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    -webkit-tap-highlight-color: rgba(25, 118, 210, 0.2) !important;
+    touch-action: manipulation !important;
+  }
+
+  .main-btn:active {
+    transform: scale(0.98) !important;
+  }
+
+  .section-block {
+    margin-bottom: 32px !important;
+    padding: 0 !important;
+  }
+
+  .section-title {
+    font-size: 1.5rem !important;
+    margin-bottom: 20px !important;
+    text-align: center !important;
+  }
+
+  .section-highlight-block {
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+    text-align: center !important;
+    padding: 16px !important;
+    margin: 20px 0 !important;
+    border-radius: 12px !important;
+  }
+
+  .section-img-row {
+    text-align: center;
+    margin: 20px 0 !important;
+  }
+
+  .section-img {
+    width: 90% !important;
+    max-width: 350px !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .prev-next-row {
+    flex-direction: column !important;
+    gap: 12px !important;
+    margin-top: 40px !important;
+  }
+
+  .prev,
+  .next {
+    padding: 12px 16px !important;
+    font-size: 0.9rem !important;
+    border-radius: 8px !important;
+    text-align: center !important;
+    -webkit-tap-highlight-color: rgba(25, 118, 210, 0.2) !important;
+    touch-action: manipulation !important;
+  }
+
+  .prev:active,
+  .next:active {
+    transform: scale(0.98) !important;
+  }
+
+  .img-preview-mask {
+    padding: 20px !important;
+  }
+
+  .img-preview-large {
+    max-width: 95vw !important;
+    max-height: 85vh !important;
+    border-radius: 12px !important;
+  }
+}
+</style>

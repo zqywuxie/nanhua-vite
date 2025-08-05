@@ -1,121 +1,304 @@
 <template>
-  <div class="detail-page">
-    <!-- 顶部主模块：左图右文按钮 -->
-    <div class="main-info-row">
-      <div class="main-img-col">
-        <img :src="imgMain" class="main-img previewable" alt="ISO_Digital" @click="openPreview(imgMain)" />
+  <MobileOptimizedContent>
+    <div class="detail-page">
+      <!-- 顶部主模块：左图右文按钮 -->
+      <div class="main-info-row">
+        <div class="main-img-col">
+          <img
+            :src="imgMain"
+            class="main-img previewable"
+            alt="ISO_Digital"
+            @click="openPreview(imgMain)"
+          />
+        </div>
+        <div class="main-info-col">
+          <h1 class="main-title highlight-title">ISO Digital</h1>
+          <div class="main-desc">
+            <p>
+              <b
+                >Innovative digital isothermal platform combining the advantages
+                of isothermal amplification and digital PCR technology.</b
+              >
+            </p>
+            <p><b>Fully automated, compact, all-in-one system.</b></p>
+            <p>
+              <b>Compatible with Digital PCR and Ultra-Multiplex Technology.</b>
+            </p>
+            <p>
+              <b
+                >A major advancement in molecular diagnostics, offering more
+                options for pathogen detection, genetic research, and clinical
+                diagnostics.</b
+              >
+            </p>
+          </div>
+          <div class="main-btns">
+            <a href="/contact_us" class="main-btn contact">Contact Us</a>
+            <a href="#" class="main-btn online">Online</a>
+          </div>
+        </div>
       </div>
-      <div class="main-info-col">
-        <h1 class="main-title highlight-title">ISO Digital</h1>
-        <div class="main-desc">
-          <p><b>Innovative digital isothermal platform combining the advantages of isothermal amplification and digital PCR technology.</b></p>
-          <p><b>Fully automated, compact, all-in-one system.</b></p>
-          <p><b>Compatible with Digital PCR and Ultra-Multiplex Technology.</b></p>
-          <p><b>A major advancement in molecular diagnostics, offering more options for pathogen detection, genetic research, and clinical diagnostics.</b></p>
+
+      <!-- 详细介绍区块 -->
+      <section class="section-block">
+        <h2 class="section-title">Detailed Introduction</h2>
+        <div class="section-highlight-block">
+          <span
+            >The world's innovative commercial digital isothermal amplification
+            system is poised to revolutionize the fields of life sciences and
+            precision medicine. It offers researchers and clinicians more
+            advanced and efficient technological tools to drive scientific
+            progress and enhance diagnostic capabilities.</span
+          >
         </div>
-        <div class="main-btns">
-          <a href="/contact_us" class="main-btn contact">Contact Us</a>
-          <a href="#" class="main-btn online">Online</a>
+        <div class="section-video-row">
+          <video :src="videoMain" controls class="section-video"></video>
         </div>
+      </section>
+
+      <!-- 技术参数/特性区块 -->
+      <section class="section-block">
+        <h2 class="section-title">Technical Features</h2>
+        <div class="intro-features-cards">
+          <div class="feature-col">
+            <div class="feature-item">
+              <span class="dot"></span>
+              <div>
+                <b>Digital Isothermal Amplification</b>
+                <div class="feature-desc">
+                  Highly sensitive and specific detection without thermal
+                  cycling, faster and more efficient, reaction times 15-45 min.
+                </div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="dot"></span>
+              <div>
+                <b>Accurate Quantification</b>
+                <div class="feature-desc">
+                  Adapts digital PCR technology, giving isothermal amplification
+                  precise quantification capabilities.
+                </div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="dot"></span>
+              <div>
+                <b>Strong Compatibility</b>
+                <div class="feature-desc">
+                  Compatible with Digital LAMP, Digital ERA, Digital RPA, and
+                  other mainstream isothermal amplification functions.
+                </div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="dot"></span>
+              <div>
+                <b>Ultra-Multiplex Capability</b>
+                <div class="feature-desc">
+                  Supports simultaneous detection of multiple targets with
+                  optimized isothermal reactions.
+                </div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="dot"></span>
+              <div>
+                <b>Strict Reaction Time Consistency</b>
+                <div class="feature-desc">
+                  Automated FIFO control ensures identical reagent mixing and
+                  droplet generation times for each sample.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="feature-col">
+            <div class="feature-item">
+              <span class="dot"></span>
+              <div>
+                <b>High Droplet Stability</b>
+                <div class="feature-desc">
+                  Proprietary solid oil-water separation, 20,000+ droplets, >95%
+                  effective, >99% uniformity.
+                </div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="dot"></span>
+              <div>
+                <b>User-Friendly Operation</b>
+                <div class="feature-desc">
+                  Software control simplifies experiment setup, execution, and
+                  analysis.
+                </div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="dot"></span>
+              <div>
+                <b>Compact Design</b>
+                <div class="feature-desc">
+                  Fits any lab configuration without taking up excessive space.
+                </div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="dot"></span>
+              <div>
+                <b>High Expandability</b>
+                <div class="feature-desc">
+                  Upgradeable to digital PCR functionality.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 竞争优势区块 -->
+      <section class="section-block">
+        <h2 class="section-title">Competitive Advantages</h2>
+        <div class="intro-features-cards">
+          <div class="feature-col">
+            <div class="feature-item">
+              <span class="dot"></span>
+              <div>
+                <b>Speed</b>
+                <div class="feature-desc">
+                  No need for thermal cycling, which accelerates the process and
+                  delivers faster results.
+                </div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="dot"></span>
+              <div>
+                <b>Quantification</b>
+                <div class="feature-desc">
+                  Digital quantification ensures that every target molecule is
+                  accurately counted, providing precise quantitative results.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="feature-col">
+            <div class="feature-item">
+              <span class="dot"></span>
+              <div>
+                <b>Expandability</b>
+                <div class="feature-desc">
+                  Adaptable to both small and large laboratories, offering a
+                  versatile solution.
+                </div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="dot"></span>
+              <div>
+                <b>Differentiation</b>
+                <div class="feature-desc">
+                  Compared to conventional isothermal amplification and PCR
+                  techniques, digital isothermal amplification offers additional
+                  benefits.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="section-img-row">
+          <img
+            :src="imgAdvantage"
+            class="section-img previewable"
+            alt="Competitive Advantages"
+            @click="openPreview(imgAdvantage)"
+          />
+        </div>
+      </section>
+
+      <!-- 应用领域区块 -->
+      <section class="section-block">
+        <h2 class="section-title">Application Areas</h2>
+        <div class="intro-features-cards">
+          <div class="feature-col">
+            <div class="feature-item">
+              <span class="dot"></span>
+              <div>
+                <b>Pathogen Detection</b>
+                <div class="feature-desc">
+                  Especially suitable for rapid and reliable diagnosis of
+                  infectious diseases.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="feature-col">
+            <div class="feature-item">
+              <span class="dot"></span>
+              <div>
+                <b>Clinical Diagnostics</b>
+                <div class="feature-desc">
+                  High accuracy and timeliness make it an ideal technology for
+                  clinical environments.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 技术原理区块 -->
+      <section class="section-block">
+        <h2 class="section-title">Innovative glass-based microfluidic chip</h2>
+        <div class="section-highlight-block">
+          <span
+            ><b>Principal:</b> glass-based sandwich design enabling the
+            solidified oil isolation technology, which forms micro-droplets
+            sealed in independent microchambers by solidifying the oil phase. A
+            totally different approach than oil encapsulated water droplet
+            partitioning method or flow cytometry detection principle.</span
+          >
+        </div>
+        <div class="section-highlight-block">
+          <span
+            ><b>Advantages:</b> prevents droplet fusion or uneven droplet sizes,
+            ensuring more stable droplets. Rapid generation of 20,000+ droplets
+            with higher effective droplet ratio (>95%) and droplet uniformity
+            (>99%). Higher thermal efficiency, more uniform reactions, increased
+            transparency for higher signal quality.</span
+          >
+        </div>
+        <div class="section-video-row">
+          <video :src="videoDroplet" controls class="section-video"></video>
+        </div>
+      </section>
+
+      <!-- 参数图区块 -->
+      <section class="section-block">
+        <h2 class="section-title">Droplet generation Illustration</h2>
+        <div class="section-img-row">
+          <img
+            :src="imgDroplet"
+            class="section-img previewable"
+            alt="Droplet generation Illustration"
+            @click="openPreview(imgDroplet)"
+          />
+        </div>
+      </section>
+      <div v-if="previewImg" class="img-preview-mask" @click="closePreview">
+        <img :src="previewImg" class="img-preview-large" @click.stop />
       </div>
     </div>
-
-    <!-- 详细介绍区块 -->
-    <section class="section-block">
-      <h2 class="section-title">Detailed Introduction</h2>
-      <div class="section-highlight-block">
-        <span>The world's innovative commercial digital isothermal amplification system is poised to revolutionize the fields of life sciences and precision medicine. It offers researchers and clinicians more advanced and efficient technological tools to drive scientific progress and enhance diagnostic capabilities.</span>
-      </div>
-      <div class="section-video-row">
-        <video :src="videoMain" controls class="section-video"></video>
-      </div>
-    </section>
-
-    <!-- 技术参数/特性区块 -->
-    <section class="section-block">
-      <h2 class="section-title">Technical Features</h2>
-      <div class="intro-features-cards">
-        <div class="feature-col">
-          <div class="feature-item"><span class="dot"></span><div><b>Digital Isothermal Amplification</b><div class="feature-desc">Highly sensitive and specific detection without thermal cycling, faster and more efficient, reaction times 15-45 min.</div></div></div>
-          <div class="feature-item"><span class="dot"></span><div><b>Accurate Quantification</b><div class="feature-desc">Adapts digital PCR technology, giving isothermal amplification precise quantification capabilities.</div></div></div>
-          <div class="feature-item"><span class="dot"></span><div><b>Strong Compatibility</b><div class="feature-desc">Compatible with Digital LAMP, Digital ERA, Digital RPA, and other mainstream isothermal amplification functions.</div></div></div>
-          <div class="feature-item"><span class="dot"></span><div><b>Ultra-Multiplex Capability</b><div class="feature-desc">Supports simultaneous detection of multiple targets with optimized isothermal reactions.</div></div></div>
-          <div class="feature-item"><span class="dot"></span><div><b>Strict Reaction Time Consistency</b><div class="feature-desc">Automated FIFO control ensures identical reagent mixing and droplet generation times for each sample.</div></div></div>
-        </div>
-        <div class="feature-col">
-          <div class="feature-item"><span class="dot"></span><div><b>High Droplet Stability</b><div class="feature-desc">Proprietary solid oil-water separation, 20,000+ droplets, >95% effective, >99% uniformity.</div></div></div>
-          <div class="feature-item"><span class="dot"></span><div><b>User-Friendly Operation</b><div class="feature-desc">Software control simplifies experiment setup, execution, and analysis.</div></div></div>
-          <div class="feature-item"><span class="dot"></span><div><b>Compact Design</b><div class="feature-desc">Fits any lab configuration without taking up excessive space.</div></div></div>
-          <div class="feature-item"><span class="dot"></span><div><b>High Expandability</b><div class="feature-desc">Upgradeable to digital PCR functionality.</div></div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 竞争优势区块 -->
-    <section class="section-block">
-      <h2 class="section-title">Competitive Advantages</h2>
-      <div class="intro-features-cards">
-        <div class="feature-col">
-          <div class="feature-item"><span class="dot"></span><div><b>Speed</b><div class="feature-desc">No need for thermal cycling, which accelerates the process and delivers faster results.</div></div></div>
-          <div class="feature-item"><span class="dot"></span><div><b>Quantification</b><div class="feature-desc">Digital quantification ensures that every target molecule is accurately counted, providing precise quantitative results.</div></div></div>
-        </div>
-        <div class="feature-col">
-          <div class="feature-item"><span class="dot"></span><div><b>Expandability</b><div class="feature-desc">Adaptable to both small and large laboratories, offering a versatile solution.</div></div></div>
-          <div class="feature-item"><span class="dot"></span><div><b>Differentiation</b><div class="feature-desc">Compared to conventional isothermal amplification and PCR techniques, digital isothermal amplification offers additional benefits.</div></div></div>
-        </div>
-      </div>
-      <div class="section-img-row">
-        <img :src="imgAdvantage" class="section-img previewable" alt="Competitive Advantages" @click="openPreview(imgAdvantage)" />
-      </div>
-    </section>
-
-    <!-- 应用领域区块 -->
-    <section class="section-block">
-      <h2 class="section-title">Application Areas</h2>
-      <div class="intro-features-cards">
-        <div class="feature-col">
-          <div class="feature-item"><span class="dot"></span><div><b>Pathogen Detection</b><div class="feature-desc">Especially suitable for rapid and reliable diagnosis of infectious diseases.</div></div></div>
-        </div>
-        <div class="feature-col">
-          <div class="feature-item"><span class="dot"></span><div><b>Clinical Diagnostics</b><div class="feature-desc">High accuracy and timeliness make it an ideal technology for clinical environments.</div></div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 技术原理区块 -->
-    <section class="section-block">
-      <h2 class="section-title">Innovative glass-based microfluidic chip</h2>
-      <div class="section-highlight-block">
-        <span><b>Principal:</b> glass-based sandwich design enabling the solidified oil isolation technology, which forms micro-droplets sealed in independent microchambers by solidifying the oil phase. A totally different approach than oil encapsulated water droplet partitioning method or flow cytometry detection principle.</span>
-      </div>
-      <div class="section-highlight-block">
-        <span><b>Advantages:</b> prevents droplet fusion or uneven droplet sizes, ensuring more stable droplets. Rapid generation of 20,000+ droplets with higher effective droplet ratio (>95%) and droplet uniformity (>99%). Higher thermal efficiency, more uniform reactions, increased transparency for higher signal quality.</span>
-      </div>
-      <div class="section-video-row">
-        <video :src="videoDroplet" controls class="section-video"></video>
-      </div>
-    </section>
-
-    <!-- 参数图区块 -->
-    <section class="section-block">
-      <h2 class="section-title">Droplet generation Illustration</h2>
-      <div class="section-img-row">
-        <img :src="imgDroplet" class="section-img previewable" alt="Droplet generation Illustration" @click="openPreview(imgDroplet)" />
-      </div>
-    </section>
-    <div v-if="previewImg" class="img-preview-mask" @click="closePreview">
-      <img :src="previewImg" class="img-preview-large" @click.stop />
-    </div>
-  </div>
+  </MobileOptimizedContent>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import imgMain from '@/assets/instrumentsDetail/ISO_Digital/10001.jpg';
-import imgAdvantage from '@/assets/instrumentsDetail/ISO_Digital/10002.png';
-import imgDroplet from '@/assets/instrumentsDetail/ISO_Digital/10002.png';
-import videoMain from '@/assets/instrumentsDetail/ISO_Digital/1750923996473917.mp4';
-import videoDroplet from '@/assets/instrumentsDetail/ISO_Digital/1750924085130117.mp4';
+import { ref } from "vue";
+import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+import imgMain from "@/assets/instrumentsDetail/ISO_Digital/10001.jpg";
+import imgAdvantage from "@/assets/instrumentsDetail/ISO_Digital/10002.png";
+import imgDroplet from "@/assets/instrumentsDetail/ISO_Digital/10002.png";
+import videoMain from "@/assets/instrumentsDetail/ISO_Digital/1750923996473917.mp4";
+import videoDroplet from "@/assets/instrumentsDetail/ISO_Digital/1750924085130117.mp4";
 
 const previewImg = ref(null);
 function openPreview(img) {
@@ -146,12 +329,12 @@ function closePreview() {
   width: 70%;
   max-width: 500px;
   border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  box-shadow: 0 4px 24px rgba(25, 118, 210, 0.08);
   transition: box-shadow 0.2s, transform 0.2s;
   cursor: pointer;
 }
 .main-img:hover {
-  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.16);
   transform: scale(1.04);
 }
 .main-info-col {
@@ -185,7 +368,7 @@ function closePreview() {
   background: #1976d2;
   color: #fff;
   text-decoration: none;
-  box-shadow: 0 2px 8px rgba(25,118,210,0.08);
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
   transition: background 0.2s;
 }
 .main-btn.contact {
@@ -227,7 +410,7 @@ function closePreview() {
   width: 80%;
   max-width: 700px;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(25,118,210,0.08);
+  box-shadow: 0 2px 12px rgba(25, 118, 210, 0.08);
 }
 .intro-features-cards {
   display: flex;
@@ -248,7 +431,7 @@ function closePreview() {
   border-radius: 8px;
   padding: 16px 18px;
   font-size: 1.05rem;
-  box-shadow: 0 1px 4px rgba(25,118,210,0.04);
+  box-shadow: 0 1px 4px rgba(25, 118, 210, 0.04);
 }
 .feature-item .dot {
   width: 14px;
@@ -277,19 +460,22 @@ function closePreview() {
   width: 70%;
   max-width: 500px;
   border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(25,118,210,0.08);
+  box-shadow: 0 4px 24px rgba(25, 118, 210, 0.08);
   transition: box-shadow 0.2s, transform 0.2s;
   cursor: pointer;
 }
 .section-img:hover {
-  box-shadow: 0 8px 32px rgba(25,118,210,0.16);
+  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.16);
   transform: scale(1.04);
 }
 .img-preview-mask {
   position: fixed;
   z-index: 9999;
-  left: 0; top: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.7);
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -298,21 +484,144 @@ function closePreview() {
   max-width: 90vw;
   max-height: 90vh;
   border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(25,118,210,0.18);
+  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.18);
   background: #fff;
 }
+/* 移动端优化 */
 @media (max-width: 900px) {
+  .detail-page {
+    padding: 20px 16px 40px 16px;
+  }
+
   .main-info-row {
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
+    margin-bottom: 32px;
   }
+
   .main-img-col {
     width: 100%;
     flex: none;
+    text-align: center;
   }
+
+  .main-img {
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(25, 118, 210, 0.12);
+  }
+
+  .main-title {
+    font-size: 1.8rem !important;
+    margin-bottom: 16px !important;
+    text-align: center;
+  }
+
+  .main-desc {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .main-desc p {
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+    margin: 8px 0 !important;
+  }
+
+  .main-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .main-btn {
+    width: 100% !important;
+    text-align: center !important;
+    padding: 14px 20px !important;
+    font-size: 1rem !important;
+    border-radius: 25px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    -webkit-tap-highlight-color: rgba(25, 118, 210, 0.2) !important;
+    touch-action: manipulation !important;
+  }
+
+  .main-btn:active {
+    transform: scale(0.98) !important;
+  }
+
+  .section-block {
+    margin-bottom: 32px !important;
+    padding: 0 !important;
+  }
+
+  .section-title {
+    font-size: 1.5rem !important;
+    margin-bottom: 20px !important;
+    text-align: center !important;
+  }
+
+  .section-highlight-block {
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+    text-align: justify !important;
+    padding: 16px !important;
+    margin: 20px 0 !important;
+    border-radius: 12px !important;
+  }
+
+  .section-video-row,
+  .section-img-row {
+    text-align: center;
+    margin: 20px 0 !important;
+  }
+
+  .section-video,
+  .section-img {
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+  }
+
   .intro-features-cards {
     flex-direction: column;
-    gap: 18px;
+    gap: 16px;
+  }
+
+  .feature-col {
+    width: 100% !important;
+  }
+
+  .feature-item {
+    padding: 16px !important;
+    margin-bottom: 12px !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
+    background: #f8f9fa !important;
+  }
+
+  .feature-item b {
+    font-size: 1rem !important;
+    color: #1976d2 !important;
+    display: block !important;
+    margin-bottom: 8px !important;
+  }
+
+  .feature-desc {
+    font-size: 0.85rem !important;
+    line-height: 1.5 !important;
+    color: #555 !important;
+  }
+
+  .img-preview-mask {
+    padding: 20px !important;
+  }
+
+  .img-preview-large {
+    max-width: 95vw !important;
+    max-height: 85vh !important;
+    border-radius: 12px !important;
   }
 }
 </style> 

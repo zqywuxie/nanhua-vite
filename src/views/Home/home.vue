@@ -99,7 +99,39 @@
               <p class="nav-subtitle">Diagnostic Materials & Reagents</p>
             </div>
             <div class="nav-menu">
-              <div class="nav-dropdown" :class="{ show: reagentDropdownOpen }">
+              <!-- 移动端优化的下拉选择器 -->
+              <div v-if="isMobile" class="mobile-dropdown-wrapper">
+                <div
+                  class="mobile-dropdown-selector"
+                  @click="openReagentMobileSelector"
+                >
+                  <span class="mobile-dropdown-text">{{
+                    reagentCategories[activeReagent]?.name || "Select Category"
+                  }}</span>
+                  <svg
+                    class="mobile-dropdown-icon"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M6 9L12 15L18 9"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- 桌面端下拉菜单 -->
+              <div
+                v-else
+                class="nav-dropdown"
+                :class="{ show: reagentDropdownOpen }"
+              >
                 <button
                   class="dropdown-toggle"
                   @click="toggleReagentDropdown"
@@ -320,7 +352,37 @@
               <p class="nav-subtitle">Research Solutions & Tools</p>
             </div>
             <div class="nav-menu">
+              <!-- 移动端优化的下拉选择器 -->
+              <div v-if="isMobile" class="mobile-dropdown-wrapper">
+                <div
+                  class="mobile-dropdown-selector"
+                  @click="openLifeScienceMobileSelector"
+                >
+                  <span class="mobile-dropdown-text">{{
+                    lifeScienceCategories[activeLifeScience]?.name ||
+                    "Select Category"
+                  }}</span>
+                  <svg
+                    class="mobile-dropdown-icon"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M6 9L12 15L18 9"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- 桌面端下拉菜单 -->
               <div
+                v-else
                 class="nav-dropdown"
                 :class="{ show: lifeScienceDropdownOpen }"
               >
@@ -380,7 +442,37 @@
               <p class="nav-subtitle">Advanced Instrumentation</p>
             </div>
             <div class="nav-menu">
+              <!-- 移动端优化的下拉选择器 -->
+              <div v-if="isMobile" class="mobile-dropdown-wrapper">
+                <div
+                  class="mobile-dropdown-selector"
+                  @click="openInstrumentMobileSelector"
+                >
+                  <span class="mobile-dropdown-text">{{
+                    instrumentCategories[activeInstrument]?.name ||
+                    "Select Category"
+                  }}</span>
+                  <svg
+                    class="mobile-dropdown-icon"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M6 9L12 15L18 9"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- 桌面端下拉菜单 -->
               <div
+                v-else
                 class="nav-dropdown"
                 :class="{ show: instrumentDropdownOpen }"
               >
@@ -828,6 +920,43 @@
       </div>
     </section>
 
+    <!-- 移动端选择器弹窗 -->
+    <div
+      v-if="showMobileSelector"
+      class="mobile-selector-overlay"
+      @click="closeMobileSelector"
+    >
+      <div class="mobile-selector-modal" @click.stop>
+        <div class="mobile-selector-header">
+          <h3>{{ currentSelectorTitle }}</h3>
+          <button class="mobile-selector-close" @click="closeMobileSelector">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M18 6L6 18M6 6L18 18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+        <div class="mobile-selector-content">
+          <div
+            v-for="(option, index) in currentSelectorOptions"
+            :key="index"
+            class="mobile-selector-option"
+            :class="{ active: currentSelectorActive === index }"
+            @click="selectMobileOption(index)"
+          >
+            <span class="option-text">{{ option.name }}</span>
+            <span v-if="currentSelectorActive === index" class="option-check"
+              >✓</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- 页脚 -->
     <WeGoFastFooter />
   </div>
@@ -914,6 +1043,16 @@ const activeInstrument = ref(0);
 const reagentDropdownOpen = ref(false);
 const lifeScienceDropdownOpen = ref(false);
 const instrumentDropdownOpen = ref(false);
+
+// 移动端检测
+const isMobile = ref(false);
+
+// 移动端选择器状态
+const showMobileSelector = ref(false);
+const currentSelectorType = ref("");
+const currentSelectorTitle = ref("");
+const currentSelectorOptions = ref([]);
+const currentSelectorActive = ref(0);
 
 // Reagent 产品显示控制
 const reagentProductsLimit = ref(6); // 默认显示6个产品
@@ -1812,6 +1951,62 @@ const selectInstrument = (index) => {
   updateBodyScrollLock();
 };
 
+// 移动端检测方法
+const checkMobile = () => {
+  isMobile.value = window.innerWidth <= 768;
+};
+
+// 移动端选择器方法
+const openReagentMobileSelector = () => {
+  currentSelectorType.value = "reagent";
+  currentSelectorTitle.value = "Select Reagent Category";
+  currentSelectorOptions.value = reagentCategories.value;
+  currentSelectorActive.value = activeReagent.value;
+  showMobileSelector.value = true;
+  document.body.classList.add("modal-open");
+};
+
+const openLifeScienceMobileSelector = () => {
+  currentSelectorType.value = "lifescience";
+  currentSelectorTitle.value = "Select Life Science Category";
+  currentSelectorOptions.value = lifeScienceCategories.value;
+  currentSelectorActive.value = activeLifeScience.value;
+  showMobileSelector.value = true;
+  document.body.classList.add("modal-open");
+};
+
+const openInstrumentMobileSelector = () => {
+  currentSelectorType.value = "instrument";
+  currentSelectorTitle.value = "Select Instrument Category";
+  currentSelectorOptions.value = instrumentCategories.value;
+  currentSelectorActive.value = activeInstrument.value;
+  showMobileSelector.value = true;
+  document.body.classList.add("modal-open");
+};
+
+const selectMobileOption = (index) => {
+  currentSelectorActive.value = index;
+
+  // 根据类型更新对应的活跃状态
+  if (currentSelectorType.value === "reagent") {
+    activeReagent.value = index;
+  } else if (currentSelectorType.value === "lifescience") {
+    activeLifeScience.value = index;
+  } else if (currentSelectorType.value === "instrument") {
+    activeInstrument.value = index;
+  }
+
+  // 延迟关闭，给用户视觉反馈
+  setTimeout(() => {
+    closeMobileSelector();
+  }, 200);
+};
+
+const closeMobileSelector = () => {
+  showMobileSelector.value = false;
+  document.body.classList.remove("modal-open");
+};
+
 // Reagent 产品显示控制方法
 const getVisibleReagentProducts = (products, categoryIndex) => {
   const showAll = reagentShowAll.value[categoryIndex];
@@ -2095,6 +2290,12 @@ onMounted(() => {
   startSlideShow();
   // initPartnerSlides(); // Partners模块已注释掉
 
+  // 初始化移动端检测
+  checkMobile();
+
+  // 添加窗口大小变化监听器
+  window.addEventListener("resize", checkMobile);
+
   // 添加全局点击事件监听器
   document.addEventListener("click", (event) => {
     const target = event.target;
@@ -2108,9 +2309,11 @@ onMounted(() => {
 onUnmounted(() => {
   stopSlideShow();
   // 清理事件监听器
+  window.removeEventListener("resize", checkMobile);
   document.removeEventListener("click", closeAllDropdowns);
   // 清理body类
   document.body.classList.remove("dropdown-open");
+  document.body.classList.remove("modal-open");
 });
 </script>
 
@@ -3806,33 +4009,80 @@ onUnmounted(() => {
   } */
 
   .map-section {
-    padding: 80px 0;
+    padding: 60px 0;
   }
 
   .map-content {
     flex-direction: column;
-    gap: 40px;
-  }
-
-  .map-info {
-    max-width: 100%;
-  }
-
-  .map-title {
-    font-size: 2.2rem;
-  }
-
-  .map-desc {
-    font-size: 1.1rem;
-  }
-
-  .map-btn {
-    padding: 15px 30px;
-    font-size: 1.1rem;
+    gap: 30px;
   }
 
   .map-visual {
-    height: 300px;
+    order: 2;
+    min-height: 300px;
+  }
+
+  .map-container {
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  }
+
+  .location-info {
+    order: 1;
+  }
+
+  .location-card {
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  }
+
+  .location-title {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .location-address {
+    font-size: 1rem;
+    margin-bottom: 25px;
+    line-height: 1.6;
+  }
+
+  .contact-item {
+    padding: 12px 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .contact-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #00bc97;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .contact-value {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+  }
+
+  .location-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .map-btn {
+    padding: 14px 24px;
+    font-size: 1rem;
+    border-radius: 25px;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+    transition: all 0.3s ease;
   }
 }
 
@@ -4013,24 +4263,108 @@ onUnmounted(() => {
   } */
 
   .map-section {
-    padding: 60px 0;
+    padding: 40px 0;
   }
 
-  .map-title {
-    font-size: 1.8rem;
-  }
-
-  .map-desc {
-    font-size: 1rem;
-  }
-
-  .map-btn {
-    padding: 12px 24px;
-    font-size: 1rem;
+  .map-content {
+    gap: 20px;
   }
 
   .map-visual {
-    height: 250px;
+    min-height: 250px;
+    order: 2;
+  }
+
+  .map-container {
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .location-info {
+    order: 1;
+  }
+
+  .location-card {
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .location-icon {
+    margin-bottom: 20px;
+  }
+
+  .location-pin {
+    font-size: 2.5rem;
+  }
+
+  .location-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .location-address {
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  .location-contact {
+    margin-bottom: 25px;
+  }
+
+  .contact-item {
+    padding: 10px 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .contact-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #00bc97;
+    min-width: 60px;
+  }
+
+  .contact-value {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+    text-align: right;
+    flex: 1;
+  }
+
+  .location-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .map-btn {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    border-radius: 20px;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    transition: all 0.3s ease;
+    -webkit-tap-highlight-color: rgba(0, 188, 151, 0.2);
+    touch-action: manipulation;
+  }
+
+  .map-btn:active {
+    transform: scale(0.98);
+  }
+
+  .map-btn.primary:active {
+    box-shadow: 0 8px 20px rgba(0, 188, 151, 0.4);
+  }
+
+  .map-btn.secondary:active {
+    background: #00bc97;
+    color: #fff;
   }
 }
 
@@ -6901,9 +7235,171 @@ body.feature-cursor-active * {
   .reagent-product-card,
   .instruments-product-item,
   .banner-btn,
-  .view-more-btn {
+  .view-more-btn,
+  .map-btn {
     -webkit-tap-highlight-color: rgba(0, 188, 151, 0.2);
     touch-action: manipulation;
+  }
+
+  /* 移动端地图模块优化 */
+  .map-section {
+    padding: 50px 0;
+  }
+
+  .map-content {
+    gap: 25px;
+  }
+
+  .map-visual {
+    min-height: 280px;
+    order: 2;
+  }
+
+  .map-container {
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* 移动端地图交互提示 */
+  .map-container::before {
+    content: "📍 Tap to interact with map";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 188, 151, 0.9);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    z-index: 10;
+    opacity: 0.8;
+    pointer-events: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .location-info {
+    order: 1;
+  }
+
+  .location-card {
+    padding: 24px;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  }
+
+  .location-icon {
+    margin-bottom: 18px;
+    text-align: center;
+  }
+
+  .location-pin {
+    font-size: 2.8rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  }
+
+  .location-title {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+    line-height: 1.3;
+    text-align: center;
+  }
+
+  .location-address {
+    font-size: 0.95rem;
+    margin-bottom: 22px;
+    line-height: 1.6;
+    text-align: center;
+    color: #555;
+  }
+
+  .location-contact {
+    margin-bottom: 25px;
+    background: rgba(0, 188, 151, 0.05);
+    border-radius: 12px;
+    padding: 16px;
+  }
+
+  .contact-item {
+    padding: 8px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 188, 151, 0.1);
+  }
+
+  .contact-item:last-child {
+    border-bottom: none;
+  }
+
+  .contact-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #00bc97;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .contact-value {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .location-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .map-btn {
+    padding: 14px 20px;
+    font-size: 0.95rem;
+    border-radius: 25px;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .map-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.5s;
+  }
+
+  .map-btn:active::before {
+    left: 100%;
+  }
+
+  .map-btn:active {
+    transform: scale(0.98);
+  }
+
+  .map-btn.primary:active {
+    box-shadow: 0 8px 20px rgba(0, 188, 151, 0.4);
+  }
+
+  .map-btn.secondary:active {
+    background: #00bc97;
+    color: #fff;
+    transform: scale(0.98);
   }
 
   /* 移动端下拉菜单优化 */
@@ -7359,5 +7855,195 @@ body.feature-cursor-active * {
     bottom: 10px;
     padding: 8px 14px;
   }
+}
+
+/* 移动端下拉选择器样式 */
+.mobile-dropdown-wrapper {
+  width: 100%;
+}
+
+.mobile-dropdown-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #00bc97 0%, #00a085 100%);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 188, 151, 0.3);
+  -webkit-tap-highlight-color: rgba(0, 188, 151, 0.2);
+  touch-action: manipulation;
+}
+
+.mobile-dropdown-selector:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(0, 188, 151, 0.4);
+}
+
+.mobile-dropdown-text {
+  flex: 1;
+  text-align: left;
+}
+
+.mobile-dropdown-icon {
+  margin-left: 12px;
+  transition: transform 0.3s ease;
+}
+
+/* 移动端选择器弹窗样式 */
+.mobile-selector-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.mobile-selector-modal {
+  background: white;
+  width: 100%;
+  max-height: 70vh;
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.mobile-selector-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e9ecef;
+  background: #f8f9fa;
+}
+
+.mobile-selector-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.mobile-selector-close {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  color: #6c757d;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-selector-close:hover {
+  background: rgba(108, 117, 125, 0.1);
+  color: #495057;
+}
+
+.mobile-selector-content {
+  max-height: calc(70vh - 80px);
+  overflow-y: auto;
+  padding: 8px 0;
+}
+
+.mobile-selector-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  -webkit-tap-highlight-color: rgba(0, 188, 151, 0.1);
+  touch-action: manipulation;
+}
+
+.mobile-selector-option:last-child {
+  border-bottom: none;
+}
+
+.mobile-selector-option:active {
+  background: rgba(0, 188, 151, 0.1);
+  transform: scale(0.98);
+}
+
+.mobile-selector-option.active {
+  background: rgba(0, 188, 151, 0.1);
+  color: #00bc97;
+}
+
+.option-text {
+  font-size: 1rem;
+  font-weight: 500;
+  flex: 1;
+}
+
+.option-check {
+  color: #00bc97;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-left: 12px;
+}
+
+/* 防止弹窗打开时背景滚动 */
+body.modal-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+/* 移动端选择器滚动条样式 */
+.mobile-selector-content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.mobile-selector-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 2px;
+}
+
+.mobile-selector-content::-webkit-scrollbar-thumb {
+  background: rgba(0, 188, 151, 0.3);
+  border-radius: 2px;
+}
+
+.mobile-selector-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 188, 151, 0.5);
 }
 </style>
