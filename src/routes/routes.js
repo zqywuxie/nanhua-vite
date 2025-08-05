@@ -397,6 +397,14 @@ const routes = [
         component: () => import("../views/Contact us/contact_us.vue"),
       },
       {
+        path: "/email_test",
+        name: "email test",
+        meta: {
+          title: "Email Service Test",
+        },
+        component: () => import("../views/EmailTest.vue"),
+      },
+      {
         path: "/technology",
         name: "technology",
         meta: {

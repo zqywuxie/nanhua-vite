@@ -2,7 +2,16 @@
   <div class="container">
     <!-- 头部横幅 -->
     <div class="header">
-      <img src="/src/assets/about/aboutus01.png" alt="Contact Us Banner">
+      <div class="banner-bg">
+        <img src="/src/assets/about/aboutus01.png" alt="Contact Us Banner" />
+      </div>
+      <div class="banner-content">
+        <div class="banner-text">
+          <h1 class="banner-title">Contact Us</h1>
+          <hr class="banner-divider" />
+          <p class="banner-subtitle">Get in Touch with Our Expert Team</p>
+        </div>
+      </div>
     </div>
 
     <!-- 导航栏 -->
@@ -23,58 +32,64 @@
           <span>Contact Us</span>
         </h2>
         <p class="contact-form-desc">
-          Get in touch with our team for expert DNA sequencing solutions and support. We're here to help you accelerate your research and provide the best service for your needs.
+          Get in touch with our team for expert DNA sequencing solutions and
+          support. We're here to help you accelerate your research and provide
+          the best service for your needs.
         </p>
         <div class="form-card">
           <form @submit.prevent="submitForm" class="contact-form">
             <div class="form-grid">
               <div class="form-group">
-                <input 
-                  v-model="formData.firstName" 
-                  type="text" 
-                  placeholder="*First Name" 
+                <input
+                  v-model="formData.firstName"
+                  type="text"
+                  placeholder="*First Name"
                   required
                   class="form-input"
-                >
+                />
               </div>
               <div class="form-group">
-                <input 
-                  v-model="formData.lastName" 
-                  type="text" 
-                  placeholder="*Last Name" 
+                <input
+                  v-model="formData.lastName"
+                  type="text"
+                  placeholder="*Last Name"
                   required
                   class="form-input"
-                >
+                />
               </div>
               <div class="form-group">
-                <input 
-                  v-model="formData.email" 
-                  type="email" 
-                  placeholder="*Email" 
+                <input
+                  v-model="formData.email"
+                  type="email"
+                  placeholder="*Email"
                   required
                   class="form-input"
-                >
+                />
               </div>
               <div class="form-group">
-                <input 
-                  v-model="formData.company" 
-                  type="text" 
-                  placeholder="*Company/Institution" 
+                <input
+                  v-model="formData.company"
+                  type="text"
+                  placeholder="*Company/Institution"
                   required
                   class="form-input"
-                >
+                />
               </div>
               <div class="form-group full-width">
-                <textarea 
-                  v-model="formData.message" 
-                  placeholder="*Message" 
+                <textarea
+                  v-model="formData.message"
+                  placeholder="*Message"
                   required
                   class="form-textarea"
                   rows="6"
                 ></textarea>
               </div>
               <div class="form-group full-width">
-                <button type="submit" class="submit-btn" :disabled="isSubmitting">
+                <button
+                  type="submit"
+                  class="submit-btn"
+                  :disabled="isSubmitting"
+                >
                   <span v-if="!isSubmitting">Send Message</span>
                   <span v-else>Sending...</span>
                 </button>
@@ -97,7 +112,9 @@
             <div class="office-details">
               <div class="office-item">
                 <span class="office-icon">📍</span>
-                <span>625 Mt Auburn Street, Suite 105, Cambridge, MA 02138</span>
+                <span
+                  >625 Mt Auburn Street, Suite 105, Cambridge, MA 02138</span
+                >
               </div>
               <div class="office-item">
                 <span class="office-icon">📞</span>
@@ -197,7 +214,8 @@
             <div class="company-item">
               <div class="company-icon">📍</div>
               <div class="company-text">
-                <strong>Address:</strong> 南京经济开发区恒泰路8号汇智科技园A9栋第4层
+                <strong>Address:</strong>
+                南京经济开发区恒泰路8号汇智科技园A9栋第4层
               </div>
             </div>
             <div class="company-item">
@@ -218,74 +236,117 @@
     </section>
 
     <!-- 成功提交弹窗 -->
-    <div v-if="showSuccessModal" class="success-modal" @click="closeSuccessModal">
+    <div
+      v-if="showSuccessModal"
+      class="success-modal"
+      @click="closeSuccessModal"
+    >
       <div class="modal-content" @click.stop>
         <div class="modal-header">
           <h3>Thank You!</h3>
-          <button class="modal-close" @click="closeSuccessModal">&times;</button>
+          <button class="modal-close" @click="closeSuccessModal">
+            &times;
+          </button>
         </div>
         <div class="modal-body">
-          <p>Our sales manager will reach out to you within <strong>24 hours</strong>.</p>
+          <p>
+            Our sales manager will reach out to you within
+            <strong>24 hours</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 错误提交弹窗 -->
+    <div v-if="showErrorModal" class="error-modal" @click="closeErrorModal">
+      <div class="modal-content" @click.stop>
+        <div class="modal-header">
+          <h3>Error</h3>
+          <button class="modal-close" @click="closeErrorModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p style="white-space: pre-line">{{ errorMessage }}</p>
         </div>
       </div>
     </div>
 
     <!-- 页脚 -->
     <WeGoFastFooter />
-    </div>
+  </div>
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
-import WeGoFastFooter from '/src/components/WeGoFastFooter.vue'
+import { ref, reactive } from "vue";
+import WeGoFastFooter from "/src/components/WeGoFastFooter.vue";
+import { sendEmail, validateFormData } from "/src/utils/emailService.js";
 
 // 表单数据
 const formData = reactive({
-  firstName: '',
-  lastName: '',
-  email: '',
-  company: '',
-  message: ''
-})
+  firstName: "",
+  lastName: "",
+  email: "",
+  company: "",
+  message: "",
+});
 
 // 状态管理
-const isSubmitting = ref(false)
-const showSuccessModal = ref(false)
+const isSubmitting = ref(false);
+const showSuccessModal = ref(false);
+const showErrorModal = ref(false);
+const errorMessage = ref("");
 
 // 滚动到指定区域
 const scrollTo = (id) => {
-  const el = document.getElementById(id)
+  const el = document.getElementById(id);
   if (el) {
-    el.scrollIntoView({ behavior: 'smooth' })
+    el.scrollIntoView({ behavior: "smooth" });
   }
-}
+};
 
 // 提交表单
 const submitForm = async () => {
-  isSubmitting.value = true
-  
-  try {
-    // 模拟API调用
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    
-    // 显示成功消息
-    showSuccessModal.value = true
-    
-    // 重置表单
-    Object.keys(formData).forEach(key => {
-      formData[key] = ''
-    })
-  } catch (error) {
-    console.error('Form submission error:', error)
-  } finally {
-    isSubmitting.value = false
+  // 验证表单
+  const validationErrors = validateFormData(formData);
+  if (validationErrors.length > 0) {
+    errorMessage.value = validationErrors.join("\n");
+    showErrorModal.value = true;
+    return;
   }
-}
+
+  isSubmitting.value = true;
+
+  try {
+    // 使用邮件服务发送邮件
+    const result = await sendEmail(formData);
+    console.log("Email sent successfully:", result);
+
+    // 显示成功消息
+    showSuccessModal.value = true;
+
+    // 重置表单
+    Object.keys(formData).forEach((key) => {
+      formData[key] = "";
+    });
+  } catch (error) {
+    console.error("Form submission error:", error);
+    errorMessage.value =
+      error.message ||
+      "Sorry, there was an error sending your message. Please try again later or contact us directly.";
+    showErrorModal.value = true;
+  } finally {
+    isSubmitting.value = false;
+  }
+};
 
 // 关闭成功弹窗
 const closeSuccessModal = () => {
-  showSuccessModal.value = false
-}
+  showSuccessModal.value = false;
+};
+
+// 关闭错误弹窗
+const closeErrorModal = () => {
+  showErrorModal.value = false;
+};
 </script>
 
 <style scoped>
@@ -301,24 +362,92 @@ const closeSuccessModal = () => {
 /* 头部横幅 */
 .header {
   width: 100%;
-  height: 40%;
+  height: 450px;
   position: relative;
+  overflow: hidden;
 }
 
-.header img {
+.banner-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.banner-bg img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
 }
 
+.banner-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.banner-text {
+  text-align: center;
+  color: white;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.banner-title {
+  font-size: 4rem;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: 2px;
+}
+
+.banner-divider {
+  width: 80%;
+  height: 3px;
+  margin: 1.5rem 0;
+  background: none;
+  border: none;
+  border-radius: 1px;
+  position: relative;
+}
+
+.banner-divider::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #00bc97 0%, #4e3fa5 100%);
+  border-radius: 1px;
+}
+
+.banner-subtitle {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 20px 0 0 0;
+  opacity: 0.95;
+  line-height: 1.4;
+}
+
 /* 导航栏 */
 .navbar {
   width: 100%;
-  height: 50px;
+  height: 60px;
   position: relative;
-  background-color: rgba(42, 59, 119, 0.5);
-  margin-top: -50px;
+  background-color: rgba(42, 59, 119, 0.9);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .nav-inner-container {
@@ -614,7 +743,8 @@ const closeSuccessModal = () => {
 }
 
 /* 成功弹窗 */
-.success-modal {
+.success-modal,
+.error-modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -683,8 +813,25 @@ const closeSuccessModal = () => {
   color: #00bc97;
 }
 
+/* 错误弹窗特定样式 */
+.error-modal .modal-header h3 {
+  color: #dc3545;
+}
+
+.error-modal .modal-body p {
+  color: #dc3545;
+}
+
 /* 响应式设计 */
 @media (max-width: 1024px) {
+  .banner-title {
+    font-size: 3rem;
+  }
+
+  .banner-subtitle {
+    font-size: 1.3rem;
+  }
+
   .contact-form-content,
   .offices-content,
   .company-info-content {
@@ -692,38 +839,72 @@ const closeSuccessModal = () => {
     padding-left: 16px;
     padding-right: 16px;
   }
-  
+
   .offices-grid {
     gap: 20px;
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
+  .header {
+    height: 400px;
+  }
+
+  .banner-title {
+    font-size: 2.8rem;
+  }
+
+  .banner-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .banner-divider {
+    width: 75%;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    height: 350px;
+  }
+
+  .banner-title {
+    font-size: 2.5rem;
+  }
+
+  .banner-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .banner-divider {
+    width: 70%;
+  }
+
   .contact-form-title {
     font-size: 2.1rem;
   }
-  
+
   .form-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .offices-title {
     font-size: 1.5rem;
   }
-  
+
   .offices-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .company-info-title {
     font-size: 1.5rem;
   }
-  
+
   .nav-container {
     gap: 20px;
     padding: 0 20px;
   }
-  
+
   .nav-container span {
     font-size: 16px;
     padding: 6px 12px;
@@ -731,59 +912,75 @@ const closeSuccessModal = () => {
 }
 
 @media (max-width: 500px) {
+  .header {
+    height: 300px;
+  }
+
+  .banner-title {
+    font-size: 2rem;
+  }
+
+  .banner-subtitle {
+    font-size: 1rem;
+  }
+
+  .banner-divider {
+    width: 65%;
+  }
+
   .container {
     padding: 0;
   }
-  
+
   .nav-inner-container {
     padding: 0 4px;
   }
-  
+
   .nav-container {
     gap: 12px;
     padding: 0 4px;
   }
-  
+
   .nav-container span {
     font-size: 14px;
     padding: 4px 8px;
   }
-  
+
   .contact-form-content,
   .offices-content,
   .company-info-content {
     padding-left: 4px;
     padding-right: 4px;
   }
-  
+
   .contact-form-title {
     font-size: 1.8rem;
   }
-  
+
   .contact-form-desc {
     font-size: 1rem;
   }
-  
+
   .form-card {
     padding: 20px;
   }
-  
+
   .offices-title {
     font-size: 1.3rem;
   }
-  
+
   .office-card {
     padding: 20px;
   }
-  
+
   .company-info-title {
     font-size: 1.3rem;
   }
-  
+
   .company-info-card {
     padding: 20px;
   }
-  
+
   .modal-content {
     padding: 30px 20px;
   }
