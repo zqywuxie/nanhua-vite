@@ -1,27 +1,44 @@
 <template>
   <div class="email-test-container">
     <div class="test-card">
-      <h2>邮件服务测试</h2>
-      <p>这个页面用于测试邮件服务配置是否正确。</p>
+      <h2>Web3Forms 邮件服务测试</h2>
+      <p>这个页面用于测试 Web3Forms 邮件服务配置是否正确。</p>
       
       <div class="service-status">
-        <h3>服务状态</h3>
+        <h3>Web3Forms 服务状态</h3>
         <div class="status-grid">
-          <div class="status-item" :class="{ enabled: emailServices.EMAILJS.enabled }">
-            <span class="service-name">EmailJS</span>
-            <span class="status">{{ emailServices.EMAILJS.enabled ? '启用' : '禁用' }}</span>
-          </div>
-          <div class="status-item" :class="{ enabled: emailServices.FORMSPREE.enabled }">
-            <span class="service-name">Formspree</span>
-            <span class="status">{{ emailServices.FORMSPREE.enabled ? '启用' : '禁用' }}</span>
-          </div>
-          <div class="status-item" :class="{ enabled: emailServices.WEB3FORMS.enabled }">
+          <div class="status-item" :class="{ enabled: serviceStatus.enabled }">
             <span class="service-name">Web3Forms</span>
-            <span class="status">{{ emailServices.WEB3FORMS.enabled ? '启用' : '禁用' }}</span>
+            <span class="status">{{ serviceStatus.enabled ? '启用' : '禁用' }}</span>
           </div>
-          <div class="status-item" :class="{ enabled: emailServices.NETLIFY.enabled }">
-            <span class="service-name">Netlify Forms</span>
-            <span class="status">{{ emailServices.NETLIFY.enabled ? '启用' : '禁用' }}</span>
+          <div class="status-item" :class="{ enabled: serviceStatus.configured }">
+            <span class="service-name">配置状态</span>
+            <span class="status">{{ serviceStatus.configured ? '已配置' : '未配置' }}</span>
+          </div>
+        </div>
+        <div v-if="serviceStatus.reason" class="status-message">
+          <p>{{ serviceStatus.reason }}</p>
+        </div>
+      </div>
+
+      <div class="service-info">
+        <h3>Web3Forms 特性</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-icon">💰</span>
+            <span>完全免费使用</span>
+          </div>
+          <div class="info-item">
+            <span class="info-icon">⚡</span>
+            <span>无需服务器配置</span>
+          </div>
+          <div class="info-item">
+            <span class="info-icon">🛡️</span>
+            <span>防垃圾邮件保护</span>
+          </div>
+          <div class="info-item">
+            <span class="info-icon">📧</span>
+            <span>支持基础HTML格式</span>
           </div>
         </div>
       </div>
@@ -66,19 +83,30 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
-import { EMAIL_SERVICES } from '/src/utils/emailConfig.js'
+import { ref, reactive, onMounted } from 'vue'
+import { checkWeb3FormsAvailability, getWeb3FormsInfo } from '/src/utils/emailServiceSelector.js'
 import { sendEmail, validateFormData } from '/src/utils/emailService.js'
 
-const emailServices = EMAIL_SERVICES
 const isTesting = ref(false)
 const testResults = ref([])
+const serviceStatus = ref({
+  enabled: false,
+  configured: false,
+  reason: ''
+})
+const serviceInfo = ref({})
 
 const testData = reactive({
   name: 'Test User',
   email: 'test@example.com',
   company: 'Test Company',
-  message: 'This is a test message from the email service test page.'
+  message: 'This is a test message from the Web3Forms email service test page.'
+})
+
+// 检查Web3Forms服务状态
+onMounted(() => {
+  serviceStatus.value = checkWeb3FormsAvailability()
+  serviceInfo.value = getWeb3FormsInfo()
 })
 
 // 转换测试数据格式
@@ -100,12 +128,12 @@ const testEmail = async () => {
   const formData = getFormData()
   
   // 验证表单数据
-  const validationErrors = validateFormData(formData)
-  if (validationErrors.length > 0) {
+  const validationResult = validateFormData(formData)
+  if (!validationResult.isValid) {
     testResults.value.push({
       service: '表单验证',
       success: false,
-      message: validationErrors.join(', ')
+      message: validationResult.errors.join(', ')
     })
     isTesting.value = false
     return
@@ -114,13 +142,13 @@ const testEmail = async () => {
   try {
     const result = await sendEmail(formData)
     testResults.value.push({
-      service: result.service,
+      service: result.service || 'Web3Forms',
       success: true,
-      message: '邮件发送成功！'
+      message: 'Web3Forms 邮件发送成功！'
     })
   } catch (error) {
     testResults.value.push({
-      service: '邮件发送',
+      service: 'Web3Forms',
       success: false,
       message: error.message
     })
@@ -155,6 +183,7 @@ const testEmail = async () => {
 }
 
 .service-status h3,
+.service-info h3,
 .test-form h3,
 .test-results h3 {
   color: #333;
@@ -167,17 +196,18 @@ const testEmail = async () => {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 15px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .status-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 15px;
+  padding: 15px;
   border: 2px solid #ddd;
   border-radius: 8px;
   background: #f9f9f9;
+  transition: all 0.3s ease;
 }
 
 .status-item.enabled {
@@ -201,6 +231,41 @@ const testEmail = async () => {
 .status-item.enabled .status {
   background: #00bc97;
   color: white;
+}
+
+.status-message {
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 6px;
+  border-left: 4px solid #00bc97;
+  margin-bottom: 20px;
+}
+
+.status-message p {
+  margin: 0;
+  color: #666;
+  font-size: 0.9em;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #00bc97;
+}
+
+.info-icon {
+  font-size: 1.5rem;
 }
 
 .form {
@@ -313,5 +378,12 @@ const testEmail = async () => {
 .result-message {
   color: #666;
   font-size: 0.95em;
+}
+
+@media (max-width: 768px) {
+  .status-grid,
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

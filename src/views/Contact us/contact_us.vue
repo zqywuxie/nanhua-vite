@@ -249,10 +249,24 @@
           </button>
         </div>
         <div class="modal-body">
+          <div class="success-icon">✅</div>
           <p>
-            Our sales manager will reach out to you within
-            <strong>24 hours</strong>.
+            感谢您的咨询！我们的专业团队将在
+            <strong style="color: #00bc97">24小时内</strong>与您取得联系。
           </p>
+          <p style="font-size: 14px; color: #666; margin-top: 15px">
+            同时，您也会收到一封确认邮件，请注意查收。
+          </p>
+          <div class="contact-quick-info">
+            <p><strong>紧急联系:</strong></p>
+            <p>📞 {{ COMPANY_INFO.phone }}</p>
+            <p>📧 {{ COMPANY_INFO.email }}</p>
+          </div>
+          <div v-if="emailResult && emailResult.service" class="service-info">
+            <p style="font-size: 12px; color: #999; margin-top: 10px;">
+              邮件服务: {{ emailResult.service || 'Web3Forms' }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -276,9 +290,11 @@
 </template>
 
 <script setup>
-import { ref, reactive } from "vue";
+import { ref, reactive, computed } from "vue";
 import WeGoFastFooter from "/src/components/WeGoFastFooter.vue";
-import { sendEmail, validateFormData } from "/src/utils/emailService.js";
+import { sendEmail } from "/src/utils/emailService.js";
+import { validateFormData, formatCustomerInfo } from "/src/utils/emailService.js";
+import { COMPANY_INFO } from "/src/utils/emailConfig.js";
 
 // 表单数据
 const formData = reactive({
@@ -294,6 +310,7 @@ const isSubmitting = ref(false);
 const showSuccessModal = ref(false);
 const showErrorModal = ref(false);
 const errorMessage = ref("");
+const emailResult = ref(null);
 
 // 滚动到指定区域
 const scrollTo = (id) => {
@@ -305,34 +322,77 @@ const scrollTo = (id) => {
 
 // 提交表单
 const submitForm = async () => {
+  console.log("📝 开始提交联系表单...");
+
   // 验证表单
-  const validationErrors = validateFormData(formData);
-  if (validationErrors.length > 0) {
-    errorMessage.value = validationErrors.join("\n");
+  const validationResult = validateFormData(formData);
+  if (!validationResult.isValid) {
+    console.warn("❌ 表单验证失败:", validationResult.errors);
+    errorMessage.value = validationResult.errors.join("\n");
     showErrorModal.value = true;
     return;
   }
 
+  console.log("✅ 表单验证通过，准备发送邮件...");
+  console.log("👤 客户信息:", formatCustomerInfo(formData));
+
   isSubmitting.value = true;
 
   try {
-    // 使用邮件服务发送邮件
+    // 使用Web3Forms发送邮件
     const result = await sendEmail(formData);
-    console.log("Email sent successfully:", result);
+    console.log("📧 邮件发送成功:", result);
 
     // 显示成功消息
     showSuccessModal.value = true;
+    emailResult.value = result; // 将结果赋值给 emailResult
+
+    // 记录成功提交
+    console.log(`🎉 客户咨询提交成功 - ${formatCustomerInfo(formData)}`);
+    console.log(`📊 使用服务: ${result.service || 'Web3Forms'}`);
 
     // 重置表单
     Object.keys(formData).forEach((key) => {
       formData[key] = "";
     });
+
+    // 可选：发送统计数据到分析服务
+    if (window.gtag) {
+      window.gtag("event", "form_submit", {
+        event_category: "contact",
+        event_label: "contact_form_success",
+        value: 1,
+        service: result.service || "Web3Forms",
+      });
+    }
   } catch (error) {
-    console.error("Form submission error:", error);
-    errorMessage.value =
-      error.message ||
-      "Sorry, there was an error sending your message. Please try again later or contact us directly.";
+    console.error("💥 表单提交失败:", error);
+
+    // 更友好的错误消息
+    let friendlyErrorMessage =
+      "抱歉，发送消息时出现错误。请稍后重试或直接联系我们。";
+
+    if (error.message.includes("网络")) {
+      friendlyErrorMessage = "网络连接出现问题，请检查您的网络连接后重试。";
+    } else if (error.message.includes("邮件服务")) {
+      friendlyErrorMessage =
+        "邮件服务暂时不可用，请稍后重试或直接拨打我们的客服电话。";
+    } else if (error.message.includes("Web3Forms")) {
+      friendlyErrorMessage =
+        "邮件服务暂时不可用，请稍后重试或直接拨打我们的客服电话。";
+    }
+
+    errorMessage.value = `${friendlyErrorMessage}\n\n技术详情: ${error.message}`;
     showErrorModal.value = true;
+
+    // 发送错误统计
+    if (window.gtag) {
+      window.gtag("event", "form_error", {
+        event_category: "contact",
+        event_label: "contact_form_error",
+        value: 0,
+      });
+    }
   } finally {
     isSubmitting.value = false;
   }
@@ -341,11 +401,13 @@ const submitForm = async () => {
 // 关闭成功弹窗
 const closeSuccessModal = () => {
   showSuccessModal.value = false;
+  emailResult.value = null;
 };
 
 // 关闭错误弹窗
 const closeErrorModal = () => {
   showErrorModal.value = false;
+  errorMessage.value = "";
 };
 </script>
 
@@ -811,6 +873,60 @@ const closeErrorModal = () => {
 
 .modal-body strong {
   color: #00bc97;
+}
+
+.success-icon {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 20px;
+  animation: bounce 0.6s ease-in-out;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.contact-quick-info {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%);
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+  border-left: 4px solid #00bc97;
+}
+
+.contact-quick-info p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.contact-quick-info strong {
+  color: #4e3fa5;
+}
+
+.service-info {
+  margin-top: 15px;
+  padding: 8px 12px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border-left: 3px solid #00bc97;
+}
+
+.service-info p {
+  margin: 0;
+  font-size: 12px;
+  color: #666;
 }
 
 /* 错误弹窗特定样式 */
