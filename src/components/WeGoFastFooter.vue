@@ -53,7 +53,7 @@
                   </svg>
                 </span>
                 <a class="contact-nav-link" href="/reagent"
-                  >Diagnostic Materials</a
+                  >Diagnostic Reagents</a
                 >
               </li>
               <li class="contact-nav-item">
@@ -76,7 +76,7 @@
                   </svg>
                 </span>
                 <a class="contact-nav-link" href="/instruments"
-                  >Digital PCR & Instruments</a
+                  >Digital PCR Systems</a
                 >
               </li>
             </ul>
@@ -103,8 +103,8 @@
                     />
                   </svg>
                 </span>
-                <a class="contact-nav-link" href="/services/health-assessment"
-                  >Health Assessment</a
+                <a class="contact-nav-link" href="/ai-medical-multimodal"
+                  >AI Medical Intelligence</a
                 >
               </li>
               <li class="contact-nav-item">
@@ -126,8 +126,8 @@
                     />
                   </svg>
                 </span>
-                <a class="contact-nav-link" href="/services/disease-diagnosis"
-                  >Disease Diagnosis</a
+                <a class="contact-nav-link" href="/custom-molecular-diagnostics"
+                  >Molecular Diagnostics</a
                 >
               </li>
               <li class="contact-nav-item">
@@ -149,59 +149,13 @@
                     />
                   </svg>
                 </span>
-                <a class="contact-nav-link" href="/services/drug-development"
-                  >Drug Development</a
+                <a class="contact-nav-link" href="/big-data-database"
+                  >Big Data & Database</a
                 >
               </li>
             </ul>
           </li>
-          <li class="contact-nav-col contact-nav-col-right">
-            <div class="contact-nav-group-title">Resources</div>
-            <ul class="contact-nav-sub">
-              <li class="contact-nav-item">
-                <span class="contact-nav-dotline">
-                  <svg
-                    width="6"
-                    height="28"
-                    viewBox="0 0 6 28"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <circle
-                      v-for="i in 5"
-                      :key="i"
-                      :cy="3 + 5 * (i - 1)"
-                      cx="3"
-                      :r="0.8 + 0.2 * i"
-                      fill="#fff"
-                    />
-                  </svg>
-                </span>
-                <a class="contact-nav-link" href="#">Marketing Materials</a>
-              </li>
-              <li class="contact-nav-item">
-                <span class="contact-nav-dotline">
-                  <svg
-                    width="6"
-                    height="28"
-                    viewBox="0 0 6 28"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <circle
-                      v-for="i in 5"
-                      :key="i"
-                      :cy="3 + 5 * (i - 1)"
-                      cx="3"
-                      :r="0.8 + 0.2 * i"
-                      fill="#fff"
-                    />
-                  </svg>
-                </span>
-                <a class="contact-nav-link" href="#">Events</a>
-              </li>
-            </ul>
-          </li>
+
           <li class="contact-nav-col contact-nav-col-right">
             <div class="contact-nav-group-title">
               <a class="contact-nav-link" href="/about_us" style="padding: 0"
@@ -212,6 +166,9 @@
               <li class="contact-nav-item">
                 <a class="contact-nav-link" href="/contact_us">Contact</a>
               </li>
+              <li class="contact-nav-item">
+                <a class="contact-nav-link" href="/technology">Technology</a>
+              </li>
             </ul>
           </li>
         </ul>
@@ -221,46 +178,58 @@
     <div class="contact-bottom">
       <div class="contact-location">
         <div class="contact-location-title">
-          <span class="contact-icon">🏢</span>南京总部 (暂定)
+          <span class="contact-icon">🏢</span>Vivolution Biosciences
+          Headquarters
         </div>
         <div class="contact-location-row">
-          <span class="contact-icon">✉️</span>info@company.com (暂定)
+          <span class="contact-icon">✉️</span>info@vivolution.com
         </div>
         <div class="contact-location-row">
-          <span class="contact-icon">📞</span>4008-281-191 (暂定)
+          <span class="contact-icon">📞</span>+86-25-8888-0000
         </div>
         <div class="contact-location-row">
-          <span class="contact-icon">📍</span
-          >南京经济开发区恒泰路8号汇智科技园A9栋第4层 (暂定)
+          <span class="contact-icon">📍</span>Building A9, 4th Floor, Huizhi
+          Science Park, No.8 Hengtai Road, Nanjing Economic Development Zone
         </div>
       </div>
       <div class="contact-location">
         <div class="contact-location-title">
-          <span class="contact-icon">🏢</span>北京分公司 (暂定)
+          <span class="contact-icon">🏢</span>Beijing R&D Center
         </div>
         <div class="contact-location-row">
-          <span class="contact-icon">✉️</span>beijing@company.com (暂定)
+          <span class="contact-icon">✉️</span>beijing@vivolution.com
         </div>
         <div class="contact-location-row">
-          <span class="contact-icon">📞</span>010-XXXX-XXXX (暂定)
+          <span class="contact-icon">📞</span>+86-10-8888-0000
         </div>
         <div class="contact-location-row">
-          <span class="contact-icon">📍</span>北京市朝阳区XX路XX号 (暂定)
+          <span class="contact-icon">📍</span>Zhongguancun Life Science Park,
+          Changping District, Beijing
         </div>
       </div>
       <div class="contact-location">
         <div class="contact-location-title">
-          <span class="contact-icon">🏢</span>上海分公司 (暂定)
+          <span class="contact-icon">🏢</span>Shanghai Manufacturing Center
         </div>
         <div class="contact-location-row">
-          <span class="contact-icon">✉️</span>shanghai@company.com (暂定)
+          <span class="contact-icon">✉️</span>shanghai@vivolution.com
         </div>
         <div class="contact-location-row">
-          <span class="contact-icon">📞</span>021-XXXX-XXXX (暂定)
+          <span class="contact-icon">📞</span>+86-21-8888-0000
         </div>
         <div class="contact-location-row">
-          <span class="contact-icon">📍</span>上海市浦东新区XX路XX号 (暂定)
+          <span class="contact-icon">📍</span>Shanghai Zhangjiang Hi-Tech Park,
+          Pudong New Area, Shanghai
         </div>
+      </div>
+    </div>
+    <div class="contact-copyright">
+      <div class="copyright-content">
+        <p>&copy; 2024 Vivolution Biosciences. All rights reserved.</p>
+        <p>
+          Leading Life Science Technology Service Provider | We Go Fast, You Go
+          Forward
+        </p>
       </div>
     </div>
   </section>
@@ -275,7 +244,7 @@ import logoImg from "@/assets/logo.png";
 .contact-info-gradient {
   width: 100%;
   background: linear-gradient(90deg, #00e6b8 0%, #6c3fff 100%);
-  padding: 2rem 0 2.5rem 0;
+  padding: 2rem 0 0 0;
   min-height: 30vh;
   display: flex;
   flex-direction: column;
@@ -629,4 +598,35 @@ import logoImg from "@/assets/logo.png";
     color: #333 !important;
   }
 }
-</style> 
+
+.contact-copyright {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 20px 0;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.copyright-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.copyright-content p {
+  margin: 5px 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.copyright-content p:first-child {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+@media (max-width: 768px) {
+  .copyright-content p {
+    font-size: 12px;
+  }
+}
+</style>

@@ -671,105 +671,34 @@ const routes = [
           ),
       },
       // Services子路由
-      // AI Services
+      // AI医学多模态人工智能
       {
-        path: "/ai-services",
-        name: "AIServices",
+        path: "/ai-medical-multimodal",
+        name: "AIMedicalMultimodal",
         meta: {
-          title: "AI Medical Multimodal Intelligence",
+          title: "AI医学多模态人工智能",
         },
-        component: () => import("../views/Services/AIServices.vue"),
+        component: () => import("../views/Services/AIMedicalMultimodal.vue"),
       },
+      // 定制化分子诊断开发
       {
-        path: "/medical-ai",
-        name: "MedicalAI",
+        path: "/custom-molecular-diagnostics",
+        name: "CustomMolecularDiagnostics",
         meta: {
-          title: "Medical AI Solutions",
+          title: "定制化分子诊断开发",
         },
-        component: () => import("../views/Services/MedicalAI.vue"),
+        component: () => import("../views/Services/CustomMolecularDiagnostics.vue"),
       },
+      // 大数据服务数据库
       {
-        path: "/multimodal-analysis",
-        name: "MultimodalAnalysis",
+        path: "/big-data-database",
+        name: "BigDataDatabase",
         meta: {
-          title: "Multimodal Data Analysis",
+          title: "大数据服务数据库",
         },
-        component: () => import("../views/Services/MultimodalAnalysis.vue"),
+        component: () => import("../views/Services/BigDataDatabase.vue"),
       },
-      {
-        path: "/ai-diagnostics",
-        name: "AIDiagnostics",
-        meta: {
-          title: "AI-Powered Diagnostics",
-        },
-        component: () => import("../views/Services/AIDiagnostics.vue"),
-      },
-      // Molecular Diagnostics
-      {
-        path: "/molecular-diagnostics",
-        name: "MolecularDiagnostics",
-        meta: {
-          title: "Custom Molecular Diagnostics",
-        },
-        component: () => import("../views/Services/MolecularDiagnostics.vue"),
-      },
-      {
-        path: "/assay-development",
-        name: "AssayDevelopment",
-        meta: {
-          title: "Assay Development",
-        },
-        component: () => import("../views/Services/AssayDevelopment.vue"),
-      },
-      {
-        path: "/biomarker-discovery",
-        name: "BiomarkerDiscovery",
-        meta: {
-          title: "Biomarker Discovery",
-        },
-        component: () => import("../views/Services/BiomarkerDiscovery.vue"),
-      },
-      {
-        path: "/diagnostic-validation",
-        name: "DiagnosticValidation",
-        meta: {
-          title: "Diagnostic Validation",
-        },
-        component: () => import("../views/Services/DiagnosticValidation.vue"),
-      },
-      // Big Data Services
-      {
-        path: "/big-data-services",
-        name: "BigDataServices",
-        meta: {
-          title: "Big Data & Database Services",
-        },
-        component: () => import("../views/Services/BigDataServices.vue"),
-      },
-      {
-        path: "/genomic-databases",
-        name: "GenomicDatabases",
-        meta: {
-          title: "Genomic Databases",
-        },
-        component: () => import("../views/Services/GenomicDatabases.vue"),
-      },
-      {
-        path: "/data-analytics",
-        name: "DataAnalytics",
-        meta: {
-          title: "Data Analytics Platform",
-        },
-        component: () => import("../views/Services/DataAnalytics.vue"),
-      },
-      {
-        path: "/cloud-computing",
-        name: "CloudComputing",
-        meta: {
-          title: "Cloud Computing Services",
-        },
-        component: () => import("../views/Services/CloudComputing.vue"),
-      },
+
       // About us子路由
       {
         path: "/Careers_at_Quintara",

@@ -60,13 +60,7 @@
 
         <!-- 桌面端悬浮下拉面板 -->
         <div
-          v-if="
-            activeNav &&
-            !isMobile &&
-            currentNav?.children?.filter(
-              (child) => child.children && child.children.length > 0
-            )?.length > 0
-          "
+          v-if="activeNav && !isMobile && currentNav?.children?.length > 0"
           class="dropdown-panel fixed-panel"
           @mouseenter="handlePanelHover"
           @mouseleave="handlePanelLeave"
@@ -76,21 +70,21 @@
             <div class="panel-column">
               <ul class="menu-list">
                 <li
-                  v-for="subItem in currentNav?.children?.filter(
-                    (child) => child.children && child.children.length > 0
-                  ) || []"
+                  v-for="subItem in currentNav?.children || []"
                   :key="subItem.key"
                   class="menu-item"
                   @mouseenter="handleFirstMenuHover(subItem)"
                   @click="handleSubMenuClick(subItem)"
                 >
-                  <a-icon :type="subItem.icon" class="menu-icon" />
                   <span class="menu-text">{{ subItem.title }}</span>
                 </li>
               </ul>
             </div>
             <!-- 第二栏：二级菜单 -->
-            <div class="panel-column">
+            <div
+              class="panel-column"
+              v-if="activeFirstMenu?.children?.length > 0"
+            >
               <ul class="submenu-list">
                 <li
                   v-for="subSubItem in activeFirstMenu?.children"
@@ -98,10 +92,19 @@
                   class="submenu-item"
                   @click="handleSubSubMenuClick(subSubItem)"
                 >
-                  <a-icon :type="subSubItem.icon" class="submenu-icon" />
                   <span class="submenu-text">{{ subSubItem.title }}</span>
                 </li>
               </ul>
+            </div>
+            <!-- 当没有二级菜单时显示的内容 -->
+            <div class="panel-column" v-else>
+              <div class="no-submenu-content">
+                <h4 v-if="activeFirstMenu">{{ activeFirstMenu.title }}</h4>
+                <p v-if="activeFirstMenu">
+                  Click the menu item on the left to directly access the service
+                  page
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -668,89 +671,26 @@ const navItems = ref([
     path: "/services",
     children: [
       {
-        key: "ai_services",
+        key: "ai_medical_multimodal",
         title: "AI Medical Multimodal Intelligence",
-        path: "/ai-services",
-        children: [
-          {
-            key: "medical_ai",
-            title: "Medical AI Solutions",
-            path: "/medical-ai",
-          },
-          {
-            key: "multimodal_analysis",
-            title: "Multimodal Data Analysis",
-            path: "/multimodal-analysis",
-          },
-          {
-            key: "ai_diagnostics",
-            title: "AI-Powered Diagnostics",
-            path: "/ai-diagnostics",
-          },
-        ],
+        path: "/ai-medical-multimodal",
+        children: [],
       },
       {
-        key: "molecular_diagnostics",
-        title: "Custom Molecular Diagnostics",
-        path: "/molecular-diagnostics",
-        children: [
-          {
-            key: "assay_development",
-            title: "Assay Development",
-            path: "/assay-development",
-          },
-          {
-            key: "biomarker_discovery",
-            title: "Biomarker Discovery",
-            path: "/biomarker-discovery",
-          },
-          {
-            key: "diagnostic_validation",
-            title: "Diagnostic Validation",
-            path: "/diagnostic-validation",
-          },
-        ],
+        key: "custom_molecular_diagnostics",
+        title: "Custom Molecular Diagnostics Development",
+        path: "/custom-molecular-diagnostics",
+        children: [],
       },
       {
-        key: "big_data_services",
+        key: "big_data_database",
         title: "Big Data & Database Services",
-        path: "/big-data-services",
-        children: [
-          {
-            key: "genomic_databases",
-            title: "Genomic Databases",
-            path: "/genomic-databases",
-          },
-          {
-            key: "data_analytics",
-            title: "Data Analytics Platform",
-            path: "/data-analytics",
-          },
-          {
-            key: "cloud_computing",
-            title: "Cloud Computing Services",
-            path: "/cloud-computing",
-          },
-        ],
+        path: "/big-data-database",
+        children: [],
       },
     ],
   },
-  // {
-  //   key: 'support',
-  //   title: 'SUPPORT',
-  //   path: '/support',
-  //   children: []
-  // },
-  // {
-  //   key: "resources",
-  //   title: "RESOURCES",
-  //   path: "/resources",
-  // },
-  // {
-  //   key: "news",
-  //   title: "NEWS",
-  //   path: "/news",
-  // },
+
   {
     key: "about_us",
     title: "ABOUT US",
@@ -848,7 +788,7 @@ const handleNavClick = (item) => {
   resetScrollPosition();
 
   if (item.key === "services") {
-    router.push("/ai-services");
+    router.push("/services");
     activeNav.value = null;
     activeFirstMenu.value = null;
     return;
@@ -1585,6 +1525,26 @@ function resetScrollPosition() {
 }
 .submenu-text {
   font-size: 14px;
+}
+
+// 无子菜单时的内容样式
+.no-submenu-content {
+  padding: 2rem;
+  text-align: center;
+  color: #64748b;
+
+  h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin: 0;
+  }
 }
 
 // 右侧推荐区
