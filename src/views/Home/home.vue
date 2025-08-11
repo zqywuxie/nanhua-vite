@@ -715,84 +715,71 @@
       </div>
     </section>
 
-    <!-- 服务模块 -->
+    <!-- 服务模块：Products & Services（对齐 Services 页面） -->
     <section class="services-module">
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">Products & Services</h2>
           <p class="section-desc">
-            Advanced biotechnology solutions for immune repertoire analysis,
-            molecular diagnostics, and life science research applications
+            Professional service solutions spanning AI medical multimodal
+            intelligence, custom molecular diagnostics, and big data database
+            platforms
           </p>
         </div>
         <ul class="services-list">
+          <!-- AI Medical Multimodal -->
           <li>
-            <a href="/instruments">
-              <figure
-                class="service-image"
-                :style="{ backgroundImage: `url(${ngsLibrarySystem})` }"
-              ></figure>
-              <div class="service-text">
-                <h3 class="service-title">
-                  Automated NGS Library Construction Systems
-                </h3>
-                <p class="service-desc">
-                  Fully automated library construction systems for immune
-                  repertoire sequencing, featuring high-throughput processing
-                  and standardized workflows for TCR/BCR analysis
-                </p>
-              </div>
-            </a>
-          </li>
-
-          <li>
-            <a href="/reagent/chemiluminescence">
-              <figure
-                class="service-image"
-                :style="{ backgroundImage: `url(${digitalPcrKit})` }"
-              ></figure>
-              <div class="service-text">
-                <h3 class="service-title">Digital PCR Detection Kits</h3>
-                <p class="service-desc">
-                  Multiplex and ultra-multiplex digital PCR kits for respiratory
-                  pathogens, gastrointestinal pathogens, tumor detection, and
-                  other clinical applications
-                </p>
-              </div>
-            </a>
-          </li>
-
-          <li>
-            <a href="/Sanger_Sequencing">
-              <figure
-                class="service-image"
-                :style="{ backgroundImage: `url(${sangerSequencing})` }"
-              ></figure>
-              <div class="service-text">
-                <h3 class="service-title">
-                  Immune Repertoire Sequencing Services
-                </h3>
-                <p class="service-desc">
-                  Comprehensive immune repertoire analysis services including
-                  sample processing, library construction, sequencing, and
-                  bioinformatics analysis for research and clinical applications
-                </p>
-              </div>
-            </a>
-          </li>
-
-          <li>
-            <a href="/life_science/homogeneous_luminescence">
+            <a href="/ai-medical-multimodal">
               <figure
                 class="service-image"
                 :style="{ backgroundImage: `url(${nextGene01Service})` }"
               ></figure>
               <div class="service-text">
-                <h3 class="service-title">Life Science Solutions</h3>
+                <h3 class="service-title">
+                  AI Medical Multimodal Intelligence
+                </h3>
                 <p class="service-desc">
-                  Homogeneous luminescence detection systems, chromatography
-                  media, cell sorting systems, and protein purification
-                  solutions for research applications
+                  Advanced AI solutions integrating deep learning, computer
+                  vision, and natural language processing for medical imaging
+                  analysis and clinical decision support
+                </p>
+              </div>
+            </a>
+          </li>
+
+          <!-- Custom Molecular Diagnostics -->
+          <li>
+            <a href="/custom-molecular-diagnostics">
+              <figure
+                class="service-image"
+                :style="{ backgroundImage: `url(${digitalPcrKit})` }"
+              ></figure>
+              <div class="service-text">
+                <h3 class="service-title">
+                  Custom Molecular Diagnostics Development
+                </h3>
+                <p class="service-desc">
+                  End-to-end molecular diagnostic solutions from concept to
+                  commercialization, including assay development, validation,
+                  and regulatory support
+                </p>
+              </div>
+            </a>
+          </li>
+
+          <!-- Big Data & Database -->
+          <li>
+            <a href="/big-data-database">
+              <figure
+                class="service-image"
+                :style="{ backgroundImage: `url(${sangerSequencing})` }"
+              ></figure>
+              <div class="service-text">
+                <h3 class="service-title">Big Data & Database Services</h3>
+                <p class="service-desc">
+                  Comprehensive multi-omics database platform integrating
+                  single-cell, immune repertoire, and metabolomics/proteomics
+                  data with advanced analytics
                 </p>
               </div>
             </a>
@@ -3161,7 +3148,7 @@ onUnmounted(() => {
 
 /* 服务模块 */
 .services-module {
-  padding: 100px 0;
+  padding: 80px 0;
   background: #fff;
 }
 
@@ -3170,7 +3157,7 @@ onUnmounted(() => {
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 30px;
   max-width: 1400px;
   margin: 0 auto;
@@ -3178,46 +3165,47 @@ onUnmounted(() => {
 
 .services-list li {
   background: #fff;
-  border-radius: 20px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 2px solid #f8f9fa;
+  border: 1px solid #edf2f7;
+  display: flex;
+  flex-direction: column;
 }
 
 .services-list li:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-  border-color: #00bc97;
+  transform: translateY(-8px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+  border-color: rgba(0, 188, 151, 0.3);
 }
 
 .services-list a {
   text-decoration: none;
   color: inherit;
-  display: block;
+  display: flex;
+  flex-direction: column;
   height: 100%;
 }
 
 .service-image {
   width: 100%;
-  height: 200px;
+  aspect-ratio: 16 / 9;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
+  transition: transform 0.3s ease;
 }
 
 .service-image::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: linear-gradient(
     135deg,
-    rgba(0, 188, 151, 0.1) 0%,
-    rgba(78, 63, 165, 0.1) 100%
+    rgba(0, 188, 151, 0.15) 0%,
+    rgba(78, 63, 165, 0.15) 100%
   );
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -3226,26 +3214,29 @@ onUnmounted(() => {
 .services-list li:hover .service-image::before {
   opacity: 1;
 }
+.services-list li:hover .service-image {
+  transform: scale(1.02);
+}
 
 .service-text {
-  padding: 25px;
+  padding: 22px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
 }
 
 .service-title {
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  color: #333;
-  margin-bottom: 15px;
-  line-height: 1.3;
-  background: linear-gradient(135deg, #00bc97 0%, #4e3fa5 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #1a202c;
+  line-height: 1.45;
+  margin: 0;
 }
 
 .service-desc {
-  font-size: 1rem;
-  color: #666;
+  font-size: 0.95rem;
+  color: #4a5568;
   line-height: 1.6;
   margin: 0;
   display: -webkit-box;
@@ -3731,8 +3722,8 @@ onUnmounted(() => {
   }
 
   .services-list {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 
   /* .partners-grid {

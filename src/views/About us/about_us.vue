@@ -207,6 +207,7 @@ import aboutus03 from "@/assets/about/aboutus03.png";
 import aboutus04 from "@/assets/about/aboutus04.png";
 import aboutus05 from "@/assets/about/aboutus05.png";
 import aboutus06 from "@/assets/about/aboutus06.png";
+import sequenator from "@/assets/about/sequenator.jpeg";
 import PHDWang from "@/assets/about/PHD-wang.jpg";
 import HakeemO from "@/assets/about/Hakeem O. Lawal, Ph.D..jpg";
 import WeGoFastFooter from "@/components/WeGoFastFooter.vue";
@@ -253,7 +254,7 @@ const businessList = [
     desc: "Customizable microbead platforms engineered with proprietary surface chemistry for diagnostics, therapeutics, and molecular biology applications including nucleic acid extraction and protein purification.",
   },
   {
-    img: aboutus05,
+    img: sequenator,
     title: "Next-Generation Sequencing Services",
     desc: "Comprehensive NGS solutions including DNA sequencing, RNA sequencing, single-cell sequencing, and 16S/ITS microbiome analysis with fast turnaround times and expert data analysis support.",
   },
