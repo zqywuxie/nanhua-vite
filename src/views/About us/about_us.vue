@@ -108,7 +108,51 @@
                 <div class="chief-role">MD, PhD; Chief Scientist</div>
                 <div class="chief-hr"></div>
                 <div class="chief-desc">
-                  <p>简介待补充。</p>
+                  <p>
+                    Dr. Wang Zhe is a distinguished scientist with extensive
+                    international research experience in molecular and cell
+                    biology, specializing in cancer immunotherapy and
+                    neurodegenerative diseases. He received his Ph.D. in
+                    Molecular and Cell Biology from The University of Alabama in
+                    2006, where he conducted groundbreaking research on
+                    Drosophila models of Parkinson's disease and
+                    neurotransmitter regulation.
+                  </p>
+                  <p>
+                    Following his doctoral studies, Dr. Wang completed
+                    postdoctoral training at the Stowers Institute of Medical
+                    Research in Kansas City, Missouri (2006-2007), and the
+                    University of Mississippi Medical Center in Jackson,
+                    Mississippi (2007-2013). During this period, he made
+                    significant contributions to understanding stress-induced
+                    monoamine oxidase expression and the role of cytochrome P450
+                    in kidney injury.
+                  </p>
+                  <p>
+                    From 2014 to 2016, Dr. Wang conducted research at UPMC et
+                    INSERM UMR S 938 CDR St Antoine in Paris, France, where he
+                    focused on cancer biology and tumor suppressor mechanisms.
+                    His work on TGIF proteins and their role in cancer
+                    development has been published in prestigious journals
+                    including Cancer Cell and EMBO Journal.
+                  </p>
+                  <p>
+                    Since 2016, Dr. Wang has served as a Senior Consultant at
+                    iRepertoire Inc. in Huntsville, Alabama, contributing to the
+                    development of next-generation sequencing technologies and
+                    immune repertoire analysis. His research has led to numerous
+                    peer-reviewed publications in high-impact journals, covering
+                    topics from cancer immunotherapy to COVID-19 immune
+                    responses.
+                  </p>
+                  <p>
+                    Dr. Wang's international experience spans over two decades,
+                    during which he has established himself as a leading expert
+                    in translational medicine, with particular expertise in
+                    developing innovative therapeutic approaches for cancer
+                    treatment and understanding immune system dynamics in
+                    various disease states.
+                  </p>
                 </div>
               </div>
             </div>

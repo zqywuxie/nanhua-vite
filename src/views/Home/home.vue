@@ -2816,12 +2816,12 @@ onUnmounted(() => {
 
 .value-icon {
   display: block;
-  width: 70px;
-  height: 70px;
-  margin-bottom: 20px;
+  width: 60px; /* 从70px减少到60px */
+  height: 60px; /* 从70px减少到60px */
+  margin-bottom: 18px; /* 减少底部间距 */
   background: linear-gradient(135deg, #00bc97 0%, #4e3fa5 100%);
-  border-radius: 15px;
-  padding: 12px;
+  border-radius: 12px; /* 减少圆角 */
+  padding: 10px; /* 减少内边距 */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2835,10 +2835,10 @@ onUnmounted(() => {
 
 .values-list strong {
   display: block;
-  font-size: 1.6rem;
+  font-size: 1.4rem; /* 从1.6rem减少到1.4rem */
   font-weight: 700;
   color: #333;
-  margin-bottom: 15px;
+  margin-bottom: 12px; /* 减少底部间距 */
 }
 .values-list strong span {
   background: linear-gradient(135deg, #00bc97 0%, #4e3fa5 100%);
@@ -2847,7 +2847,7 @@ onUnmounted(() => {
   background-clip: text;
 }
 .values-list p {
-  font-size: 1.1rem;
+  font-size: 1rem; /* 从1.1rem减少到1rem */
   color: #666;
   line-height: 1.6;
   margin: 0;
@@ -2965,16 +2965,16 @@ onUnmounted(() => {
 .values-content {
   display: flex;
   align-items: center;
-  gap: 100px;
-  max-width: 1600px;
+  gap: 80px; /* 减少间距，让布局更紧凑 */
+  max-width: 1500px; /* 稍微减少最大宽度 */
   margin: 0 auto;
 }
 
 .values-visual {
   position: relative;
   flex-shrink: 0;
-  width: 600px;
-  height: 600px;
+  width: 500px; /* 从600px减少到500px */
+  height: 500px; /* 从600px减少到500px */
 }
 
 .values-bg {
@@ -3033,8 +3033,8 @@ onUnmounted(() => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 300px;
-  height: 300px;
+  width: 250px; /* 从300px减少到250px */
+  height: 250px; /* 从300px减少到250px */
   z-index: 2;
 }
 
@@ -3051,22 +3051,30 @@ onUnmounted(() => {
   margin: 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
-  max-width: 1000px;
+  gap: 30px; /* 减少卡片间距 */
+  max-width: 900px; /* 减少最大宽度 */
+  /* 防止卡片被挤压 */
+  min-width: 0;
+  width: 100%;
 }
 
 .values-list li {
-  padding: 30px 40px;
+  padding: 25px 30px; /* 减少内边距 */
   background: #fff;
-  border-radius: 20px;
+  border-radius: 18px; /* 稍微减少圆角 */
   border: 2px solid #e9ecef;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  min-height: 220px;
+  min-height: 200px; /* 减少最小高度 */
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* 防止内容溢出和文本挤压 */
+  min-width: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 .values-list li::before {
   content: "";
@@ -3080,8 +3088,8 @@ onUnmounted(() => {
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .values-list li:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  transform: translateY(-8px); /* 减少悬停时的移动距离 */
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.1);
   border-color: #00bc97;
 }
 .values-list li:hover::before {
@@ -3090,12 +3098,12 @@ onUnmounted(() => {
 
 .value-icon {
   display: block;
-  width: 70px;
-  height: 70px;
-  margin-bottom: 20px;
+  width: 60px; /* 从70px减少到60px */
+  height: 60px; /* 从70px减少到60px */
+  margin-bottom: 18px; /* 减少底部间距 */
   background: linear-gradient(135deg, #00bc97 0%, #4e3fa5 100%);
-  border-radius: 15px;
-  padding: 12px;
+  border-radius: 12px; /* 减少圆角 */
+  padding: 10px; /* 减少内边距 */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3109,10 +3117,10 @@ onUnmounted(() => {
 
 .values-list strong {
   display: block;
-  font-size: 1.6rem;
+  font-size: 1.4rem; /* 从1.6rem减少到1.4rem */
   font-weight: 700;
   color: #333;
-  margin-bottom: 15px;
+  margin-bottom: 12px; /* 减少底部间距 */
 }
 .values-list strong span {
   background: linear-gradient(135deg, #00bc97 0%, #4e3fa5 100%);
@@ -3121,10 +3129,15 @@ onUnmounted(() => {
   background-clip: text;
 }
 .values-list p {
-  font-size: 1.1rem;
+  font-size: 1rem; /* 从1.1rem减少到1rem */
   color: #666;
   line-height: 1.6;
   margin: 0;
+  /* 确保文本在小空间内仍然可读 */
+  word-spacing: normal;
+  letter-spacing: normal;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 @keyframes rotate {
@@ -3142,7 +3155,7 @@ onUnmounted(() => {
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-8px); /* 减少动画幅度 */
   }
 }
 
@@ -3241,6 +3254,7 @@ onUnmounted(() => {
   margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -6205,7 +6219,222 @@ body.reagent-cursor-active * {
   }
 }
 
-/* 响应式设计 - 简化 */
+/* 响应式设计 - 增强PC端支持 */
+
+/* 大屏幕优化 (1600px+) */
+@media (min-width: 1600px) {
+  .values-content {
+    gap: 100px; /* 减少间距 */
+    max-width: 1700px; /* 减少最大宽度 */
+  }
+
+  .values-visual {
+    width: 600px; /* 从700px减少到600px */
+    height: 600px; /* 从700px减少到600px */
+  }
+
+  .values-list {
+    gap: 40px; /* 减少间距 */
+    max-width: 1000px; /* 减少最大宽度 */
+  }
+
+  .values-list li {
+    padding: 35px 45px; /* 减少内边距 */
+    min-height: 230px; /* 减少最小高度 */
+  }
+
+  .values-list strong {
+    font-size: 1.6rem; /* 从1.8rem减少到1.6rem */
+    margin-bottom: 18px; /* 减少底部间距 */
+  }
+
+  .values-list p {
+    font-size: 1.1rem; /* 从1.2rem减少到1.1rem */
+    line-height: 1.6; /* 减少行高 */
+  }
+
+  .value-icon {
+    width: 70px; /* 从80px减少到70px */
+    height: 70px; /* 从80px减少到70px */
+    margin-bottom: 22px; /* 减少底部间距 */
+  }
+}
+
+/* 中大屏幕优化 (1400px-1599px) */
+@media (min-width: 1400px) and (max-width: 1599px) {
+  .values-content {
+    gap: 90px; /* 减少间距 */
+    max-width: 1600px; /* 减少最大宽度 */
+  }
+
+  .values-visual {
+    width: 550px; /* 从650px减少到550px */
+    height: 550px; /* 从650px减少到550px */
+  }
+
+  .values-list {
+    gap: 35px; /* 减少间距 */
+    max-width: 950px; /* 减少最大宽度 */
+  }
+
+  .values-list li {
+    padding: 30px 40px; /* 减少内边距 */
+    min-height: 220px; /* 减少最小高度 */
+  }
+
+  .values-list strong {
+    font-size: 1.5rem; /* 从1.7rem减少到1.5rem */
+    margin-bottom: 15px; /* 减少底部间距 */
+  }
+
+  .values-list p {
+    font-size: 1rem; /* 从1.15rem减少到1rem */
+    line-height: 1.6; /* 减少行高 */
+  }
+
+  .value-icon {
+    width: 65px; /* 从75px减少到65px */
+    height: 65px; /* 从75px减少到65px */
+    margin-bottom: 18px; /* 减少底部间距 */
+  }
+}
+
+/* 标准桌面优化 (1200px-1399px) */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .values-content {
+    gap: 80px; /* 减少间距 */
+    max-width: 1500px; /* 减少最大宽度 */
+  }
+
+  .values-visual {
+    width: 500px; /* 从600px减少到500px */
+    height: 500px; /* 从600px减少到500px */
+  }
+
+  .values-list {
+    gap: 30px; /* 减少间距 */
+    max-width: 900px; /* 减少最大宽度 */
+  }
+
+  .values-list li {
+    padding: 25px 30px; /* 减少内边距 */
+    min-height: 200px; /* 减少最小高度 */
+  }
+
+  .values-list strong {
+    font-size: 1.4rem; /* 从1.6rem减少到1.4rem */
+    margin-bottom: 12px; /* 减少底部间距 */
+  }
+
+  .values-list p {
+    font-size: 1rem; /* 从1.1rem减少到1rem */
+    line-height: 1.6;
+  }
+
+  .value-icon {
+    width: 60px; /* 从70px减少到60px */
+    height: 60px; /* 从70px减少到60px */
+    margin-bottom: 18px; /* 减少底部间距 */
+  }
+}
+
+/* 中等桌面屏幕 (992px-1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .values-section {
+    padding: 80px 0;
+  }
+
+  .values-content {
+    flex-direction: column;
+    gap: 50px; /* 减少间距 */
+    align-items: center;
+    text-align: center;
+  }
+
+  .values-visual {
+    width: 450px; /* 从500px减少到450px */
+    height: 450px; /* 从500px减少到450px */
+    order: 1;
+  }
+
+  .values-list {
+    order: 2;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px; /* 减少间距 */
+    max-width: 800px; /* 减少最大宽度 */
+  }
+
+  .values-list li {
+    padding: 22px 30px; /* 减少内边距 */
+    min-height: 180px; /* 减少最小高度 */
+  }
+
+  .values-list strong {
+    font-size: 1.3rem; /* 从1.5rem减少到1.3rem */
+    margin-bottom: 10px; /* 减少底部间距 */
+  }
+
+  .values-list p {
+    font-size: 0.95rem; /* 从1rem减少到0.95rem */
+    line-height: 1.5; /* 减少行高 */
+  }
+
+  .value-icon {
+    width: 55px; /* 从65px减少到55px */
+    height: 55px; /* 从65px减少到55px */
+    margin: 0 auto 15px auto; /* 减少底部间距 */
+  }
+}
+
+/* 小桌面/平板横屏 (768px-991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .values-section {
+    padding: 70px 0;
+  }
+
+  .values-content {
+    flex-direction: column;
+    gap: 50px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .values-visual {
+    width: 400px;
+    height: 400px;
+    order: 1;
+  }
+
+  .values-list {
+    order: 2;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    max-width: 700px;
+  }
+
+  .values-list li {
+    padding: 20px 30px;
+    min-height: 180px;
+  }
+
+  .values-list strong {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+  }
+
+  .values-list p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .value-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 15px auto;
+  }
+}
+
+/* 产品模块响应式 - 1200px以下 */
 @media (max-width: 1200px) {
   .product-module {
     flex-direction: column;
@@ -6252,6 +6481,200 @@ body.reagent-cursor-active * {
 
   .module-display {
     padding: 30px 25px;
+  }
+}
+
+/* 缩放级别优化 - 处理浏览器缩放 */
+@media (min-width: 1200px) {
+  /* 125% 缩放优化 */
+  @media (min-resolution: 120dpi) {
+    .values-content {
+      gap: 80px;
+    }
+
+    .values-list {
+      gap: 35px;
+    }
+
+    .values-list li {
+      padding: 25px 35px;
+      min-height: 200px;
+    }
+
+    .values-list strong {
+      font-size: 1.5rem;
+    }
+
+    .values-list p {
+      font-size: 1rem;
+    }
+  }
+
+  /* 150% 缩放优化 */
+  @media (min-resolution: 144dpi) {
+    .values-content {
+      flex-direction: column;
+      gap: 50px;
+      align-items: center;
+      text-align: center;
+    }
+
+    .values-visual {
+      width: 450px;
+      height: 450px;
+    }
+
+    .values-list {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+      max-width: 800px;
+    }
+
+    .values-list li {
+      padding: 20px 30px;
+      min-height: 180px;
+    }
+
+    .value-icon {
+      margin: 0 auto 15px auto;
+    }
+  }
+}
+
+/* 容器宽度自适应优化 */
+@media (min-width: 1200px) {
+  .container {
+    max-width: min(90vw, 1400px);
+    padding: 0 20px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    max-width: min(85vw, 1600px);
+    padding: 0 30px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .container {
+    max-width: min(80vw, 1800px);
+    padding: 0 40px;
+  }
+}
+
+/* Core Values 特定响应式优化 - 防止卡片挤压 */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .values-content {
+    gap: clamp(60px, 8vw, 100px);
+  }
+
+  .values-list {
+    gap: clamp(25px, 3vw, 40px);
+  }
+
+  .values-list li {
+    padding: clamp(20px, 2.5vw, 40px);
+    min-height: clamp(180px, 15vw, 220px);
+  }
+}
+
+@media (min-width: 1000px) and (max-width: 1199px) {
+  .values-content {
+    gap: clamp(40px, 6vw, 80px);
+  }
+
+  .values-list {
+    gap: clamp(20px, 2.5vw, 35px);
+  }
+
+  .values-list li {
+    padding: clamp(18px, 2vw, 35px);
+    min-height: clamp(160px, 12vw, 200px);
+  }
+
+  .values-list strong {
+    font-size: clamp(1.3rem, 1.5vw, 1.6rem);
+  }
+
+  .values-list p {
+    font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+  }
+}
+
+/* 浏览器缩放适配 - 核心价值观 */
+@media (min-width: 1200px) {
+  .values-section {
+    /* 使用 CSS Grid 和 Flexbox 的组合来更好地处理缩放 */
+    container-type: inline-size;
+  }
+
+  .values-content {
+    display: flex;
+    align-items: center;
+    gap: clamp(60px, 8cqw, 120px);
+    max-width: min(90vw, 1600px);
+    margin: 0 auto;
+  }
+
+  .values-visual {
+    flex-shrink: 0;
+    width: clamp(400px, 35cqw, 700px);
+    height: clamp(400px, 35cqw, 700px);
+  }
+
+  .values-list {
+    flex: 1;
+    min-width: 0; /* 防止 flex 项目溢出 */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: clamp(20px, 3cqw, 50px);
+  }
+
+  .values-list li {
+    padding: clamp(20px, 3cqw, 50px);
+    min-height: clamp(160px, 15cqw, 250px);
+    /* 确保内容不会溢出 */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .values-list strong {
+    font-size: clamp(1.2rem, 2cqw, 1.8rem);
+    margin-bottom: clamp(10px, 1.5cqw, 20px);
+  }
+
+  .values-list p {
+    font-size: clamp(0.9rem, 1.3cqw, 1.2rem);
+    line-height: clamp(1.4, 1.6, 1.7);
+    flex: 1;
+  }
+
+  .value-icon {
+    width: clamp(50px, 6cqw, 80px);
+    height: clamp(50px, 6cqw, 80px);
+    margin-bottom: clamp(12px, 2cqw, 25px);
+  }
+}
+
+/* 整体页面响应式优化 */
+@media (min-width: 992px) {
+  .section-header {
+    margin-bottom: 60px;
+  }
+
+  .section-title {
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .section-desc {
+    font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
   }
 }
 

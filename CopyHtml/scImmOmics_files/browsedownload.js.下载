@@ -1,0 +1,250 @@
+/*define param*/
+var dataSourceParam = ''
+var biosampleTypeParam = ''
+var tissueTypeParam = ''
+var biosampleNameParam = ''
+var idenSignalParam = ''
+
+/*browser DataSource*/
+function dataSource(url) {
+    $.ajax({
+        url: url,
+        type: "get",
+        data: {"dataSourceParam": dataSourceParam, "biosampleTypeParam": biosampleTypeParam, "tissueTypeParam": tissueTypeParam, "biosampleNameParam":biosampleNameParam, "idenSignalParam":idenSignalParam},
+        async: true,
+        success: function (res) {
+            itemSpan(res, 4, "dataSource", "collapseDataSource")
+        },
+        dataType: "json"
+    });
+}
+function biosampleType(url) {
+    $.ajax({
+        url: url,
+        type: "get",
+        data: {"dataSourceParam": dataSourceParam, "biosampleTypeParam": biosampleTypeParam, "tissueTypeParam": tissueTypeParam, "biosampleNameParam":biosampleNameParam, "idenSignalParam":idenSignalParam},
+        async: true,
+        success: function (res) {
+            itemSpan(res, 4, "biosampleType", "collapseBiosampleType")
+        },
+        dataType: "json"
+    });
+}
+function tissueType(url) {
+    $.ajax({
+        url: url,
+        type: "get",
+        data: {"dataSourceParam": dataSourceParam, "biosampleTypeParam": biosampleTypeParam, "tissueTypeParam": tissueTypeParam, "biosampleNameParam":biosampleNameParam, "idenSignalParam":idenSignalParam},
+        async: true,
+        success: function (res) {
+            itemSpan(res, 4, "tissueType", "collapseTissueType")
+        },
+        dataType: "json"
+    });
+}
+function biosampleName(url) {
+    $.ajax({
+        url: url,
+        type: "get",
+        data: {"dataSourceParam": dataSourceParam, "biosampleTypeParam": biosampleTypeParam, "tissueTypeParam": tissueTypeParam, "biosampleNameParam":biosampleNameParam, "idenSignalParam":idenSignalParam},
+        async: true,
+        success: function (res) {
+            itemSpan(res, 4, "biosampleName", "collapseBiosampleName")
+        },
+        dataType: "json"
+    });
+}
+function idenSignal(url) {
+    $.ajax({
+        url: url,
+        type: "get",
+        data: {"dataSourceParam": dataSourceParam, "biosampleTypeParam": biosampleTypeParam, "tissueTypeParam": tissueTypeParam, "biosampleNameParam":biosampleNameParam, "idenSignalParam":idenSignalParam},
+        async: true,
+        success: function (res) {
+            itemSpan(res, 4, "idenSignal", "collapseIdenSignal")
+        },
+        dataType: "json"
+    });
+}
+
+/*循环遍历结果，插入HTML中*/
+function itemSpan(res, size, id, id_Type) {
+    $("#" + id).empty();
+
+    if (res.active=="active"||res.data.length<5){
+        $("#" + id).css("height","auto");
+    }else $("#" + id).css("height","200px");
+
+    for (var i = 0; i < res.data.length; i++) {
+        var html
+        if (res.data[i].name=="Starr"){
+            html = '<li class="my_browse list-group-item justify-content-between align-items-center list-group-item-action '+res.active+'" onclick="' + id + 'Click(\'' +res.data[i].name+ '\')"><span>' + "STARR-seq" + '</span><span class="badge bg-primary rounded-pill">'+res.data[i].sum+'</span></li>'
+        }else if (res.data[i].name=="Dnase"){
+            html = '<li class="my_browse list-group-item justify-content-between align-items-center list-group-item-action '+res.active+'" onclick="' + id + 'Click(\'' +res.data[i].name+ '\')"><span>' + "DNase-seq" + '</span><span class="badge bg-primary rounded-pill">'+res.data[i].sum+'</span></li>'
+        }else if (res.data[i].name=="Mnase"){
+            html = '<li class="my_browse list-group-item justify-content-between align-items-center list-group-item-action '+res.active+'" onclick="' + id + 'Click(\'' +res.data[i].name+ '\')"><span>' + "MNase-seq" + '</span><span class="badge bg-primary rounded-pill">'+res.data[i].sum+'</span></li>'
+        }else if (res.data[i].name=="FAIRE"){
+            html = '<li class="my_browse list-group-item justify-content-between align-items-center list-group-item-action '+res.active+'" onclick="' + id + 'Click(\'' +res.data[i].name+ '\')"><span>' + "FAIRE-seq" + '</span><span class="badge bg-primary rounded-pill">'+res.data[i].sum+'</span></li>'
+        }else if (res.data[i].name=="ATAC"){
+            html = '<li class="my_browse list-group-item justify-content-between align-items-center list-group-item-action '+res.active+'" onclick="' + id + 'Click(\'' +res.data[i].name+ '\')"><span>' + "ATAC-seq" + '</span><span class="badge bg-primary rounded-pill">'+res.data[i].sum+'</span></li>'
+        }else {
+            html = '<li class="my_browse list-group-item justify-content-between align-items-center list-group-item-action '+res.active+'" onclick="' + id + 'Click(\'' +res.data[i].name+ '\')"><span>' + res.data[i].name + '</span><span class="badge bg-primary rounded-pill">'+res.data[i].sum+'</span></li>'
+        }
+        $("#" + id).append(html);
+    }
+}
+
+/*点击响应函数*/
+function dataSourceClick(param) {
+    if (param != '') {
+        if (param == dataSourceParam) {
+            dataSourceParam = ""
+        } else dataSourceParam = param
+        browserFourTable()
+    }
+}
+
+function biosampleTypeClick(param) {
+    if (param != '') {
+        if (param == biosampleTypeParam) {
+            biosampleTypeParam = ""
+        } else biosampleTypeParam = param
+        browserFourTable()
+    }
+}
+function tissueTypeClick(param) {
+    if (param != '') {
+        if (param == tissueTypeParam) {
+            tissueTypeParam = ""
+        } else tissueTypeParam = param
+        browserFourTable()
+    }
+}
+function biosampleNameClick(param) {
+    if (param != '') {
+        if (param == biosampleNameParam) {
+            biosampleNameParam = ""
+        } else biosampleNameParam = param
+        browserFourTable()
+    }
+}
+function idenSignalClick(param) {
+    if (param != '') {
+        if (param == idenSignalParam) {
+            idenSignalParam = ""
+        } else idenSignalParam = param
+        browserFourTable()
+    }
+}
+
+function browserFourTable() {
+    browserTable("browseTable")
+    dataSource("dataSource")
+    biosampleType("biosampleType")
+    tissueType("tissueType")
+    biosampleName("biosampleName")
+    idenSignal("idenSignal")
+    datatablesShow()
+}
+
+
+/*browserTable*/
+function browserTable(url) {
+    $('#browasedownload').DataTable({
+        ajax: {
+            url: url,
+            type: "GET",
+            async: true,
+            data: {"dataSourceParam": dataSourceParam, "biosampleTypeParam": biosampleTypeParam, "tissueTypeParam": tissueTypeParam, "biosampleNameParam":biosampleNameParam, "idenSignalParam":idenSignalParam}
+        },
+        // bStateSave: false,
+        bProcessing : true,
+        serverSide: true,
+        searching: true,
+        paging: true,
+        ordering: true,
+        scrollX: true,
+        lengthMenu: [[15, 20, 30, 100], [15, 20, 30, 100]],
+        destroy: true,
+        order: [[ 13, "asc" ]],
+        columns: [
+            {
+                "data": "idenSignal",
+                "render": function (data, type, row, meta) {
+                    if (row.biosampleType=="scATAC-seq"){
+                        return "<a download='"+row.idenSignal+"_metadata.txt"+"' href='scATAC_Data8/" + row.idenSignal + "_metadata.txt" + "'>meta" + "</a>" + "|" + "<a href='ExpRDS_Data8/" + row.idenSignal + "_cicero_gene_activity.rds" + "'>Expression" + "</a>";
+                    } else if (row.biosampleType=="scCUT&Tag-pro"){
+                        return "<a download='"+row.idenSignal+"_metadata.txt"+"' href='metadata/" + row.idenSignal + "_metadata3.txt" + "'>meta" + "</a>" + "|" + "<a href='ExpRDS_Data8/" + row.idenSignal + ".rds" + "'>Expression" + "</a>";
+                    } else {
+                        return "<a download='"+row.idenSignal+"_metadata.txt"+"' href='metadata/" + row.idenSignal + "_metadata3.txt" + "'>meta" + "</a>" + "|" + "<a href='ExpRDS_Data8/" + row.idenSignal + ".rds" + "'>Expression" + "</a>";
+                    }
+                }
+            },
+            {
+                "data": "idenSignal",
+                "render": function (data, type, row, meta) {
+                    if (row.biosampleType=="scATAC-seq"){
+                        return "<a target='_blank' href='atac_detail?sample=" + row.idenSignal + "'>" + row.idenSignal + "</a>";
+                    } else if (row.biosampleType=="scCUT&Tag-pro"){
+                        return "<a target='_blank' href='detail_histone?sample=" + row.idenSignal + "'>" + row.idenSignal + "</a>";
+                    } else {
+                        return "<a target='_blank' href='detail?sample=" + row.idenSignal + "'>" + row.idenSignal + "</a>";
+                    }
+                }
+            },
+            {"data": "sapiens"},
+            {"data": "tissueType"},
+            {"data": "biosampleName"},
+            {"data": "biosampleType"},
+            {"data": "disease"},
+            {
+                "data": "dataSource",
+                "render": function (data, type, row, meta) {
+                    return "<a target='_blank' href='https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=" + row.dataSource + "'>" + row.dataSource + "</a>";
+                }
+            },
+            {"data": "platform"},
+            {"data": "article"},
+            {"data": "journal"},
+            {"data": "year"},
+            {
+                "data": "pmid",
+                "render": function (data, type, row, meta) {
+                    return "<a target='_blank' href='https://www.ncbi.nlm.nih.gov/pmc/articles/pmid/" + row.pmid + "'>" + row.pmid + "</a>";
+                }
+            },
+            {"data": "orderid"}
+        ],
+        columnDefs: [{
+                className: "hide_column",
+                "targets": [13]
+            }],
+        oLanguage: {
+            // "sProcessing": '<img src="assets/img/loading.gif" style="width: 350px;">',
+            "sProcessing": 'processing......',
+            "sLengthMenu": "_MENU_ entries per page",
+            "sZeroRecords": "No matching data found",
+            "sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+            "sInfoEmpty": "Showing _START_ to _END_ of _TOTAL_ entries",
+            "sInfoFiltered": "( Filter from _MAX_ records )",
+            "sSearch": "Search: ",
+            "oPaginate": {
+                "sFirst": "home",
+                "sPrevious": "‹",
+                "sNext": "›",
+                "sLast": "end"
+            }
+        }
+    });
+}
+
+function datatablesShow() {
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        // 当切换tab时，强制重新计算列宽
+        $.fn.dataTable.tables({
+            visible: true,
+            api: true
+        }).columns.adjust();
+    });
+    /* datatables配置结束 */
+}
