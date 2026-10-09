@@ -1,7 +1,7 @@
 <template>
   <div class="background-page">
     <!-- Banner -->
-    <div class="background-banner">
+    <div class="background-banner site-page-header site-page-header--technology">
       <div class="banner-bg">
         <img :src="bannerImg" alt="banner" />
       </div>
@@ -66,8 +66,7 @@
         <div class="tech-highlight-section">
           <div class="highlight-card primary-card">
             <div class="card-header">
-              <div class="card-icon">🔬</div>
-              <h4>Single Target by Multiple Fluorescent Encoding</h4>
+              <h2>Single Target by Multiple Fluorescent Encoding</h2>
             </div>
             <div class="card-content">
               <div class="tech-description">
@@ -102,7 +101,6 @@
                   <p>Limited by channel count (N)</p>
                   <p>Linear growth in detection capacity</p>
                 </div>
-                <div class="comparison-arrow">→</div>
                 <div class="comparison-item revolutionary">
                   <h5>Ultra-Multiplex Technology</h5>
                   <p>Multiple Channels = 1 Target</p>
@@ -111,11 +109,9 @@
                 </div>
               </div>
               <div class="tech-image-container">
-                <img
-                  :src="multiplexDiagram"
-                  alt="Multiplex Technology Diagram"
-                  class="tech-image"
-                />
+                <button type="button" class="tech-image-button" aria-label="Enlarge Multiplex Technology Diagram" @click="previewImg = multiplexDiagram">
+                <img :src="multiplexDiagram" alt="Multiplex Technology Diagram" class="tech-image" loading="lazy" />
+              </button>
               </div>
             </div>
           </div>
@@ -125,8 +121,7 @@
         <div class="tech-highlight-section">
           <div class="highlight-card secondary-card">
             <div class="card-header">
-              <div class="card-icon">📊</div>
-              <h4>Multiple Channels, Up to 30 Targets</h4>
+              <h2>Multiple Channels, Up to 30 Targets</h2>
             </div>
             <div class="card-content">
               <div class="tech-description">
@@ -160,7 +155,6 @@
                   <div class="capacity-result">15 Targets</div>
                   <div class="capacity-formula">2<sup>4</sup>-1 = 15</div>
                 </div>
-                <div class="capacity-arrow">→</div>
                 <div class="capacity-item flagship">
                   <div class="capacity-number">5</div>
                   <div class="capacity-label">Channels</div>
@@ -170,11 +164,9 @@
                 </div>
               </div>
               <div class="tech-image-container">
-                <img
-                  :src="channelsTargets"
-                  alt="Channels and Targets"
-                  class="tech-image"
-                />
+                <button type="button" class="tech-image-button" aria-label="Enlarge Channels and Targets" @click="previewImg = channelsTargets">
+                <img :src="channelsTargets" alt="Channels and Targets" class="tech-image" loading="lazy" />
+              </button>
               </div>
             </div>
           </div>
@@ -184,8 +176,7 @@
         <div class="tech-highlight-section">
           <div class="highlight-card tertiary-card">
             <div class="card-header">
-              <div class="card-icon">⚡</div>
-              <h4>Technical Advantages</h4>
+              <h2>Technical Advantages</h2>
             </div>
             <div class="card-content">
               <div class="tech-description">
@@ -215,28 +206,24 @@
               </div>
               <div class="performance-grid">
                 <div class="performance-item">
-                  <div class="performance-icon">🎯</div>
                   <div class="performance-label">Ultra-Multiplexity</div>
                   <div class="performance-desc">
                     Exponential target detection capacity
                   </div>
                 </div>
                 <div class="performance-item">
-                  <div class="performance-icon">🔍</div>
                   <div class="performance-label">High Sensitivity</div>
                   <div class="performance-desc">
                     Single molecule detection capability
                   </div>
                 </div>
                 <div class="performance-item">
-                  <div class="performance-icon">📏</div>
                   <div class="performance-label">High Precision</div>
                   <div class="performance-desc">
                     Minimal cross-reactivity and interference
                   </div>
                 </div>
                 <div class="performance-item">
-                  <div class="performance-icon">📊</div>
                   <div class="performance-label">Absolute Quantification</div>
                   <div class="performance-desc">
                     Direct counting without standard curves
@@ -244,11 +231,9 @@
                 </div>
               </div>
               <div class="tech-image-container">
-                <img
-                  :src="technicalComparison"
-                  alt="Technical Comparison"
-                  class="tech-image"
-                />
+                <button type="button" class="tech-image-button" aria-label="Enlarge Technical Comparison" @click="previewImg = technicalComparison">
+                <img :src="technicalComparison" alt="Technical Comparison" class="tech-image" loading="lazy" />
+              </button>
               </div>
               <div class="advantage-summary">
                 <p>
@@ -275,7 +260,6 @@
             :key="index"
             class="application-card"
           >
-            <div class="application-icon">{{ field.icon }}</div>
             <h4>{{ field.title }}</h4>
             <p>{{ field.desc }}</p>
             <div v-if="field.products" class="product-links">
@@ -319,11 +303,15 @@
       </div>
     </div>
     <!-- 页脚 -->
+    <InstrumentImagePreview v-model="previewImg" title="Digital PCR Technology" />
     <WeGoFastFooter />
   </div>
 </template>
 
 <script setup>
+import { ref } from "vue";
+import InstrumentImagePreview from "@/components/Business/InstrumentImagePreview.vue";
+const previewImg = ref(null);
 import WeGoFastFooter from "@/components/WeGoFastFooter.vue";
 
 // 图片import
@@ -334,7 +322,6 @@ import technicalComparison from "@/assets/technology/technical-comparison.png";
 // Application Fields Data
 const applicationFields = [
   {
-    icon: "🫁",
     title: "Respiratory Pathogen Detection",
     desc: "Rapidly understand different pathogens in one test. Vivolution Biosciences has developed comprehensive detection kits to assist in rapid response to disease control.",
     products: [
@@ -343,25 +330,21 @@ const applicationFields = [
     ],
   },
   {
-    icon: "🩸",
     title: "Blood Infection Detection",
     desc: "Conduct highly sensitive detection of infection pathogens in bloodstream that may cause Sepsis, to quickly identify pathogens and seize valuable treatment opportunities.",
     products: [],
   },
   {
-    icon: "🧬",
     title: "Tumor Gene Detection",
     desc: "Efficiently analyze the expression of tumor genes to understand the occurrence, development, and drug resistance mechanisms of tumors.",
     products: [],
   },
   {
-    icon: "🔬",
     title: "Gene Mutation Screening",
     desc: "Simultaneously detect multiple gene mutations, accelerating the screening process.",
     products: [],
   },
   {
-    icon: "🌾",
     title: "Others",
     desc: "Breeding, livestock and poultry disease tests, food safety, and more applications across various fields.",
     products: [],
@@ -370,1335 +353,110 @@ const applicationFields = [
 </script>
 
 <style scoped>
-.background-page {
-  width: 100%;
-  background: #fff;
-  min-height: 100vh;
-  /* padding-bottom: 48px; */
-}
-.background-banner {
-  width: 100%;
-  height: 450px;
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 40px;
-}
-
-.banner-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.banner-bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  filter: brightness(0.7);
-}
-
-.banner-bg::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.4) 0%,
-    rgba(0, 0, 0, 0.2) 100%
-  );
-  z-index: 1;
-}
-
-.banner-content {
-  position: relative;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  height: 100%;
-  color: #fff;
-}
-
-.banner-text {
-  max-width: 800px;
-  margin-left: 10%;
-  margin-top: 0;
-}
-
-.banner-title {
-  font-size: 3.2rem;
-  font-weight: 800;
-  margin-bottom: 8px;
-  line-height: 1.1;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  color: #fff;
-  letter-spacing: 1px;
-}
-
-.banner-subtitle-main {
-  font-size: 2.8rem;
-  font-weight: 700;
-  margin-bottom: 16px;
-  line-height: 1.1;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  color: #00bc97;
-  letter-spacing: 0.5px;
-}
-
-.banner-divider {
-  width: 80%;
-  height: 3px;
-  margin: 1.5rem 0;
-  background: none;
-  border: none;
-  border-radius: 1px;
-  position: relative;
-}
-
-.banner-divider::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    #00bc97 0%,
-    #4e3fa5 50%,
-    transparent 8px,
-    transparent 12px
-  );
-  background-size: 12px 3px;
-}
-
-.banner-subtitle {
-  font-size: 1.3rem;
-  margin-bottom: 2rem;
-  opacity: 0.9;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  color: #fff;
-}
-
-.background-about {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 56px;
-  max-width: 1200px;
-  margin: 0 auto 56px auto;
-  padding: 0 24px;
-  min-height: 320px;
-}
-.about-img img {
-  width: 340px;
-  height: 260px;
-  object-fit: cover;
-  border-radius: 14px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
-}
-.about-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.about-title {
-  font-size: 32px;
-  font-weight: bold;
-  margin-bottom: 22px;
-  color: #2b7bbf;
-  letter-spacing: 1px;
-}
-.about-desc p {
-  font-size: 17px;
-  color: #333;
-  margin-bottom: 12px;
-  line-height: 1.8;
-}
-.about-links {
-  display: flex;
-  gap: 28px;
-  margin-top: 24px;
-}
-.about-btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 16px;
-  color: #fff;
-  background: linear-gradient(90deg, #00bc97 0%, #2b7bbf 100%);
-  border-radius: 22px;
-  padding: 10px 28px;
-  font-weight: 500;
-  text-decoration: none;
-  box-shadow: 0 2px 8px rgba(59, 123, 191, 0.1);
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-}
-.about-btn img {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
-}
-.about-btn:hover {
-  background: linear-gradient(90deg, #2b7bbf 0%, #00bc97 100%);
-  color: #fff;
-  box-shadow: 0 4px 16px rgba(59, 123, 191, 0.16);
-}
-.background-piclist {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-.piclist-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 40px;
-}
-.piclist-item {
-  background: #fff;
-  border-radius: 14px;
-  box-shadow: 0 4px 24px rgba(59, 123, 191, 0.08);
-  padding: 36px 24px 28px 24px;
-  text-align: center;
-  transition: box-shadow 0.2s, transform 0.2s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.piclist-item:hover {
-  box-shadow: 0 8px 32px rgba(59, 123, 191, 0.16);
-  transform: translateY(-4px) scale(1.03);
-}
-.piclist-img-wrap {
-  width: 200px;
-  height: 120px;
-  margin: 0 auto 18px auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f7fafd;
-  border-radius: 8px;
-  overflow: hidden;
-}
-.piclist-img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.piclist-item h3 {
-  font-size: 21px;
-  color: #2b7bbf;
-  margin-bottom: 12px;
-  font-weight: 600;
-  line-height: 1.4;
-}
-.piclist-item p {
-  font-size: 15.5px;
-  color: #444;
-  line-height: 1.7;
-}
-@media (max-width: 900px) {
-  .background-about {
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
-    min-height: unset;
-  }
-  .about-img img {
-    width: 100%;
-    max-width: 340px;
-    height: 200px;
-  }
-  .about-content {
-    width: 100%;
-    padding: 0;
-  }
-}
-@media (max-width: 900px) {
-  .banner-title {
-    font-size: 2.8rem;
-  }
-
-  .banner-subtitle {
-    font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .background-banner {
-    height: 350px;
-    margin-bottom: 24px;
-  }
-
-  .banner-text {
-    margin-left: 5%;
-  }
-
-  .banner-title {
-    font-size: 2.2rem;
-    margin-bottom: 12px;
-  }
-
-  .banner-subtitle {
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .banner-divider {
-    width: 70%;
-  }
-
-
-}
-
-@media (max-width: 600px) {
-  .background-about {
-    padding: 0 8px;
-    margin-bottom: 32px;
-  }
-  .about-title {
-    font-size: 22px;
-    margin-bottom: 14px;
-  }
-  .about-desc p {
-    font-size: 15px;
-  }
-  .about-links {
-    gap: 12px;
-    margin-top: 14px;
-  }
-  .about-btn {
-    font-size: 14px;
-    padding: 7px 16px;
-  }
-  .piclist-grid {
-    gap: 18px;
-  }
-  .piclist-item {
-    padding: 18px 8px 14px 8px;
-  }
-  .piclist-img-wrap {
-    width: 100px;
-    height: 60px;
-    margin-bottom: 10px;
-  }
-  .piclist-item h3 {
-    font-size: 16px;
-    margin-bottom: 7px;
-  }
-  .piclist-item p {
-    font-size: 13px;
-  }
-}
-/* Technology Content Styles */
-.technology-content {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 40px;
-}
-
-/* Tech Overview Section */
-.tech-overview-section {
-  margin-bottom: 60px;
-  padding: 40px 0;
-}
-
-.overview-stats {
-  display: flex;
-  justify-content: center;
-  gap: 60px;
-  flex-wrap: wrap;
-}
-
-.overview-stats .stat-item {
-  text-align: center;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 12px;
-  border: 1px solid #e6eaf0;
-  min-width: 150px;
-  transition: all 0.3s ease;
-}
-
-.overview-stats .stat-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  border-color: #00bc97;
-}
-
-.overview-stats .stat-number {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #00bc97;
-  margin-bottom: 8px;
-  display: block;
-}
-
-.overview-stats .stat-label {
-  font-size: 1rem;
-  color: #666;
-  font-weight: 500;
-}
-
-/* Section Styles */
-.section-title {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.section-title h2 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 16px;
-  background: linear-gradient(135deg, #00bc97 0%, #4e3fa5 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.title-divider {
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, #00bc97 0%, #4e3fa5 100%);
-  margin: 0 auto;
-  border-radius: 2px;
-}
-
-/* Company Introduction Section */
-.company-intro-section {
-  margin-bottom: 80px;
-  padding: 60px 40px;
-  background: linear-gradient(135deg, #f8fafe 0%, #f0f4f8 100%);
-  border-radius: 20px;
-}
-
-.company-intro-content {
-  display: flex;
-  gap: 60px;
-  align-items: flex-start;
-}
-
-.intro-text {
-  flex: 2;
-}
-
-.intro-text p {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: #555;
-  margin-bottom: 20px;
-}
-
-.highlight-text {
-  font-size: 1.3rem;
-  color: #00bc97;
-  font-weight: 600;
-}
-
-.company-stats {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.stat-item {
-  text-align: center;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.stat-icon {
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-
-.stat-number {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #00bc97;
-  margin-bottom: 5px;
-}
-
-.stat-label {
-  font-size: 1rem;
-  color: #666;
-  font-weight: 500;
-}
-.background-about-rows {
-  display: flex;
-  flex-direction: column;
-  gap: 36px;
-  max-width: 1100px;
-  margin: 0 auto 56px auto;
-  padding: 0 24px;
-}
-.about-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 32px;
-}
-.about-row-title {
-  min-width: 160px;
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #2b7bbf;
-  margin-top: 6px;
-}
-.about-row-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.team-list-row {
-  flex-direction: row;
-  gap: 32px;
-}
-.team-member-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  background: #f7fafd;
-  border-radius: 10px;
-  padding: 14px 22px;
-  box-shadow: 0 2px 8px rgba(59, 123, 191, 0.06);
-  min-width: 220px;
-  max-width: 320px;
-}
-.team-member-photo img {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  object-fit: cover;
-  background: #fff;
-  border: 2px solid #e0e6f0;
-}
-.team-member-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-.team-member-name {
-  font-weight: 600;
-  color: #2b7bbf;
-  font-size: 1.08rem;
-}
-.team-member-role {
-  color: #00bc97;
-  font-size: 0.98rem;
-}
-.team-member-desc {
-  color: #444;
-  font-size: 0.97rem;
-  line-height: 1.5;
-}
-.background-about-rows.with-img {
-  flex-direction: row;
-  align-items: stretch;
-  gap: 40px;
-}
-.about-img-col {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 320px;
-  max-width: 360px;
-}
-.about-img-col img {
-  width: 100%;
-  height: auto;
-  max-height: 420px;
-  object-fit: cover;
-  border-radius: 14px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
-}
-.about-rows-col {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 36px;
-  justify-content: center;
-}
-.tech-content-wrapper {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 32px 24px 48px 24px;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 2px 16px rgba(59, 123, 191, 0.06);
-}
-.tech-title {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #2b7bbf;
-  margin-bottom: 28px;
-  text-align: left;
-}
-.tech-paragraphs p {
-  font-size: 1.08rem;
-  color: #333;
-  margin-bottom: 14px;
-  line-height: 1.9;
-}
-.tech-solutions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 32px 48px;
-  margin-top: 32px;
-}
-.solution-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 160px;
-  gap: 12px;
-}
-.solution-icon {
-  width: 64px;
-  height: 64px;
-  object-fit: contain;
-  border-radius: 50%;
-  background: #f7fafd;
-  box-shadow: 0 2px 8px rgba(59, 123, 191, 0.08);
-}
-.solution-title {
-  font-size: 1.08rem;
-  color: #2b7bbf;
-  font-weight: 600;
-  text-align: center;
-}
-.tech-title-center {
-  text-align: center;
-  font-size: 2.6rem;
-  letter-spacing: 2px;
-}
-.tech-img-center {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin: 32px 0 32px 0;
-}
-.tech-img-center img {
-  max-width: 640px;
-  width: 100%;
-  height: auto;
-  border-radius: 16px;
-  box-shadow: 0 2px 16px rgba(59, 123, 191, 0.13);
-}
-.solution-item-0 {
-  background: linear-gradient(90deg, #e0f7fa 0%, #b2ebf2 100%);
-  color: #00796b;
-  border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(0, 188, 212, 0.08);
-}
-.solution-item-1 {
-  background: linear-gradient(90deg, #fffde7 0%, #fff9c4 100%);
-  color: #fbc02d;
-  border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(251, 192, 45, 0.08);
-}
-.solution-item-2 {
-  background: linear-gradient(90deg, #fce4ec 0%, #f8bbd0 100%);
-  color: #c2185b;
-  border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(194, 24, 91, 0.08);
-}
-.solution-item-3 {
-  background: linear-gradient(90deg, #e8f5e9 0%, #a5d6a7 100%);
-  color: #388e3c;
-  border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(56, 142, 60, 0.08);
-}
-.solution-item-4 {
-  background: linear-gradient(90deg, #ede7f6 0%, #b39ddb 100%);
-  color: #512da8;
-  border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(81, 45, 168, 0.08);
-}
-.solution-item-5 {
-  background: linear-gradient(90deg, #fff3e0 0%, #ffcc80 100%);
-  color: #f57c00;
-  border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(245, 124, 0, 0.08);
-}
-.solution-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 180px;
-  gap: 12px;
-  margin-bottom: 12px;
-  font-size: 1.12rem;
-  font-weight: 600;
-  padding: 28px 0 22px 0;
-  transition: box-shadow 0.2s;
-}
-.solution-title {
-  text-align: center;
-  width: 100%;
-}
-.tech-advantages-section {
-  margin-top: 56px;
-}
-.tech-advantages-title {
-  font-size: 2rem;
-  color: #2b7bbf;
-  font-weight: bold;
-  margin-bottom: 32px;
-  text-align: center;
-}
-.tech-advantages-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 32px 48px;
-  justify-content: center;
-}
-.tech-advantage-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 18px;
-  background: #f7fafd;
-  border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(59, 123, 191, 0.08);
-  padding: 22px 32px;
-  min-width: 320px;
-  max-width: 420px;
-}
-.advantage-icon img {
-  width: 56px;
-  height: 56px;
-  object-fit: contain;
-  border-radius: 50%;
-  background: #fff;
-  border: 2px solid #e0e6f0;
-}
-.advantage-content {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.advantage-title {
-  font-weight: 600;
-  color: #2b7bbf;
-  font-size: 1.15rem;
-}
-.advantage-desc {
-  color: #444;
-  font-size: 1.01rem;
-  line-height: 1.7;
-}
-.tech-advantages-divider {
-  border: none;
-  border-top: 2px solid #e0e6f0;
-  margin: 56px 0 40px 0;
-  width: 100%;
-}
-/* Technology Section */
-.technology-section {
-  margin-bottom: 80px;
-}
-
-.technology-intro {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.tech-hero {
-  margin-bottom: 50px;
-}
-
-.tech-hero-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 20px;
-  line-height: 1.3;
-  background: linear-gradient(135deg, #00bc97 0%, #4e3fa5 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.tech-hero-subtitle {
-  font-size: 1.2rem;
-  color: #666;
-  line-height: 1.6;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.tech-innovation-grid {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  margin-top: 40px;
-  flex-wrap: wrap;
-}
-
-.innovation-item {
-  text-align: center;
-  padding: 20px;
-  background: linear-gradient(135deg, #f8fafe 0%, #fff 100%);
-  border-radius: 15px;
-  border: 1px solid #e6eaf0;
-  min-width: 150px;
-  transition: all 0.3s ease;
-}
-
-.innovation-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  border-color: #00bc97;
-}
-
-.innovation-number {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #00bc97;
-  margin-bottom: 8px;
-  display: block;
-}
-
-.innovation-label {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 5px;
-}
-
-.innovation-desc {
-  font-size: 0.9rem;
-  color: #666;
-  line-height: 1.4;
-}
-
-/* Individual Tech Highlight Sections */
-.tech-highlight-section {
-  margin-bottom: 60px;
-}
-
-.tech-highlight-section .highlight-card {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.highlight-card {
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  overflow: hidden;
-  position: relative;
-}
-
-.highlight-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-}
-
-.primary-card {
-  border-left: 5px solid #00bc97;
-}
-
-.secondary-card {
-  border-left: 5px solid #4e3fa5;
-}
-
-.tertiary-card {
-  border-left: 5px solid #ff6b6b;
-}
-
-.card-header {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 30px 30px 20px 30px;
-  background: linear-gradient(135deg, #f8fafe 0%, #fff 100%);
-}
-
-.card-icon {
-  font-size: 2rem;
-  padding: 10px;
-  background: rgba(0, 188, 151, 0.1);
-  border-radius: 12px;
-}
-
-.card-header h4 {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #333;
-  margin: 0;
-}
-
-.card-content {
-  padding: 0 30px 30px 30px;
-}
-
-.card-content p {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #666;
-  margin-bottom: 15px;
-}
-
-/* Tech Description Styles */
-.tech-description {
-  margin-bottom: 30px;
-}
-
-.tech-description p {
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: #555;
-  margin-bottom: 20px;
-  text-align: justify;
-}
-
-.tech-description p:last-child {
-  margin-bottom: 0;
-}
-
-.tech-image-container {
-  text-align: center;
-  margin: 20px 0;
-}
-
-.tech-image {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-
-.tech-image:hover {
-  transform: scale(1.02);
-}
-
-/* Tech Comparison Styles */
-.tech-comparison {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 25px;
-  padding: 20px;
-  background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
-  border-radius: 12px;
-}
-
-.comparison-item {
-  flex: 1;
-  text-align: center;
-  padding: 15px;
-  border-radius: 10px;
-}
-
-.conventional {
-  background: rgba(255, 107, 107, 0.1);
-  border: 1px solid rgba(255, 107, 107, 0.3);
-}
-
-.revolutionary {
-  background: rgba(0, 188, 151, 0.1);
-  border: 1px solid rgba(0, 188, 151, 0.3);
-}
-
-.comparison-item h5 {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.comparison-item p {
-  font-size: 0.9rem;
-  margin-bottom: 5px;
-  color: #666;
-}
-
-.comparison-arrow {
-  font-size: 1.5rem;
-  color: #00bc97;
-  font-weight: bold;
-}
-
-/* Capacity Showcase Styles */
-.capacity-showcase {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 25px;
-  padding: 20px;
-  background: linear-gradient(135deg, #f8f0ff 0%, #f0e6ff 100%);
-  border-radius: 12px;
-}
-
-.capacity-item {
-  flex: 1;
-  text-align: center;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 10px;
-  border: 1px solid rgba(78, 63, 165, 0.2);
-}
-
-.flagship {
-  border: 2px solid #4e3fa5;
-  background: rgba(78, 63, 165, 0.05);
-}
-
-.capacity-number {
-  font-size: 2rem;
-  font-weight: 800;
-  color: #4e3fa5;
-  margin-bottom: 5px;
-}
-
-.capacity-label {
-  font-size: 0.9rem;
-  color: #666;
-  margin-bottom: 8px;
-}
-
-.capacity-result {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 5px;
-}
-
-.capacity-platform {
-  font-size: 0.8rem;
-  color: #4e3fa5;
-  font-weight: 500;
-}
-
-.capacity-formula {
-  font-size: 0.75rem;
-  color: #888;
-  font-style: italic;
-  margin-top: 5px;
-}
-
-.capacity-arrow {
-  font-size: 1.5rem;
-  color: #4e3fa5;
-  font-weight: bold;
-}
-
-/* Performance Grid Styles */
-.performance-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  margin-bottom: 25px;
-  padding: 20px;
-  background: linear-gradient(135deg, #fff8f0 0%, #ffe6e6 100%);
-  border-radius: 12px;
-}
-
-.performance-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 8px;
-  border: 1px solid rgba(255, 107, 107, 0.2);
-}
-
-.performance-icon {
-  font-size: 1.5rem;
-}
-
-.performance-label {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #333;
-  margin-bottom: 5px;
-}
-
-.performance-desc {
-  font-size: 0.8rem;
-  color: #666;
-  line-height: 1.3;
-}
-
-.advantage-summary {
-  text-align: center;
-  padding: 15px;
-  background: rgba(255, 107, 107, 0.05);
-  border-radius: 8px;
-  border: 1px solid rgba(255, 107, 107, 0.2);
-}
-
-.advantage-summary p {
-  font-size: 1.05rem;
-  color: #555;
-  line-height: 1.6;
-  margin: 0;
-  text-align: center;
-}
-
-/* Application Section */
-.application-section {
-  margin-bottom: 80px;
-}
-
-.application-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
-}
-
-.application-card {
-  background: linear-gradient(135deg, #f8fafe 0%, #fff 100%);
-  padding: 20px 15px;
-  border-radius: 12px;
-  border: 1px solid #e6eaf0;
-  transition: all 0.3s ease;
-  text-align: center;
-  min-height: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.application-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  border-color: #00bc97;
-}
-
-.application-icon {
-  font-size: 2.5rem;
-  margin-bottom: 12px;
-  display: block;
-}
-
-.application-card h4 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 10px;
-  line-height: 1.3;
-}
-
-.application-card p {
-  font-size: 0.85rem;
-  line-height: 1.4;
-  color: #666;
-  margin-bottom: 12px;
-  flex-grow: 1;
-}
-
-.product-links {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.product-link {
-  background: #00bc97;
-  color: white;
-  padding: 4px 8px;
-  border-radius: 15px;
-  font-size: 0.75rem;
-  font-weight: 500;
-}
-
-/* Culture Section */
-.culture-section {
-  margin-bottom: 80px;
-  padding: 60px 40px;
-  background: linear-gradient(135deg, #f0f4f8 0%, #f8fafe 100%);
-  border-radius: 20px;
-}
-
-.culture-values {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-}
-
-.value-item {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-}
-
-.value-number {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #00bc97;
-  min-width: 50px;
-}
-
-.value-content h4 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 5px;
-}
-
-.value-content p {
-  font-size: 0.95rem;
-  color: #666;
-  line-height: 1.5;
-}
-
-/* Responsive Design */
-@media (max-width: 900px) {
-  .overview-stats {
-    gap: 30px;
-  }
-
-  .overview-stats .stat-item {
-    min-width: 120px;
-  }
-
-  .section-title h2 {
-    font-size: 2rem;
-  }
-
-  .tech-comparison,
-  .capacity-showcase {
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .comparison-arrow,
-  .capacity-arrow {
-    transform: rotate(90deg);
-    font-size: 1.2rem;
-  }
-
-  .performance-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .application-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-  }
-}
-
-@media (max-width: 1200px) {
-  .application-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 900px) {
-  .application-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-  }
-}
-
-@media (max-width: 600px) {
-  .technology-content {
-    padding: 0 15px;
-  }
-
-  .overview-stats {
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-  }
-
-  .overview-stats .stat-item {
-    min-width: 200px;
-  }
-
-  .application-grid {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-
-  .application-card {
-    min-height: auto;
-    padding: 15px;
-  }
-
-  .section-title h2 {
-    font-size: 1.8rem;
-  }
-
-  .tech-hero-title {
-    font-size: 2rem;
-  }
-
-  .tech-innovation-grid {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .card-header {
-    flex-direction: column;
-    text-align: center;
-    gap: 10px;
-  }
-
-  .card-content {
-    padding: 0 20px 30px 20px;
-  }
-}
-
-/* Collaboration Section */
-.collaboration-section {
-  margin-bottom: 80px;
-  padding: 60px 40px;
-  background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
-  border-radius: 20px;
-}
-
-.collaboration-content {
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.collaboration-content p {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: #555;
-  margin-bottom: 30px;
-}
-
-.collaboration-highlight {
-  background: rgba(255, 255, 255, 0.8);
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.collaboration-highlight h3 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 15px;
-}
-
-.collaboration-highlight .highlight-text {
-  font-size: 1.2rem;
-  color: #00bc97;
-  font-weight: 600;
+.background-page { width: 100%; background: #fff; color: #4c5563; font-size: 16px; line-height: 1.75; }
+.background-banner { position: relative; min-height: 240px; overflow: hidden; }
+.banner-bg { position: absolute; inset: 0; }
+.banner-bg img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.banner-bg::after { content: ''; position: absolute; inset: 0; background: #17234b8c; }
+.banner-content { position: relative; width: calc(100% - 48px); max-width: 1120px; margin: auto; padding: 36px 0; }
+.banner-text { max-width: 760px; }
+.banner-title { margin: 0; font-size: 36px; font-weight: 600; line-height: 1.25; color: #fff; }
+.banner-subtitle-main { margin: 8px 0 0; color: #fff; font-size: 28px; font-weight: 500; line-height: 1.3; }
+.banner-divider { width: 180px; height: 2px; margin: 16px 0; border: 0; background: repeating-linear-gradient(90deg,#00bc97 0 4px,transparent 4px 12px); }
+.banner-subtitle { margin: 0; font-size: 16px; line-height: 1.6; color: #fff; }
+.technology-content { width: calc(100% - 48px); max-width: 1120px; margin: 0 auto; padding: 48px 0 64px; }
+.section-title { margin: 0 0 28px; }
+.section-title h2 { border-left: 5px solid #409eff; padding-left: 16px; margin: 0; font-size: 26px; font-weight: 600; line-height: 1.4; color: #243b7b; }
+.title-divider { display: none; }
+.technology-intro { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,1fr); gap: 48px; align-items: start; margin-bottom: 48px; }
+.tech-hero-title { font-size: 21px; font-weight: 600; line-height: 1.5; color: #243b7b; margin: 0 0 14px; }
+.tech-hero-subtitle { margin: 0; font-size: 16px; line-height: 1.8; }
+.tech-innovation-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; padding: 24px; border: 1px solid #e2e7ed; border-radius: 10px; background: #f6f8fa; }
+.innovation-item { min-width: 0; }
+.innovation-number { font-size: 30px; font-weight: 600; line-height: 1.25; color: #243b7b; margin-bottom: 12px; white-space: nowrap; }
+.innovation-number sup { font-size: 16px; }
+.innovation-label { font-size: 15px; font-weight: 600; color: #243b7b; line-height: 1.4; margin-bottom: 8px; }
+.innovation-desc { font-size: 14px; line-height: 1.6; color: #697586; }
+.tech-highlight-section { padding: 40px 0; border-top: 1px solid #e2e7ed; }
+.highlight-card { background: #fff; border: 0; box-shadow: none; }
+.card-header { margin-bottom: 24px; }
+.card-header h2 { margin: 0; color: #243b7b; font-size: 24px; font-weight: 600; line-height: 1.4; }
+.card-content { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); grid-template-areas: 'description figure' 'summary figure'; gap: 24px 40px; align-items: start; }
+.card-content > * { min-width: 0; }
+.tech-description { grid-area: description; }
+.tech-description p { font-size: 16px; line-height: 1.85; margin: 0 0 16px; }
+.tech-description p:last-child { margin-bottom: 0; }
+strong { color: #243b7b; font-weight: 600; }
+.tech-image-container { grid-area: figure; position: sticky; top: 24px; }
+.tech-image-button { display: block; width: 100%; min-width: 0; padding: 12px; border: 1px solid #e2e7ed; border-radius: 10px; background: #fff; cursor: zoom-in; }
+.tech-image { display: block; width: auto; max-width: 100%; max-height: 420px; height: auto; margin: auto; object-fit: contain; }
+.tech-image-button:hover { border-color: #9baec4; }
+.tech-comparison, .capacity-showcase { grid-area: summary; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+.comparison-item, .capacity-item { padding: 18px; border: 1px solid #e2e7ed; border-radius: 8px; background: #f7f9fb; min-width: 0; }
+.comparison-item h5 { margin: 0 0 12px; color: #243b7b; font-size: 16px; font-weight: 600; line-height: 1.5; }
+.comparison-item p { margin: 8px 0 0; font-size: 14px; line-height: 1.65; }
+.capacity-number { color: #243b7b; font-size: 28px; font-weight: 600; line-height: 1.3; }
+.capacity-label { margin: 4px 0 12px; font-size: 14px; color: #697586; }
+.capacity-result { font-size: 17px; font-weight: 600; color: #243b7b; }
+.capacity-platform, .capacity-formula { margin-top: 6px; font-size: 14px; line-height: 1.6; }
+.performance-grid { grid-area: summary; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px 20px; padding: 20px; border: 1px solid #e2e7ed; border-radius: 8px; background: #f7f9fb; }
+.performance-label { color: #243b7b; font-size: 16px; line-height: 1.5; font-weight: 600; }
+.performance-desc { color: #697586; margin-top: 6px; font-size: 14px; line-height: 1.65; }
+.advantage-summary { grid-column: 1 / -1; padding: 20px 24px; background: #f6f8fa; border: 1px solid #e2e7ed; border-radius: 8px; }
+.advantage-summary p { margin: 0; max-width: 85ch; font-size: 16px; line-height: 1.8; }
+.application-section { border-top: 1px solid #e2e7ed; padding-top: 40px; margin-top: 8px; }
+.application-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; }
+.application-card { min-width: 0; padding: 24px; border: 1px solid #e2e7ed; border-radius: 10px; background: #fff; }
+.application-card:last-child { grid-column: 1 / -1; }
+.application-card h4 { color: #243b7b; font-size: 19px; font-weight: 600; line-height: 1.4; margin: 0 0 12px; }
+.application-card p { margin: 0; font-size: 16px; line-height: 1.75; max-width: 80ch; }
+.product-links { margin-top: 16px; padding-top: 12px; border-top: 1px solid #e2e7ed; display: grid; gap: 6px; }
+.product-link { font-size: 14px; line-height: 1.6; color: #596578; }
+.collaboration-section { margin-top: 48px; padding: 32px; border: 1px solid #e2e7ed; border-radius: 10px; background: #f6f8fa; }
+.collaboration-section .section-title { margin-bottom: 18px; }
+.collaboration-content { max-width: 82ch; }
+.collaboration-content > p { margin: 0; font-size: 16px; line-height: 1.85; }
+.collaboration-highlight { margin-top: 24px; }
+.collaboration-highlight h3 { margin: 0 0 10px; font-size: 20px; font-weight: 600; color: #243b7b; line-height: 1.5; }
+.highlight-text { margin: 0; color: #596578; font-size: 16px; line-height: 1.75; }
+.technology-content h2, .technology-content h3, .technology-content h4, .technology-content h5 { overflow-wrap: anywhere; }
+.technology-content p { overflow-wrap: anywhere; }
+.tech-image-button:focus-visible { outline: 2px solid #243b7b; outline-offset: 3px; }
+@media (max-width:1023px) {
+  .technology-intro { grid-template-columns: 1fr; gap: 24px; }
+  .tech-hero { max-width: 76ch; }
+  .tech-innovation-grid { max-width: 640px; }
+  .card-content { gap: 24px; }
+  .tech-image { max-height: 340px; }
+}
+@media (max-width:767px) {
+  .banner-content, .technology-content { width: calc(100% - 32px); }
+  .banner-content { padding: 28px 0; }
+  .background-banner { min-height: 0; }
+  .banner-title { font-size: 26px; }
+  .banner-subtitle-main { font-size: 23px; }
+  .technology-content { padding: 32px 0 40px; }
+  .section-title h2 { font-size: 24px; }
+  .tech-innovation-grid { padding: 16px; gap: 12px; }
+  .innovation-number { font-size: 25px; }
+  .innovation-label { font-size: 14px; }
+  .innovation-desc { font-size: 13px; }
+  .technology-intro { margin-bottom: 32px; }
+  .tech-highlight-section { padding: 28px 0; }
+  .card-header h2 { font-size: 23px; }
+  .card-content { grid-template-columns: minmax(0,1fr); grid-template-areas: 'description' 'figure' 'summary'; gap: 24px; }
+  .tech-image-container { position: static; }
+  .tech-image { max-height: 280px; }
+  .comparison-item, .capacity-item { padding: 14px; }
+  .performance-grid { padding: 16px; gap: 16px; }
+  .advantage-summary { grid-column: 1; padding: 18px; }
+  .application-section { padding-top: 28px; }
+  .application-grid { grid-template-columns: 1fr; gap: 16px; }
+  .application-card { padding: 20px; }
+  .collaboration-section { margin-top: 32px; padding: 20px; }
+}
+@media (max-width:359px) {
+  .tech-comparison, .capacity-showcase, .performance-grid { grid-template-columns: 1fr; }
+  .tech-innovation-grid { padding: 12px; gap: 8px; }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="resources-page">
     <!-- Banner -->
-    <div class="resources-banner">
+    <div class="resources-banner site-page-header site-page-header--technology">
       <div class="banner-bg">
         <img :src="resourcesBanner" alt="Resources Banner" />
       </div>
@@ -31,15 +31,15 @@
     </div>
     <!-- Tab 切换 -->
     <div class="resources-tabs">
-      <div
+      <button type="button"
         v-for="(tab, idx) in tabs"
         :key="tab.key"
         :class="['resources-tab', { active: currentTab === idx }]"
+        :aria-pressed="currentTab === idx"
         @click="currentTab = idx"
       >
-        <span class="tab-icon" v-html="tab.icon"></span>
         {{ tab.label }}
-      </div>
+      </button>
     </div>
     <!-- Tab 内容区 -->
     <div class="resources-tab-content">
@@ -57,7 +57,7 @@
                   <a
                     :href="paper.pdf"
                     target="_blank"
-                    class="paper-link no-underline"
+                    class="paper-link"
                     >{{ paper.title }}</a
                   >
                 </li>
@@ -74,12 +74,16 @@
             :key="video.title"
             class="resources-video-card"
           >
-            <div
+            <button v-if="video.src" type="button"
               class="video-thumb"
               :style="{ backgroundImage: `url(${video.thumb})` }"
+              :aria-label="`Play ${video.title}`"
               @click="playVideo(video)"
             >
-              <div class="video-play-btn">▶</div>
+              <span class="video-play-btn" aria-hidden="true">▶</span>
+            </button>
+            <div v-else class="video-thumb video-unavailable" :style="{ backgroundImage: `url(${video.thumb})` }">
+              <span>Video unavailable</span>
             </div>
             <div class="video-info">
               <div class="video-title">{{ video.title }}</div>
@@ -87,14 +91,21 @@
             </div>
           </div>
         </div>
-        <div
+        <dialog
           v-if="showVideoDialog"
+          ref="videoDialog"
+          :aria-label="currentVideo.title"
+          @close="closeVideo"
           class="resources-video-dialog"
           @click.self="closeVideo"
         >
           <div class="video-dialog-content">
-            <span class="video-dialog-close" @click="closeVideo">×</span>
-            <template v-if="currentVideo.type === 'mp4'">
+            <button type="button" class="video-dialog-close" aria-label="Close video" @click="closeVideo">×</button>
+            <div v-if="!currentVideo.src" role="status" style="padding: 48px 24px; text-align: center">
+              <p>This video is currently unavailable.</p>
+              <router-link to="/contact_us">Contact us for more information</router-link>
+            </div>
+            <template v-else-if="currentVideo.type === 'mp4'">
               <video
                 controls
                 autoplay
@@ -111,7 +122,7 @@
               ></iframe>
             </template>
           </div>
-        </div>
+        </dialog>
       </div>
       <div v-else-if="currentTab === 2">
         <!-- Tables 内容区 -->
@@ -251,7 +262,7 @@
                   <a
                     :href="item.url"
                     target="_blank"
-                    class="paper-link no-underline"
+                    class="paper-link"
                     >{{ item.title }}</a
                   >
                 </li>
@@ -509,7 +520,8 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, nextTick } from "vue";
+import { useQueryTab } from "@/composables/useQueryTab";
 import resourcesBanner from "@/assets/resources/Banner001847-ban5_wap.jpg";
 import papersImg from "@/assets/resources/papers/c2.png";
 import tablesImg1 from "@/assets/resources/forms/7.jpg";
@@ -520,9 +532,6 @@ import manualImg2 from "@/assets/resources/manuals/c2.png";
 import manualImg3 from "@/assets/resources/manuals/c3.png";
 import manualImg4 from "@/assets/resources/manuals/20181101113355035.png";
 import manualImg5 from "@/assets/resources/manuals/c4.png";
-import videosThumb1 from "@/assets/resources/manuals/20181101113355035.png";
-import videosThumb2 from "@/assets/resources/manuals/20181101113355035.png";
-import videosThumb3 from "@/assets/resources/manuals/20181101113355035.png";
 
 const tabs = [
   {
@@ -551,29 +560,30 @@ const tabs = [
     icon: `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="14" height="14" rx="3" fill="#888" fill-opacity="0.13"/><path d="M7 8.5H13M7 11H13M7 13.5H10" stroke="#888" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   },
 ];
-const currentTab = ref(0);
+const currentTab = useQueryTab(tabs);
+const videoDialog = ref(null);
 const showVideoDialog = ref(false);
 const currentVideo = ref({});
 const videos = [
   {
     title: "NGS of Immune Repertoire for biomarker discovery",
     desc: 'Professor Han Jian, founder of Repertoire and Chief Researcher at HudsonAlpha Institute for Biotechnology, was invited as a guest speaker at the 13th National Immunology Academic Conference of the Chinese Society for Immunology, delivering a keynote speech titled "NGS of Immune Repertoire for biomarker discovery".',
-    thumb: videosThumb1,
+    thumb: manualImg4,
     src: "https://player.youku.com/embed/XMzk2Nzg4NDE5Ng==",
     type: "iframe",
   },
   {
     title: "iR Automated Library Construction System Operation Video",
     desc: "The iR Automated Library Construction System uses the iR-Processor and iR-Cassette to automate library construction and purification for high-throughput immune repertoire sequencing. The use of disposable cassettes, multi-slot, and fully enclosed design effectively prevents contamination and errors, increases throughput, and provides a one-step library construction solution for end users.",
-    thumb: videosThumb2,
-    src: "/CopyHtml/资料中心-视频_files/20181102163955471.mp4",
+    thumb: manualImg4,
+    src: "", // Add the locally hosted video URL when the source file is available.,
     type: "mp4",
   },
   {
     title: "Fingertip Blood Collection Video",
     desc: "When conducting Genepower Immune System Health Assessment services, fingertip blood should be collected according to the procedure shown in the operation video.",
-    thumb: videosThumb3,
-    src: "/CopyHtml/资料中心-视频_files/20210618154754933.mp4",
+    thumb: manualImg4,
+    src: "", // Add the locally hosted video URL when the source file is available.,
     type: "mp4",
   },
 ];
@@ -735,11 +745,15 @@ const manuals = [
   },
 ];
 
-function playVideo(video) {
+async function playVideo(video) {
+  if (!video.src) return;
   currentVideo.value = video;
   showVideoDialog.value = true;
+  await nextTick();
+  videoDialog.value?.showModal();
 }
 function closeVideo() {
+  if (videoDialog.value?.open) videoDialog.value.close();
   showVideoDialog.value = false;
   currentVideo.value = {};
 }
@@ -892,22 +906,22 @@ function closeVideo() {
   overflow-x: auto;
 }
 .resources-tab {
-  font-size: 1.18rem;
-  font-weight: 700;
-  color: #4e3fa5;
-  background: #f7fafd;
-  border-radius: 16px 16px 0 0;
-  padding: 14px 44px;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  color: #596578;
+  background: none;
+  border-radius: 0;
+  padding: 12px 16px;
+  min-height: 48px;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-  border: none;
-  outline: none;
-  min-width: 120px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  min-width: 100px;
   text-align: center;
 }
 .resources-tab.active {
-  background: linear-gradient(90deg, #00bc97 0%, #4e3fa5 100%);
-  color: #fff;
+  background: none; color: #243b7b; border-bottom-color: #00bc97; font-weight: 600;
 }
 @media (max-width: 700px) {
   .resources-tabs {
@@ -941,8 +955,9 @@ function closeVideo() {
 .resources-video-card {
   width: 340px;
   background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+  border-radius: var(--vb-radius-panel, 12px);
+  border: 1px solid #e1e6ed;
+  box-shadow: none;
   overflow: hidden;
   cursor: pointer;
   transition: box-shadow 0.2s, transform 0.2s;
@@ -1063,16 +1078,16 @@ function closeVideo() {
   align-items: center;
   width: 100%;
   background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+  border-radius: var(--vb-radius-panel, 12px);
+  border: 1px solid #e1e6ed;
+  box-shadow: none;
   overflow: hidden;
   transition: box-shadow 0.2s, transform 0.2s;
   margin: 0;
   max-width: 1100px;
 }
 .resources-table-card.row-layout:hover {
-  box-shadow: 0 8px 32px rgba(0, 188, 151, 0.13);
-  transform: translateY(-4px) scale(1.03);
+  border-color: #cbd2dc;
 }
 .resources-table-card .table-img {
   width: 220px;
@@ -1173,20 +1188,17 @@ function closeVideo() {
 .papers-list li {
   font-size: 1.08rem;
   line-height: 1.6;
-  word-break: break-all;
+  word-break: normal;
   overflow-wrap: anywhere;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 .paper-link {
-  color: #4e3fa5;
-  text-decoration: underline;
-  transition: color 0.2s;
-  font-weight: 500;
+  color: #176cb0; text-decoration: underline; text-underline-offset: 4px; font-weight: 500;
 }
 .paper-link:hover {
-  color: #00bc97;
+  color: #124a78;
 }
 .papers-img-center {
   display: flex;
@@ -1200,19 +1212,6 @@ function closeVideo() {
   width: auto;
   height: auto;
   display: block;
-}
-.paper-link.no-underline {
-  color: #222;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 1.08rem;
-  transition: color 0.2s;
-  padding: 2px 0;
-  border-radius: 3px;
-}
-.paper-link.no-underline:hover {
-  color: #00bc97;
-  background: #f5f7fa;
 }
 .papers-img-center-both {
   display: flex;
@@ -1321,4 +1320,35 @@ function closeVideo() {
     font-size: 0.85rem;
   }
 }
+.banner-text { width: calc(100% - 48px); max-width: 1120px; margin: 0 auto; }
+.banner-title { margin-bottom: 12px; }
+.banner-divider { margin: 12px 0; }
+.banner-subtitle { font-size: 16px; line-height: 1.6; }
+.banner-stats { gap: 28px; margin-top: 16px; }
+.stat-number { font-size: 24px; line-height: 1.3; }
+.stat-label { font-size: 14px; }
+.resources-tabs { justify-content: flex-start; gap: 24px; padding-top: 20px; }
+.resources-tab:focus-visible { outline: 2px solid #243b7b; outline-offset: -3px; }
+.video-dialog-close { min-width: 44px; min-height: 44px; padding: 0; background: none; border: 0; color: #243b7b; }
+@media (max-width: 767px) {
+  .banner-text { width: calc(100% - 32px); }
+  .banner-stats { flex-direction: row; flex-wrap: wrap; gap: 16px; }
+  .stat-item { min-width: 0; }
+  .stat-number { font-size: 22px; }
+  .stat-label { font-size: 13px; }
+  .resources-tabs { gap: 8px; padding: 16px 16px 0; }
+  .resources-tab { min-width: 90px; flex-shrink: 0; }
+}
+.papers-list li { align-items: flex-start; }
+.paper-link { min-width: 0; flex: 1; }
+.paper-index { flex-shrink: 0; min-width: 24px; color: #687586; }
+.video-thumb { padding: 0; border: 0; border-radius: 0; }
+.video-thumb:focus-visible { outline: 3px solid #243b7b; outline-offset: -3px; }
+.video-unavailable span { padding: 8px 12px; color: #fff; background: #243b7be6; font-size: 16px; }
+.resources-video-card { width: min(340px, 100%); cursor: default; }
+.resources-video-card:hover { transform: none; box-shadow: none; }
+.resources-video-dialog { width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; border: 0; padding: 16px; background: transparent; }
+.resources-video-dialog:not([open]) { display: none; }
+.resources-video-dialog::backdrop { background: #17234b80; }
+.video-dialog-content { width: min(960px, 100%); min-width: 0; max-width: 100%; max-height: calc(100dvh - 32px); overflow: auto; border-radius: var(--vb-radius-panel, 12px); }
 </style> 

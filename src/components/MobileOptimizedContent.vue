@@ -12,7 +12,7 @@
 .mobile-optimized-content {
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* 基础移动端优化 */

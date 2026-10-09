@@ -1,12 +1,12 @@
 <template>
-  <MobileOptimizedContent>
+  <CatalogContent title="Ion Exchange Chromatography" family="Life Science">
     <div class="ion-exchange-page">
-      <h1 class="main-title">Ion Exchange Chromatography</h1>
 
-      <MobileOptimizedTabs :tabs="tabs" v-model="currentTab">
+
+      <CatalogTabs :tabs="tabs" v-model="currentTab">
         <!-- Tab Content: Product Introduction -->
         <section v-if="currentTab === 'intro'" class="intro">
-          <div class="section-title">Product Introduction</div>
+          <h2 class="section-title">Product Introduction</h2>
           <p>
             Ion exchange chromatography is one of the most widely used methods
             for protein separation and purification. Differences in isoelectric
@@ -22,7 +22,7 @@
             bioprocess purification solutions.
           </p>
           <div class="divider"></div>
-          <div class="section-title">VDX Series Ion Exchange Media</div>
+          <h2 class="section-title">VDX Series Ion Exchange Media</h2>
           <p>
             The VDX series is a high-end chromatography media series
             independently developed by VDO Biotech, featuring high performance,
@@ -32,15 +32,14 @@
             capacity, and strong binding series.
           </p>
           <div class="divider"></div>
-          <div class="section-title">Application Cases</div>
+          <h2 class="section-title">Application Cases</h2>
           <ol>
             <li>
               <span class="case-title"
                 >Separation of Antibody Polymers by VDX HS</span
-              ><br /><img
+              ><br /><img role="button" tabindex="0" aria-label="Enlarge image"
                 :src="img1"
                 class="intro-img"
-                @click="openPreview(img1)"
                 alt="Case 1"
               />
             </li>
@@ -48,10 +47,9 @@
               <span class="case-title"
                 >Separation of Recombinant Protein Monomers and Polymers by VDX
                 HQ</span
-              ><br /><img
+              ><br /><img role="button" tabindex="0" aria-label="Enlarge image"
                 :src="img2"
                 class="intro-img"
-                @click="openPreview(img2)"
                 alt="Case 2"
               />
             </li>
@@ -59,64 +57,59 @@
               <span class="case-title"
                 >Comparison of Separation Effects of VDX HS/VDX RS/VDX CM on
                 Mixed Standard Proteins</span
-              ><br /><img
+              ><br /><img role="button" tabindex="0" aria-label="Enlarge image"
                 :src="img3"
                 class="intro-img"
-                @click="openPreview(img3)"
                 alt="Case 3"
               />
             </li>
           </ol>
           <div class="divider"></div>
-          <div class="section-title">Product List</div>
+          <h2 class="section-title">Product List</h2>
           <p class="case-title">High Resolution Series</p>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img4"
             class="intro-img"
-            @click="openPreview(img4)"
             alt="High Resolution Series"
           />
           <p class="case-title">High Capacity Series</p>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img5"
             class="intro-img"
-            @click="openPreview(img5)"
             alt="High Capacity Series"
           />
           <p class="case-title">Strong Binding Series</p>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img6"
             class="intro-img"
-            @click="openPreview(img6)"
             alt="Strong Binding Series"
           />
           <div class="divider"></div>
-          <div class="section-title">
+          <h2 class="section-title">
             Pre-packed Column Ordering Information
-          </div>
-          <img
+          </h2>
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img7"
             class="intro-img"
-            @click="openPreview(img7)"
             alt="Pre-packed Column Ordering Information"
           />
           <div class="divider"></div>
-          <div class="section-title">
+          <h2 class="section-title">
             Conventional Series Ion Exchange Chromatography Media
-          </div>
+          </h2>
           <p class="case-title">1. High Flow Rate, High Resolution Series</p>
           <p style="margin: 12px 0 0 0">
             High flow rate agarose-based ion exchange media are made from highly
             cross-linked 6% agarose microspheres, coupled with DEAE/CM/Q/SP
             ligands.
           </p>
-          <div
+          <h2
             class="section-title"
             style="font-size: 1.1rem; margin: 24px 0 10px 0"
           >
             Product Advantages
-          </div>
-          <ul class="list-paddingleft-2">
+          </h2>
+<ul class="catalog-features list-paddingleft-2">
             <li>★ Fast, simple, and convenient.</li>
             <li>
               ★ Wide application range, suitable for separation or fine
@@ -131,16 +124,15 @@
               screening.
             </li>
           </ul>
-          <div
+          <h2
             class="section-title"
             style="font-size: 1.1rem; margin: 24px 0 10px 0"
           >
             Application Cases
-          </div>
-          <img
+          </h2>
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img8"
             class="intro-img"
-            @click="openPreview(img8)"
             alt="High Flow Rate High Resolution Series"
           />
           <p class="case-title">
@@ -149,23 +141,21 @@
           <p class="case-title">
             1. DEAE Weak Anion Elution Mode - High Purity
           </p>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img9"
             class="intro-img"
-            @click="openPreview(img9)"
             alt="High Purity Scheme"
           />
           <span class="case-title"
             >2. Q Focurose FF Elution Mode - High Recovery</span
           >
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img10"
             class="intro-img"
-            @click="openPreview(img10)"
             alt="High Recovery Scheme"
           />
           <div class="divider"></div>
-          <div class="section-title">Ultra-high Capacity Series</div>
+          <h2 class="section-title">Ultra-high Capacity Series</h2>
           <p style="margin: 12px 0 0 0">
             Ultra-high capacity agarose-based ion exchange media are made by
             inserting linear dextran molecules into highly cross-linked 6%
@@ -173,13 +163,13 @@
             increasing ligand density, thus greatly increasing binding capacity,
             known as Focurose XL.
           </p>
-          <div
+          <h2
             class="section-title"
             style="font-size: 1.1rem; margin: 24px 0 10px 0"
           >
             Product Advantages
-          </div>
-          <ul class="list-paddingleft-2">
+          </h2>
+<ul class="catalog-features list-paddingleft-2">
             <li>
               ★ Ultra-high capacity allows for capturing more target substances
               from samples, offering excellent cost performance.
@@ -192,49 +182,46 @@
               viruses, proteins, polysaccharides).
             </li>
           </ul>
-          <div
+          <h2
             class="section-title"
             style="font-size: 1.1rem; margin: 24px 0 10px 0"
           >
             Application Cases
-          </div>
+          </h2>
           <p class="case-title">
             Comparison of Binding Capacity between High Flow Rate Agarose-based
             Ion Exchange Media (DEAE Focurose FF) and Ultra-high Capacity
             Agarose-based Ion Exchange Media (DEAE Focurose XL)
           </p>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img11"
             class="intro-img"
-            @click="openPreview(img11)"
             alt="Ultra-high Capacity Series Comparison"
           />
-          <div
+          <h2
             class="section-title"
             style="font-size: 1.1rem; margin: 24px 0 10px 0"
           >
             Product List
-          </div>
-          <img
+          </h2>
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img12"
             class="intro-img"
-            @click="openPreview(img12)"
             alt="Ultra-high Capacity Product List"
           />
-          <div
+          <h2
             class="section-title"
             style="font-size: 1.1rem; margin: 24px 0 10px 0"
           >
             Pre-packed Column Ordering Information
-          </div>
-          <img
+          </h2>
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img13"
             class="intro-img"
-            @click="openPreview(img13)"
             alt="Ultra-high Capacity Pre-packed Column Ordering Information"
           />
           <div class="divider"></div>
-          <div class="section-title">High Rigidity Series</div>
+          <h2 class="section-title">High Rigidity Series</h2>
           <p style="margin: 12px 0 0 0">
             High rigidity agarose-based ion exchange media are composed of
             highly cross-linked agarose and cellulose matrices, coupled with
@@ -248,105 +235,86 @@
             biomacromolecules. High rigidity also enables high flow rates,
             improving quality and reducing costs in industrial production.
           </p>
-          <div
+          <h2
             class="section-title"
             style="font-size: 1.1rem; margin: 24px 0 10px 0"
           >
             Application Cases
-          </div>
+          </h2>
           <p class="case-title">
             Purification of Recombinant Kinase Supernatant by SP Focurose HPR
           </p>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img14"
             class="intro-img"
-            @click="openPreview(img14)"
             alt="High Rigidity Case 1"
           />
           <p class="case-title">
             Purification of Recombinant Type III Collagen by SP Focurose HPR
           </p>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img15"
             class="intro-img"
-            @click="openPreview(img15)"
             alt="High Rigidity Case 2"
           />
           <p class="case-title">
             Purification of Circovirus Vaccine by SP Focurose HPR
           </p>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img16"
             class="intro-img"
-            @click="openPreview(img16)"
             alt="High Rigidity Case 3"
           />
-          <div
+          <h2
             class="section-title"
             style="font-size: 1.1rem; margin: 24px 0 10px 0"
           >
             Product List
-          </div>
-          <img
+          </h2>
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img17"
             class="intro-img"
-            @click="openPreview(img17)"
             alt="High Rigidity Product List"
           />
-          <div
+          <h2
             class="section-title"
             style="font-size: 1.1rem; margin: 24px 0 10px 0"
           >
             Pre-packed Column Ordering Information
-          </div>
-          <img
+          </h2>
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img18"
             class="intro-img"
-            @click="openPreview(img18)"
             alt="High Rigidity Pre-packed Column Ordering Information"
           />
         </section>
         <!-- Tab Content: Manuals -->
-        <section v-if="currentTab === 'manual'" class="manuals">
-          <div class="section-title">Product Manuals</div>
+        <section v-if="currentTab === 'manual'" class="catalog-resources manuals">
+          <h2 class="section-title">Product Manuals</h2>
           <ul class="manual-list">
             <li v-for="file in manualFiles" :key="file.name">
-              <a :href="file.url" target="_blank" download>
+              <a :href="file.url" target="_blank" rel="noopener noreferrer">
                 <i class="el-icon-document"></i>{{ file.name }}
               </a>
             </li>
           </ul>
         </section>
         <!-- Image Preview Modal -->
-        <div
-          v-if="previewImg"
-          class="img-preview-modal"
-          @click.self="closePreview"
-        >
-          <img :src="previewImg" class="img-preview-large" @click.stop />
-          <span class="img-preview-close" @click="closePreview">×</span>
-        </div>
-      </MobileOptimizedTabs>
+
+      </CatalogTabs>
     </div>
-  </MobileOptimizedContent>
+  </CatalogContent>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
-import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
+import CatalogContent from "@/components/Business/CatalogContent.vue";
+import CatalogTabs from "@/components/Business/CatalogTabs.vue";
 const tabs = [
   { key: "intro", label: "Product Introduction" },
   { key: "manual", label: "Manuals" },
 ];
 const currentTab = ref("intro");
-const previewImg = ref("");
-function openPreview(img) {
-  previewImg.value = img;
-}
-function closePreview() {
-  previewImg.value = "";
-}
 // 图片资源
 import img1 from "@/assets/LifeScience/chromatography/chromatography-3/59f3b53291544beea170a99927e251cc.png";
 import img2 from "@/assets/LifeScience/chromatography/chromatography-3/8d14f44635d247ce94295a4d0e1bd8ac.png";
@@ -394,131 +362,6 @@ const manualFiles = [
 </script>
 
 <style scoped>
-.ion-exchange-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 24px 48px 24px;
-  background: #f8fafc;
-  min-height: 100vh;
-  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans", Arial, sans-serif;
-}
-.main-title {
-  text-align: center;
-  font-size: 2.6rem;
-  font-weight: 700;
-  color: #223a5e;
-  margin-bottom: 36px;
-  letter-spacing: 2px;
-}
-.tab-nav {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  margin-bottom: 36px;
-  border-bottom: 2px solid #e0e4ea;
-}
-.tab-item {
-  font-size: 1.1rem;
-  color: #204a6d;
-  padding: 8px 24px 10px 24px;
-  cursor: pointer;
-  font-weight: 500;
-  border-bottom: 2.5px solid transparent;
-  transition: color 0.2s, border-color 0.2s, font-weight 0.2s;
-}
-.tab-item.active {
-  color: #1a2a3a;
-  font-weight: 700;
-  border-bottom: 2.5px solid #204a6d;
-  background: #f7f9fb;
-}
-.tab-item:hover {
-  color: #2b7bbf;
-}
-.section-title {
-  font-size: 1.35rem;
-  font-weight: 600;
-  color: #223a5e;
-  border-left: 5px solid #409eff;
-  padding-left: 16px;
-  margin: 36px 0 18px 0;
-  background: none;
-}
-.divider {
-  height: 1px;
-  background: #e0e6ed;
-  margin: 32px 0;
-  border: none;
-}
-ul,
-ol {
-  padding-left: 24px;
-  margin-bottom: 18px;
-}
-li {
-  margin-bottom: 8px;
-  font-size: 1.05rem;
-  color: #3a4664;
-}
-.intro-img {
-  display: block;
-  max-width: 100%;
-  margin: 18px 0;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px #e0e6ed;
-  cursor: pointer;
-  transition: box-shadow 0.2s;
-}
-.intro-img:hover {
-  box-shadow: 0 4px 16px #b3c6e0;
-}
-.img-preview-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(30, 40, 60, 0.65);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.img-preview-large {
-  max-width: 90vw;
-  max-height: 90vh;
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 4px 32px #223a5e44;
-}
-.img-preview-close {
-  position: absolute;
-  top: 40px;
-  right: 60px;
-  font-size: 2.5rem;
-  color: #fff;
-  cursor: pointer;
-  font-weight: bold;
-  z-index: 10000;
-}
-.manual-list {
-  padding-left: 0;
-  margin-top: 24px;
-}
-.manual-list li {
-  list-style: none;
-  margin-bottom: 14px;
-  font-size: 1.08rem;
-}
-.manual-list a {
-  color: #204a6d;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.manual-list a:hover {
-  color: #409eff;
-  text-decoration: underline;
-}
 /* 案例标题样式 */
 .case-title {
   display: block;
@@ -527,14 +370,4 @@ li {
   font-size: 1.08rem;
   margin-bottom: 4px;
 }
-@media (max-width: 900px) {
-  .ion-exchange-page {
-    max-width: 100vw;
-    padding: 16px 4vw 32px 4vw;
-  }
-  .img-preview-close {
-    top: 12px;
-    right: 18px;
-  }
-}
-</style> 
+</style>

@@ -1,7 +1,7 @@
 <template>
-  <MobileOptimizedContent>
+  <CatalogContent title="Flow Cytometry Beads" family="Reagent">
     <div class="flow-cytometry-beads-page">
-      <h1 class="main-title">Flow Cytometry Beads</h1>
+
       <div class="base-richtext">
         <p>
           Flow cytometry (FCM) is a multi-parameter, rapid quantitative analysis
@@ -15,18 +15,18 @@
           advanced cell quantitative analysis technologies today.
         </p>
         <div class="img-row">
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img1"
             alt="Flow Cytometry Beads Diagram 1"
             class="intro-img"
           />
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img2"
             alt="Flow Cytometry Beads Diagram 2"
             class="intro-img"
           />
         </div>
-        <div class="section-title">Types of Flow Cytometry Beads</div>
+        <h2 class="section-title">Types of Flow Cytometry Beads</h2>
         <div class="product-type-list">
           <div class="product-type-item">
             Magnetic Fluorescent Encoded Beads
@@ -35,11 +35,11 @@
         </div>
       </div>
     </div>
-  </MobileOptimizedContent>
+  </CatalogContent>
 </template>
 
 <script setup>
-import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+import CatalogContent from "@/components/Business/CatalogContent.vue";
 import img1 from "@/assets/Reagent/cytometric/cytometric-1/10001.jpg";
 import img2 from "@/assets/Reagent/cytometric/cytometric-1/10002.png";
 </script>
@@ -54,18 +54,6 @@ import img2 from "@/assets/Reagent/cytometric/cytometric-1/10002.png";
   font-size: 14px;
   line-height: 1.8;
 }
-.img-row {
-  display: flex;
-  gap: 24px;
-  justify-content: flex-start;
-  margin: 20px 0 32px 0;
-}
-.img-row img {
-  max-width: 260px;
-  border-radius: 6px;
-  border: 1px solid #eee;
-  background: #fafbfc;
-}
 .product-page__list {
   margin-top: 12px;
   margin-bottom: 24px;
@@ -75,4 +63,4 @@ import img2 from "@/assets/Reagent/cytometric/cytometric-1/10002.png";
   font-size: 14px;
   border-bottom: 1px dashed #e0e0e0;
 }
-</style> 
+</style>

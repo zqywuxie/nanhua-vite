@@ -1,32 +1,34 @@
 <template>
   <div class="support-page">
     <!-- Banner -->
-    <div class="support-banner">
+    <div class="support-banner site-page-header">
 
-      <img src="/CopyHtml/支持_files/Banner001847-ban4_wap.jpg" alt="支持Banner" />
+      <img src="../../assets/support/Banner001847-ban4_wap.jpg" alt="支持Banner" />
     </div>
     <!-- 一级Tab切换模块 -->
     <div class="support-main-tabs">
-      <div
+      <button type="button"
         v-for="(tab, idx) in mainTabs"
         :key="tab.key"
         :class="['support-main-tab', {active: mainTabIdx === idx}]"
         @click="mainTabIdx = idx"
+        :aria-pressed="mainTabIdx === idx"
       >
         {{ tab.label }}
-      </div>
+      </button>
     </div>
     <!-- Tab切换模块 -->
     <div v-if="mainTabIdx === 0">
       <div class="support-tabs">
-        <div
+        <button type="button"
           v-for="(tab, idx) in tabs"
           :key="tab.key"
           :class="['support-tab', {active: currentTab === idx}]"
           @click="currentTab = idx"
+          :aria-pressed="currentTab === idx"
         >
           {{ tab.label }}
-        </div>
+        </button>
       </div>
       <!-- Tab内容区 -->
       <div v-if="currentTab === 0">
@@ -74,9 +76,6 @@
             </div>
             <div class="location-info">
               <div class="location-card">
-                <div class="location-icon">
-                  <i class="location-pin">📍</i>
-                </div>
                 <div class="location-details">
                   <h3 class="location-title">Nanjing iRepertoire Biotechnology Co., Ltd.</h3>
                   <p class="location-address">4th Floor, Building A9, Huizhi Science Park, No.8 Hengtai Road, Nanjing Economic Development Zone</p>
@@ -113,12 +112,12 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { useQueryTab } from '@/composables/useQueryTab'
 const mainTabs = [
   { key: 'faq', label: 'FAQ' },
   { key: 'contact', label: 'Contact Us' },
 ]
-const mainTabIdx = ref(0)
+const mainTabIdx = useQueryTab(mainTabs, 'section')
 const tabs = [
   { key: 'primer', label: 'Primer Kits' },
   { key: 'ir', label: 'iR Library Prep Kits' },
@@ -127,7 +126,7 @@ const tabs = [
   { key: 'sample', label: 'Sample Requirements' },
   { key: 'seq', label: 'Sequencing' },
 ]
-const currentTab = ref(0)
+const currentTab = useQueryTab(tabs)
 const qaList = [
   {
     q: 'What types of immune repertoire libraries can be constructed?',
@@ -537,4 +536,20 @@ const qaList = [
     margin-bottom: 30px;
   }
 }
+.support-banner { border-radius: 0; }
+.support-main-tab, .support-tab { font: inherit; font-size: 16px; min-height: 44px; color: #596578; background: none; border-radius: 0; border-bottom: 2px solid transparent; box-shadow: none; flex-shrink: 0; }
+.support-main-tab.active, .support-tab.active { color: #243b7b; background: none; border-bottom-color: #00bc97; box-shadow: none; font-weight: 600; }
+.support-tab:hover { color: #243b7b; filter: none; box-shadow: none; }
+.support-main-tab:focus-visible, .support-tab:focus-visible { outline: 2px solid #243b7b; outline-offset: -3px; }
+.support-tabs { justify-content: flex-start; padding: 0 24px; gap: 16px; }
+.support-qa-item { box-shadow: none; border: 1px solid #e1e6ed; border-radius: var(--vb-radius-panel, 12px); }
+.container { max-width: 1248px; padding: 0 24px; }
+.section-title, .location-title { background: none; color: #243b7b; -webkit-text-fill-color: currentColor; font-size: 26px; }
+.section-desc { font-size: 16px; }
+.map-btn { border-radius: var(--vb-radius-control, 6px); }
+.map-btn.primary { background: #243b7b; }
+.map-btn.primary:hover, .map-btn.secondary:hover { transform: none; box-shadow: none; }
+.map-btn.secondary { color: #176cb0; border: 1px solid #cbd2dc; }
+.map-btn.secondary:hover { background: #f3f6f7; color: #124a78; }
+@media (max-width: 767px) { .support-tabs { padding: 0 16px; gap: 8px; } .container { padding: 0 16px; } }
 </style> 

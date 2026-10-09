@@ -1,7 +1,7 @@
 <template>
-  <MobileOptimizedContent>
+  <CatalogContent title="Molecular Diagnosis" family="Reagent">
     <div class="molecular-diagnosis-page">
-      <h1 class="main-title">Molecular Diagnosis</h1>
+
       <section class="intro">
         <p>
           We offer multiple product lines in the molecular diagnosis field,
@@ -32,11 +32,10 @@
               packaging specifications.
             </p>
           </div>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="imgNucleicAcid"
             alt="Nucleic Acid Extraction and Purification"
             class="preview-img"
-            @click="openPreview(imgNucleicAcid)"
           />
         </div>
       </section>
@@ -60,11 +59,10 @@
               packaging specifications.
             </p>
           </div>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="imgNucleicAcid"
             alt="Viral Nucleic Acid Extraction and Purification"
             class="preview-img"
-            @click="openPreview(imgNucleicAcid)"
           />
         </div>
       </section>
@@ -85,11 +83,10 @@
               expression analysis, etc.
             </p>
           </div>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="imgMrna"
             alt="mRNA Extraction & Purification Magnetic Microspheres"
             class="preview-img"
-            @click="openPreview(imgMrna)"
           />
         </div>
       </section>
@@ -112,11 +109,10 @@
               adsorption, making it an ideal choice for cfDNA purification.
             </p>
           </div>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="imgCfDNA"
             alt="cfDNA (cfDNA) Extraction"
             class="preview-img"
-            @click="openPreview(imgCfDNA)"
           />
         </div>
       </section>
@@ -138,11 +134,10 @@
               making it an ideal choice for HPV DNA extraction.
             </p>
           </div>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="imgHPV"
             alt="HPV DNA Extraction Microspheres"
             class="preview-img"
-            @click="openPreview(imgHPV)"
           />
         </div>
       </section>
@@ -165,11 +160,10 @@
               detection, and high-throughput sequencing experiments.
             </p>
           </div>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="imgBloodDNA"
             alt="Blood Genomic DNA Extraction Reagent (Bead Method)"
             class="preview-img"
-            @click="openPreview(imgBloodDNA)"
           />
         </div>
       </section>
@@ -183,11 +177,10 @@
               bind biotin derivatives.
             </p>
           </div>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="imgTarget"
             alt="Target Capture"
             class="preview-img"
-            @click="openPreview(imgTarget)"
           />
         </div>
       </section>
@@ -204,11 +197,10 @@
               results.
             </p>
           </div>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="imgNGS"
             alt="NGS Sequencing"
             class="preview-img"
-            @click="openPreview(imgNGS)"
           />
         </div>
       </section>
@@ -229,11 +221,10 @@
             </p>
             <p>Other specifications can be customized as required.</p>
           </div>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="imgSingleCell"
             alt="Single-Cell Sequencing"
             class="preview-img"
-            @click="openPreview(imgSingleCell)"
           />
         </div>
       </section>
@@ -256,69 +247,59 @@
         <h2>Types of Molecular Diagnosis</h2>
         <ul>
           <li>
-            <router-link to="/reagent/molecular/nucleic-acid"
+            <router-link to="/reagent/molecular_diagnosis/nucleic_acid_extraction"
               >Nucleic Acid Extraction and Purification</router-link
             >
           </li>
           <li>
-            <router-link to="/reagent/molecular/mrna"
+            <router-link to="/reagent/molecular_diagnosis/mrna_extraction_beads"
               >mRNA Extraction & Purification Magnetic Microspheres</router-link
             >
           </li>
           <li>
-            <router-link to="/reagent/molecular/cfdna"
+            <router-link to="/reagent/molecular_diagnosis/cfDNA_extraction"
               >cfDNA (cfDNA) Extraction</router-link
             >
           </li>
           <li>
-            <router-link to="/reagent/molecular/hpv"
+            <router-link to="/reagent/molecular_diagnosis/hpv_dna_beads"
               >HPV DNA Extraction Microspheres</router-link
             >
           </li>
           <li>
-            <router-link to="/reagent/molecular/blood-dna"
+            <router-link to="/reagent/molecular_diagnosis/blood_genome_beads"
               >Blood Genomic DNA Extraction Reagent (Bead Method)</router-link
             >
           </li>
           <li>
-            <router-link to="/reagent/molecular/target-capture"
+            <router-link to="/reagent/molecular_diagnosis/target_capture"
               >Target Capture</router-link
             >
           </li>
           <li>
-            <router-link to="/reagent/molecular/ngs"
+            <router-link to="/reagent/molecular_diagnosis/ngs_sequencing"
               >NGS Sequencing</router-link
             >
           </li>
           <li>
-            <router-link to="/reagent/molecular/single-cell"
+            <router-link to="/reagent/molecular_diagnosis/single_cell_sequencing"
               >Single-Cell Sequencing</router-link
             >
           </li>
           <li>
-            <router-link to="/reagent/molecular/magnetic-rack"
+            <router-link to="/reagent/molecular_diagnosis/magnetic_rack"
               >Magnetic Rack</router-link
             >
           </li>
         </ul>
       </section>
 
-      <!-- 图片预览弹窗 -->
-      <div
-        v-if="previewImg"
-        class="img-preview-modal"
-        @click.self="closePreview"
-      >
-        <img :src="previewImg" class="img-preview-large" @click.stop />
-        <span class="img-preview-close" @click="closePreview">×</span>
-      </div>
     </div>
-  </MobileOptimizedContent>
+  </CatalogContent>
 </template>
 
 <script setup>
-import { ref } from "vue";
-import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+import CatalogContent from "@/components/Business/CatalogContent.vue";
 import imgNucleicAcid from "@/assets/Reagent/diagnosis/diagnosis-1/10001.png";
 import imgMrna from "@/assets/Reagent/diagnosis/diagnosis-1/10002.png";
 import imgCfDNA from "@/assets/Reagent/diagnosis/diagnosis-1/10003.png";
@@ -328,110 +309,34 @@ import imgTarget from "@/assets/Reagent/diagnosis/diagnosis-1/10006.png";
 import imgNGS from "@/assets/Reagent/diagnosis/diagnosis-1/10007.png";
 import imgSingleCell from "@/assets/Reagent/diagnosis/diagnosis-1/10008.png";
 
-const previewImg = ref(null);
-function openPreview(img) {
-  previewImg.value = img;
-}
-function closePreview() {
-  previewImg.value = null;
-}
 </script>
 
 <style scoped>
-.molecular-diagnosis-page {
-  padding: 32px 0 24px 0;
-  background: #f7f9fb;
-}
-.main-title {
-  font-size: 2.2rem;
-  color: #1a2a3a;
-  font-weight: 700;
-  letter-spacing: 2px;
-  margin-bottom: 18px;
-  text-align: center;
-}
-.intro {
-  max-width: 1200px;
-  margin: 0 auto 32px auto;
-  font-size: 1.08rem;
-  color: #333;
-  line-height: 1.8;
-  text-align: center;
-}
-.divider {
-  height: 1px;
-  background: #e0e4ea;
-  margin: 36px auto 36px auto;
-  max-width: 1200px;
-}
 .product-section {
   max-width: 1200px;
   margin: 0 auto 0 auto;
   padding: 0 0 0 0;
 }
-.product-section h2 {
-  font-size: 1.35rem;
-  color: #204a6d;
-  font-weight: 600;
-  margin-bottom: 12px;
-  border-left: 4px solid #204a6d;
-  padding-left: 12px;
-  background: none;
-}
 .section-content {
-  display: flex;
-  align-items: flex-start;
-  gap: 32px;
-  margin-bottom: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
 }
 .section-text {
-  flex: 1 1 0%;
-  font-size: 1rem;
-  color: #444;
-  line-height: 1.8;
+  min-width: 0;
 }
-.preview-img {
-  flex: 0 0 320px;
-  max-width: 320px;
-  max-height: 260px;
-  object-fit: contain;
-  margin: 0;
-  border-radius: 6px;
-  border: 1.5px solid #e0e4ea;
-  background: #fff;
-  box-shadow: none;
-  display: block;
-  cursor: pointer;
-  transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
-}
-.preview-img:hover {
-  box-shadow: 0 4px 24px rgba(32, 74, 109, 0.18);
-  border-color: #204a6d;
-  z-index: 2;
-  transform: scale(1.06);
-}
-@media (max-width: 900px) {
-  .section-content {
-    flex-direction: column;
-    gap: 16px;
-  }
-  .preview-img {
-    max-width: 100%;
-    margin: 0 auto;
-  }
+.section-content .preview-img {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: auto;
+  margin: 8px auto 24px;
 }
 .diagnosis-types {
   max-width: 1200px;
   margin: 48px auto 0 auto;
   padding: 32px 0 0 0;
   border-top: 2px solid #e0e4ea;
-}
-.diagnosis-types h2 {
-  font-size: 1.18rem;
-  color: #204a6d;
-  font-weight: 600;
-  margin-bottom: 16px;
-  letter-spacing: 1px;
 }
 .diagnosis-types ul {
   list-style: none;
@@ -458,50 +363,4 @@ function closePreview() {
   color: #204a6d;
   text-decoration: underline;
 }
-/* 图片预览弹窗样式 */
-.img-preview-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(30, 40, 60, 0.65);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: fadeIn 0.2s;
-}
-.img-preview-large {
-  max-width: 90vw;
-  max-height: 90vh;
-  border-radius: 10px;
-  box-shadow: 0 8px 32px rgba(32, 74, 109, 0.25);
-  background: #fff;
-  border: 2px solid #204a6d;
-  display: block;
-}
-.img-preview-close {
-  position: absolute;
-  top: 32px;
-  right: 48px;
-  font-size: 2.5rem;
-  color: #fff;
-  cursor: pointer;
-  font-weight: bold;
-  z-index: 1010;
-  user-select: none;
-  transition: color 0.2s;
-}
-.img-preview-close:hover {
-  color: #d23c1a;
-}
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-</style> 
+</style>

@@ -1,15 +1,13 @@
 <template>
-  <MobileOptimizedContent>
+  <CatalogContent title="Beadstar-mPlex® Magnetic Fluorescent Encoded Microspheres" family="Reagent">
     <div class="beadstar-mplex-microspheres-page">
-      <h1 class="main-title">
-        Beadstar-mPlex® Magnetic Fluorescent Encoded Microspheres
-      </h1>
 
-      <MobileOptimizedTabs :tabs="tabList" v-model="tab">
+
+      <CatalogTabs :tabs="tabList" v-model="tab">
         <!-- Product Introduction Tab -->
         <section v-if="tab === 'intro'">
           <div class="section-block">
-            <div class="section-title">Product Overview</div>
+            <h2 class="section-title">Product Overview</h2>
             <div class="base-richtext">
               <p>
                 Beadstar-mPlex® Magnetic Fluorescent Encoded Microspheres are
@@ -47,7 +45,7 @@
           </div>
           <div class="divider"></div>
           <div class="section-block">
-            <div class="section-title">Technical Advantage</div>
+            <h2 class="section-title">Technical Advantage</h2>
             <ul class="feature-list">
               <li>
                 <b>Low-adsorption:</b> The second-generation low-adsorption
@@ -70,19 +68,18 @@
               </li>
             </ul>
             <div class="img-row">
-              <img
+              <img role="button" tabindex="0" aria-label="Enlarge image"
                 v-for="(img, idx) in techImgs"
                 :key="img"
                 :src="img"
                 :alt="`Technical Advantage ${idx + 1}`"
                 class="adv-img"
-                @click="openModal(img)"
               />
             </div>
           </div>
           <div class="divider"></div>
           <div class="section-block">
-            <div class="section-title">Application Scenarios</div>
+            <h2 class="section-title">Application Scenarios</h2>
             <div class="overview-list">
               <div class="overview-row">
                 <span class="overview-label">Multiplex protein detection:</span>
@@ -114,11 +111,11 @@
           </div>
           <div class="divider"></div>
           <div class="section-block">
-            <div class="section-title">
+            <h2 class="section-title">
               Product Classification & Specifications
-            </div>
+            </h2>
             <div class="table-wrapper">
-              <table class="spec-table">
+              <div class="catalog-table-scroll" tabindex="0" role="region" aria-label="Product data table"><table class="spec-table">
                 <thead>
                   <tr>
                     <th>Series</th>
@@ -158,12 +155,12 @@
                     <td>CBA / Luminex</td>
                   </tr>
                 </tbody>
-              </table>
+              </table></div>
             </div>
           </div>
           <div class="divider"></div>
           <div class="section-block">
-            <div class="section-title">Application Example</div>
+            <h2 class="section-title">Application Example</h2>
             <div class="base-richtext">
               The kit is used for quantitative analysis of the concentrations of
               IL-1β, IL-2, IL-4, IL-5, IL-8, IL-6, IL-10, IL-12p70, IL-17A,
@@ -171,11 +168,10 @@
               human serum samples.
             </div>
             <div class="img-center">
-              <img
+              <img role="button" tabindex="0" aria-label="Enlarge image"
                 :src="imgExample"
                 alt="Application Example"
                 class="main-img"
-                @click="openModal(imgExample)"
               />
             </div>
           </div>
@@ -183,7 +179,7 @@
         <!-- FAQ Tab -->
         <section v-if="tab === 'faq'">
           <div class="section-block">
-            <div class="section-title">Frequently Asked Questions (FAQ)</div>
+            <h2 class="section-title">Frequently Asked Questions (FAQ)</h2>
             <div class="faq-list">
               <div class="faq-item" v-for="(item, idx) in faqList" :key="idx">
                 <div class="faq-q"><b>Q:</b> {{ item.q }}</div>
@@ -194,57 +190,40 @@
         </section>
         <!-- Order Tab -->
         <section v-if="tab === 'order'">
-          <div class="section-title">Order Information</div>
-          <div class="img-center">
-            <img
-              :src="imgOrder"
-              alt="Order Information"
-              class="main-img"
-              @click="openModal(imgOrder)"
-            />
-          </div>
-          <div v-if="modalImg" class="img-modal" @click.self="closeModal">
-            <div class="modal-content">
-              <img :src="modalImg" alt="Preview Large Image" />
-              <button class="close-btn" @click="closeModal">×</button>
-            </div>
-          </div>
+          <h2 class="section-title">Order Information</h2>
+          <p class="base-richtext">Contact our team for order information.</p>
+
         </section>
         <!-- Manual Tab -->
-        <section v-if="tab === 'manual'">
-          <div class="section-title">Manual</div>
+        <section v-if="tab === 'manual'" class="catalog-resources">
+          <h2 class="section-title">Manual</h2>
           <div class="base-richtext">
             <ul>
               <li>
-                <a href="#" download target="_blank"
+                <router-link :to="{ path: '/contact_us', query: { product: 'Beadstar-mPlex® Magnetic Fluorescent Encoded Microspheres' } }"
                   >Beadstar-mPlex® Magnetic Fluorescent Encoded Microspheres
-                  Product Manual (PDF)</a
+                  Product Manual (PDF)</router-link
                 >
               </li>
             </ul>
           </div>
         </section>
         <!-- 图片放大 Modal -->
-        <div v-if="modalImg" class="img-modal" @click.self="closeModal">
-          <div class="modal-content">
-            <img :src="modalImg" alt="Preview Large Image" />
-            <button class="close-btn" @click="closeModal">×</button>
-          </div>
-        </div>
-      </MobileOptimizedTabs>
+
+      </CatalogTabs>
     </div>
-  </MobileOptimizedContent>
+  </CatalogContent>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
-import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
+import CatalogContent from "@/components/Business/CatalogContent.vue";
+import CatalogTabs from "@/components/Business/CatalogTabs.vue";
 import techImg1 from "@/assets/Reagent/cytometric/cytometric-3/1001.png";
 import techImg2 from "@/assets/Reagent/cytometric/cytometric-3/1002.png";
 import techImg3 from "@/assets/Reagent/cytometric/cytometric-3/1003.png";
 import imgExample from "@/assets/Reagent/cytometric/cytometric-3/1004.png";
-const imgOrder = "https://via.placeholder.com/600x400?text=Order+Info";
+
 const techImgs = [techImg1, techImg2, techImg3];
 const tabList = [
   { key: "intro", label: "Product Introduction" },
@@ -253,13 +232,6 @@ const tabList = [
   { key: "manual", label: "Manual" },
 ];
 const tab = ref("intro");
-const modalImg = ref(null);
-const openModal = (img) => {
-  modalImg.value = img;
-};
-const closeModal = () => {
-  modalImg.value = null;
-};
 const faqList = [
   {
     q: "Compared to the first-generation microspheres, what technological improvements have been made in the second-generation low-adsorption magnetic fluorescent encoded microspheres?",
@@ -281,64 +253,8 @@ const faqList = [
 </script>
 
 <style scoped>
-.beadstar-mplex-microspheres-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 24px 48px 24px;
-  background: #f8fafc;
-  min-height: 100vh;
-  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans", Arial, sans-serif;
-}
-.main-title {
-  text-align: center;
-  font-size: 2.6rem;
-  font-weight: 700;
-  color: #223a5e;
-  margin-bottom: 36px;
-  letter-spacing: 2px;
-}
-.tab-nav {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  margin-bottom: 36px;
-  border-bottom: 2px solid #e0e4ea;
-}
-.tab-item {
-  font-size: 1.1rem;
-  color: #204a6d;
-  padding: 8px 24px 10px 24px;
-  cursor: pointer;
-  font-weight: 500;
-  border-bottom: 2.5px solid transparent;
-  transition: color 0.2s, border-color 0.2s, font-weight 0.2s;
-}
-.tab-item.active {
-  color: #1a2a3a;
-  font-weight: 700;
-  border-bottom: 2.5px solid #204a6d;
-  background: #f7f9fb;
-}
-.tab-item:hover {
-  color: #2b7bbf;
-}
 .section-block {
   margin-bottom: 36px;
-}
-.section-title {
-  font-size: 1.35rem;
-  font-weight: 600;
-  color: #223a5e;
-  border-left: 5px solid #409eff;
-  padding-left: 16px;
-  margin: 36px 0 18px 0;
-  background: none;
-}
-.divider {
-  height: 1px;
-  background: #e0e6ed;
-  margin: 32px 0;
-  border: none;
 }
 .base-richtext {
   font-size: 1.05rem;
@@ -354,30 +270,6 @@ const faqList = [
   margin-bottom: 8px;
   font-size: 1.05rem;
   color: #3a4664;
-}
-.img-row {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 24px;
-  margin: 32px 0 24px 0;
-  flex-wrap: wrap;
-}
-.adv-img {
-  max-width: 320px;
-  width: 100%;
-  max-height: 220px;
-  border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(34, 58, 94, 0.1);
-  cursor: pointer;
-  transition: box-shadow 0.25s, border 0.25s, transform 0.25s;
-  border: 2px solid transparent;
-  object-fit: cover;
-}
-.adv-img:hover {
-  box-shadow: 0 8px 32px rgba(64, 158, 255, 0.18);
-  border: 2px solid #409eff;
-  transform: scale(1.04);
 }
 .table-wrapper {
   display: flex;
@@ -431,77 +323,6 @@ const faqList = [
   font-size: 1.05rem;
   line-height: 1.7;
 }
-.img-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 32px 0 24px 0;
-}
-.main-img {
-  max-width: 600px;
-  width: 100%;
-  max-height: 400px;
-  border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(34, 58, 94, 0.1);
-  cursor: pointer;
-  transition: box-shadow 0.25s, border 0.25s, transform 0.25s;
-  border: 2px solid transparent;
-}
-.main-img:hover {
-  box-shadow: 0 8px 32px rgba(64, 158, 255, 0.18);
-  border: 2px solid #409eff;
-  transform: scale(1.04);
-}
-.img-modal {
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(34, 58, 94, 0.65);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.modal-content {
-  position: relative;
-  background: #fff;
-  border-radius: 16px;
-  padding: 32px 32px 16px 32px;
-  box-shadow: 0 8px 40px rgba(34, 58, 94, 0.18);
-  max-width: 90vw;
-  max-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.modal-content img {
-  max-width: 800px;
-  max-height: 70vh;
-  border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(34, 58, 94, 0.1);
-}
-.close-btn {
-  position: absolute;
-  top: 12px;
-  right: 18px;
-  background: #223a5e;
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  font-size: 1.6rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s;
-}
-.close-btn:hover {
-  background: #409eff;
-}
 .overview-list {
   display: flex;
   flex-direction: column;
@@ -530,28 +351,8 @@ const faqList = [
   margin-bottom: 2px;
 }
 @media (max-width: 900px) {
-  .beadstar-mplex-microspheres-page {
-    max-width: 100vw;
-    padding: 16px 4vw 32px 4vw;
-  }
-  .main-img {
-    max-width: 98vw;
-    max-height: 40vw;
-  }
-  .modal-content img {
-    max-width: 96vw;
-    max-height: 60vw;
-  }
-  .img-row {
-    flex-direction: column;
-    gap: 18px;
-  }
-  .adv-img {
-    max-width: 98vw;
-    max-height: 40vw;
-  }
   .spec-table {
     min-width: 90vw;
   }
 }
-</style> 
+</style>

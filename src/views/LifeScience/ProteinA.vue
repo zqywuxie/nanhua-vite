@@ -1,12 +1,12 @@
 <template>
-  <MobileOptimizedContent>
+  <CatalogContent title="Protein A Agarose Magnetic Beads" family="Life Science">
     <div class="homogeneous-page">
-      <h1 class="main-title">Protein A Agarose Magnetic Beads</h1>
 
-      <MobileOptimizedTabs :tabs="tabs" v-model="currentTab">
+
+      <CatalogTabs :tabs="tabs" v-model="currentTab">
         <!-- Tab Content: Product Introduction -->
         <section v-if="currentTab === 'intro'" class="intro">
-          <div class="section-title">Product Overview</div>
+          <h2 class="section-title">Product Overview</h2>
           <p>
             Protein A agarose magnetic beads are composed of agarose and
             nano-magnetic particles, with Protein A ligand coupled to the bead
@@ -18,15 +18,14 @@
             convenience—ideal for high-throughput sample purification.
           </p>
           <div class="img-block">
-            <img
+            <img role="button" tabindex="0" aria-label="Enlarge image"
               :src="img1"
               alt="ProteinA Light Microscopy and Product Image"
               class="intro-img"
-              @click="openPreview(img1)"
             />
           </div>
-          <div class="section-title">Product Features</div>
-          <ul>
+          <h2 class="section-title">Product Features</h2>
+<ul class="catalog-features">
             <li>
               High binding capacity: Each mL of Protein A settled gel can bind
               ≥70 mg of human IgG
@@ -58,27 +57,25 @@
               bead pretreatment to binding, elution, and bead recovery
             </li>
           </ul>
-          <div class="section-title">
+          <h2 class="section-title">
             Protein A Agarose Magnetic Bead Purification Workflow
-          </div>
+          </h2>
           <div class="img-block">
-            <img
+            <img role="button" tabindex="0" aria-label="Enlarge image"
               :src="img2"
               alt="Purification Workflow"
               class="intro-img"
-              @click="openPreview(img2)"
             />
           </div>
-          <div class="section-title">Product Information</div>
+          <h2 class="section-title">Product Information</h2>
           <div class="img-block">
-            <img
+            <img role="button" tabindex="0" aria-label="Enlarge image"
               :src="img3"
               alt="Product Information"
               class="intro-img"
-              @click="openPreview(img3)"
             />
           </div>
-          <div class="section-title">Validation Data</div>
+          <h2 class="section-title">Validation Data</h2>
           <ul>
             <li>
               Standard Human IgG Test: VDO Protein A agarose magnetic beads have
@@ -88,11 +85,10 @@
             </li>
           </ul>
           <div class="img-block">
-            <img
+            <img role="button" tabindex="0" aria-label="Enlarge image"
               :src="img4"
               alt="Standard Human IgG Test"
               class="intro-img"
-              @click="openPreview(img4)"
             />
           </div>
           <ul>
@@ -103,62 +99,57 @@
             </li>
           </ul>
           <div class="img-block">
-            <img
+            <img role="button" tabindex="0" aria-label="Enlarge image"
               :src="img5"
               alt="Alkali Resistance Test"
               class="intro-img"
-              @click="openPreview(img5)"
             />
           </div>
           <ul>
             <li>Competitor Comparison Data – Human Standard</li>
           </ul>
           <div class="img-block">
-            <img
+            <img role="button" tabindex="0" aria-label="Enlarge image"
               :src="img6"
               alt="Competitor Comparison – Human Standard"
               class="intro-img"
-              @click="openPreview(img6)"
             />
           </div>
           <ul>
             <li>Competitor Comparison Data – CHO Cells</li>
           </ul>
           <div class="img-block">
-            <img
+            <img role="button" tabindex="0" aria-label="Enlarge image"
               :src="img7"
               alt="Competitor Comparison – CHO Cells"
               class="intro-img"
-              @click="openPreview(img7)"
             />
           </div>
           <ul>
             <li>Competitor Comparison Data – HEK293</li>
           </ul>
           <div class="img-block">
-            <img
+            <img role="button" tabindex="0" aria-label="Enlarge image"
               :src="img8"
               alt="Competitor Comparison – HEK293"
               class="intro-img"
-              @click="openPreview(img8)"
             />
           </div>
-          <div class="section-title">Product List</div>
+          <h2 class="section-title">Product List</h2>
           <div class="img-block">
-            <img
+            <img role="button" tabindex="0" aria-label="Enlarge image"
               :src="img9"
               alt="Product List"
               class="intro-img"
-              @click="openPreview(img9)"
             />
           </div>
         </section>
         <!-- Tab Content: Manuals -->
-        <section v-if="currentTab === 'manual'" class="manuals">
-          <div class="section-title">Manual Download</div>
+        <section v-if="currentTab === 'manual'" class="catalog-resources manuals">
+          <h2 class="section-title">Product Manuals</h2>
           <ul class="manual-list">
             <li v-for="file in manualFiles" :key="file.name">
-              <a :href="file.url" :download="file.name" target="_blank">
+              <a :href="file.url" target="_blank" rel="noopener noreferrer">
                 <i class="el-icon-document" style="margin-right: 6px"></i
                 >{{ file.name }}
               </a>
@@ -166,23 +157,16 @@
           </ul>
         </section>
         <!-- Image Preview Modal -->
-        <div
-          v-if="previewImg"
-          class="img-preview-modal"
-          @click.self="closePreview"
-        >
-          <img :src="previewImg" class="img-preview-large" @click.stop />
-          <span class="img-preview-close" @click="closePreview">×</span>
-        </div>
-      </MobileOptimizedTabs>
+
+      </CatalogTabs>
     </div>
-  </MobileOptimizedContent>
+  </CatalogContent>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
-import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
+import CatalogContent from "@/components/Business/CatalogContent.vue";
+import CatalogTabs from "@/components/Business/CatalogTabs.vue";
 import img1 from "@/assets/LifeScience/microballoon/microballoon-2/26ae28a5734a42e0a34b969f9ccad050.png";
 import img2 from "@/assets/LifeScience/microballoon/microballoon-2/6608f42c41884a7ab4d2b3c74799883a.png";
 import img3 from "@/assets/LifeScience/microballoon/microballoon-2/4f9548fd6b4649688771a5021d8dac72.png";
@@ -198,168 +182,10 @@ const tabs = [
   { key: "manual", label: "Manuals" },
 ];
 const currentTab = ref("intro");
-const previewImg = ref("");
-const openPreview = (img) => {
-  previewImg.value = img;
-};
-const closePreview = () => {
-  previewImg.value = "";
-};
 const manualFiles = [
   { name: "Protein A Agarose Magnetic Beads Manual.pdf", url: pdfManual },
 ];
 </script>
 
 <style scoped>
-.homogeneous-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 24px 48px 24px;
-  background: #f8fafc;
-  min-height: 100vh;
-  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans", Arial, sans-serif;
-}
-.main-title {
-  text-align: center;
-  font-size: 2.6rem;
-  font-weight: 700;
-  color: #223a5e;
-  margin-bottom: 36px;
-  letter-spacing: 2px;
-}
-.tab-nav {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  margin-bottom: 36px;
-  border-bottom: 2px solid #e0e4ea;
-}
-.tab-item {
-  font-size: 1.1rem;
-  color: #204a6d;
-  padding: 8px 24px 10px 24px;
-  cursor: pointer;
-  font-weight: 500;
-  border-bottom: 2.5px solid transparent;
-  transition: color 0.2s, border-color 0.2s, font-weight 0.2s;
-}
-.tab-item.active {
-  color: #1a2a3a;
-  font-weight: 700;
-  border-bottom: 2.5px solid #204a6d;
-  background: #f7f9fb;
-}
-.tab-item:hover {
-  color: #2b7bbf;
-}
-.section-title {
-  font-size: 1.35rem;
-  font-weight: 600;
-  color: #223a5e;
-  border-left: 5px solid #409eff;
-  padding-left: 16px;
-  margin: 36px 0 18px 0;
-  background: none;
-}
-.divider {
-  height: 1px;
-  background: #e0e6ed;
-  margin: 32px 0;
-  border: none;
-}
-ul,
-ol {
-  padding-left: 24px;
-  margin-bottom: 18px;
-}
-li {
-  margin-bottom: 8px;
-  font-size: 1.05rem;
-  color: #3a4664;
-}
-.manual-list {
-  list-style: none;
-  padding: 0;
-}
-.manual-list li {
-  margin-bottom: 12px;
-}
-.manual-list a {
-  color: #204a6d;
-  text-decoration: none;
-  font-size: 1.08rem;
-  transition: color 0.2s;
-}
-.manual-list a:hover {
-  color: #409eff;
-  text-decoration: underline;
-}
-.img-block {
-  margin: 18px 0;
-  text-align: center;
-}
-.intro-img {
-  display: block;
-  max-width: 320px;
-  width: 70%;
-  margin: 18px auto 24px auto;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px #0001;
-  cursor: pointer;
-  transition: box-shadow 0.2s;
-}
-.intro-img,
-.img-block img {
-  max-width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  cursor: pointer;
-  transition: box-shadow 0.2s;
-}
-.img-block img:hover {
-  box-shadow: 0 4px 16px rgba(64, 158, 255, 0.18);
-}
-.img-preview-modal {
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.55);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.img-preview-large {
-  max-width: 90vw;
-  max-height: 80vh;
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.18);
-}
-.img-preview-close {
-  position: absolute;
-  top: 40px;
-  right: 60px;
-  font-size: 2.5rem;
-  color: #fff;
-  cursor: pointer;
-  font-weight: bold;
-  z-index: 10000;
-}
-@media (max-width: 900px) {
-  .homogeneous-page {
-    max-width: 100vw;
-    padding: 16px 4vw 32px 4vw;
-  }
-  .intro-img {
-    max-width: 98vw;
-    margin: 12px auto 18px auto;
-  }
-  .img-preview-close {
-    top: 12px;
-    right: 16px;
-  }
-}
-</style> 
+</style>

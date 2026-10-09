@@ -1,14 +1,14 @@
 <template>
   <div class="lifescience-layout">
     <!-- 顶部Banner -->
-    <div class="banner">
+    <div class="banner site-page-header site-page-header--product">
       <img :src="bannerImg" alt="Life Science Banner" class="banner-img" />
       <div class="banner-title">
-        <span class="desktop-title">{{ currentPageTitle }}</span>
-        <span class="mobile-title">{{ mobilePageTitle }}</span>
+        <span class="desktop-title">{{ categoryBannerTitle }}</span>
+        <span class="mobile-title">{{ categoryBannerTitle }}</span>
       </div>
     </div>
-    <div class="main-content">
+    <div ref="catalogContent" class="main-content">
       <!-- 移动端菜单切换按钮 -->
       <div class="mobile-menu-toggle" @click="toggleMobileMenu">
         <span class="menu-icon">☰</span>
@@ -22,19 +22,16 @@
         <div class="side-menu-title">Life Science Classification</div>
         <ul class="side-menu-list">
           <li v-for="item in menuItems" :key="item.key">
-            <div
+            <button
+              type="button"
               class="side-menu-category"
               :class="{ active: isActiveCategory(item) }"
+              :aria-expanded="item.children?.length ? isOpenCategory(item) : undefined"
               @click="handleCategoryClick(item)"
             >
-              <span>{{ item.title }}</span>
-              <span
-                v-if="item.children?.length"
-                class="arrow"
-                :class="{ open: isOpenCategory(item) }"
-                >▶</span
-              >
-            </div>
+              <span class="category-label">{{ item.title }}</span>
+              <MenuChevron v-if="item.children?.length" direction="right" :expanded="isOpenCategory(item)" />
+            </button>
             <ul
               v-if="item.children?.length && isOpenCategory(item)"
               class="side-submenu"
@@ -61,7 +58,7 @@
       <!-- 右侧内容区域 -->
       <section class="content-area">
         <router-view v-slot="{ Component }">
-          <transition name="page-fade" mode="out-in">
+          <transition name="page-fade" mode="out-in" @after-enter="restorePendingScroll">
             <component :is="Component" />
           </transition>
         </router-view>
@@ -71,11 +68,14 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, nextTick, onMounted, onUnmounted } from "vue";
+import { ref, computed, watch, onMounted, onUnmounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { restorePendingScroll, requestContentScroll } from "@/utils/scroll";
+import MenuChevron from "@/components/Business/MenuChevron.vue";
 import bannerImg from "@/assets/LifeScience/banner.jpg";
 const router = useRouter();
 const route = useRoute();
+const catalogContent = ref(null);
 
 // 移动端相关状态
 const isMobile = ref(false);
@@ -250,6 +250,8 @@ const menuItems = [
   },
 ];
 
+const categoryBannerTitle = computed(() => menuItems.find(item => item.key === route.path.split('/')[2])?.title || 'Life Science');
+
 const openKeys = ref(["chromatography_media"]);
 
 // 标题缩写映射，用于移动端显示
@@ -294,17 +296,20 @@ const mobilePageTitle = computed(() => {
   return titleAbbreviations[fullTitle] || fullTitle;
 });
 
-function handleCategoryClick(item) {
-  // 立即重置滚动位置
-  resetScrollPosition();
+function navigateCatalog(path) {
+  if (route.path === path) return;
+  requestContentScroll(path, catalogContent.value);
+  router.push(path);
+}
 
+function handleCategoryClick(item) {
   if (openKeys.value.includes(item.key)) {
     openKeys.value = [];
   } else {
     openKeys.value = [item.key];
   }
   if (item.path) {
-    router.push(item.path);
+    navigateCatalog(item.path);
   }
 
   // 移动端点击后关闭菜单
@@ -314,11 +319,8 @@ function handleCategoryClick(item) {
 }
 
 function handleProductClick(category, product) {
-  // 立即重置滚动位置
-  resetScrollPosition();
-
   if (product.path) {
-    router.push(product.path);
+    navigateCatalog(product.path);
   }
 
   // 移动端点击后关闭菜单
@@ -355,50 +357,6 @@ watch(
   { immediate: true }
 );
 
-// 监听路由变化，重置滚动位置
-watch(route, (to, from) => {
-  if (to.path !== from.path) {
-    // 立即重置
-    resetScrollPosition();
-
-    // 延迟重置，确保DOM更新完成
-    nextTick(() => {
-      resetScrollPosition();
-    });
-
-    // 再次延迟重置，确保所有异步操作完成
-    setTimeout(() => {
-      resetScrollPosition();
-    }, 50);
-  }
-});
-
-// 重置滚动位置的函数
-function resetScrollPosition() {
-  // 重置所有可能的滚动容器
-  const containers = [
-    ".lifescience-layout",
-    ".main-content",
-    ".content-area",
-    ".layout-container",
-  ];
-
-  containers.forEach((selector) => {
-    const element = document.querySelector(selector);
-    if (element) {
-      element.scrollTop = 0;
-      element.scrollLeft = 0;
-      if (element.scrollTo) {
-        element.scrollTo(0, 0);
-      }
-    }
-  });
-
-  // 重置整个页面的滚动位置
-  window.scrollTo(0, 0);
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
-}
 </script>
 
 <style scoped>
@@ -409,7 +367,7 @@ function resetScrollPosition() {
 .banner {
   position: relative;
   width: 100%;
-  height: 450px;
+  height: 280px;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -469,10 +427,18 @@ function resetScrollPosition() {
 }
 .side-menu-list {
   list-style: none;
-  padding: 0 0 0 2vw;
+  padding: 0 12px 0 2vw;
   margin: 0;
 }
 .side-menu-category {
+  width: 100%;
+  min-height: 44px;
+  box-sizing: border-box;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  text-align: left;
+  gap: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -480,7 +446,7 @@ function resetScrollPosition() {
   color: #222;
   margin-bottom: 0.5vw;
   cursor: pointer;
-  padding: 0.6vw 0 0.6vw 0.6vw;
+  padding: 0.6vw 10px 0.6vw 0.6vw;
   border-radius: 0.4vw;
   transition: background 0.2s, color 0.2s, font-weight 0.2s;
   font-weight: 400;
@@ -491,15 +457,8 @@ function resetScrollPosition() {
   color: #2b7bbf;
   font-weight: 700;
 }
-.arrow {
-  font-size: 0.9vw;
-  margin-left: 0.6vw;
-  transition: transform 0.2s;
-  display: inline-block;
-}
-.arrow.open {
-  transform: rotate(90deg);
-}
+.category-label { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.side-menu-category:focus-visible { outline: 2px solid #4e3fa5; outline-offset: 2px; }
 .side-submenu {
   list-style: none;
   padding-left: 1.2vw;
@@ -526,15 +485,13 @@ function resetScrollPosition() {
 }
 .page-fade-enter-active,
 .page-fade-leave-active {
-  transition: all 0.3s ease;
+  transition: opacity 0.2s ease;
 }
 .page-fade-enter-from {
   opacity: 0;
-  transform: translateX(20px);
 }
 .page-fade-leave-to {
   opacity: 0;
-  transform: translateX(-20px);
 }
 /* 移动端菜单切换按钮 */
 .mobile-menu-toggle {
@@ -581,7 +538,7 @@ function resetScrollPosition() {
 
 @media (max-width: 900px) {
   .banner {
-    height: 400px;
+    height: 240px;
   }
 
   .main-content {
@@ -651,9 +608,6 @@ function resetScrollPosition() {
     border-radius: 6px;
   }
 
-  .arrow {
-    font-size: 14px;
-  }
 
   .content-area {
     padding: 20px 0;
@@ -679,7 +633,7 @@ function resetScrollPosition() {
 
 @media (max-width: 600px) {
   .banner {
-    height: 300px;
+    height: 200px;
   }
 
   .main-content {
@@ -716,4 +670,26 @@ function resetScrollPosition() {
     padding: 16px 0;
   }
 }
-</style> 
+/* Shared compact product-family shell. */
+.lifescience-layout { background: #fff; }
+.lifescience-layout .banner { height: 120px; margin-bottom: 0; }
+.lifescience-layout .banner-title { font-size: 30px; letter-spacing: 0; width: calc(100% - 32px); max-width: none; white-space: normal; line-height: 1.3; word-break: normal; }
+.lifescience-layout .main-content { max-width: 1200px; width: calc(100% - 48px); gap: 32px; }
+.lifescience-layout .side-menu { align-self: flex-start; margin-top: 24px; border-radius: var(--vb-radius-panel,12px); }
+.lifescience-layout .content-area { padding: 0; }
+@media (min-width:901px) {
+  .lifescience-layout .side-menu { flex: 0 0 240px; }
+  .lifescience-layout .side-menu-title { padding-left: 16px; font-size: 16px; }
+  .lifescience-layout .side-menu-list { padding: 0 16px; }
+  .lifescience-layout .side-menu-category { font-size: 16px; padding: 12px 10px; line-height: 1.5; }
+  .lifescience-layout .side-submenu { padding-left: 10px; }
+  .lifescience-layout .side-submenu > li { font-size: 14px; line-height: 1.6; }
+}
+@media (max-width:900px) {
+  .lifescience-layout .banner { height: 100px; }
+  .lifescience-layout .banner-title { font-size: 26px; }
+  .lifescience-layout .main-content { width: calc(100% - 32px); padding: 0; gap: 0; }
+  .lifescience-layout .mobile-menu-toggle { margin: 16px 0 0; min-height: 44px; }
+  .lifescience-layout .side-menu { margin-top: 0; border-radius: 0; }
+}
+</style>

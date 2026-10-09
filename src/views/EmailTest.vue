@@ -3,7 +3,7 @@
     <div class="test-card">
       <h2>Web3Forms 邮件服务测试</h2>
       <p>这个页面用于测试 Web3Forms 邮件服务配置是否正确。</p>
-      
+
       <div class="service-status">
         <h3>Web3Forms 服务状态</h3>
         <div class="status-grid">
@@ -126,7 +126,7 @@ const testEmail = async () => {
   testResults.value = []
 
   const formData = getFormData()
-  
+
   // 验证表单数据
   const validationResult = validateFormData(formData)
   if (!validationResult.isValid) {
@@ -237,7 +237,7 @@ const testEmail = async () => {
   background: #f8f9fa;
   padding: 10px;
   border-radius: 6px;
-  border-left: 4px solid #00bc97;
+  border-left: 0;
   margin-bottom: 20px;
 }
 
@@ -261,7 +261,7 @@ const testEmail = async () => {
   padding: 15px;
   background: #f8f9fa;
   border-radius: 8px;
-  border-left: 4px solid #00bc97;
+  border-left: 0;
 }
 
 .info-icon {
@@ -335,17 +335,17 @@ const testEmail = async () => {
   margin-bottom: 10px;
   padding: 15px;
   border-radius: 6px;
-  border-left: 4px solid;
+  border-left: 0;
 }
 
 .result-item.success {
   background: #f0fdf4;
-  border-left-color: #22c55e;
+
 }
 
 .result-item.error {
   background: #fef2f2;
-  border-left-color: #ef4444;
+
 }
 
 .result-header {

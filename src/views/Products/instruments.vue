@@ -1,107 +1,39 @@
 <template>
-  <MobileOptimizedContent>
-    <div class="instruments-page">
-      <!-- Banner -->
-      <div class="banner">
-        <img :src="bannerImg" alt="banner" class="banner-img" />
-        <div class="banner-title">INSTRUMENTS</div>
-      </div>
-      <!-- 11个产品类别跳转链接 -->
+  <div class="instruments-page business-surface">
+    <div class="banner site-page-header site-page-header--product"><img :src="bannerImg" alt="" class="banner-img" /><h1 class="banner-title">Instruments</h1></div>
+    <div class="business-container product-content">
       <div class="category-nav-container">
-        <!-- 移动端下拉选择器 -->
         <div class="mobile-category-selector">
-          <label class="selector-label">选择产品分类：</label>
-          <select
-            v-model="activeCategory"
-            @change="handleMobileCategoryChange"
-            class="category-select"
-          >
+          <label for="instrument-category" class="selector-label">Product category</label>
+          <select :value="activeCategory" @change="handleCategoryClick($event.target.value, false)" id="instrument-category" class="category-select">
             <option value="all">All Products ({{ allProducts.length }})</option>
-            <option
-              v-for="item in categories"
-              :key="item.key"
-              :value="item.key"
-            >
-              {{ item.title }} ({{ getCategoryCount(item.key) }})
-            </option>
+            <option v-for="item in categories" :key="item.key" :value="item.key">{{ item.title }} ({{ getCategoryCount(item.key) }})</option>
           </select>
-          <div class="select-arrow">
-            <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-              <path
-                d="M1 1L6 6L11 1"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </div>
         </div>
-
-        <!-- PC端分类导航 -->
-        <div class="desktop-category-nav" ref="categoryNavRef">
-          <!-- All Categories Button -->
-          <div
-            :class="[
-              'category-link',
-              'category-all',
-              { active: activeCategory === 'all' },
-            ]"
-            @click="handleCategoryClick('all')"
-          >
-            <span class="category-text">All</span>
-            <span class="category-badge">{{ allProducts.length }}</span>
-          </div>
-
-          <!-- 具体分类按钮 -->
-          <div
-            v-for="item in categories"
-            :key="item.key"
-            :class="['category-link', { active: activeCategory === item.key }]"
-            @click="handleCategoryClick(item.key)"
-          >
-            <span class="category-text">{{ item.title }}</span>
-            <span class="category-badge">{{ getCategoryCount(item.key) }}</span>
-          </div>
+        <div class="desktop-category-nav" role="group" aria-label="Product category">
+          <button type="button" class="category-link category-all" :class="{ active: activeCategory === 'all' }" :aria-pressed="activeCategory === 'all'" @click="handleCategoryClick('all')"><span class="category-text">All</span><span class="category-badge">{{ allProducts.length }}</span></button>
+          <button v-for="item in categories" :key="item.key" type="button" class="category-link" :class="{ active: activeCategory === item.key }" :aria-pressed="activeCategory === item.key" @click="handleCategoryClick(item.key)"><span class="category-text">{{ item.title }}</span><span class="category-badge">{{ getCategoryCount(item.key) }}</span></button>
         </div>
       </div>
-      <!-- 产品分页卡片区 -->
       <div class="category-list">
-        <div
-          v-for="item in pagedProducts"
-          :key="item.key"
-          class="category-card"
-          @click="goToDetail(item)"
-        >
-          <img :src="item.img" :alt="item.title" class="category-img" />
-          <div class="category-title">{{ item.title }}</div>
-        </div>
+        <router-link v-for="item in pagedProducts" :key="item.key" class="category-card" :to="{ path: `/instrumentDetail/${item.key}`, query: { page: currentPage, ...(activeCategory !== 'all' ? { category: activeCategory } : {}) } }">
+          <div class="category-image-frame"><img :src="item.img" :alt="item.title" class="category-img" width="480" height="320" loading="lazy" /></div>
+          <h2 class="category-title">{{ item.title }}</h2>
+          <span class="card-link">View details <span aria-hidden="true">→</span></span>
+        </router-link>
       </div>
-      <!-- 数字分页控件 -->
-      <div class="pagination-numbers">
-        <span
-          v-for="n in totalPages"
-          :key="n"
-          :class="['page-number', { active: currentPage === n }]"
-          @click="gotoPage(n)"
-        >
-          {{ n }}
-        </span>
-      </div>
+      <nav class="pagination-numbers" aria-label="Product pages"><button v-for="n in totalPages" :key="n" type="button" class="page-number" :class="{ active: currentPage === n }" :aria-label="`Page ${n}`" :aria-current="currentPage === n ? 'page' : undefined" @click="gotoPage(n)">{{ n }}</button></nav>
     </div>
-  </MobileOptimizedContent>
+  </div>
 </template>
 
 <script setup>
-import { ref, computed, watchEffect, onMounted, watch, nextTick } from "vue";
+import { computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+import "@/styles/business-layout.css";
 const router = useRouter();
 const route = useRoute();
 
-// 新增：移动端优化相关的响应式变量
-const categoryNavRef = ref(null);
-const showScrollHint = ref(false);
 // 本地图片import
 import imgSCI_Digital_PRO from "@/assets/instruments/PRODUCTS-1/SCI Digital PRO.jpg";
 import imgSCI_Digital from "@/assets/instruments/PRODUCTS-1/SCI Digital.jpeg";
@@ -298,598 +230,64 @@ const allProducts = [
   },
 ];
 
-const activeCategory = ref("all");
-const currentPage = ref(1);
+const activeCategory = computed(() => categories.some(item => item.key === route.query.category) ? route.query.category : 'all');
 const pageSize = 6;
-
-const filteredProducts = computed(() => {
-  if (activeCategory.value === "all") return allProducts;
-  return allProducts.filter((p) => p.category === activeCategory.value);
+const filteredProducts = computed(() => activeCategory.value === 'all' ? allProducts : allProducts.filter(product => product.category === activeCategory.value));
+const totalPages = computed(() => Math.max(1, Math.ceil(filteredProducts.value.length / pageSize)));
+const currentPage = computed(() => {
+  const requested = Number(route.params.pageNum || route.query.page || 1);
+  return Number.isInteger(requested) ? Math.min(totalPages.value, Math.max(1, requested)) : 1;
 });
-const totalPages = computed(() =>
-  Math.ceil(filteredProducts.value.length / pageSize)
-);
-const pagedProducts = computed(() => {
-  const start = (currentPage.value - 1) * pageSize;
-  return filteredProducts.value.slice(start, start + pageSize);
-});
-
-// 新增：获取分类产品数量
-const getCategoryCount = (categoryKey) => {
-  return allProducts.filter((product) => product.category === categoryKey)
-    .length;
-};
-
-// 新增：检查是否需要显示滚动提示
-const checkScrollHint = () => {
-  if (categoryNavRef.value) {
-    const nav = categoryNavRef.value;
-    const hasOverflow = nav.scrollWidth > nav.clientWidth;
-    showScrollHint.value = hasOverflow;
-
-    // 3秒后自动隐藏提示
-    if (hasOverflow) {
-      setTimeout(() => {
-        showScrollHint.value = false;
-      }, 3000);
-    }
-  }
-};
-
-function handleCategoryClick(key) {
-  if (activeCategory.value === key) {
-    // If clicking the currently active category, switch to "All"
-    activeCategory.value = "all";
-    currentPage.value = 1;
-    router.push("/products/page/1");
-  } else {
-    // 切换到新的分类
-    activeCategory.value = key;
-    currentPage.value = 1;
-    router.push("/products/page/1");
-  }
-
-  // 滚动到选中的分类标签
-  nextTick(() => {
-    scrollToActiveCategory();
-  });
+const pagedProducts = computed(() => filteredProducts.value.slice((currentPage.value - 1) * pageSize, currentPage.value * pageSize));
+const getCategoryCount = key => allProducts.filter(product => product.category === key).length;
+function handleCategoryClick(key, toggle = true) {
+  const category = toggle && key === activeCategory.value ? 'all' : key;
+  router.push({ path: '/products/page/1', query: category === 'all' ? {} : { category } });
 }
-
-// 新增：处理移动端下拉选择变化
-const handleMobileCategoryChange = () => {
-  currentPage.value = 1;
-  router.push("/products/page/1");
-};
-
-// 新增：滚动到激活的分类标签
-const scrollToActiveCategory = () => {
-  if (categoryNavRef.value) {
-    const nav = categoryNavRef.value;
-    const activeElement = nav.querySelector(".category-link.active");
-    if (activeElement) {
-      const navRect = nav.getBoundingClientRect();
-      const activeRect = activeElement.getBoundingClientRect();
-      const scrollLeft =
-        activeRect.left -
-        navRect.left +
-        nav.scrollLeft -
-        navRect.width / 2 +
-        activeRect.width / 2;
-
-      nav.scrollTo({
-        left: scrollLeft,
-        behavior: "smooth",
-      });
-    }
-  }
-};
-
-onMounted(() => {
-  // 多路由分页：优先用路由参数 pageNum
-  if (route.params.pageNum) {
-    currentPage.value = parseInt(route.params.pageNum);
-  } else if (route.query.page) {
-    currentPage.value = parseInt(route.query.page);
-  } else {
-    currentPage.value = 1;
-  }
-
-  // 检查是否需要显示滚动提示
-  nextTick(() => {
-    checkScrollHint();
-    scrollToActiveCategory();
-  });
-});
-
-// 监听路由变化，切换分页时自动更新 currentPage
-watch(
-  () => route.params.pageNum,
-  (val) => {
-    if (val) currentPage.value = parseInt(val);
-  }
-);
-
-function goToDetail(item) {
-  router.push({
-    path: `/instrumentDetail/${item.key}`,
-    query: { page: currentPage.value },
-  });
-}
-
 function gotoPage(page) {
-  currentPage.value = page;
-  router.push(`/products/page/${page}`);
+  router.push({ path: `/products/page/${page}`, query: activeCategory.value === 'all' ? {} : { category: activeCategory.value } });
 }
-
-watchEffect(() => {
-  if (currentPage.value > totalPages.value)
-    currentPage.value = totalPages.value || 1;
-});
 </script>
 
 <style scoped>
-.instruments-page {
-  background: #f7f7f7;
-  min-height: 100vh;
+.instruments-page { background: #fff; }
+.banner { position: relative; height: 220px; overflow: hidden; background: #f7f7f7; }
+.banner-img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.banner::after { content: ''; position: absolute; inset: 0; background: #ffffff99; }
+.banner-title { position: absolute; z-index: 1; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0; font-size: 48px; font-weight: 600; line-height: 1.2; color: #243b7b; }
+.product-content { padding: 48px 0 64px; }
+.category-nav-container { margin-bottom: 32px; }
+.desktop-category-nav { display: flex; flex-wrap: wrap; gap: 10px; }
+.category-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 14px; background: #fff; color: #555; border: 1px solid #d8dde5; border-radius: var(--vb-radius-control, 6px); font: inherit; font-size: 16px; line-height: 1.5; text-align: left; cursor: pointer; }
+.category-link:hover { border-color: #4e3fa5; color: #4e3fa5; }
+.category-link.active { border-color: #4e3fa5; background: #4e3fa5; color: #fff; }
+.category-text { overflow-wrap: anywhere; }
+.category-badge { opacity: .8; font-size: 14px; }
+.mobile-category-selector { display: none; }
+.selector-label { display: block; margin-bottom: 10px; font-size: 16px; color: #243b7b; }
+.category-select { width: 100%; min-height: 44px; border: 1px solid #cbd2dc; border-radius: var(--vb-radius-control, 6px); padding: 10px 12px; background: #fff; color: #243b7b; font: inherit; font-size: 16px; }
+.category-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.category-card { display: flex; flex-direction: column; min-width: 0; border: 1px solid #e6eaf0; border-radius: var(--vb-radius-panel, 12px); overflow: hidden; text-decoration: none; color: #243b7b; background: #fff; }
+.category-card:hover { border-color: #4e3fa5; }
+.category-image-frame { aspect-ratio: 3 / 2; background: #f7f7f7; padding: 20px; }
+.category-img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.category-title { margin: 0; padding: 24px 24px 16px; font-size: 20px; font-weight: 600; line-height: 1.5; color: #243b7b; }
+.card-link { margin-top: auto; display: flex; align-items: center; gap: 16px; padding: 0 24px 24px; min-height: 44px; font-size: 16px; font-weight: 600; color: #4e3fa5; }
+.pagination-numbers { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 36px; }
+.page-number { min-width: 44px; min-height: 44px; background: #fff; border: 1px solid #d8dde5; border-radius: var(--vb-radius-control, 6px); font: inherit; font-size: 16px; cursor: pointer; color: #243b7b; }
+.page-number.active { color: #fff; border-color: #4e3fa5; background: #4e3fa5; }
+a:focus-visible, button:focus-visible, select:focus-visible { outline: 2px solid #4e3fa5; outline-offset: 3px; }
+@media (max-width: 1023px) {
+  .category-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .desktop-category-nav { display: none; }
+  .mobile-category-selector { display: block; }
 }
-.banner {
-  position: relative;
-  width: 100%;
-  height: 320px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 18px;
+@media (max-width: 767px) {
+  .banner { height: 160px; }
+  .banner-title { font-size: 30px; }
+  .product-content { padding: 36px 0; }
+  .category-list { grid-template-columns: 1fr; gap: 20px; }
+  .category-title { padding: 20px 20px 12px; }
+  .card-link { padding: 0 20px 20px; }
 }
-.banner-img {
-  width: 100%;
-  height: 320px;
-  object-fit: cover;
-  filter: brightness(0.7);
-}
-.banner-title {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  color: #fff;
-  font-size: 56px;
-  font-weight: bold;
-  letter-spacing: 2px;
-  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-}
-/* 分类导航容器 */
-.category-nav-container {
-  position: relative;
-  margin-bottom: 20px;
-}
-
-/* 移动端下拉选择器 */
-.mobile-category-selector {
-  display: none;
-  position: relative;
-  padding: 16px;
-  background: #fff;
-  border-radius: 12px;
-  margin: 0 16px 20px 16px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-}
-
-.selector-label {
-  display: block;
-  font-size: 14px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 8px;
-}
-
-.category-select {
-  width: 100%;
-  padding: 12px 40px 12px 16px;
-  font-size: 16px;
-  font-weight: 500;
-  color: #333;
-  background: #f8f9fa;
-  border: 2px solid #e9ecef;
-  border-radius: 8px;
-  appearance: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  -webkit-tap-highlight-color: rgba(43, 123, 191, 0.2);
-  touch-action: manipulation;
-}
-
-.category-select:focus {
-  outline: none;
-  border-color: #2b7bbf;
-  background: #fff;
-  box-shadow: 0 0 0 3px rgba(43, 123, 191, 0.1);
-}
-
-.select-arrow {
-  position: absolute;
-  right: 28px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #666;
-  pointer-events: none;
-  transition: transform 0.3s ease;
-}
-
-.category-select:focus + .select-arrow {
-  transform: translateY(-50%) rotate(180deg);
-}
-
-/* PC端分类导航 */
-.desktop-category-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  padding: 12px 20px 0 20px;
-  min-height: 72px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.category-link {
-  background: #fff;
-  border-radius: 20px;
-  padding: 0 16px;
-  font-size: 13px;
-  color: #243b7b;
-  font-weight: 500;
-  cursor: pointer;
-  border: 2px solid #e6eaf0;
-  transition: all 0.2s;
-  height: 36px;
-  line-height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  position: relative;
-  min-width: fit-content;
-  white-space: nowrap;
-}
-
-.category-text {
-  flex: 0 1 auto;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 120px;
-}
-
-.category-badge {
-  background: linear-gradient(135deg, #f1f3f4 0%, #e8eaed 100%);
-  color: #5f6368;
-  font-size: 10px;
-  font-weight: 700;
-  padding: 2px 6px;
-  border-radius: 8px;
-  min-width: 18px;
-  height: 16px;
-  line-height: 12px;
-  text-align: center;
-  transition: all 0.3s ease;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.category-link.active,
-.category-link:hover {
-  background: #2b7bbf;
-  color: #fff;
-  border-color: #2b7bbf;
-}
-
-.category-link.active .category-badge,
-.category-link:hover .category-badge {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.25) 0%,
-    rgba(255, 255, 255, 0.15) 100%
-  );
-  color: #fff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-.category-all {
-  font-weight: 600;
-  background: linear-gradient(135deg, #2b7bbf 0%, #1976d2 100%);
-  color: #fff;
-  border-color: #2b7bbf;
-  box-shadow: 0 2px 8px rgba(43, 123, 191, 0.25);
-}
-
-.category-all .category-badge {
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.3);
-}
-
-/* 滚动提示 */
-.scroll-hint {
-  position: absolute;
-  bottom: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(43, 123, 191, 0.9);
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 15px;
-  font-size: 12px;
-  white-space: nowrap;
-  animation: fadeInOut 3s ease-in-out;
-  pointer-events: none;
-}
-
-@keyframes fadeInOut {
-  0%,
-  100% {
-    opacity: 0;
-    transform: translateX(-50%) translateY(10px);
-  }
-  20%,
-  80% {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-}
-.category-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 48px 0;
-  justify-items: center;
-  padding: 48px 0 12px 0;
-  /* max-width: 1200px; */
-  margin: 0 auto;
-}
-.category-card {
-  background: #fff;
-  border-radius: 22px;
-  box-shadow: 0 6px 32px rgba(43, 123, 191, 0.07);
-  width: 94%;
-  /* max-width: 380px; */
-  min-width: 340px;
-  height: 420px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 44px 24px 24px 24px;
-  transition: box-shadow 0.2s, transform 0.2s;
-  cursor: pointer;
-}
-.category-card:hover {
-  box-shadow: 0 16px 48px rgba(43, 123, 191, 0.13);
-  transform: translateY(-8px) scale(1.04);
-}
-.category-img {
-  width: 360px;
-  height: 240px;
-  object-fit: contain;
-  border-radius: 16px;
-  margin-bottom: 32px;
-  /* background: #f0f0f0; */
-  /* box-shadow: 0 2px 12px rgba(0,0,0,0.04); */
-}
-.category-title {
-  font-size: 22px;
-  font-weight: 700;
-  color: #243b7b;
-  text-align: center;
-  margin-top: 8px;
-}
-.pagination-numbers {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 18px;
-  margin: 48px 0 0 0;
-}
-.page-number {
-  display: inline-block;
-  min-width: 40px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  font-size: 20px;
-  font-weight: 600;
-  color: #2b7bbf;
-  background: #fff;
-  border-radius: 8px;
-  border: 2px solid #e6eaf0;
-  cursor: pointer;
-  transition: all 0.2s;
-  user-select: none;
-}
-.page-number.active,
-.page-number:hover {
-  background: #2b7bbf;
-  color: #fff;
-  border-color: #2b7bbf;
-}
-/* 移动端优化 */
-@media (max-width: 900px) {
-  .instruments-page {
-    background: #f7f7f7;
-    min-height: 100vh;
-  }
-
-  .banner {
-    height: 200px !important;
-    margin-bottom: 20px !important;
-  }
-
-  .banner-img {
-    height: 200px !important;
-  }
-
-  .banner-title {
-    font-size: 2rem !important;
-    letter-spacing: 1px !important;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
-  }
-
-  /* 移动端显示下拉选择器 */
-  .mobile-category-selector {
-    display: block !important;
-  }
-
-  /* 移动端隐藏PC端导航 */
-  .desktop-category-nav {
-    display: none !important;
-  }
-
-  /* 优化移动端下拉框样式 */
-  .category-select {
-    font-size: 16px !important;
-    padding: 14px 50px 14px 16px !important;
-    border-radius: 12px !important;
-    background: #f8f9fa !important;
-    border: 2px solid #e9ecef !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
-  }
-
-  .category-select:focus {
-    border-color: #2b7bbf !important;
-    background: #fff !important;
-    box-shadow: 0 0 0 3px rgba(43, 123, 191, 0.1), 0 4px 12px rgba(0, 0, 0, 0.1) !important;
-  }
-
-  .select-arrow {
-    right: 20px !important;
-    color: #2b7bbf !important;
-  }
-
-  .selector-label {
-    font-size: 15px !important;
-    color: #333 !important;
-    margin-bottom: 10px !important;
-  }
-
-  .mobile-category-selector {
-    margin: 0 16px 24px 16px !important;
-    padding: 20px !important;
-    border-radius: 16px !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
-    background: #fff !important;
-  }
-
-  .category-list {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 24px !important;
-    padding: 24px 16px 12px 16px !important;
-    margin: 0 !important;
-  }
-
-  .category-card {
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: none !important;
-    height: auto !important;
-    padding: 20px 16px 24px 16px !important;
-    border-radius: 16px !important;
-    box-shadow: 0 4px 20px rgba(43, 123, 191, 0.08) !important;
-    transition: all 0.3s ease !important;
-    -webkit-tap-highlight-color: rgba(43, 123, 191, 0.2) !important;
-    touch-action: manipulation !important;
-  }
-
-  .category-card:hover {
-    box-shadow: 0 8px 32px rgba(43, 123, 191, 0.15) !important;
-    transform: translateY(-4px) !important;
-  }
-
-  .category-card:active {
-    transform: translateY(-2px) scale(0.98) !important;
-  }
-
-  .category-img {
-    width: 100% !important;
-    max-width: 280px !important;
-    height: 180px !important;
-    object-fit: contain !important;
-    border-radius: 12px !important;
-    margin-bottom: 16px !important;
-    background: #fafafa !important;
-  }
-
-  .category-title {
-    font-size: 1.2rem !important;
-    font-weight: 700 !important;
-    color: #243b7b !important;
-    text-align: center !important;
-    margin-top: 8px !important;
-    line-height: 1.4 !important;
-  }
-
-  .pagination-numbers {
-    gap: 12px !important;
-    margin: 32px 16px 40px 16px !important;
-    flex-wrap: wrap !important;
-  }
-
-  .page-number {
-    min-width: 44px !important;
-    height: 44px !important;
-    line-height: 44px !important;
-    font-size: 16px !important;
-    font-weight: 600 !important;
-    border-radius: 12px !important;
-    border: 2px solid #e6eaf0 !important;
-    transition: all 0.3s ease !important;
-    -webkit-tap-highlight-color: rgba(43, 123, 191, 0.2) !important;
-    touch-action: manipulation !important;
-  }
-
-  .page-number:active {
-    transform: scale(0.95) !important;
-  }
-
-  .page-number.active,
-  .page-number:hover {
-    background: #2b7bbf !important;
-    color: #fff !important;
-    border-color: #2b7bbf !important;
-    box-shadow: 0 4px 12px rgba(43, 123, 191, 0.3) !important;
-  }
-}
-
-/* 平板端优化 */
-@media (min-width: 901px) and (max-width: 1200px) {
-  .category-list {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 32px 24px !important;
-    padding: 32px 24px 12px 24px !important;
-  }
-
-  .category-card {
-    width: 100% !important;
-    max-width: none !important;
-    height: 380px !important;
-  }
-
-  .category-img {
-    width: 100% !important;
-    max-width: 320px !important;
-    height: 200px !important;
-  }
-
-  .category-title {
-    font-size: 1.1rem !important;
-  }
-
-  .banner-title {
-    font-size: 3rem !important;
-  }
-}
-</style> 
+</style>

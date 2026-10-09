@@ -1,42 +1,39 @@
-import { createRouter, createWebHistory } from "vue-router";
-import routes from "./routes";
+import { nextTick } from 'vue';
+import { createRouter, createWebHistory } from 'vue-router';
+import routes from './routes';
+import { capturePageScroll, restorePageScroll, releaseScrollRestoration, rememberPageScroll, consumeRequestedScroll } from '@/utils/scroll';
+import { updatePageMetadata } from '@/utils/pageMetadata';
 
-// configure routes
+let queryPosition = null;
+let requestedPosition = null;
 const router = createRouter({
-  routes, // short for routes: routes
-  history: createWebHistory(),
-  linkActiveClass: "active",
-  scrollBehavior: (to, from, savedPosition) => {
-    // 强制重置到顶部，忽略保存的位置
-    return new Promise((resolve) => {
-      // 立即重置滚动位置
-      setTimeout(() => {
-        // 重置所有可能的滚动容器
-        const containers = [
-          ".main-content",
-          ".content-area",
-          ".reagent-layout",
-          ".lifescience-layout",
-          ".layout-container"
-        ];
-
-        containers.forEach(selector => {
-          const element = document.querySelector(selector);
-          if (element) {
-            element.scrollTop = 0;
-            element.scrollLeft = 0;
-          }
-        });
-
-        // 重置页面滚动
-        window.scrollTo(0, 0);
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-
-        resolve({ top: 0, left: 0 });
-      }, 0);
-    });
+  routes,
+  history: createWebHistory(import.meta.env.BASE_URL),
+  linkActiveClass: 'active',
+  async scrollBehavior(to, from, savedPosition) {
+    await nextTick();
+    const stored = window.history.state?.vbScroll;
+    if ((savedPosition || !from.matched.length) && stored?.path === to.fullPath) {
+      restorePageScroll(stored);
+    } else if (requestedPosition) {
+      restorePageScroll(requestedPosition);
+    } else if (to.path === from.path && queryPosition) {
+      restorePageScroll(queryPosition);
+    } else {
+      restorePageScroll();
+    }
+    requestAnimationFrame(() => rememberPageScroll(to.fullPath));
+    return false;
   },
+});
+
+router.beforeEach((to, from) => {
+  requestedPosition = consumeRequestedScroll(to.path);
+  queryPosition = to.path === from.path ? capturePageScroll() : null;
+  releaseScrollRestoration();
+});
+router.afterEach((to, from, failure) => {
+  if (!failure) updatePageMetadata(to);
 });
 
 export default router;

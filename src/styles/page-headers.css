@@ -1,0 +1,66 @@
+/* Reserve a consistent top region before route-specific content and images load. */
+.layout-container main.main-content { --site-page-header-height: 280px; }
+.layout-container main.main-content .site-page-header {
+  height: var(--site-page-header-height);
+  min-height: var(--site-page-header-height);
+  box-sizing: border-box;
+  position: relative;
+}
+.layout-container main.main-content .site-page-header :is(h1, .banner-title) { font-size: 36px; line-height: 1.25; }
+.layout-container main.main-content .site-page-header--product .banner-title { width: calc(100% - 48px); max-width: 1120px; padding: 0; margin: 0; }
+.layout-container main.main-content .site-page-header--split { padding: 16px 24px 24px; }
+.layout-container main.main-content .site-page-header--split :is(.hero-inner, .services-container) {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.layout-container main.main-content .site-page-header--split :is(.breadcrumbs, .services-breadcrumbs) {
+  flex-shrink: 0;
+  min-height: 32px;
+  margin: 0 0 16px;
+}
+.layout-container main.main-content .site-page-header--split :is(.hero-layout, .intro-layout) {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0,1.7fr) minmax(0,1fr);
+  align-items: center;
+  gap: 36px;
+}
+.layout-container main.main-content .site-page-header--split :is(.hero-photo, .intro-photo) { height: 160px; width: 100%; object-fit: cover; }
+.layout-container main.main-content .site-page-header--split :is(.description, .intro-copy p) { margin: 12px 0 0; font-size: 16px; line-height: 1.6; }
+.layout-container main.main-content .site-page-header--split .eyebrow { margin-bottom: 8px; font-size: 14px; line-height: 1.4; }
+.layout-container main.main-content .site-page-header--technology { display: flex; align-items: center; }
+.layout-container main.main-content .site-page-header--technology .banner-content { padding: 24px 0; }
+.layout-container main.main-content .site-page-header--tabs .banner-content { padding-bottom: 50px; }
+.layout-container main.main-content .site-page-header--tabs + .navbar { height: 50px; margin-top: -50px; position: relative; z-index: 10; }
+.layout-container main.main-content .site-page-header--carousel .banner-content { padding-bottom: 52px; }
+.layout-container main.main-content .site-page-header--carousel h1 { font-size: 40px; line-height: 1.2; }
+.layout-container main.main-content .site-page-header--carousel .banner-divider { margin: 12px 0; }
+.layout-container main.main-content .site-page-header--carousel .banner-text p { margin-bottom: 16px; }
+@media (max-width: 767px) {
+  .layout-container main.main-content { --site-page-header-height: 320px; }
+  .layout-container main.main-content .site-page-header :is(h1, .banner-title) { font-size: 28px; line-height: 1.25; }
+  .layout-container main.main-content .site-page-header--product .banner-title { width: calc(100% - 32px); }
+  .layout-container main.main-content .site-page-header--split { padding: 16px; }
+  .layout-container main.main-content .site-page-header--split :is(.breadcrumbs, .services-breadcrumbs) { margin-bottom: 12px; }
+  .layout-container main.main-content .site-page-header--split :is(.hero-layout, .intro-layout) {
+    grid-template-columns: minmax(0,1fr);
+    grid-template-rows: auto 60px;
+    align-content: space-between;
+    gap: 12px;
+  }
+  .layout-container main.main-content .site-page-header.site-page-header--split h1 { font-size: 24px; line-height: 1.25; }
+  .layout-container main.main-content .site-page-header--split :is(.hero-photo, .intro-photo) { height: 60px; }
+  .layout-container main.main-content .site-page-header--split :is(.description, .intro-copy p) { margin-top: 10px; }
+  .layout-container main.main-content .site-page-header--split .eyebrow { font-size: 13px; margin-bottom: 6px; }
+  .layout-container main.main-content .site-page-header--tabs .banner-content { box-sizing: border-box; }
+  .layout-container main.main-content .site-page-header--tabs + .navbar .nav-container { padding: 0 8px; gap: 0; justify-content: space-between; }
+  .layout-container main.main-content .site-page-header--tabs + .navbar .nav-container :is(button, span) { padding: 8px; font-size: 14px; white-space: nowrap; }
+  .layout-container main.main-content .site-page-header--carousel .banner-content { padding-bottom: 64px; }
+  .layout-container main.main-content .site-page-header--carousel h1 { font-size: 28px; }
+  .layout-container main.main-content .site-page-header--carousel .banner-text p { margin-bottom: 14px; }
+}

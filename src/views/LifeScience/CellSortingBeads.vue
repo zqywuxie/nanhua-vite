@@ -1,13 +1,13 @@
 <template>
-  <MobileOptimizedContent>
+  <CatalogContent title="Cell Sorting Magnetic Beads" family="Life Science">
     <div class="affinity-page">
-      <h1 class="main-title">Cell Sorting Magnetic Beads</h1>
 
-      <MobileOptimizedTabs :tabs="tabs" v-model="currentTab">
+
+      <CatalogTabs :tabs="tabs" v-model="currentTab">
         <!-- Tab Content: Technical Principle -->
         <section v-if="currentTab === 'intro'" class="intro">
-          <div class="section-title">Technical Principle</div>
-          <p style="text-align: justify; font-size: 14px">
+          <h2 class="section-title">Technical Principle</h2>
+          <p >
             Magnetic-activated cell sorting (MACS) technology is based on the
             specific binding of cell surface antigens and antibodies. By
             labeling target cells with superparamagnetic beads, it enables rapid
@@ -18,8 +18,8 @@
             therapy, and other fields.
           </p>
           <div class="divider"></div>
-          <div class="section-title">Product Introduction</div>
-          <p style="text-align: justify; font-size: 14px">
+          <h2 class="section-title">Product Introduction</h2>
+          <p >
             VDO Biotech is committed to providing high-quality magnetic bead
             products and supporting solutions. According to different sorting
             needs, we have developed column-based and column-free cell sorting
@@ -28,8 +28,8 @@
             precise and efficient cell studies.
           </p>
           <div class="divider"></div>
-          <div class="section-title">Product Advantages</div>
-          <ul>
+          <h2 class="section-title">Product Advantages</h2>
+<ul class="catalog-features">
             <li>
               High safety: Made of natural dextran, with good biodegradability.
             </li>
@@ -51,8 +51,8 @@
             </li>
           </ul>
           <div class="divider"></div>
-          <div class="section-title">Column-Based Cell Sorting Workflow</div>
-          <p style="font-size: 14px">
+          <h2 class="section-title">Column-Based Cell Sorting Workflow</h2>
+          <p >
             This product series uses 50–100 nm magnetic beads, with
             corresponding antibodies or proteins coupled to the surface, and is
             used with cell sorting columns for gentle sorting. After sorting,
@@ -62,19 +62,18 @@
             affected. Perfectly matches research and clinical needs.
           </p>
           <div class="img-block">
-            <img
+            <img role="button" tabindex="0" aria-label="Enlarge image"
               :src="img1"
               alt="Column-Based Cell Sorting Workflow Diagram"
               class="intro-img"
-              @click="openPreview(img1)"
             />
             <div style="color: #888; font-size: 14px; margin-top: 8px">
               Column-Based Cell Sorting Workflow Diagram
             </div>
           </div>
           <div class="divider"></div>
-          <div class="section-title">Column-Free Cell Sorting Workflow</div>
-          <p style="font-size: 14px">
+          <h2 class="section-title">Column-Free Cell Sorting Workflow</h2>
+          <p >
             This product series uses magnetic beads with a diameter of 150–200
             nm, with proteins on the surface that can bind to biomolecules. Used
             with biomolecules, it flexibly sorts various target cells. These
@@ -82,24 +81,22 @@
             convenient and cost more controllable.
           </p>
           <div class="img-block">
-            <img
+            <img role="button" tabindex="0" aria-label="Enlarge image"
               :src="img2"
               alt="Column-Free Cell Sorting Workflow Diagram"
               class="intro-img"
-              @click="openPreview(img2)"
             />
             <div style="color: #888; font-size: 14px; margin-top: 8px">
               Column-Free Cell Sorting Workflow Diagram
             </div>
           </div>
           <div class="divider"></div>
-          <div class="section-title">Product List</div>
+          <h2 class="section-title">Product List</h2>
           <div class="img-block">
-            <img
+            <img role="button" tabindex="0" aria-label="Enlarge image"
               :src="img3"
               alt="Cell Sorting Magnetic Beads Product List"
               class="intro-img"
-              @click="openPreview(img3)"
             />
             <div style="color: #888; font-size: 14px; margin-top: 8px">
               Cell Sorting Magnetic Beads Product List
@@ -107,11 +104,11 @@
           </div>
         </section>
         <!-- Tab Content: Manual -->
-        <section v-if="currentTab === 'manual'" class="manuals">
-          <div class="section-title">Manual Download</div>
+        <section v-if="currentTab === 'manual'" class="catalog-resources manuals">
+          <h2 class="section-title">Product Manuals</h2>
           <ul class="manual-list">
             <li v-for="file in manualFiles" :key="file.name">
-              <a :href="file.url" :download="file.name" target="_blank">
+              <a :href="file.url" target="_blank" rel="noopener noreferrer">
                 <i
                   class="el-icon-document"
                   style="margin-right: 6px; color: #409eff"
@@ -122,23 +119,16 @@
           </ul>
         </section>
         <!-- Image Preview Modal -->
-        <div
-          v-if="previewImg"
-          class="img-preview-modal"
-          @click.self="closePreview"
-        >
-          <img :src="previewImg" class="img-preview-large" @click.stop />
-          <span class="img-preview-close" @click="closePreview">×</span>
-        </div>
-      </MobileOptimizedTabs>
+
+      </CatalogTabs>
     </div>
-  </MobileOptimizedContent>
+  </CatalogContent>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
-import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
+import CatalogContent from "@/components/Business/CatalogContent.vue";
+import CatalogTabs from "@/components/Business/CatalogTabs.vue";
 // Tab 配置
 const tabs = [
   { key: "intro", label: "Product Introduction" },
@@ -222,156 +212,7 @@ const manualFiles = [
   },
 ];
 // 图片预览弹窗
-const previewImg = ref("");
-function openPreview(img) {
-  previewImg.value = img;
-}
-function closePreview() {
-  previewImg.value = "";
-}
 </script>
 
 <style scoped>
-.affinity-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 24px 48px 24px;
-  background: #f8fafc;
-  min-height: 100vh;
-  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans", Arial, sans-serif;
-}
-.main-title {
-  text-align: center;
-  font-size: 2.6rem;
-  font-weight: 700;
-  color: #223a5e;
-  margin-bottom: 36px;
-  letter-spacing: 2px;
-}
-.tab-nav {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  margin-bottom: 36px;
-  border-bottom: 2px solid #e0e4ea;
-}
-.tab-item {
-  font-size: 1.1rem;
-  color: #204a6d;
-  padding: 8px 24px 10px 24px;
-  cursor: pointer;
-  font-weight: 500;
-  border-bottom: 2.5px solid transparent;
-  transition: color 0.2s, border-color 0.2s, font-weight 0.2s;
-}
-.tab-item.active {
-  color: #1a2a3a;
-  font-weight: 700;
-  border-bottom: 2.5px solid #204a6d;
-  background: #f7f9fb;
-}
-.tab-item:hover {
-  color: #2b7bbf;
-}
-.section-title {
-  font-size: 1.35rem;
-  font-weight: 600;
-  color: #223a5e;
-  border-left: 5px solid #409eff;
-  padding-left: 16px;
-  margin: 36px 0 18px 0;
-  background: none;
-}
-.divider {
-  height: 1px;
-  background: #e0e6ed;
-  margin: 32px 0;
-  border: none;
-}
-ul,
-ol {
-  padding-left: 24px;
-  margin-bottom: 18px;
-}
-li {
-  margin-bottom: 8px;
-  font-size: 1.05rem;
-  color: #3a4664;
-}
-.manual-list {
-  list-style: none;
-  padding: 0;
-}
-.manual-list li {
-  margin-bottom: 12px;
-}
-.manual-list a {
-  color: #204a6d;
-  text-decoration: none;
-  font-size: 1.08rem;
-  transition: color 0.2s;
-}
-.manual-list a:hover {
-  color: #409eff;
-  text-decoration: underline;
-}
-.img-block {
-  margin: 18px 0;
-  text-align: center;
-}
-.intro-img {
-  cursor: pointer;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px #0001;
-  transition: box-shadow 0.2s;
-  max-width: 500px;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
-.intro-img:hover {
-  box-shadow: 0 4px 16px #0002;
-}
-.img-preview-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.55);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.img-preview-large {
-  max-width: 90vw;
-  max-height: 90vh;
-  border-radius: 10px;
-  box-shadow: 0 4px 32px #0005;
-  background: #fff;
-}
-.img-preview-close {
-  position: absolute;
-  top: 32px;
-  right: 48px;
-  font-size: 2.5rem;
-  color: #fff;
-  cursor: pointer;
-  font-weight: bold;
-  z-index: 1001;
-  text-shadow: 0 2px 8px #000a;
-}
-@media (max-width: 900px) {
-  .affinity-page {
-    max-width: 100vw;
-    padding: 16px 4vw 32px 4vw;
-  }
-  .main-title {
-    font-size: 2rem;
-  }
-  .intro-img {
-    max-width: 98vw;
-  }
-}
-</style> 
+</style>

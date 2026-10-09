@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="header">
+    <div class="header site-page-header site-page-header--tabs">
       <div class="banner-bg">
         <img :src="aboutus01" alt="About Us Banner" />
       </div>
@@ -15,9 +15,9 @@
     <div class="navbar">
       <div class="nav-inner-container">
         <div class="nav-container">
-          <span @click="scrollTo('company')">Company</span>
-          <span @click="scrollTo('ourbusiness')">Our Business</span>
-          <span @click="scrollTo('ourteam')">Our Team</span>
+          <button type="button" @click="scrollTo('company')">Company</button>
+          <button type="button" @click="scrollTo('ourbusiness')">Our Business</button>
+          <button type="button" @click="scrollTo('ourteam')">Our Team</button>
           <!-- <span @click="scrollTo('honoraryawards')">Honorary Awards</span>
           <span @click="scrollTo('partners')">Partners</span> -->
         </div>
@@ -71,9 +71,9 @@
       </div>
     </section>
     <section id="ourbusiness" class="section-business">
-      <div class="aboutus-business-title">
+      <h2 class="aboutus-business-title">
         <span>Our Business</span>
-      </div>
+      </h2>
       <div class="aboutus-business-grid">
         <div
           v-for="(item, idx) in businessList"
@@ -94,9 +94,9 @@
     <section id="ourteam" class="section-team">
       <div class="aboutus-team-bg">
         <div class="aboutus-team-inner">
-          <div class="aboutus-team-title">
+          <h2 class="aboutus-team-title">
             <span>Our Team</span>
-          </div>
+          </h2>
           <!-- 首席科学家 -->
           <div class="chief-scientist-section">
             <div class="chief-content">
@@ -366,7 +366,7 @@ const teamList = [
 
 .header {
   width: 100%;
-  height: 450px;
+  height: 280px;
   position: relative;
   overflow: hidden;
 }
@@ -469,7 +469,7 @@ const teamList = [
   z-index: 10;
   .nav-inner-container {
     height: 100%;
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
     .nav-container {
       height: 100%;
@@ -478,7 +478,10 @@ const teamList = [
       justify-content: flex-start;
       padding: 0 20px;
       gap: 30px;
-      span {
+      button {
+        border: 0;
+        background: none;
+        min-height: 44px;
         color: #ffffff;
         font-size: 20px;
         font-weight: 400;
@@ -516,19 +519,21 @@ const teamList = [
   margin-bottom: 32px;
 }
 .aboutus-overview-title {
-  font-size: 2.8rem;
-  font-weight: 700;
-  margin-bottom: 0;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #243b7b;
+  text-align: left;
+  border-left: 5px solid #409eff;
+  padding-left: 16px;
+  margin-bottom: 24px;
+  span { background: none; color: inherit; -webkit-text-fill-color: currentColor; }
 }
 .aboutus-overview-title span {
-  background: linear-gradient(90deg, #00bc97 0%, #4e3fa5 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-fill-color: transparent;
+  background: none; color: #243b7b; -webkit-text-fill-color: currentColor;
 }
 .aboutus-overview-inner {
-  max-width: 1400px;
+  max-width: 1248px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -537,8 +542,8 @@ const teamList = [
 }
 .aboutus-overview-text {
   flex: 1.2;
-  opacity: 0;
-  transform: translateX(-40px);
+  opacity: 1;
+  transform: none;
   animation: fadeInLeft 1s 0.2s forwards;
 }
 
@@ -564,8 +569,8 @@ const teamList = [
   flex: 1;
   display: flex;
   justify-content: flex-end;
-  opacity: 0;
-  transform: translateX(40px);
+  opacity: 1;
+  transform: none;
   animation: fadeInRight 1s 0.4s forwards;
 }
 .aboutus-overview-img img.float-img {
@@ -589,7 +594,7 @@ const teamList = [
 
 @media (max-width: 900px) {
   .header {
-    height: 400px;
+    height: 240px;
   }
 
   .banner-text {
@@ -623,7 +628,7 @@ const teamList = [
 }
 @media (max-width: 600px) {
   .header {
-    height: 350px;
+    height: 220px;
   }
 
   .banner-text {
@@ -676,20 +681,18 @@ const teamList = [
   background: #fafbfc;
 }
 .aboutus-business-title {
-  text-align: center;
-  font-size: 2.8rem;
-  font-weight: 700;
-  margin-bottom: 40px;
-  span {
-    background: linear-gradient(90deg, #00bc97 0%, #4e3fa5 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
-  }
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #243b7b;
+  text-align: left;
+  border-left: 5px solid #409eff;
+  padding-left: 16px;
+  margin-bottom: 24px;
+  span { background: none; color: inherit; -webkit-text-fill-color: currentColor; }
 }
 .aboutus-business-grid {
-  max-width: 1400px;
+  max-width: 1248px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -706,13 +709,7 @@ const teamList = [
   transition: transform 0.2s, box-shadow 0.2s;
   border-bottom: 1px solid #ececec;
   padding-bottom: 24px;
-  &:hover {
-    transform: translateY(-6px) scale(1.03);
-    .business-img img {
-      transform: scale(1.08);
-      box-shadow: 0 8px 32px 0 rgba(90, 79, 207, 0.1);
-    }
-  }
+
   &:last-child,
   &:nth-last-child(2) {
     border-bottom: none;
@@ -799,22 +796,20 @@ const teamList = [
   padding: 64px 0 8px 0; /* Reduce bottom padding from 32px to 8px */
 }
 .aboutus-team-inner {
-  max-width: 1400px;
+  max-width: 1248px;
   margin: 0 auto;
   padding: 0 32px;
 }
 .aboutus-team-title {
-  font-size: 2.8rem;
-  font-weight: 700;
-  margin-bottom: 40px;
-  text-align: center;
-  span {
-    background: linear-gradient(90deg, #00bc97 0%, #4e3fa5 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
-  }
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #243b7b;
+  text-align: left;
+  border-left: 5px solid #409eff;
+  padding-left: 16px;
+  margin-bottom: 24px;
+  span { background: none; color: inherit; -webkit-text-fill-color: currentColor; }
 }
 .chief-scientist-section {
   margin-bottom: 56px;
@@ -909,10 +904,7 @@ const teamList = [
   transition: transform 0.3s, box-shadow 0.3s;
   box-shadow: 0 2px 12px 0 rgba(90, 79, 207, 0.06);
 }
-.team-member:hover .member-photo img {
-  transform: scale(1.07);
-  box-shadow: 0 6px 24px 0 rgba(90, 79, 207, 0.13);
-}
+
 .member-info {
   flex: 1;
   display: flex;
@@ -993,22 +985,20 @@ const teamList = [
   padding: 64px 0 8px 0; /* Reduce bottom padding from 32px to 8px */
 }
 .aboutus-team-inner {
-  max-width: 1400px;
+  max-width: 1248px;
   margin: 0 auto;
   padding: 0 32px;
 }
 .aboutus-team-title {
-  font-size: 2.8rem;
-  font-weight: 700;
-  margin-bottom: 40px;
-  text-align: center;
-  span {
-    background: linear-gradient(90deg, #00bc97 0%, #4e3fa5 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
-  }
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #243b7b;
+  text-align: left;
+  border-left: 5px solid #409eff;
+  padding-left: 16px;
+  margin-bottom: 24px;
+  span { background: none; color: inherit; -webkit-text-fill-color: currentColor; }
 }
 .chief-scientist-section {
   margin-bottom: 56px;
@@ -1103,10 +1093,7 @@ const teamList = [
   transition: transform 0.3s, box-shadow 0.3s;
   box-shadow: 0 2px 12px 0 rgba(90, 79, 207, 0.06);
 }
-.team-member:hover .member-photo img {
-  transform: scale(1.07);
-  box-shadow: 0 6px 24px 0 rgba(90, 79, 207, 0.13);
-}
+
 .member-info {
   flex: 1;
   display: flex;
@@ -1304,5 +1291,45 @@ const teamList = [
   font-size: 0.98rem;
   color: #00bc97;
   font-weight: 500;
+}
+
+.aboutus-overview-inner { max-width: 1248px; padding: 0 24px; gap: 40px; }
+.aboutus-overview-text, .aboutus-overview-img { min-width: 0; }
+.aboutus-overview-text p { font-size: 17px; line-height: 1.8; }
+.aboutus-overview-title span, .aboutus-overview-text h3 { background: none; color: #243b7b; -webkit-text-fill-color: #243b7b; }
+.aboutus-overview-text h3 { font-size: 28px; }
+.navbar .nav-inner-container .nav-container button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+@media (max-width: 767px) {
+  .navbar .nav-inner-container .nav-container { padding: 0 8px; gap: 0; justify-content: space-between; }
+  .navbar .nav-inner-container .nav-container button { padding: 8px; font-size: 14px; white-space: nowrap; }
+  .aboutus-overview-inner { padding: 0 16px; gap: 24px; }
+  .aboutus-overview-text p { font-size: 16px; }
+  .aboutus-overview-text h3 { font-size: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .aboutus-overview-text, .aboutus-overview-img, .business-item { opacity: 1; transform: none; }
+}
+
+.banner-text .banner-title, .banner-title { font-size: 42px; line-height: 1.2; margin-bottom: 14px; }
+.banner-text .banner-divider, .banner-divider { margin: 14px 0; }
+.banner-text .banner-subtitle, .banner-subtitle { font-size: 18px; line-height: 1.55; margin-top: 0; margin-bottom: 0; }
+.banner-content { padding-bottom: 50px; }
+.aboutus-overview-img img.float-img { border-radius: var(--vb-radius-image, 10px); }
+@media (max-width: 767px) {
+  .banner-text { max-width: calc(100% - 32px); }
+  .banner-text .banner-title, .banner-title { font-size: 32px; margin-bottom: 12px; }
+  .banner-text .banner-divider, .banner-divider { margin: 12px 0; }
+  .banner-text .banner-subtitle, .banner-subtitle { font-size: 16px; }
+}
+.aboutus-overview-title-wrapper { max-width: 1248px; padding: 0 24px; margin: 0 auto 24px; text-align: left; }
+.aboutus-overview-title { margin-bottom: 0; }
+.aboutus-business-title { max-width: 1184px; width: calc(100% - 64px); margin: 0 auto 28px; }
+.business-title, .chief-name, .member-name { color: #243b7b; }
+@media (max-width: 767px) {
+  .aboutus-overview-title-wrapper { padding: 0 16px; }
+  .aboutus-business-title { width: calc(100% - 32px); }
+  .aboutus-business-grid, .aboutus-team-inner { padding: 0 16px; }
+  .aboutus-overview-title, .aboutus-business-title, .aboutus-team-title { font-size: 23px; padding-left: 12px; }
 }
 </style>

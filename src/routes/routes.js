@@ -1,4 +1,5 @@
-import { changeConfirmLocale } from "ant-design-vue/es/modal/locale";
+import { serviceModules } from "@/data/businessNavigation";
+
 
 // 优化 reagentChildren 结构
 const molecularDiagnosisChildren = [
@@ -443,7 +444,6 @@ const routes = [
           title: "products",
         },
         component: () => import("../views/Products/products.vue"),
-        redirect: "/reagent/chemiluminescence",
       },
       {
         path: "/products/page/:pageNum",
@@ -461,10 +461,6 @@ const routes = [
       },
       // 试剂产品路由
       // 删除原有 reagent 路由
-      {
-        path: "/Reagent",
-        redirect: "/reagent",
-      },
       {
         path: "/QuinDyeTM_Terminator",
         name: "QuinDyeTM_Terminator",
@@ -670,6 +666,23 @@ const routes = [
             "../views/instrumentDetail/ProteoSenseTM_Protein_Detection_Open_Kit_Set.vue"
           ),
       },
+      // Data-backed service templates share views, while existing service URLs remain intact.
+      ...serviceModules.flatMap((module) => [
+        {
+          path: module.path,
+          name: `${module.key}-services`,
+          meta: { title: module.title },
+          component: () => import("../views/Business/ServiceList.vue"),
+          props: { serviceType: module.key },
+        },
+        {
+          path: `${module.path}/:slug`,
+          name: `${module.key}-service-detail`,
+          meta: { title: module.title },
+          component: () => import("../views/Business/ServiceDetail.vue"),
+          props: (route) => ({ serviceType: module.key, slug: route.params.slug }),
+        },
+      ]),
       // Services子路由
       // AI医学多模态人工智能
       {
@@ -724,11 +737,13 @@ const routes = [
         redirect: "/reagent/chemiluminescence",
         children: reagentChildren,
       },
+      {
+        path: '/:pathMatch(.*)*',
+        name: 'PageNotFound',
+        meta: { title: 'Page not found', notFound: true },
+        component: () => import('../views/Business/NotFound.vue'),
+      },
     ],
-  },
-  {
-    path: "/Reagent",
-    redirect: "/reagent",
   },
 ];
 export default routes;

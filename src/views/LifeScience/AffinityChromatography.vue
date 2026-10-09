@@ -1,12 +1,12 @@
 <template>
-  <MobileOptimizedContent>
+  <CatalogContent title="Affinity Chromatography" family="Life Science">
     <div class="affinity-page">
-      <h1 class="main-title">Affinity Chromatography</h1>
 
-      <MobileOptimizedTabs :tabs="tabs" v-model="currentTab">
+
+      <CatalogTabs :tabs="tabs" v-model="currentTab">
         <!-- Tab Content: Product Introduction -->
         <section v-if="currentTab === 'intro'" class="intro">
-          <div class="section-title">Antibody Purification</div>
+          <h2 class="section-title">Antibody Purification</h2>
           <p>
             Antibody affinity chromatography media utilize immobilized specific
             ligands (such as Protein A/G or VH3) that reversibly bind to
@@ -32,12 +32,12 @@
             can purify Fab, ScFv, and nanobodies, independent of the Fc region,
             expanding the range of antibody purification.
           </p>
-          <div
+          <h2
             class="section-title"
             style="font-size: 1.1rem; margin: 24px 0 10px 0"
           >
             Application Cases
-          </div>
+          </h2>
           <p class="case-title">
             Two-step Purification of Mouse IgG Antibody (Pilot Scale) by
             Affinity and Ion Exchange Chromatography
@@ -49,52 +49,47 @@
             yields above 93%. Purity, HCP, HCD, and endotoxin levels all meet
             requirements.
           </p>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img1"
             class="intro-img"
-            @click="openPreview(img1)"
             alt="Case 1"
           />
           <p class="case-title">
             High Capacity Protein G Focurose 4FF Purification of Sheep Serum
           </p>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img2"
             class="intro-img"
-            @click="openPreview(img2)"
             alt="Case 2"
           />
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img3"
             class="intro-img"
-            @click="openPreview(img3)"
             alt="Case 3"
           />
-          <div
+          <h2
             class="section-title"
             style="font-size: 1.1rem; margin: 24px 0 10px 0"
           >
             Product List
-          </div>
-          <img
+          </h2>
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img4"
             class="intro-img"
-            @click="openPreview(img4)"
             alt="Product List"
           />
-          <div
+          <h2
             class="section-title"
             style="font-size: 1.1rem; margin: 24px 0 10px 0"
           >
             Pre-packed Column Ordering Information
-          </div>
-          <img
+          </h2>
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img5"
             class="intro-img"
-            @click="openPreview(img5)"
             alt="Pre-packed Column Ordering Information"
           />
-          <div class="section-title">His-tagged Protein Purification</div>
+          <h2 class="section-title">His-tagged Protein Purification</h2>
           <p>
             Transition metal ions (Cu2+>Ni2+>Zn2+>Co2+) can form coordination
             bonds with electron-donating atoms such as N, S, and O. The
@@ -110,25 +105,23 @@
             surface, so different metal ligands are selected for separation and
             purification according to their affinity strength.
           </p>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img6"
             class="intro-img"
-            @click="openPreview(img6)"
             alt="His-tagged Protein Purification"
           />
           <p>
             According to different chelation methods, there are three types:
             IDA, IMAC, and TED.
           </p>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img7"
             class="intro-img"
-            @click="openPreview(img7)"
             alt="IDA IMAC TED"
           />
-          <div class="section-title">
+          <h2 class="section-title">
             Strong Binding NTA (IMAC) Tag Purification Affinity Media
-          </div>
+          </h2>
           <p>
             VDX NTA Ni ultra utilizes the interaction between Ni2+ and certain
             amino acids on the protein side chain (mainly histidine, cysteine,
@@ -140,13 +133,13 @@
             or bind weakly to traditional Ni affinity media, or have significant
             flow-through.
           </p>
-          <div
+          <h2
             class="section-title"
             style="font-size: 1.1rem; margin: 24px 0 10px 0"
           >
             Product Advantages
-          </div>
-          <ul class="list-paddingleft-2">
+          </h2>
+<ul class="catalog-features list-paddingleft-2">
             <li>
               ★ Stronger binding ability: can successfully bind tagged proteins
               that traditional nickel media cannot bind
@@ -160,12 +153,12 @@
               yield of the target protein, but also reduces impurity residues
             </li>
           </ul>
-          <div
+          <h2
             class="section-title"
             style="font-size: 1.1rem; margin: 24px 0 10px 0"
           >
             Application Cases
-          </div>
+          </h2>
           <p class="case-title">
             Purification of the Same Tagged Protein under the Same Conditions by
             Traditional Ni-NTA and VDX NTA Ni ultra
@@ -182,127 +175,116 @@
             and much higher recovery than traditional Ni-NTA.
           </p>
           <p class="case-title">Traditional Ni-NTA</p>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img8"
             class="intro-img"
-            @click="openPreview(img8)"
             alt="Traditional Ni-NTA"
           />
           <p class="case-title">VDX NTA Ni ultra</p>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img9"
             class="intro-img"
-            @click="openPreview(img9)"
             alt="VDX NTA Ni ultra"
           />
-          <div
+          <h2
             class="section-title"
             style="font-size: 1.1rem; margin: 24px 0 10px 0"
           >
             Product List
-          </div>
-          <img
+          </h2>
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img10"
             class="intro-img"
-            @click="openPreview(img10)"
             alt="Product List 2"
           />
-          <div
+          <h2
             class="section-title"
             style="font-size: 1.1rem; margin: 24px 0 10px 0"
           >
             Application Cases
-          </div>
+          </h2>
           <p class="case-title">
             Ni Focurose FF(TED) Purification of His-tagged Protein
           </p>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img11"
             class="intro-img"
-            @click="openPreview(img11)"
             alt="Ni Focurose FF(TED) Purification of His-tagged Protein"
           />
           <p class="case-title">
             Ni Focurose FF(IDA) Purification of Recombinant COVID-19 Antigen
             (His-tagged)
           </p>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img12"
             class="intro-img"
-            @click="openPreview(img12)"
             alt="Ni Focurose FF(IDA) Purification of Recombinant COVID-19 Antigen (His-tagged)"
           />
-          <div
+          <h2
             class="section-title"
             style="font-size: 1.1rem; margin: 24px 0 10px 0"
           >
             Product List
-          </div>
-          <img
+          </h2>
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img13"
             class="intro-img"
-            @click="openPreview(img13)"
             alt="Product List 3"
           />
-          <div
+          <h2
             class="section-title"
             style="font-size: 1.1rem; margin: 24px 0 10px 0"
           >
             Pre-packed Column Ordering Information
-          </div>
-          <img
+          </h2>
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img14"
             class="intro-img"
-            @click="openPreview(img14)"
             alt="Pre-packed Column Ordering Information 3"
           />
-          <div class="section-title">GST-tagged Protein Purification</div>
-          <img
+          <h2 class="section-title">GST-tagged Protein Purification</h2>
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img15"
             class="intro-img"
-            @click="openPreview(img15)"
             alt="GST-tagged Protein Purification"
           />
-          <div
+          <h2
             class="section-title"
             style="font-size: 1.1rem; margin: 24px 0 10px 0"
           >
             Application Cases
-          </div>
+          </h2>
           <p class="case-title">
             GST Focurose 4FF Purification of GST-tagged Protein
           </p>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img16"
             class="intro-img"
-            @click="openPreview(img16)"
             alt="GST Focurose 4FF Purification of GST-tagged Protein"
           />
-          <div
+          <h2
             class="section-title"
             style="font-size: 1.1rem; margin: 24px 0 10px 0"
           >
             Product List
-          </div>
-          <img
+          </h2>
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img17"
             class="intro-img"
-            @click="openPreview(img17)"
             alt="Product List 4"
           />
-          <div
+          <h2
             class="section-title"
             style="font-size: 1.1rem; margin: 24px 0 10px 0"
           >
             Pre-packed Column Ordering Information
-          </div>
-          <img
+          </h2>
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img18"
             class="intro-img"
-            @click="openPreview(img18)"
             alt="Pre-packed Column Ordering Information 4"
           />
-          <div class="section-title">Serine Protein Purification</div>
+          <h2 class="section-title">Serine Protein Purification</h2>
           <p>
             Serine protease purification affinity media are prepared by coupling
             the broad-spectrum inhibitor of serine proteases,
@@ -310,37 +292,34 @@
             cross-linked agarose Focurose 4FF, named Benzamidine Focurose FF(LS)
             and Benzamidine Focurose 4FF(HS).
           </p>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img19"
             class="intro-img"
-            @click="openPreview(img19)"
             alt="Serine Protein Purification"
           />
-          <div
+          <h2
             class="section-title"
             style="font-size: 1.1rem; margin: 24px 0 10px 0"
           >
             Product List
-          </div>
-          <img
+          </h2>
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img20"
             class="intro-img"
-            @click="openPreview(img20)"
             alt="Product List 5"
           />
-          <div
+          <h2
             class="section-title"
             style="font-size: 1.1rem; margin: 24px 0 10px 0"
           >
             Pre-packed Column Ordering Information
-          </div>
-          <img
+          </h2>
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img21"
             class="intro-img"
-            @click="openPreview(img21)"
             alt="Pre-packed Column Ordering Information 5"
           />
-          <div class="section-title">Pre-activated Media</div>
+          <h2 class="section-title">Pre-activated Media</h2>
           <p>
             Pre-activated media, also known as activated intermediates for
             affinity media, are prepared by bonding different active groups
@@ -351,53 +330,44 @@
             couple the desired ligand according to their needs, avoiding the
             tedious process of introducing active groups in advance.
           </p>
-          <div
+          <h2
             class="section-title"
             style="font-size: 1.1rem; margin: 24px 0 10px 0"
           >
             Application Cases
-          </div>
+          </h2>
           <p class="case-title">
             CNBr Focurose 4FF Coupling Human IgG for Purification of Recombinant
             Protein G
           </p>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img22"
             class="intro-img"
-            @click="openPreview(img22)"
             alt="CNBr Focurose 4FF Coupling Human IgG for Purification of Recombinant Protein G"
           />
-          <div
+          <h2
             class="section-title"
             style="font-size: 1.1rem; margin: 24px 0 10px 0"
           >
             Product Information
-          </div>
-          <img
+          </h2>
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="img23"
             class="intro-img"
-            @click="openPreview(img23)"
             alt="Product Information"
           />
           <!-- Image Preview Modal -->
-          <div
-            v-if="previewImg"
-            class="img-preview-modal"
-            @click.self="closePreview"
-          >
-            <img :src="previewImg" class="img-preview-large" @click.stop />
-            <span class="img-preview-close" @click="closePreview">×</span>
-          </div>
+
         </section>
-      </MobileOptimizedTabs>
+      </CatalogTabs>
     </div>
-  </MobileOptimizedContent>
+  </CatalogContent>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
-import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
+import CatalogContent from "@/components/Business/CatalogContent.vue";
+import CatalogTabs from "@/components/Business/CatalogTabs.vue";
 // Tab 配置
 const tabs = [{ key: "intro", label: "Product Introduction" }];
 const currentTab = ref("intro");
@@ -467,157 +437,7 @@ const allImgs = [
   { src: img23, alt: "Product Information", width: 750 },
 ];
 // 图片预览弹窗
-const previewImg = ref(null);
-function openPreview(src) {
-  previewImg.value = src;
-}
-function closePreview() {
-  previewImg.value = null;
-}
 </script>
 
 <style scoped>
-.affinity-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 24px 48px 24px;
-  background: #f8fafc;
-  min-height: 100vh;
-  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans", Arial, sans-serif;
-}
-.main-title {
-  text-align: center;
-  font-size: 2.6rem;
-  font-weight: 700;
-  color: #223a5e;
-  margin-bottom: 36px;
-  letter-spacing: 2px;
-}
-.tab-nav {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  margin-bottom: 36px;
-  border-bottom: 2px solid #e0e4ea;
-}
-.tab-item {
-  font-size: 1.1rem;
-  color: #204a6d;
-  padding: 8px 24px 10px 24px;
-  cursor: pointer;
-  font-weight: 500;
-  border-bottom: 2.5px solid transparent;
-  transition: color 0.2s, border-color 0.2s, font-weight 0.2s;
-}
-.tab-item.active {
-  color: #1a2a3a;
-  font-weight: 700;
-  border-bottom: 2.5px solid #204a6d;
-  background: #f7f9fb;
-}
-.tab-item:hover {
-  color: #2b7bbf;
-}
-.section-title {
-  font-size: 1.35rem;
-  font-weight: 600;
-  color: #223a5e;
-  border-left: 5px solid #409eff;
-  padding-left: 16px;
-  margin: 36px 0 18px 0;
-  background: none;
-}
-.divider {
-  height: 1px;
-  background: #e0e6ed;
-  margin: 32px 0;
-  border: none;
-}
-ul,
-ol {
-  padding-left: 24px;
-  margin-bottom: 18px;
-}
-li {
-  margin-bottom: 8px;
-  font-size: 1.05rem;
-  color: #3a4664;
-}
-.manual-list {
-  list-style: none;
-  padding: 0;
-}
-.manual-list li {
-  margin-bottom: 12px;
-}
-.manual-list a {
-  color: #204a6d;
-  text-decoration: none;
-  font-size: 1.08rem;
-  transition: color 0.2s;
-}
-.manual-list a:hover {
-  color: #409eff;
-  text-decoration: underline;
-}
-.img-block {
-  margin: 18px 0;
-  text-align: center;
-}
-.intro-img {
-  display: block;
-  max-width: 650px;
-  width: 100%;
-  margin: 18px auto 24px auto;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px #0001;
-  cursor: pointer;
-  transition: box-shadow 0.2s;
-}
-.intro-img:hover {
-  box-shadow: 0 4px 16px #0002;
-}
-.img-preview-modal {
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(30, 40, 60, 0.55);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.img-preview-large {
-  max-width: 90vw;
-  max-height: 80vh;
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: 0 6px 32px #0003;
-}
-.img-preview-close {
-  position: absolute;
-  top: 32px;
-  right: 48px;
-  font-size: 2.2rem;
-  color: #fff;
-  cursor: pointer;
-  font-weight: bold;
-  z-index: 10000;
-}
-@media (max-width: 900px) {
-  .affinity-page {
-    max-width: 100vw;
-    padding: 16px 4vw 32px 4vw;
-  }
-  .intro-img {
-    max-width: 98vw;
-    margin: 12px auto 18px auto;
-  }
-  .img-preview-close {
-    top: 12px;
-    right: 16px;
-  }
-}
-</style> 
+</style>

@@ -1,12 +1,12 @@
 <template>
-  <MobileOptimizedContent>
+  <CatalogContent title="Gel Filtration Chromatography" family="Life Science">
     <div class="gel-filtration-page">
-      <h1 class="main-title">Gel Filtration Chromatography</h1>
 
-      <MobileOptimizedTabs :tabs="tabs" v-model="currentTab">
+
+      <CatalogTabs :tabs="tabs" v-model="currentTab">
         <!-- Tab Content -->
         <section v-if="currentTab === 'intro'" class="intro">
-          <div class="section-title">Product Introduction</div>
+          <h2 class="section-title">Product Introduction</h2>
           <p>
             Gel filtration chromatography, also known as size exclusion
             chromatography or molecular sieve chromatography, separates target
@@ -29,134 +29,121 @@
             </li>
           </ul>
           <div class="divider"></div>
-          <div class="section-title">Separation Range and Process</div>
+          <h2 class="section-title">Separation Range and Process</h2>
           <div class="intro-imgs">
-            <img
+            <img role="button" tabindex="0" aria-label="Enlarge image"
               :src="img1"
               alt="Separation Range"
               class="intro-img"
-              @click="openPreview(img1)"
             />
-            <img
+            <img role="button" tabindex="0" aria-label="Enlarge image"
               :src="img2"
               alt="Separation Process"
               class="intro-img"
-              @click="openPreview(img2)"
             />
           </div>
           <div class="divider"></div>
-          <div class="section-title">
+          <h2 class="section-title">
             Gel Filtration Media Separation Process
-          </div>
+          </h2>
           <div class="img-block">
-            <img
+            <img role="button" tabindex="0" aria-label="Enlarge image"
               :src="imgProcess"
               alt="Gel Filtration Media Separation Process"
               class="intro-img"
-              @click="openPreview(imgProcess)"
             />
             <div style="color: #888; font-size: 14px; margin-top: 8px">
               Gel Filtration Media Separation Process
             </div>
           </div>
           <div class="divider"></div>
-          <div class="section-title">Application Cases</div>
+          <h2 class="section-title">Application Cases</h2>
           <ol>
             <li>
               <span class="case-title"
                 >Separation of Substances with Different Molecular Weights by
                 Focurose 4FF/6FF</span
-              ><br /><img
+              ><br /><img role="button" tabindex="0" aria-label="Enlarge image"
                 :src="img3"
                 alt="Case 1"
                 class="intro-img"
-                @click="openPreview(img3)"
               />
             </li>
             <li>
               <span class="case-title"
                 >Comparison of Focurose 4FF and Imported Brands in Influenza
                 Vaccine Purification</span
-              ><br /><img
+              ><br /><img role="button" tabindex="0" aria-label="Enlarge image"
                 :src="img4"
                 alt="Case 2"
                 class="intro-img"
-                @click="openPreview(img4)"
               />
             </li>
             <li>
               <span class="case-title"
                 >Purification of Rabies Virus by Focurose 4FF</span
-              ><br /><img
+              ><br /><img role="button" tabindex="0" aria-label="Enlarge image"
                 :src="img5"
                 alt="Case 3"
                 class="intro-img"
-                @click="openPreview(img5)"
               />
             </li>
             <li>
               <span class="case-title"
                 >Comparison of Focurose 200PG and Imported Brands in Standard
                 Protein Separation</span
-              ><br /><img
+              ><br /><img role="button" tabindex="0" aria-label="Enlarge image"
                 :src="img6"
                 alt="Case 4-1"
                 class="intro-img"
-                @click="openPreview(img6)"
               />
-              <img
+              <img role="button" tabindex="0" aria-label="Enlarge image"
                 :src="img7"
                 alt="Case 4-2"
                 class="intro-img"
-                @click="openPreview(img7)"
               />
             </li>
             <li>
               <span class="case-title"
                 >Desalting Efficiency of Focurose G25+ at Different Flow
                 Rates</span
-              ><br /><img
+              ><br /><img role="button" tabindex="0" aria-label="Enlarge image"
                 :src="img8"
                 alt="Case 5-1"
                 class="intro-img"
-                @click="openPreview(img8)"
               />
-              <img
+              <img role="button" tabindex="0" aria-label="Enlarge image"
                 :src="img9"
                 alt="Case 5-2"
                 class="intro-img"
-                @click="openPreview(img9)"
               />
             </li>
             <li>
               <span class="case-title"
                 >Comparison of Focurose G25+ and Two Competing Desalting
                 Media</span
-              ><br /><img
+              ><br /><img role="button" tabindex="0" aria-label="Enlarge image"
                 :src="img10"
                 alt="Case 6-1"
                 class="intro-img"
-                @click="openPreview(img10)"
-              /><img
+              /><img role="button" tabindex="0" aria-label="Enlarge image"
                 :src="img11"
                 alt="Case 6-2"
                 class="intro-img"
-                @click="openPreview(img11)"
               />
             </li>
           </ol>
           <div class="divider"></div>
-          <div class="section-title">Agarose Gel Filtration Media List</div>
+          <h2 class="section-title">Agarose Gel Filtration Media List</h2>
           <div class="intro-imgs">
-            <img
+            <img role="button" tabindex="0" aria-label="Enlarge image"
               :src="img12"
               alt="Media List"
               class="intro-img"
-              @click="openPreview(img12)"
             />
           </div>
           <div class="divider"></div>
-          <div class="section-title">Tips</div>
+          <h2 class="section-title">Tips</h2>
           <ul>
             <li>
               The column height-to-diameter ratio should be between 1:15 and
@@ -179,34 +166,27 @@
             </li>
           </ul>
         </section>
-        <section v-if="currentTab === 'manual'" class="manuals">
-          <div class="section-title">Manual Download</div>
+        <section v-if="currentTab === 'manual'" class="catalog-resources manuals">
+          <h2 class="section-title">Product Manuals</h2>
           <ul class="manual-list">
             <li v-for="file in manualFiles" :key="file.name">
-              <a :href="file.url" target="_blank" download>
+              <a :href="file.url" target="_blank" rel="noopener noreferrer">
                 <i class="icon-pdf"></i>{{ file.name }}
               </a>
             </li>
           </ul>
         </section>
         <!-- Image Preview Modal -->
-        <div
-          v-if="previewImg"
-          class="img-preview-modal"
-          @click.self="closePreview"
-        >
-          <img :src="previewImg" class="img-preview-large" @click.stop />
-          <span class="img-preview-close" @click="closePreview">×</span>
-        </div>
-      </MobileOptimizedTabs>
+
+      </CatalogTabs>
     </div>
-  </MobileOptimizedContent>
+  </CatalogContent>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
-import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
+import CatalogContent from "@/components/Business/CatalogContent.vue";
+import CatalogTabs from "@/components/Business/CatalogTabs.vue";
 import img1 from "@/assets/LifeScience/chromatography/chromatography-2/548991fc46fa439faf7a45784c5e1bf0.png";
 import img2 from "@/assets/LifeScience/chromatography/chromatography-2/2edbe2c69d8949a2815b78f16d6c604a.jpg";
 import img3 from "@/assets/LifeScience/chromatography/chromatography-2/3eaf0fb710fd4f3da58ccbd430993e3e.png";
@@ -242,102 +222,15 @@ const manualFiles = [
   { name: "Focurose G25+ Manual-HN120350.pdf", url: pdf6 },
   { name: "Focurose 4B Manual-HN030301.pdf", url: pdf7 },
 ];
-const previewImg = ref(null);
-function openPreview(img) {
-  previewImg.value = img;
-}
-function closePreview() {
-  previewImg.value = null;
-}
 </script>
 
 <style scoped>
-.gel-filtration-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 24px 48px 24px;
-  background: #f8fafc;
-  min-height: 100vh;
-  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans", Arial, sans-serif;
-}
-.main-title {
-  text-align: center;
-  font-size: 2.6rem;
-  font-weight: 700;
-  color: #223a5e;
-  margin-bottom: 36px;
-  letter-spacing: 2px;
-}
-.tab-nav {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  margin-bottom: 36px;
-  border-bottom: 2px solid #e0e4ea;
-}
-.tab-item {
-  font-size: 1.1rem;
-  color: #204a6d;
-  padding: 8px 24px 10px 24px;
-  cursor: pointer;
-  font-weight: 500;
-  border-bottom: 2.5px solid transparent;
-  transition: color 0.2s, border-color 0.2s, font-weight 0.2s;
-}
-.tab-item.active {
-  color: #1a2a3a;
-  font-weight: 700;
-  border-bottom: 2.5px solid #204a6d;
-  background: #f7f9fb;
-}
-.tab-item:hover {
-  color: #2b7bbf;
-}
-.section-title {
-  font-size: 1.35rem;
-  font-weight: 600;
-  color: #223a5e;
-  border-left: 5px solid #409eff;
-  padding-left: 16px;
-  margin: 36px 0 18px 0;
-  background: none;
-}
-.divider {
-  height: 1px;
-  background: #e0e6ed;
-  margin: 32px 0;
-  border: none;
-}
 .intro-imgs {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 24px;
   margin-bottom: 32px;
-}
-.intro-img {
-  max-width: 600px;
-  width: 100%;
-  border-radius: 8px;
-  background: #fff;
-  border: 1.5px solid #e0e4ea;
-  box-shadow: none;
-  object-fit: contain;
-  cursor: pointer;
-  transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
-}
-.intro-img:hover {
-  box-shadow: 0 4px 24px rgba(32, 74, 109, 0.18);
-  border-color: #204a6d;
-  z-index: 2;
-  transform: scale(1.04);
-}
-.manual-list {
-  padding-left: 0;
-}
-.manual-list li {
-  list-style: none;
-  margin-bottom: 12px;
 }
 .icon-pdf {
   display: inline-block;
@@ -349,29 +242,6 @@ function closePreview() {
   margin-right: 8px;
   vertical-align: middle;
 }
-.img-block {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 32px;
-}
-.img-block .intro-img {
-  max-width: 600px;
-  width: 100%;
-  border-radius: 8px;
-  background: #fff;
-  border: 1.5px solid #e0e4ea;
-  box-shadow: none;
-  object-fit: contain;
-  cursor: pointer;
-  transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
-}
-.img-block .intro-img:hover {
-  box-shadow: 0 4px 24px rgba(32, 74, 109, 0.18);
-  border-color: #204a6d;
-  z-index: 2;
-  transform: scale(1.04);
-}
 /* 案例标题样式 */
 .case-title {
   display: inline-block;
@@ -380,54 +250,7 @@ function closePreview() {
   font-size: 1.08rem;
   margin-bottom: 4px;
 }
-@media (max-width: 900px) {
-  .gel-filtration-page {
-    max-width: 100vw;
-    padding: 16px 4vw 32px 4vw;
-  }
-  .intro-img {
-    max-width: 100%;
-    margin: 0 auto;
-  }
-}
 /* 图片预览弹窗样式 */
-.img-preview-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(30, 40, 60, 0.65);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: fadeIn 0.2s;
-}
-.img-preview-large {
-  max-width: 90vw;
-  max-height: 90vh;
-  border-radius: 10px;
-  box-shadow: 0 8px 32px rgba(32, 74, 109, 0.25);
-  background: #fff;
-  border: 2px solid #204a6d;
-  display: block;
-}
-.img-preview-close {
-  position: absolute;
-  top: 32px;
-  right: 48px;
-  font-size: 2.5rem;
-  color: #fff;
-  cursor: pointer;
-  font-weight: bold;
-  z-index: 1010;
-  user-select: none;
-  transition: color 0.2s;
-}
-.img-preview-close:hover {
-  color: #d23c1a;
-}
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -436,4 +259,4 @@ function closePreview() {
     opacity: 1;
   }
 }
-</style> 
+</style>

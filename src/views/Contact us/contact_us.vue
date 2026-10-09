@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <!-- 头部横幅 -->
-    <div class="header">
+    <div class="header site-page-header site-page-header--tabs">
       <div class="banner-bg">
         <img src="/src/assets/about/aboutus01.png" alt="Contact Us Banner" />
       </div>
@@ -18,9 +18,9 @@
     <div class="navbar">
       <div class="nav-inner-container">
         <div class="nav-container">
-          <span @click="scrollTo('contact-form')">Contact Form</span>
-          <span @click="scrollTo('our-offices')">Our Offices</span>
-          <span @click="scrollTo('company-info')">Company Info</span>
+          <button type="button" @click="scrollTo('contact-form')">Contact Form</button>
+          <button type="button" @click="scrollTo('our-offices')">Our Offices</button>
+          <button type="button" @click="scrollTo('company-info')">Company Info</button>
         </div>
       </div>
     </div>
@@ -40,8 +40,12 @@
           <form @submit.prevent="submitForm" class="contact-form">
             <div class="form-grid">
               <div class="form-group">
+                <label for="contact-firstName" class="form-label">First Name <span aria-hidden="true">*</span></label>
                 <input
                   v-model="formData.firstName"
+                  id="contact-firstName"
+                  name="firstName"
+                  autocomplete="given-name"
                   type="text"
                   placeholder="*First Name"
                   required
@@ -49,8 +53,12 @@
                 />
               </div>
               <div class="form-group">
+                <label for="contact-lastName" class="form-label">Last Name <span aria-hidden="true">*</span></label>
                 <input
                   v-model="formData.lastName"
+                  id="contact-lastName"
+                  name="lastName"
+                  autocomplete="family-name"
                   type="text"
                   placeholder="*Last Name"
                   required
@@ -58,8 +66,12 @@
                 />
               </div>
               <div class="form-group">
+                <label for="contact-email" class="form-label">Email <span aria-hidden="true">*</span></label>
                 <input
                   v-model="formData.email"
+                  id="contact-email"
+                  name="email"
+                  autocomplete="email"
                   type="email"
                   placeholder="*Email"
                   required
@@ -67,8 +79,12 @@
                 />
               </div>
               <div class="form-group">
+                <label for="contact-company" class="form-label">Company/Institution <span aria-hidden="true">*</span></label>
                 <input
                   v-model="formData.company"
+                  id="contact-company"
+                  name="company"
+                  autocomplete="organization"
                   type="text"
                   placeholder="*Company/Institution"
                   required
@@ -76,8 +92,11 @@
                 />
               </div>
               <div class="form-group full-width">
+                <label for="contact-message" class="form-label">Message <span aria-hidden="true">*</span></label>
                 <textarea
                   v-model="formData.message"
+                  id="contact-message"
+                  name="message"
                   placeholder="*Message"
                   required
                   class="form-textarea"
@@ -111,17 +130,14 @@
             <h3 class="office-card-title">Massachusetts</h3>
             <div class="office-details">
               <div class="office-item">
-                <span class="office-icon">📍</span>
                 <span
                   >625 Mt Auburn Street, Suite 105, Cambridge, MA 02138</span
                 >
               </div>
               <div class="office-item">
-                <span class="office-icon">📞</span>
                 <span>1-617-943-2768</span>
               </div>
               <div class="office-item">
-                <span class="office-icon">✉️</span>
                 <span>sales.us@quintarabio.com</span>
               </div>
             </div>
@@ -131,15 +147,12 @@
             <h3 class="office-card-title">CA Hayward</h3>
             <div class="office-details">
               <div class="office-item">
-                <span class="office-icon">📍</span>
                 <span>3563 Investment Blvd, #2 Hayward, CA 94545</span>
               </div>
               <div class="office-item">
-                <span class="office-icon">📞</span>
                 <span>1-510-397-0215</span>
               </div>
               <div class="office-item">
-                <span class="office-icon">✉️</span>
                 <span>sales.us@quintarabio.com</span>
               </div>
             </div>
@@ -149,15 +162,12 @@
             <h3 class="office-card-title">Texas</h3>
             <div class="office-details">
               <div class="office-item">
-                <span class="office-icon">📍</span>
                 <span>10410 Corporate Dr, Suite 118, Sugar Land, TX 77478</span>
               </div>
               <div class="office-item">
-                <span class="office-icon">📞</span>
                 <span>346-239-9971</span>
               </div>
               <div class="office-item">
-                <span class="office-icon">✉️</span>
                 <span>sales.us@quintarabio.com</span>
               </div>
             </div>
@@ -167,15 +177,12 @@
             <h3 class="office-card-title">Michigan</h3>
             <div class="office-details">
               <div class="office-item">
-                <span class="office-icon">📍</span>
                 <span>2301 Moss Ross Ct, Ann Arbor, MI 48103</span>
               </div>
               <div class="office-item">
-                <span class="office-icon">📞</span>
                 <span>734-476-9826</span>
               </div>
               <div class="office-item">
-                <span class="office-icon">✉️</span>
                 <span>sales.us@quintarabio.com</span>
               </div>
             </div>
@@ -185,15 +192,12 @@
             <h3 class="office-card-title">CA San Diego</h3>
             <div class="office-details">
               <div class="office-item">
-                <span class="office-icon">📍</span>
                 <span>6364 Ferris Square, Suite 102, San Diego, CA 92121</span>
               </div>
               <div class="office-item">
-                <span class="office-icon">📞</span>
                 <span>858-231-4862</span>
               </div>
               <div class="office-item">
-                <span class="office-icon">✉️</span>
                 <span>sales.us@quintarabio.com</span>
               </div>
             </div>
@@ -212,20 +216,17 @@
           <h3 class="company-name">南京艾瑞谱生物技术有限公司</h3>
           <div class="company-details">
             <div class="company-item">
-              <div class="company-icon">📍</div>
               <div class="company-text">
                 <strong>Address:</strong>
                 南京经济开发区恒泰路8号汇智科技园A9栋第4层
               </div>
             </div>
             <div class="company-item">
-              <div class="company-icon">📞</div>
               <div class="company-text">
                 <strong>Phone:</strong> 4008-281-191
               </div>
             </div>
             <div class="company-item">
-              <div class="company-icon">✉️</div>
               <div class="company-text">
                 <strong>Email:</strong> info@arpbiotech.com
               </div>
@@ -251,21 +252,16 @@
         <div class="modal-body">
           <div class="success-icon">✅</div>
           <p>
-            感谢您的咨询！我们的专业团队将在
-            <strong style="color: #00bc97">24小时内</strong>与您取得联系。
+            Thank you for your inquiry. Our team will contact you within
+            <strong style="color: #00bc97">24 hours</strong>.
           </p>
           <p style="font-size: 14px; color: #666; margin-top: 15px">
-            同时，您也会收到一封确认邮件，请注意查收。
+            Please check your inbox for a confirmation email.
           </p>
           <div class="contact-quick-info">
-            <p><strong>紧急联系:</strong></p>
+            <p><strong>Contact us directly:</strong></p>
             <p>📞 {{ COMPANY_INFO.phone }}</p>
             <p>📧 {{ COMPANY_INFO.email }}</p>
-          </div>
-          <div v-if="emailResult && emailResult.service" class="service-info">
-            <p style="font-size: 12px; color: #999; margin-top: 10px;">
-              邮件服务: {{ emailResult.service || 'Web3Forms' }}
-            </p>
           </div>
         </div>
       </div>
@@ -291,18 +287,21 @@
 
 <script setup>
 import { ref, reactive, computed } from "vue";
+import { useRoute } from "vue-router";
 import WeGoFastFooter from "/src/components/WeGoFastFooter.vue";
 import { sendEmail } from "/src/utils/emailService.js";
 import { validateFormData, formatCustomerInfo } from "/src/utils/emailService.js";
 import { COMPANY_INFO } from "/src/utils/emailConfig.js";
 
 // 表单数据
+const route = useRoute();
+const enquiryProduct = typeof route.query.product === 'string' ? route.query.product : '';
 const formData = reactive({
   firstName: "",
   lastName: "",
   email: "",
   company: "",
-  message: "",
+  message: enquiryProduct ? `I would like to enquire about ${enquiryProduct}.` : '',
 });
 
 // 状态管理
@@ -310,7 +309,6 @@ const isSubmitting = ref(false);
 const showSuccessModal = ref(false);
 const showErrorModal = ref(false);
 const errorMessage = ref("");
-const emailResult = ref(null);
 
 // 滚动到指定区域
 const scrollTo = (id) => {
@@ -345,7 +343,6 @@ const submitForm = async () => {
 
     // 显示成功消息
     showSuccessModal.value = true;
-    emailResult.value = result; // 将结果赋值给 emailResult
 
     // 记录成功提交
     console.log(`🎉 客户咨询提交成功 - ${formatCustomerInfo(formData)}`);
@@ -368,21 +365,10 @@ const submitForm = async () => {
   } catch (error) {
     console.error("💥 表单提交失败:", error);
 
-    // 更友好的错误消息
-    let friendlyErrorMessage =
-      "抱歉，发送消息时出现错误。请稍后重试或直接联系我们。";
-
-    if (error.message.includes("网络")) {
-      friendlyErrorMessage = "网络连接出现问题，请检查您的网络连接后重试。";
-    } else if (error.message.includes("邮件服务")) {
-      friendlyErrorMessage =
-        "邮件服务暂时不可用，请稍后重试或直接拨打我们的客服电话。";
-    } else if (error.message.includes("Web3Forms")) {
-      friendlyErrorMessage =
-        "邮件服务暂时不可用，请稍后重试或直接拨打我们的客服电话。";
-    }
-
-    errorMessage.value = `${friendlyErrorMessage}\n\n技术详情: ${error.message}`;
+    const message = String(error?.message || '');
+    errorMessage.value = /网络|network|fetch/i.test(message)
+      ? 'Please check your internet connection and try again. You can also contact us directly.'
+      : 'We could not send your message. Please try again later or contact us directly.';
     showErrorModal.value = true;
 
     // 发送错误统计
@@ -401,7 +387,6 @@ const submitForm = async () => {
 // 关闭成功弹窗
 const closeSuccessModal = () => {
   showSuccessModal.value = false;
-  emailResult.value = null;
 };
 
 // 关闭错误弹窗
@@ -424,7 +409,7 @@ const closeErrorModal = () => {
 /* 头部横幅 */
 .header {
   width: 100%;
-  height: 450px;
+  height: 280px;
   position: relative;
   overflow: hidden;
 }
@@ -514,7 +499,7 @@ const closeErrorModal = () => {
 
 .nav-inner-container {
   height: 100%;
-  max-width: 1400px;
+  max-width: 1248px;
   margin: 0 auto;
 }
 
@@ -527,17 +512,20 @@ const closeErrorModal = () => {
   gap: 40px;
 }
 
-.nav-container span {
-  color: #ffffff;
-  font-size: 20px;
+.nav-container button {
+  color: #fff;
+  font: inherit;
+  font-size: 16px;
   font-weight: 400;
-  text-decoration: none;
+  min-height: 44px;
   padding: 8px 16px;
+  border: 0;
+  background: transparent;
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: color 0.2s;
 }
 
-.nav-container span:hover {
+.nav-container button:hover {
   color: #00bc97;
 }
 
@@ -548,42 +536,44 @@ const closeErrorModal = () => {
 }
 
 .contact-form-content {
-  max-width: 1400px;
+  max-width: 1248px;
   margin: 0 auto;
   padding-left: 40px;
   padding-right: 40px;
 }
 
 .contact-form-title {
-  text-align: center;
-  font-size: 3rem;
-  font-weight: 500;
-  margin-bottom: 14px;
+  color: #243b7b;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: left;
+  border-left: 5px solid #409eff;
+  padding-left: 16px;
+  margin-bottom: 24px;
 }
 
 .contact-form-title span {
-  background-image: linear-gradient(to right, #00bc97 0%, #4e3fa5 80%);
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  background: none;
+  color: inherit;
+  -webkit-text-fill-color: currentColor;
 }
 
 .contact-form-desc {
-  text-align: center;
-  font-size: 1.2rem;
-  color: rgb(102, 102, 102);
-  line-height: 1.6;
-  margin: 0 0 40px 0;
+  text-align: left;
+  font-size: 16px;
+  color: #596578;
+  line-height: 1.75;
+  margin: 0 auto 28px;
   max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .form-card {
   background: #fff;
-  border-radius: 20px;
-  padding: 40px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  border: 2px solid #f8f9fa;
+  border-radius: var(--vb-radius-panel, 12px);
+  padding: 32px;
+  box-shadow: none;
+  border: 1px solid #e1e6ed;
   max-width: 800px;
   margin: 0 auto;
 }
@@ -610,12 +600,16 @@ const closeErrorModal = () => {
 .form-input,
 .form-textarea {
   width: 100%;
-  padding: 15px 20px;
-  border: 2px solid #e9ecef;
-  border-radius: 10px;
-  font-size: 1rem;
-  transition: all 0.3s ease;
+  min-height: 46px;
+  padding: 12px 14px;
+  border: 1px solid #cbd2dc;
+  border-radius: var(--vb-radius-control, 6px);
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #334155;
   background: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .form-input:focus,
@@ -631,21 +625,22 @@ const closeErrorModal = () => {
 }
 
 .submit-btn {
-  background: linear-gradient(135deg, #00bc97 0%, #4e3fa5 100%);
+  background: #243b7b;
   color: #fff;
-  border: none;
-  padding: 15px 40px;
-  border-radius: 30px;
-  font-size: 1.1rem;
+  border: 1px solid #243b7b;
+  padding: 12px 24px;
+  border-radius: var(--vb-radius-control, 6px);
+  font: inherit;
+  font-size: 16px;
   font-weight: 600;
+  min-height: 46px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background 0.2s;
   width: 100%;
 }
 
 .submit-btn:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(0, 188, 151, 0.3);
+  background: #1a2d61;
 }
 
 .submit-btn:disabled {
@@ -660,23 +655,27 @@ const closeErrorModal = () => {
 }
 
 .offices-content {
-  max-width: 1400px;
+  max-width: 1248px;
   margin: 0 auto;
   text-align: center;
   padding: 0 24px;
 }
 
 .offices-title {
-  font-size: 2.6rem;
+  color: #243b7b;
+  font-size: 26px;
   font-weight: 600;
-  margin-bottom: 36px;
+  line-height: 1.4;
+  text-align: left;
+  border-left: 5px solid #409eff;
+  padding-left: 16px;
+  margin-bottom: 24px;
 }
 
 .offices-title span {
-  background: linear-gradient(90deg, #23c6c8 0%, #5a4fcf 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  background: none;
+  color: inherit;
+  -webkit-text-fill-color: currentColor;
 }
 
 .offices-grid {
@@ -688,27 +687,23 @@ const closeErrorModal = () => {
 
 .office-card {
   background: #fff;
-  border-radius: 15px;
-  padding: 30px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-  border: 1px solid #f0f0f0;
-  transition: all 0.3s ease;
+  border-radius: var(--vb-radius-panel, 12px);
+  padding: 24px;
+  border: 1px solid #e1e6ed;
+  text-align: left;
+  box-shadow: none;
 }
 
 .office-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  border-color: #cbd2dc;
 }
 
 .office-card-title {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #333;
+  font-size: 20px;
+  font-weight: 600;
+  color: #243b7b;
+  line-height: 1.4;
   margin-bottom: 20px;
-  background: linear-gradient(135deg, #00bc97 0%, #4e3fa5 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .office-details {
@@ -739,44 +734,46 @@ const closeErrorModal = () => {
 }
 
 .company-info-content {
-  max-width: 1400px;
+  max-width: 1248px;
   margin: 0 auto;
   text-align: center;
   padding: 0 24px;
 }
 
 .company-info-title {
-  font-size: 3rem;
+  color: #243b7b;
+  font-size: 26px;
   font-weight: 600;
-  margin-bottom: 48px;
+  line-height: 1.4;
+  text-align: left;
+  border-left: 5px solid #409eff;
+  padding-left: 16px;
+  margin-bottom: 24px;
 }
 
 .company-info-title span {
-  background: linear-gradient(90deg, #23c6c8 0%, #5a4fcf 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  background: none;
+  color: inherit;
+  -webkit-text-fill-color: currentColor;
 }
 
 .company-info-card {
   background: #fff;
-  border-radius: 20px;
-  padding: 40px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  border: 2px solid #f8f9fa;
-  max-width: 600px;
+  border-radius: var(--vb-radius-panel, 12px);
+  padding: 32px;
+  box-shadow: none;
+  border: 1px solid #e1e6ed;
+  max-width: 800px;
   margin: 0 auto;
+  text-align: left;
 }
 
 .company-name {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 30px;
-  background: linear-gradient(135deg, #00bc97 0%, #4e3fa5 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: 22px;
+  font-weight: 600;
+  color: #243b7b;
+  margin-bottom: 24px;
+  line-height: 1.5;
 }
 
 .company-details {
@@ -903,7 +900,7 @@ const closeErrorModal = () => {
   padding: 15px;
   border-radius: 8px;
   margin-top: 20px;
-  border-left: 4px solid #00bc97;
+  border-left: 0;
 }
 
 .contact-quick-info p {
@@ -913,20 +910,6 @@ const closeErrorModal = () => {
 
 .contact-quick-info strong {
   color: #4e3fa5;
-}
-
-.service-info {
-  margin-top: 15px;
-  padding: 8px 12px;
-  background: #f8f9fa;
-  border-radius: 6px;
-  border-left: 3px solid #00bc97;
-}
-
-.service-info p {
-  margin: 0;
-  font-size: 12px;
-  color: #666;
 }
 
 /* 错误弹窗特定样式 */
@@ -963,7 +946,7 @@ const closeErrorModal = () => {
 
 @media (max-width: 900px) {
   .header {
-    height: 400px;
+    height: 240px;
   }
 
   .banner-title {
@@ -981,7 +964,7 @@ const closeErrorModal = () => {
 
 @media (max-width: 600px) {
   .header {
-    height: 350px;
+    height: 220px;
   }
 
   .banner-title {
@@ -1021,7 +1004,7 @@ const closeErrorModal = () => {
     padding: 0 20px;
   }
 
-  .nav-container span {
+  .nav-container button {
     font-size: 16px;
     padding: 6px 12px;
   }
@@ -1029,7 +1012,7 @@ const closeErrorModal = () => {
 
 @media (max-width: 500px) {
   .header {
-    height: 300px;
+    height: 220px;
   }
 
   .banner-title {
@@ -1057,7 +1040,7 @@ const closeErrorModal = () => {
     padding: 0 4px;
   }
 
-  .nav-container span {
+  .nav-container button {
     font-size: 14px;
     padding: 4px 8px;
   }
@@ -1101,4 +1084,34 @@ const closeErrorModal = () => {
     padding: 30px 20px;
   }
 }
+
+.banner-text .banner-title, .banner-title { font-size: 42px; line-height: 1.2; margin-bottom: 14px; }
+.banner-text .banner-divider, .banner-divider { margin: 14px 0; }
+.banner-text .banner-subtitle, .banner-subtitle { font-size: 18px; line-height: 1.55; margin-top: 0; margin-bottom: 0; }
+.form-card { border-radius: var(--vb-radius-panel, 12px); }
+.form-input, .form-textarea, .submit-btn { border-radius: var(--vb-radius-control, 6px); }
+@media (max-width: 767px) {
+  .banner-text { max-width: calc(100% - 32px); }
+  .banner-text .banner-title, .banner-title { font-size: 32px; margin-bottom: 12px; }
+  .banner-text .banner-divider, .banner-divider { margin: 12px 0; }
+  .banner-text .banner-subtitle, .banner-subtitle { font-size: 16px; }
+}
+.contact-form-content { padding: 0 24px; }
+.section-contact-form, .section-company-info { padding: 48px 0; }
+.contact-form-title { max-width: 800px; margin: 0 auto 16px; }
+.form-label { color: #334155; font-size: 16px; font-weight: 500; margin-bottom: 8px; }
+.form-label span { color: #596578; }
+.form-input::placeholder, .form-textarea::placeholder { color: #687586; opacity: 1; }
+.office-details, .company-details { overflow-wrap: anywhere; }
+.nav-container button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+@media (max-width: 767px) {
+  .section-contact-form, .section-company-info { padding: 36px 0; }
+  .contact-form-content, .offices-content, .company-info-content { padding: 0 16px; }
+  .contact-form-title, .offices-title, .company-info-title { font-size: 23px; padding-left: 12px; }
+  .form-card, .company-info-card { padding: 20px; }
+  .form-grid { grid-template-columns: minmax(0, 1fr); }
+  .nav-container { gap: 0; justify-content: space-between; }
+  .nav-container button { padding: 8px; font-size: 14px; white-space: nowrap; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 </style>

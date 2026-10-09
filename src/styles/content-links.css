@@ -1,0 +1,24 @@
+/* Text links remain recognizable without changing navigation or button styles. */
+a { color: #176cb0; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: #124a78; }
+.layout-container .main-content .catalog-body a[href]:not(.manual-download-btn):not(.trial-btn),
+.layout-container .main-content .reagent-detail .detail-section a[href],
+.layout-container .main-content :is(p, dd, td) > a[href],
+.layout-container .main-content :is(.text-link, .company-link, .view-all, .service-explore) {
+  color: #176cb0;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+.layout-container .main-content .catalog-body a[href]:hover,
+.layout-container .main-content .reagent-detail .detail-section a[href]:hover,
+.layout-container .main-content :is(p, dd, td) > a[href]:hover,
+.layout-container .main-content :is(.text-link, .company-link, .view-all, .service-explore):hover {
+  color: #124a78;
+  text-decoration-thickness: 2px;
+}
+.layout-container .main-content .catalog-body a[href]:focus-visible,
+.layout-container .main-content :is(p, dd, td) > a[href]:focus-visible {
+  outline: 2px solid #176cb0;
+  outline-offset: 3px;
+}

@@ -1,6 +1,6 @@
 <template>
   <div class="news-page">
-    <div class="news-banner">
+    <div class="news-banner site-page-header site-page-header--technology">
       <div class="banner-bg">
         <img :src="newsBanner" alt="News Banner" />
       </div>
@@ -13,15 +13,12 @@
           </p>
           <div class="banner-highlights">
             <div class="highlight-item">
-              <span class="highlight-icon">📰</span>
               <span>Breaking News</span>
             </div>
             <div class="highlight-item">
-              <span class="highlight-icon">🔬</span>
               <span>Research Updates</span>
             </div>
             <div class="highlight-item">
-              <span class="highlight-icon">🏢</span>
               <span>Company News</span>
             </div>
           </div>
@@ -32,18 +29,18 @@
       <ul class="news-list">
         <li v-for="item in pagedNews" :key="item.id" class="clearfix">
           <div class="left">
-            <a :href="item.link" target="_blank">
+            <a :href="item.link" target="_blank" rel="noopener noreferrer">
               <img :src="item.img" :alt="item.title" />
             </a>
           </div>
           <div class="right">
             <span class="time">{{ item.date }}</span>
             <h3 class="h3 dot">
-              <a :href="item.link" target="_blank">{{ item.title_en }}</a>
+              <a :href="item.link" target="_blank" rel="noopener noreferrer">{{ item.title_en }}</a>
             </h3>
             <p class="p">{{ item.summary_en }}</p>
           </div>
-          <a :href="item.link" class="right_btn" target="_blank"></a>
+          <a :href="item.link" :aria-label="'Read: ' + item.title_en" class="right_btn" target="_blank" rel="noopener noreferrer"></a>
         </li>
       </ul>
       <div class="pagination">
@@ -90,7 +87,6 @@ import newsImg1 from "@/assets/News/20210518212816098.png";
 import newsImg2 from "@/assets/News/20210518194620735.png";
 import newsImg3 from "@/assets/News/20210505223144669.png";
 import newsImg4 from "@/assets/News/20181102142507871.png";
-import rightBtnGif from "@/assets/News/1.gif";
 import WeGoFastFooter from "@/components/WeGoFastFooter.vue";
 
 const news = ref([
@@ -368,7 +364,7 @@ function goToPage(page) {
   transition: color 0.2s;
 }
 .news-list .h3 a:hover {
-  color: #e95355;
+  color: #243b7b;
 }
 .news-list .p {
   color: #666;
@@ -383,7 +379,7 @@ function goToPage(page) {
   transform: translateY(-50%);
   width: 18px;
   height: 32px;
-  background: url(rightBtnGif) no-repeat center center;
+  background: url("../../assets/News/1.gif") no-repeat center center;
   background-size: contain;
   opacity: 0.2;
 }
@@ -406,9 +402,9 @@ function goToPage(page) {
 }
 .pagination button.active,
 .pagination button:hover {
-  background: #e95355;
+  background: #243b7b;
   color: #fff;
-  border-color: #e95355;
+  border-color: #243b7b;
 }
 .pagination button:disabled {
   color: #bbb;
@@ -489,4 +485,14 @@ function goToPage(page) {
     justify-content: center;
   }
 }
+.banner-text { width: calc(100% - 48px); max-width: 1120px; margin: 0 auto; }
+.banner-title { margin-bottom: 12px; }
+.banner-divider { margin: 12px 0; }
+.banner-subtitle { font-size: 16px; line-height: 1.6; }
+.banner-highlights { display: flex; flex-direction: row; flex-wrap: wrap; gap: 12px 24px; margin-top: 16px; }
+.highlight-item { padding: 0; border: 0; border-radius: 0; background: none; backdrop-filter: none; font-size: 14px; }
+.pagination { flex-wrap: wrap; }
+.pagination button { min-height: 44px; }
+.news-list .h3 a { color: #176cb0; text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 767px) { .banner-text { width: calc(100% - 32px); } }
 </style> 

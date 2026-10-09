@@ -1,10 +1,9 @@
 <template>
-  <MobileOptimizedContent>
-    <div class="detail-page">
-      <!-- 顶部主模块：左图右文按钮 -->
-      <div class="main-info-row">
+  <InstrumentDetailLayout>
+    <template #hero>
+<div class="main-info-row">
         <div class="main-img-col">
-          <img :src="imgMain" class="main-img" alt="SCI_Cycler" />
+          <img :src="imgMain" class="main-img" alt="SCI_Cycler" @click="openPreview(imgMain)" role="button" tabindex="0" @keydown.enter.prevent="openPreview(imgMain)" @keydown.space.prevent="openPreview(imgMain)" aria-label="Enlarge: SCI_Cycler" />
         </div>
         <div class="main-info-col">
           <h1 class="main-title highlight-title">SCI Cycler</h1>
@@ -24,11 +23,15 @@
             </ul>
           </div>
           <div class="main-btns">
-            <a href="/contact_us" class="main-btn contact">Contact Us</a>
-            <a href="#" class="main-btn online">Online</a>
+
+            <router-link :to="{ path: '/instruments', query: { page: $route.query.page } }" class="main-btn catalog">View all instruments</router-link>
           </div>
         </div>
       </div>
+    </template>
+
+      <!-- 顶部主模块：左图右文按钮 -->
+
 
       <!-- 详细介绍区块 -->
       <section class="section-block">
@@ -138,7 +141,7 @@
             :src="imgFeature"
             class="section-img"
             alt="SCI Cycler Features"
-          />
+          @click="openPreview(imgFeature)" role="button" tabindex="0" @keydown.enter.prevent="openPreview(imgFeature)" @keydown.space.prevent="openPreview(imgFeature)" aria-label="Enlarge: SCI Cycler Features" />
         </div>
       </section>
 
@@ -146,7 +149,7 @@
       <section class="section-block">
         <h2 class="section-title">Operating Interface</h2>
         <div class="section-img-row">
-          <img :src="imgUI" class="section-img" alt="Operating Interface" />
+          <img :src="imgUI" class="section-img" alt="Operating Interface" @click="openPreview(imgUI)" role="button" tabindex="0" @keydown.enter.prevent="openPreview(imgUI)" @keydown.space.prevent="openPreview(imgUI)" aria-label="Enlarge: Operating Interface" />
         </div>
         <div class="section-highlight-block">
           <span
@@ -159,7 +162,7 @@
             :src="imgRenaturation"
             class="section-img"
             alt="DNA Renaturation"
-          />
+          @click="openPreview(imgRenaturation)" role="button" tabindex="0" @keydown.enter.prevent="openPreview(imgRenaturation)" @keydown.space.prevent="openPreview(imgRenaturation)" aria-label="Enlarge: DNA Renaturation" />
         </div>
         <div class="section-highlight-block">
           <span
@@ -178,15 +181,15 @@
             :src="imgSpec"
             class="section-img"
             alt="Product Specifications"
-          />
+          @click="openPreview(imgSpec)" role="button" tabindex="0" @keydown.enter.prevent="openPreview(imgSpec)" @keydown.space.prevent="openPreview(imgSpec)" aria-label="Enlarge: Product Specifications" />
         </div>
-        <h3 class="section-title" style="font-size: 1.3rem">
+        <h3 class="section-title">
           Thermal Functions
         </h3>
         <div class="section-img-row">
-          <img :src="imgThermal" class="section-img" alt="Thermal Functions" />
+          <img :src="imgThermal" class="section-img" alt="Thermal Functions" @click="openPreview(imgThermal)" role="button" tabindex="0" @keydown.enter.prevent="openPreview(imgThermal)" @keydown.space.prevent="openPreview(imgThermal)" aria-label="Enlarge: Thermal Functions" />
         </div>
-        <h3 class="section-title" style="font-size: 1.3rem">
+        <h3 class="section-title">
           Gradient Functions
         </h3>
         <div class="section-img-row">
@@ -194,15 +197,15 @@
             :src="imgGradient"
             class="section-img"
             alt="Gradient Functions"
-          />
+          @click="openPreview(imgGradient)" role="button" tabindex="0" @keydown.enter.prevent="openPreview(imgGradient)" @keydown.space.prevent="openPreview(imgGradient)" aria-label="Enlarge: Gradient Functions" />
         </div>
-        <h3 class="section-title" style="font-size: 1.3rem">
+        <h3 class="section-title">
           Heated Lid Functions
         </h3>
         <div class="section-img-row">
-          <img :src="imgLid" class="section-img" alt="Heated Lid Functions" />
+          <img :src="imgLid" class="section-img" alt="Heated Lid Functions" @click="openPreview(imgLid)" role="button" tabindex="0" @keydown.enter.prevent="openPreview(imgLid)" @keydown.space.prevent="openPreview(imgLid)" aria-label="Enlarge: Heated Lid Functions" />
         </div>
-        <h3 class="section-title" style="font-size: 1.3rem">
+        <h3 class="section-title">
           Programming Functions
         </h3>
         <div class="section-img-row">
@@ -210,13 +213,13 @@
             :src="imgProgram"
             class="section-img"
             alt="Programming Functions"
-          />
+          @click="openPreview(imgProgram)" role="button" tabindex="0" @keydown.enter.prevent="openPreview(imgProgram)" @keydown.space.prevent="openPreview(imgProgram)" aria-label="Enlarge: Programming Functions" />
         </div>
-        <h3 class="section-title" style="font-size: 1.3rem">
+        <h3 class="section-title">
           Other Specifications
         </h3>
         <div class="section-img-row">
-          <img :src="imgOther" class="section-img" alt="Other Specifications" />
+          <img :src="imgOther" class="section-img" alt="Other Specifications" @click="openPreview(imgOther)" role="button" tabindex="0" @keydown.enter.prevent="openPreview(imgOther)" @keydown.space.prevent="openPreview(imgOther)" aria-label="Enlarge: Other Specifications" />
         </div>
       </section>
 
@@ -239,12 +242,15 @@
           *For research use only. Not for diagnostics
         </div>
       </section>
-    </div>
-  </MobileOptimizedContent>
+
+    <InstrumentImagePreview v-model="previewImg" title="SCI Cycler" />
+  </InstrumentDetailLayout>
 </template>
 
 <script setup>
-import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
+import { ref } from "vue";
+import InstrumentDetailLayout from "@/components/Business/InstrumentDetailLayout.vue";
+import InstrumentImagePreview from "@/components/Business/InstrumentImagePreview.vue";
 import imgMain from "@/assets/instrumentsDetail/SCI_Cycler/1740555330129063.jpg";
 import imgFeature from "@/assets/instrumentsDetail/SCI_Cycler/1721706546689701.png";
 import imgUI from "@/assets/instrumentsDetail/SCI_Cycler/1721706576152708.png";
@@ -257,165 +263,14 @@ import imgProgram from "@/assets/instrumentsDetail/SCI_Cycler/1721707760142197.p
 import imgOther from "@/assets/instrumentsDetail/SCI_Cycler/1721707130104720.png";
 import pdfIcon from "@/assets/instrumentsDetail/SCI_Cycler/pdf.svg";
 
+const previewImg = ref(null);
+function openPreview(image) { previewImg.value = image; }
+
 const pdfUrl1 = "/pdf/SCI_Cycler_Brochure-EN.pdf";
 const pdfUrl2 = "/pdf/SCI_Cycler_Pamphlet.pdf";
 </script>
 
 <style scoped>
-.detail-page {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 40px 24px 60px 24px;
-  background: #fff;
-}
-.main-info-row {
-  display: flex;
-  gap: 48px;
-  align-items: center;
-  margin-bottom: 48px;
-}
-.main-img-col {
-  flex: 0 0 420px;
-}
-.main-img {
-  width: 100%;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-}
-.main-info-col {
-  flex: 1;
-}
-.main-title {
-  font-size: 2.8rem;
-  font-weight: 800;
-  margin-bottom: 18px;
-  color: #1a237e;
-}
-.highlight-title {
-  border-left: 8px solid #1976d2;
-  padding-left: 18px;
-  background: linear-gradient(90deg, #e3f2fd 60%, transparent 100%);
-}
-.main-desc {
-  font-size: 1.2rem;
-  margin-bottom: 24px;
-}
-.main-desc ul {
-  padding-left: 18px;
-}
-.main-desc li {
-  font-size: 1.18rem;
-  color: #1976d2;
-  margin-bottom: 8px;
-  font-weight: 600;
-}
-.main-btns {
-  display: flex;
-  gap: 18px;
-}
-.main-btn {
-  display: inline-block;
-  padding: 12px 32px;
-  font-size: 1.1rem;
-  font-weight: 700;
-  border-radius: 8px;
-  background: #1976d2;
-  color: #fff;
-  text-decoration: none;
-  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
-  transition: background 0.2s;
-}
-.main-btn.contact {
-  background: #43a047;
-}
-.main-btn.online {
-  background: #1976d2;
-}
-.main-btn:hover {
-  background: #1565c0;
-}
-.section-block {
-  margin-bottom: 56px;
-}
-.section-title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 24px;
-  color: #1976d2;
-  border-left: 6px solid #1976d2;
-  padding-left: 16px;
-}
-.section-highlight-block {
-  background: #e3f2fd;
-  border-radius: 10px;
-  padding: 24px 32px;
-  font-size: 1.18rem;
-  margin-bottom: 28px;
-  color: #1a237e;
-  font-weight: 500;
-  text-align: center;
-}
-.section-video-row {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 18px;
-}
-.section-video {
-  width: 80%;
-  max-width: 700px;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(25, 118, 210, 0.08);
-}
-.intro-features-cards {
-  display: flex;
-  gap: 32px;
-  margin-bottom: 18px;
-}
-.feature-col {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-.feature-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  background: #f5faff;
-  border-radius: 8px;
-  padding: 16px 18px;
-  font-size: 1.05rem;
-  box-shadow: 0 1px 4px rgba(25, 118, 210, 0.04);
-}
-.feature-item .dot {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: #1976d2;
-  margin-top: 7px;
-  flex-shrink: 0;
-}
-.feature-item b {
-  font-size: 1.08rem;
-  color: #1976d2;
-  font-weight: 700;
-}
-.feature-desc {
-  font-size: 0.98rem;
-  color: #333;
-  margin-top: 2px;
-}
-.section-img-row {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 18px;
-}
-.section-img {
-  width: 90%;
-  max-width: 900px;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(25, 118, 210, 0.08);
-}
 .pdf-download-row {
   display: flex;
   align-items: center;
@@ -434,137 +289,6 @@ const pdfUrl2 = "/pdf/SCI_Cycler_Pamphlet.pdf";
 }
 /* 移动端优化 */
 @media (max-width: 900px) {
-  .detail-page {
-    padding: 20px 16px 40px 16px;
-  }
-
-  .main-info-row {
-    flex-direction: column;
-    gap: 20px;
-    margin-bottom: 32px;
-  }
-
-  .main-img-col {
-    width: 100%;
-    flex: none;
-  }
-
-  .main-img {
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(25, 118, 210, 0.12);
-  }
-
-  .main-title {
-    font-size: 1.8rem !important;
-    margin-bottom: 16px !important;
-    text-align: center;
-  }
-
-  .main-desc {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  .main-desc p {
-    font-size: 0.95rem !important;
-    margin: 8px 0 !important;
-  }
-
-  .main-desc ul {
-    text-align: left;
-    margin: 16px 0 !important;
-    padding-left: 20px !important;
-  }
-
-  .main-desc li {
-    font-size: 0.9rem !important;
-    line-height: 1.6 !important;
-    margin-bottom: 8px !important;
-  }
-
-  .main-btns {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-  }
-
-  .main-btn {
-    width: 100% !important;
-    text-align: center !important;
-    padding: 14px 20px !important;
-    font-size: 1rem !important;
-    border-radius: 25px !important;
-    font-weight: 600 !important;
-    transition: all 0.3s ease !important;
-    -webkit-tap-highlight-color: rgba(25, 118, 210, 0.2) !important;
-    touch-action: manipulation !important;
-  }
-
-  .main-btn:active {
-    transform: scale(0.98) !important;
-  }
-
-  .section-block {
-    margin-bottom: 32px !important;
-    padding: 0 !important;
-  }
-
-  .section-title {
-    font-size: 1.5rem !important;
-    margin-bottom: 20px !important;
-    text-align: center !important;
-  }
-
-  .section-highlight-block {
-    font-size: 0.9rem !important;
-    line-height: 1.6 !important;
-    text-align: center !important;
-    padding: 16px !important;
-    margin: 20px 0 !important;
-    border-radius: 12px !important;
-  }
-
-  .intro-features-cards {
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .feature-col {
-    width: 100% !important;
-  }
-
-  .feature-item {
-    padding: 16px !important;
-    margin-bottom: 12px !important;
-    border-radius: 12px !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
-    background: #f8f9fa !important;
-  }
-
-  .feature-item b {
-    font-size: 1rem !important;
-    color: #1976d2 !important;
-  }
-
-  .feature-desc {
-    font-size: 0.85rem !important;
-    line-height: 1.5 !important;
-    margin-top: 8px !important;
-    color: #555 !important;
-  }
-
-  .section-img-row {
-    text-align: center;
-    margin: 20px 0 !important;
-  }
-
-  .section-img-row img {
-    max-width: 100% !important;
-    height: auto !important;
-    border-radius: 12px !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
-  }
 
   .pdf-download-row {
     display: flex !important;
@@ -597,4 +321,4 @@ const pdfUrl2 = "/pdf/SCI_Cycler_Pamphlet.pdf";
     color: #1565c0 !important;
   }
 }
-</style> 
+</style>

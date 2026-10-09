@@ -1,11 +1,11 @@
 <template>
-  <MobileOptimizedContent>
+  <CatalogContent title="Lateral Chromatography" family="Reagent">
     <div class="lateral-chromatography-page">
-      <h1 class="main-title">Lateral Chromatography</h1>
 
-      <MobileOptimizedTabs :tabs="tabList" v-model="tab">
+
+      <CatalogTabs :tabs="tabList" v-model="tab">
         <section v-if="tab === 'intro'">
-          <div class="section-title">Colored Microspheres</div>
+          <h2 class="section-title">Colored Microspheres</h2>
           <p>
             Utilizing the unique internal saturated dyeing process, we have
             developed a series of colored microspheres for the biological
@@ -18,7 +18,7 @@
             technology platforms.
           </p>
           <div class="divider"></div>
-          <div class="section-title">Fluorescent Microspheres</div>
+          <h2 class="section-title">Fluorescent Microspheres</h2>
           <p>
             VDobiotech fluorescent microspheres are specifically designed for
             ultra-sensitive "lateral chromatography", which can read data
@@ -30,9 +30,9 @@
             which is an ideal choice for quantitative detection reagents.
           </p>
           <div class="divider"></div>
-          <div class="section-title">
+          <h2 class="section-title">
             Time-resolved Fluorescent Microspheres
-          </div>
+          </h2>
           <p>
             VDobiotech time-resolved fluorescent microspheres are specifically
             designed for ultra-sensitive "lateral chromatography", which can
@@ -45,9 +45,9 @@
             quantitative detection reagents.
           </p>
           <div class="divider"></div>
-          <div class="section-title">
+          <h2 class="section-title">
             High-signal Time-resolved Fluorescent Microspheres
-          </div>
+          </h2>
           <p>
             Time-resolved fluorescent microspheres contain rare earth elements
             (Eu), with long fluorescence lifetime, large Stokes shift, and
@@ -60,7 +60,7 @@
         </section>
 
         <section v-if="tab === 'case'">
-          <div class="section-title">Application Cases</div>
+          <h2 class="section-title">Application Cases</h2>
           <ul>
             <li>
               <a
@@ -73,7 +73,7 @@
               <a
                 href="https://www.vdobiotech.com.cn/group1/0a/baf13d95c4974533a11d5e0dd2bb7a9d.pdf"
                 target="_blank"
-                >FAQ for lateral chromatography microspheres</a
+                 rel="noopener noreferrer">FAQ for lateral chromatography microspheres</a
               >
             </li>
             <li>
@@ -115,7 +115,7 @@
         </section>
 
         <section v-if="tab === 'order'">
-          <div class="section-title">Order Information</div>
+          <h2 class="section-title">Order Information</h2>
           <div class="order-group-list">
             <div
               v-for="(group, gidx) in orderGroups"
@@ -130,33 +130,27 @@
                   class="img-center"
                 >
                   <p v-if="item.label">{{ item.label }}</p>
-                  <img
+                  <img role="button" tabindex="0" aria-label="Enlarge image"
                     :src="item.img"
                     :alt="item.label || 'Order Image'"
                     class="main-img"
-                    @click="openModal(item.img)"
                   />
                 </div>
               </div>
             </div>
           </div>
         </section>
-      </MobileOptimizedTabs>
+      </CatalogTabs>
 
-      <div v-if="modalImg" class="img-modal" @click.self="closeModal">
-        <div class="modal-content">
-          <img :src="modalImg" alt="Preview Image" />
-          <button class="close-btn" @click="closeModal">×</button>
-        </div>
-      </div>
+
     </div>
-  </MobileOptimizedContent>
+  </CatalogContent>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
-import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
+import CatalogContent from "@/components/Business/CatalogContent.vue";
+import CatalogTabs from "@/components/Business/CatalogTabs.vue";
 import img1 from "@/assets/Reagent/lateral/lateral-1/10001.png";
 import img2 from "@/assets/Reagent/lateral/lateral-1/10002.png";
 import img3 from "@/assets/Reagent/lateral/lateral-1/10003.png";
@@ -215,84 +209,9 @@ const orderGroups = [
     ],
   },
 ];
-const modalImg = ref(null);
-const openModal = (img) => {
-  modalImg.value = img;
-};
-const closeModal = () => {
-  modalImg.value = null;
-};
 </script>
 
 <style scoped>
-.lateral-chromatography-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 24px 48px 24px;
-  background: #f8fafc;
-  min-height: 100vh;
-  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans", Arial, sans-serif;
-}
-.main-title {
-  text-align: center;
-  font-size: 2.6rem;
-  font-weight: 700;
-  color: #223a5e;
-  margin-bottom: 36px;
-  letter-spacing: 2px;
-}
-.tab-nav {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  margin-bottom: 36px;
-  border-bottom: 2px solid #e0e4ea;
-}
-.tab-item {
-  font-size: 1.1rem;
-  color: #204a6d;
-  padding: 8px 24px 10px 24px;
-  cursor: pointer;
-  font-weight: 500;
-  border-bottom: 2.5px solid transparent;
-  transition: color 0.2s, border-color 0.2s, font-weight 0.2s;
-}
-.tab-item.active {
-  color: #1a2a3a;
-  font-weight: 700;
-  border-bottom: 2.5px solid #204a6d;
-  background: #f7f9fb;
-}
-.tab-item:hover {
-  color: #2b7bbf;
-}
-.tab-bar {
-  display: none;
-}
-.section-title {
-  font-size: 1.35rem;
-  font-weight: 600;
-  color: #223a5e;
-  border-left: 5px solid #409eff;
-  padding-left: 16px;
-  margin: 36px 0 18px 0;
-  background: none;
-}
-.divider {
-  height: 1px;
-  background: #e0e6ed;
-  margin: 32px 0;
-  border: none;
-}
-ul {
-  padding-left: 24px;
-  margin-bottom: 18px;
-}
-li {
-  margin-bottom: 8px;
-  font-size: 1.05rem;
-  color: #3a4664;
-}
 .order-group-list {
   display: flex;
   flex-direction: column;
@@ -336,90 +255,4 @@ li {
   font-weight: 500;
   text-align: center;
 }
-.main-img {
-  max-width: 320px;
-  width: 100%;
-  max-height: 240px;
-  border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(34, 58, 94, 0.1);
-  cursor: pointer;
-  transition: box-shadow 0.25s, border 0.25s, transform 0.25s;
-  border: 2px solid transparent;
-  margin-top: 8px;
-}
-.main-img:hover {
-  box-shadow: 0 8px 32px rgba(64, 158, 255, 0.18);
-  border: 2px solid #409eff;
-  transform: scale(1.04);
-}
-.img-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 32px 0 24px 0;
-}
-.img-modal {
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(34, 58, 94, 0.65);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.modal-content {
-  position: relative;
-  background: #fff;
-  border-radius: 16px;
-  padding: 32px 32px 16px 32px;
-  box-shadow: 0 8px 40px rgba(34, 58, 94, 0.18);
-  max-width: 90vw;
-  max-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.modal-content img {
-  max-width: 800px;
-  max-height: 70vh;
-  border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(34, 58, 94, 0.1);
-}
-.close-btn {
-  position: absolute;
-  top: 12px;
-  right: 18px;
-  background: #223a5e;
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  font-size: 1.6rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s;
-}
-.close-btn:hover {
-  background: #409eff;
-}
-@media (max-width: 900px) {
-  .lateral-chromatography-page {
-    max-width: 100vw;
-    padding: 16px 4vw 32px 4vw;
-  }
-  .main-img {
-    max-width: 98vw;
-    max-height: 40vw;
-  }
-  .modal-content img {
-    max-width: 96vw;
-    max-height: 60vw;
-  }
-}
-</style> 
+</style>

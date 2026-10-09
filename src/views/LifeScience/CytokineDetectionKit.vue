@@ -1,12 +1,12 @@
 <template>
-  <MobileOptimizedContent>
+  <CatalogContent title="Cytokine Detection Kit" family="Life Science">
     <div class="homogeneous-page">
-      <h1 class="main-title">Cytokine Detection Kit</h1>
 
-      <MobileOptimizedTabs :tabs="tabs" v-model="currentTab">
+
+      <CatalogTabs :tabs="tabs" v-model="currentTab">
         <!-- Tab Content: Product Introduction -->
         <section v-if="currentTab === 'intro'" class="intro">
-          <div class="section-title">Product Introduction</div>
+          <h2 class="section-title">Product Introduction</h2>
           <p>
             Cytokines are soluble proteins produced by various cells of the
             immune system, such as neutrophils, monocytes, macrophages, B cells,
@@ -33,22 +33,21 @@
             serum.
           </p>
           <p>
-            <a href="#" @click.prevent="openPreview(pdfSolution)"
+            <a :href="pdfSolution" target="_blank" rel="noopener noreferrer"
               >Homogeneous Luminescence Solution</a
             >
           </p>
           <div class="img-block">
-            <img
+            <img role="button" tabindex="0" aria-label="Enlarge image"
               :src="img1"
               alt="image.png"
               class="intro-img"
-              @click="openPreview(img1)"
             />
           </div>
-          <div class="section-title" style="margin-top: 36px">
+          <h2 class="section-title" style="margin-top: 36px">
             Product Features
-          </div>
-          <ul>
+          </h2>
+<ul class="catalog-features">
             <li>
               Homogeneous, wash-free reaction mode, convenient and efficient,
               compatible with automated instruments
@@ -66,20 +65,19 @@
               cell supernatant and serum
             </li>
           </ul>
-          <div class="section-title" style="margin-top: 36px">
+          <h2 class="section-title" style="margin-top: 36px">
             Application Scenarios
-          </div>
+          </h2>
           <div class="img-block">
-            <img
+            <img role="button" tabindex="0" aria-label="Enlarge image"
               :src="img2"
               alt="Application Scenarios"
               class="intro-img"
-              @click="openPreview(img2)"
             />
           </div>
-          <div class="section-title" style="margin-top: 36px">
+          <h2 class="section-title" style="margin-top: 36px">
             Detection Principle
-          </div>
+          </h2>
           <p>
             Taking the Human IL-6 (hIL-6) Detection Kit as an example: The core
             components of the kit include hIL-6 antibody 1 crosslinked to
@@ -96,16 +94,15 @@
             hIL-6 in the analyte.
           </p>
           <div class="img-block">
-            <img
+            <img role="button" tabindex="0" aria-label="Enlarge image"
               :src="img3"
               alt="Detection Principle"
               class="intro-img"
-              @click="openPreview(img3)"
             />
           </div>
-          <div class="section-title" style="margin-top: 36px">
+          <h2 class="section-title" style="margin-top: 36px">
             Validation Data
-          </div>
+          </h2>
           <p>
             The detection performance of this series of kits has been fully
             validated under different procedures to ensure the reliability of
@@ -118,20 +115,18 @@
           <div class="verify-block">
             <div class="verify-item">
               <span class="verify-title">1. Dynamic Range:</span> 0-30000 pg/mL
-              <img
+              <img role="button" tabindex="0" aria-label="Enlarge image"
                 :src="img4"
                 alt="Dynamic Range"
                 class="intro-img"
-                @click="openPreview(img4)"
               />
             </div>
             <div class="verify-item">
               <span class="verify-title">2. Linear Range:</span> 0.13~3000 pg/mL
-              <img
+              <img role="button" tabindex="0" aria-label="Enlarge image"
                 :src="img5"
                 alt="Linear Range"
                 class="intro-img"
-                @click="openPreview(img5)"
               />
             </div>
             <div class="verify-item">
@@ -140,55 +135,50 @@
               calculated. The mean signal + 2×SD was calculated using the
               standard curve, and the corresponding concentration value is the
               limit of blank.
-              <img
+              <img role="button" tabindex="0" aria-label="Enlarge image"
                 :src="img6"
                 alt="Limit of Blank"
                 class="intro-img"
-                @click="openPreview(img6)"
               />
             </div>
             <div class="verify-item">
               <span class="verify-title">4. Repeatability:</span> High and low
               concentration samples were tested 10 times, and the concentration
               CV was calculated.
-              <img
+              <img role="button" tabindex="0" aria-label="Enlarge image"
                 :src="img7"
                 alt="Repeatability"
                 class="intro-img"
-                @click="openPreview(img7)"
               />
             </div>
             <div class="verify-item">
               <span class="verify-title">5. Intermediate Precision:</span> High
               and low value samples were tested in 5 rounds, each round repeated
               5 times, and the concentration CV was calculated.
-              <img
+              <img role="button" tabindex="0" aria-label="Enlarge image"
                 :src="img8"
                 alt="Intermediate Precision"
                 class="intro-img"
-                @click="openPreview(img8)"
               />
             </div>
             <div class="verify-item">
               <span class="verify-title">6. Accuracy:</span> High and low
               concentration hIL-6 samples were mixed at a 1:9 ratio and the
               recovery rate was tested.
-              <img
+              <img role="button" tabindex="0" aria-label="Enlarge image"
                 :src="img9"
                 alt="Accuracy"
                 class="intro-img"
-                @click="openPreview(img9)"
               />
             </div>
             <div class="verify-item">
               <span class="verify-title">7. Specificity:</span> The following
               proteins were diluted to 0.05 μg/mL with calibrator buffer and the
               cross-interference rate was tested.
-              <img
+              <img role="button" tabindex="0" aria-label="Enlarge image"
                 :src="img10"
                 alt="Specificity"
                 class="intro-img"
-                @click="openPreview(img10)"
               />
             </div>
             <div class="verify-item">
@@ -196,27 +186,25 @@
               material NIBSC 89/548 was tested, 1 IU/mL ≈ 5 pg/mL.
             </div>
           </div>
-          <div class="section-title" style="margin-top: 36px">
+          <h2 class="section-title" style="margin-top: 36px">
             Summary of Cytokine Detection Kit Performance Parameters
-          </div>
+          </h2>
           <div class="img-block">
-            <img
+            <img role="button" tabindex="0" aria-label="Enlarge image"
               :src="img11"
               alt="Performance Parameter Summary"
               class="intro-img"
-              @click="openPreview(img11)"
             />
           </div>
-          <div class="section-title" style="margin-top: 36px">Product List</div>
+          <h2 class="section-title" style="margin-top: 36px">Product List</h2>
           <div class="img-block">
-            <img
+            <img role="button" tabindex="0" aria-label="Enlarge image"
               :src="img12"
               alt="Product List"
               class="intro-img"
-              @click="openPreview(img12)"
             />
           </div>
-          <div class="section-title" style="margin-top: 36px">References</div>
+          <h2 class="section-title" style="margin-top: 36px">References</h2>
           <ul>
             <li>
               Foster JR. The functions of cytokines and their uses in
@@ -228,12 +216,12 @@
             </li>
           </ul>
         </section>
-        <!-- Tab Content: Manual Download -->
-        <section v-if="currentTab === 'manual'" class="manuals">
-          <div class="section-title">Manual Download</div>
+        <!-- Tab Content: Product Manuals -->
+        <section v-if="currentTab === 'manual'" class="catalog-resources manuals">
+          <h2 class="section-title">Product Manuals</h2>
           <ul class="manual-list">
             <li v-for="file in manualFiles" :key="file.name">
-              <a :href="file.url" :download="file.name" target="_blank">
+              <a :href="file.url" target="_blank" rel="noopener noreferrer">
                 <i class="el-icon-document" style="margin-right: 6px"></i
                 >{{ file.name }}
               </a>
@@ -241,23 +229,16 @@
           </ul>
         </section>
         <!-- 图片预览弹窗 -->
-        <div
-          v-if="previewImg"
-          class="img-preview-modal"
-          @click.self="closePreview"
-        >
-          <img :src="previewImg" class="img-preview-large" @click.stop />
-          <span class="img-preview-close" @click="closePreview">×</span>
-        </div>
-      </MobileOptimizedTabs>
+
+      </CatalogTabs>
     </div>
-  </MobileOptimizedContent>
+  </CatalogContent>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
-import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
+import CatalogContent from "@/components/Business/CatalogContent.vue";
+import CatalogTabs from "@/components/Business/CatalogTabs.vue";
 import img1 from "@/assets/LifeScience/homogeneous/homogeneous-5/ec96b788557648bc854058eb3975768e.png";
 import img2 from "@/assets/LifeScience/homogeneous/homogeneous-5/dc6cf56d793042a6ba4bb67616d80e94.png";
 import img3 from "@/assets/LifeScience/homogeneous/homogeneous-5/b41b355f20dd400180242613e120c651.png";
@@ -296,13 +277,6 @@ const tabs = [
   { key: "manual", label: "Manual" },
 ];
 const currentTab = ref("intro");
-const previewImg = ref("");
-const openPreview = (img) => {
-  previewImg.value = img;
-};
-const closePreview = () => {
-  previewImg.value = "";
-};
 const manualFiles = [
   { name: "SH2201 Cytokine Detection Kit Manual.pdf", url: pdfSH2201 },
   { name: "SH2203 Cytokine Detection Kit Manual.pdf", url: pdfSH2203 },
@@ -327,166 +301,9 @@ const manualFiles = [
 </script>
 
 <style scoped>
-.homogeneous-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 24px 48px 24px;
-  background: #f8fafc;
-  min-height: 100vh;
-  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans", Arial, sans-serif;
-}
-.main-title {
-  text-align: center;
-  font-size: 2.6rem;
-  font-weight: 700;
-  color: #223a5e;
-  margin-bottom: 36px;
-  letter-spacing: 2px;
-}
-.tab-nav {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  margin-bottom: 36px;
-  border-bottom: 2px solid #e0e4ea;
-}
-.tab-item {
-  font-size: 1.1rem;
-  color: #204a6d;
-  padding: 8px 24px 10px 24px;
-  cursor: pointer;
-  font-weight: 500;
-  border-bottom: 2.5px solid transparent;
-  transition: color 0.2s, border-color 0.2s, font-weight 0.2s;
-}
-.tab-item.active {
-  color: #1a2a3a;
-  font-weight: 700;
-  border-bottom: 2.5px solid #204a6d;
-  background: #f7f9fb;
-}
-.tab-item:hover {
-  color: #2b7bbf;
-}
-.section-title {
-  font-size: 1.35rem;
-  font-weight: 600;
-  color: #223a5e;
-  border-left: 5px solid #409eff;
-  padding-left: 16px;
-  margin: 36px 0 18px 0;
-  background: none;
-}
-.divider {
-  height: 1px;
-  background: #e0e6ed;
-  margin: 32px 0;
-  border: none;
-}
-ul,
-ol {
-  padding-left: 24px;
-  margin-bottom: 18px;
-}
-li {
-  margin-bottom: 8px;
-  font-size: 1.05rem;
-  color: #3a4664;
-}
-p {
-  font-size: 1.08rem;
-  color: #333;
-  margin-bottom: 18px;
-  line-height: 1.9;
-}
 a {
   color: #409eff;
   text-decoration: underline;
-}
-.manual-list {
-  list-style: none;
-  padding: 0;
-}
-.manual-list li {
-  margin-bottom: 12px;
-}
-.manual-list a {
-  color: #204a6d;
-  text-decoration: none;
-  font-size: 1.08rem;
-  transition: color 0.2s;
-}
-.manual-list a:hover {
-  color: #409eff;
-  text-decoration: underline;
-}
-.img-block {
-  margin: 18px 0;
-  text-align: center;
-}
-.intro-img,
-.img-block img {
-  max-width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  cursor: pointer;
-  transition: box-shadow 0.2s;
-}
-.img-block img:hover {
-  box-shadow: 0 4px 16px rgba(64, 158, 255, 0.18);
-}
-.img-preview-modal {
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.55);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.img-preview-large {
-  max-width: 90vw;
-  max-height: 80vh;
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.18);
-}
-.img-preview-close {
-  position: absolute;
-  top: 40px;
-  right: 60px;
-  font-size: 2.5rem;
-  color: #fff;
-  cursor: pointer;
-  font-weight: bold;
-  z-index: 10000;
-}
-.intro-img {
-  display: block;
-  max-width: 600px;
-  width: 100%;
-  margin: 18px auto 24px auto;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px #0001;
-  cursor: pointer;
-  transition: box-shadow 0.2s;
-}
-@media (max-width: 900px) {
-  .homogeneous-page {
-    max-width: 100vw;
-    padding: 16px 4vw 32px 4vw;
-  }
-  .img-preview-close {
-    top: 12px;
-    right: 16px;
-  }
-  .intro-img {
-    max-width: 98vw;
-    margin: 12px auto 18px auto;
-  }
 }
 .verify-block {
   margin: 18px 0 24px 0;
@@ -499,4 +316,4 @@ a {
   font-size: 1.08rem;
   margin-right: 8px;
 }
-</style> 
+</style>

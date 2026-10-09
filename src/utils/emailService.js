@@ -102,50 +102,50 @@ export const validateFormData = (formData) => {
 
   // 检查必填字段
   if (!formData.firstName || formData.firstName.trim() === "") {
-    errors.push("姓名为必填项");
+    errors.push("First name is required");
   }
 
   if (!formData.lastName || formData.lastName.trim() === "") {
-    errors.push("姓名为必填项");
+    errors.push("Last name is required");
   }
 
   if (!formData.email || formData.email.trim() === "") {
-    errors.push("邮箱为必填项");
+    errors.push("Email is required");
   } else {
     // 验证邮箱格式
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
-      errors.push("邮箱格式不正确");
+      errors.push("Please enter a valid email address");
     }
   }
 
   if (!formData.message || formData.message.trim() === "") {
-    errors.push("留言内容为必填项");
+    errors.push("Message is required");
   }
 
   // 检查字段长度
   if (formData.firstName && formData.firstName.length > 50) {
-    errors.push("姓名字段过长");
+    errors.push("First name must be 50 characters or fewer");
   }
 
   if (formData.lastName && formData.lastName.length > 50) {
-    errors.push("姓名字段过长");
+    errors.push("Last name must be 50 characters or fewer");
   }
 
   if (formData.email && formData.email.length > 100) {
-    errors.push("邮箱字段过长");
+    errors.push("Email must be 100 characters or fewer");
   }
 
   if (formData.company && formData.company.length > 100) {
-    errors.push("公司名字段过长");
+    errors.push("Company name must be 100 characters or fewer");
   }
 
   if (formData.phone && formData.phone.length > 20) {
-    errors.push("电话号码字段过长");
+    errors.push("Phone number must be 20 characters or fewer");
   }
 
   if (formData.message && formData.message.length > 2000) {
-    errors.push("留言内容过长（超过2000字符）");
+    errors.push("Message must be 2,000 characters or fewer");
   }
 
   return {

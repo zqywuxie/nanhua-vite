@@ -1,13 +1,13 @@
 <template>
-  <MobileOptimizedContent>
+  <CatalogContent title="Chemiluminescence" family="Reagent">
     <div class="chemiluminescence-page">
-      <h1 class="main-title">Chemiluminescence</h1>
+
 
       <!-- 使用移动端优化的Tab组件 -->
-      <MobileOptimizedTabs :tabs="tabs" v-model="currentTab">
+      <CatalogTabs :tabs="tabs" v-model="currentTab">
         <!-- Tab 内容 -->
         <section v-if="currentTab === 'intro'" class="intro">
-          <div class="section-title">Product Introduction</div>
+          <h2 class="section-title">Product Introduction</h2>
           <p>
             Vdobiotech's magnetic microspheres for chemiluminescence have
             excellent superparamagnetism and suitable magnetic content, with
@@ -23,8 +23,8 @@
             applications of our customers.
           </p>
           <div class="divider"></div>
-          <div class="section-title">Product Advantages</div>
-          <ul>
+          <h2 class="section-title">Product Advantages</h2>
+<ul class="catalog-features">
             <li>
               <b>High Magnetic Content</b>: Short magnetic response time, can
               reach within 10s
@@ -100,11 +100,10 @@
 
         <section v-if="currentTab === 'order'" class="order-info">
           <h2>Order Information</h2>
-          <img
+          <img role="button" tabindex="0" aria-label="Enlarge image"
             :src="orderImg"
             alt="Order Information"
             class="preview-img"
-            @click="openPreview(orderImg)"
           />
         </section>
 
@@ -117,27 +116,20 @@
             ><b>Click to Apply for Trial</b></a
           >
         </section>
-      </MobileOptimizedTabs>
+      </CatalogTabs>
 
       <div class="divider"></div>
 
       <!-- 图片预览弹窗 -->
-      <div
-        v-if="previewImg"
-        class="img-preview-modal"
-        @click.self="closePreview"
-      >
-        <img :src="previewImg" class="img-preview-large" @click.stop />
-        <span class="img-preview-close" @click="closePreview">×</span>
-      </div>
+
     </div>
-  </MobileOptimizedContent>
+  </CatalogContent>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
-import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
+import CatalogContent from "@/components/Business/CatalogContent.vue";
+import CatalogTabs from "@/components/Business/CatalogTabs.vue";
 
 // Tab 配置
 const tabs = [
@@ -151,84 +143,9 @@ const currentTab = ref("intro");
 // 图片采用import相对路径
 import orderImg from "@/assets/Reagent/chem/10001.png";
 
-const previewImg = ref(null);
-function openPreview(img) {
-  previewImg.value = img;
-}
-function closePreview() {
-  previewImg.value = null;
-}
 </script>
 
 <style scoped>
-.chemiluminescence-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 24px 48px 24px;
-  background: #f8fafc;
-  min-height: 100vh;
-  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans", Arial, sans-serif;
-}
-.main-title {
-  text-align: center;
-  font-size: 2.6rem;
-  font-weight: 700;
-  color: #223a5e;
-  margin-bottom: 36px;
-  letter-spacing: 2px;
-}
-.tab-nav {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  margin-bottom: 36px;
-  border-bottom: 2px solid #e0e4ea;
-}
-.tab-item {
-  font-size: 1.1rem;
-  color: #204a6d;
-  padding: 8px 24px 10px 24px;
-  cursor: pointer;
-  font-weight: 500;
-  border-bottom: 2.5px solid transparent;
-  transition: color 0.2s, border-color 0.2s, font-weight 0.2s;
-}
-.tab-item.active {
-  color: #1a2a3a;
-  font-weight: 700;
-  border-bottom: 2.5px solid #204a6d;
-  background: #f7f9fb;
-}
-.tab-item:hover {
-  color: #2b7bbf;
-}
-.tab-bar {
-  display: none;
-}
-.section-title {
-  font-size: 1.35rem;
-  font-weight: 600;
-  color: #223a5e;
-  border-left: 5px solid #409eff;
-  padding-left: 16px;
-  margin: 36px 0 18px 0;
-  background: none;
-}
-.divider {
-  height: 1px;
-  background: #e0e6ed;
-  margin: 32px 0;
-  border: none;
-}
-ul {
-  padding-left: 24px;
-  margin-bottom: 18px;
-}
-li {
-  margin-bottom: 8px;
-  font-size: 1.05rem;
-  color: #3a4664;
-}
 .application ol {
   padding-left: 20px;
 }
@@ -237,26 +154,6 @@ li {
   color: #555;
   margin-bottom: 6px;
   line-height: 1.8;
-}
-.preview-img {
-  display: block;
-  margin: 24px auto 0 auto;
-  border-radius: 8px;
-  background: #fff;
-  border: 1.5px solid #e0e4ea;
-  box-shadow: none;
-  max-width: 600px;
-  max-height: 400px;
-  width: 100%;
-  object-fit: contain;
-  cursor: pointer;
-  transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
-}
-.preview-img:hover {
-  box-shadow: 0 4px 24px rgba(32, 74, 109, 0.18);
-  border-color: #204a6d;
-  z-index: 2;
-  transform: scale(1.06);
 }
 .trial-link {
   display: inline-block;
@@ -275,45 +172,8 @@ li {
   background: #204a6d;
   color: #fff;
 }
-/* 移动端样式现在由 MobileOptimizedContent 组件处理 */
+
 /* 图片预览弹窗样式 */
-.img-preview-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(30, 40, 60, 0.65);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: fadeIn 0.2s;
-}
-.img-preview-large {
-  max-width: 90vw;
-  max-height: 90vh;
-  border-radius: 10px;
-  box-shadow: 0 8px 32px rgba(32, 74, 109, 0.25);
-  background: #fff;
-  border: 2px solid #204a6d;
-  display: block;
-}
-.img-preview-close {
-  position: absolute;
-  top: 32px;
-  right: 48px;
-  font-size: 2.5rem;
-  color: #fff;
-  cursor: pointer;
-  font-weight: bold;
-  z-index: 1010;
-  user-select: none;
-  transition: color 0.2s;
-}
-.img-preview-close:hover {
-  color: #d23c1a;
-}
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -322,4 +182,4 @@ li {
     opacity: 1;
   }
 }
-</style> 
+</style>

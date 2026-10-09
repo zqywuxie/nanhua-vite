@@ -1,11 +1,11 @@
 <template>
-  <MobileOptimizedContent>
+  <CatalogContent title="NGS Sequencing" family="Reagent">
     <div class="ngs-sequencing-page">
-      <h1 class="main-title">NGS Sequencing</h1>
 
-      <MobileOptimizedTabs :tabs="tabList" v-model="tab">
+
+      <CatalogTabs :tabs="tabList" v-model="tab">
         <section v-if="tab === 'intro'" class="intro">
-          <div class="section-title">Product Description</div>
+          <h2 class="section-title">Product Description</h2>
           <p>
             CleanNGS magnetic microspheres for high-throughput sequencing
             product purification and fragment screening, compatible with
@@ -13,8 +13,8 @@
             process compatible, detection result consistency good.
           </p>
           <div class="divider"></div>
-          <div class="section-title">Performance Features</div>
-          <ul>
+          <h2 class="section-title">Performance Features</h2>
+<ul class="catalog-features">
             <li>
               Microsphere monodisperse, uniform surface group, good suspension
             </li>
@@ -32,18 +32,10 @@
             </li>
           </ul>
           <div class="divider"></div>
-          <div class="section-title">Technical Parameters</div>
-          <ul>
-            <li>Material: Iron Oxide</li>
-            <li>Density: 1.05-3.38g/cm<sup>3</sup></li>
-            <li>Dispersion medium: Pure water</li>
-            <li>Particle refractive index: NA</li>
-            <li>Size range: 50nm-100μm</li>
-            <li>Additives: Trace surface active agent</li>
-            <li>Storage conditions: Store at 2-25℃, do not freeze</li>
-          </ul>
+          <h2 class="section-title">Technical Parameters</h2>
+<dl class="catalog-parameters"><div><dt>Material</dt><dd>Iron Oxide</dd></div><div><dt>Density</dt><dd>1.05-3.38g/cm<sup>3</sup></dd></div><div><dt>Dispersion medium</dt><dd>Pure water</dd></div><div><dt>Particle refractive index</dt><dd>NA</dd></div><div><dt>Size range</dt><dd>50nm-100μm</dd></div><div><dt>Additives</dt><dd>Trace surface active agent</dd></div><div><dt>Storage conditions</dt><dd>Store at 2-25℃, do not freeze</dd></div></dl>
           <div class="divider"></div>
-          <div class="section-title">Application Cases</div>
+          <h2 class="section-title">Application Cases</h2>
           <ul>
             <li>
               <a
@@ -63,54 +55,48 @@
           </ul>
         </section>
         <section v-if="tab === 'order'" class="order-info">
-          <div class="section-title">Order Information</div>
+          <h2 class="section-title">Order Information</h2>
           <div class="img-center">
-            <img
+            <img role="button" tabindex="0" aria-label="Enlarge image"
               :src="imgMain"
               alt="Order Information Table"
               class="main-img"
-              @click="openModal(imgMain)"
             />
           </div>
         </section>
-        <section v-if="tab === 'manual'" class="manuals">
-          <div class="section-title">Product Manual Download</div>
+        <section v-if="tab === 'manual'" class="catalog-resources manuals">
+          <h2 class="section-title">Product Product Manuals</h2>
           <ul>
             <li>
               <a
-                href="/src/assets/Reagent/diagnosis/diagnosis-8/CleanNGS-R User Manual v1.00.pdf"
-                download
+                :href="catalogPdf0"
                 target="_blank"
-                >CleanNGS-R User Manual v1.00（PDF）</a
+                 rel="noopener noreferrer">CleanNGS-R User Manual v1.00（PDF）</a
               >
             </li>
             <li>
               <a
-                href="/src/assets/Reagent/diagnosis/diagnosis-8/CleanNGS User Manual v3.01.pdf"
-                download
+                :href="catalogPdf1"
                 target="_blank"
-                >CleanNGS User Manual v3.01（PDF）</a
+                 rel="noopener noreferrer">CleanNGS User Manual v3.01（PDF）</a
               >
             </li>
           </ul>
         </section>
-      </MobileOptimizedTabs>
+      </CatalogTabs>
 
       <!-- Image Modal -->
-      <div v-if="modalImg" class="img-modal" @click.self="closeModal">
-        <div class="modal-content">
-          <img :src="modalImg" alt="Preview Large Image" />
-          <button class="close-btn" @click="closeModal">×</button>
-        </div>
-      </div>
+
     </div>
-  </MobileOptimizedContent>
+  </CatalogContent>
 </template>
 
 <script setup>
+import catalogPdf0 from '@/assets/Reagent/diagnosis/diagnosis-8/CleanNGS-R User Manual v1.00.pdf?url';
+import catalogPdf1 from '@/assets/Reagent/diagnosis/diagnosis-8/CleanNGS User Manual v3.01.pdf?url';
 import { ref } from "vue";
-import MobileOptimizedContent from "@/components/MobileOptimizedContent.vue";
-import MobileOptimizedTabs from "@/components/MobileOptimizedTabs.vue";
+import CatalogContent from "@/components/Business/CatalogContent.vue";
+import CatalogTabs from "@/components/Business/CatalogTabs.vue";
 import imgMain from "@/assets/Reagent/diagnosis/diagnosis-8/ngssequencing_main.png";
 const tabList = [
   { key: "intro", label: "Product Introduction" },
@@ -121,75 +107,9 @@ const tabList = [
   { key: "manual", label: "Manual" },
 ];
 const tab = ref("intro");
-const modalImg = ref(null);
-const openModal = (img) => {
-  modalImg.value = img;
-};
-const closeModal = () => {
-  modalImg.value = null;
-};
 </script>
 
 <style scoped>
-.ngs-sequencing-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 24px 48px 24px;
-  background: #f8fafc;
-  min-height: 100vh;
-  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans", Arial, sans-serif;
-}
-.main-title {
-  text-align: center;
-  font-size: 2.6rem;
-  font-weight: 700;
-  color: #223a5e;
-  margin-bottom: 36px;
-  letter-spacing: 2px;
-}
-.tab-bar {
-  display: none;
-}
-.tab-nav {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  margin-bottom: 32px;
-  border-bottom: 2px solid #e0e4ea;
-}
-.tab-item {
-  font-size: 1.1rem;
-  color: #204a6d;
-  padding: 8px 24px 10px 24px;
-  cursor: pointer;
-  font-weight: 500;
-  border-bottom: 2.5px solid transparent;
-  transition: color 0.2s, border-color 0.2s, font-weight 0.2s;
-}
-.tab-item.active {
-  color: #1a2a3a;
-  font-weight: 700;
-  border-bottom: 2.5px solid #204a6d;
-  background: #f7f9fb;
-}
-.tab-item:hover {
-  color: #2b7bbf;
-}
-.section-title {
-  font-size: 1.35rem;
-  font-weight: 600;
-  color: #223a5e;
-  border-left: 5px solid #409eff;
-  padding-left: 16px;
-  margin: 36px 0 18px 0;
-  background: none;
-}
-.divider {
-  height: 1px;
-  background: #e0e6ed;
-  margin: 32px 0;
-  border: none;
-}
 .intro ul,
 .manuals ul {
   padding-left: 24px;
@@ -201,89 +121,4 @@ const closeModal = () => {
   font-size: 1.05rem;
   color: #3a4664;
 }
-.img-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 32px 0 24px 0;
-}
-.main-img {
-  max-width: 600px;
-  width: 100%;
-  max-height: 400px;
-  border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(34, 58, 94, 0.1);
-  cursor: pointer;
-  transition: box-shadow 0.25s, border 0.25s, transform 0.25s;
-  border: 2px solid transparent;
-}
-.main-img:hover {
-  box-shadow: 0 8px 32px rgba(64, 158, 255, 0.18);
-  border: 2px solid #409eff;
-  transform: scale(1.04);
-}
-.img-modal {
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(34, 58, 94, 0.65);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.modal-content {
-  position: relative;
-  background: #fff;
-  border-radius: 16px;
-  padding: 32px 32px 16px 32px;
-  box-shadow: 0 8px 40px rgba(34, 58, 94, 0.18);
-  max-width: 90vw;
-  max-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.modal-content img {
-  max-width: 800px;
-  max-height: 70vh;
-  border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(34, 58, 94, 0.1);
-}
-.close-btn {
-  position: absolute;
-  top: 12px;
-  right: 18px;
-  background: #223a5e;
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  font-size: 1.6rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s;
-}
-.close-btn:hover {
-  background: #409eff;
-}
-@media (max-width: 900px) {
-  .ngs-sequencing-page {
-    max-width: 100vw;
-    padding: 16px 4vw 32px 4vw;
-  }
-  .main-img {
-    max-width: 98vw;
-    max-height: 40vw;
-  }
-  .modal-content img {
-    max-width: 96vw;
-    max-height: 60vw;
-  }
-}
-</style> 
+</style>
